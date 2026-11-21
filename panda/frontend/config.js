@@ -26,9 +26,9 @@
     backendUrl = savedBackend.replace(/\/$/, '');
     apiBase = backendUrl + '/api/v1';
   } else if (!isLocal) {
-    // En Vercel: usa '/api/v1' relativo (gestionado por vercel.json)
-    apiBase = '/api/v1';
-    backendUrl = window.location.origin;
+    // En producción (Render Static Site / Vercel): apunta directamente a la API de Render
+    backendUrl = DEFAULT_RENDER_URL.replace(/\/$/, '');
+    apiBase = backendUrl + '/api/v1';
   }
 
   window.PANDA_CONFIG = {

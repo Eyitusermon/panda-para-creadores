@@ -9,6 +9,8 @@
 
   const savedBackend = localStorage.getItem('PANDA_BACKEND_URL');
 
+  const DEFAULT_RENDER_URL = 'https://pandacash-api.onrender.com';
+
   let backendUrl = 'http://localhost:8085';
   let apiBase = 'http://localhost:8085/api/v1';
 
@@ -16,9 +18,9 @@
     backendUrl = savedBackend.replace(/\/$/, '');
     apiBase = backendUrl + '/api/v1';
   } else if (!isLocal) {
-    // Si el panel de admin corre en el mismo backend de Render:
-    apiBase = window.location.origin + '/api/v1';
-    backendUrl = window.location.origin;
+    // Si corre en otro host, apunta a la API de Render
+    backendUrl = DEFAULT_RENDER_URL.replace(/\/$/, '');
+    apiBase = backendUrl + '/api/v1';
   }
 
   window.PANDA_CONFIG = {
