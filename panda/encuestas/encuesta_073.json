@@ -1,0 +1,128 @@
+{
+  "id": "enc_073",
+  "numero": 73,
+  "titulo": "Sushi y Cocina Japonesa",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "Nigiris, makis, salmón, atún rojo y restaurantes buffet libre.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia comes sushi o comida japonesa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Al menos 2 o 3 veces al mes"
+        },
+        {
+          "letra": "B",
+          "texto": "Una vez al mes como premio especial"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en ocasiones muy puntuales con amigos"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gusta el pescado crudo ni el sushi"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué tipo de pieza de sushi es tu favorita?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Nigiris de salmón flameado con salsas"
+        },
+        {
+          "letra": "B",
+          "texto": "Makis y rolls tempurizados crujientes"
+        },
+        {
+          "letra": "C",
+          "texto": "Sashimi puro de atún rojo o salmón fresco"
+        },
+        {
+          "letra": "D",
+          "texto": "Gunkans o temakis especiales"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Sabes comer con palillos japoneses con soltura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, los domino perfectamente sin esfuerzo"
+        },
+        {
+          "letra": "B",
+          "texto": "Me defiendo bien aunque a veces se me resbala alguna pieza"
+        },
+        {
+          "letra": "C",
+          "texto": "Pido adaptador o tenedor cuando puedo"
+        },
+        {
+          "letra": "D",
+          "texto": "Como las piezas de sushi con las manos como en Japón tradicional"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Le pones wasabi y jengibre al sushi?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Disuelvo wasabi en la soja para darle toque picante"
+        },
+        {
+          "letra": "B",
+          "texto": "Me encanta el jengibre encurtido entre pieza y pieza"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo salsa de soja suave sin wasabi"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero salsas dulces como teriyaki o anguila"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Prefieres restaurantes buffet a la carta con tablet o restaurante tradicional?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Buffet a la carta con pedidos infinitos por tablet"
+        },
+        {
+          "letra": "B",
+          "texto": "Restaurante tradicional con menú degustación cuidado"
+        },
+        {
+          "letra": "C",
+          "texto": "Locales de cinta giratoria (Kaitenzushi)"
+        },
+        {
+          "letra": "D",
+          "texto": "Pido bandejas de sushi para comer en casa"
+        }
+      ]
+    }
+  ]
+}

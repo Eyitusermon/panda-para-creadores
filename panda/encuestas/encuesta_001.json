@@ -1,0 +1,128 @@
+{
+  "id": "enc_001",
+  "numero": 1,
+  "titulo": "Preferencias de Plataformas de Videojuegos",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "Tu experiencia con consolas, PC y plataformas gaming modernas.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿En qué plataforma juegas con mayor frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "PC Gaming"
+        },
+        {
+          "letra": "B",
+          "texto": "PlayStation 5 / 4"
+        },
+        {
+          "letra": "C",
+          "texto": "Xbox Series / One"
+        },
+        {
+          "letra": "D",
+          "texto": "Dispositivo Móvil / Tablet"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuántas horas a la semana dedicas a jugar videojuegos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de 5 horas"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 5 y 15 horas"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 15 y 30 horas"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de 30 horas"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué género de videojuegos prefieres habitualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Arcade y Crash Games"
+        },
+        {
+          "letra": "B",
+          "texto": "Shooters / Battle Royale (FPS)"
+        },
+        {
+          "letra": "C",
+          "texto": "RPG y Mundo Abierto"
+        },
+        {
+          "letra": "D",
+          "texto": "Estrategia y Simulación"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Compras pases de batalla o microtransacciones estéticas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Con regularidad cada mes"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en ofertas especiales"
+        },
+        {
+          "letra": "C",
+          "texto": "Rara vez"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca compro micropagos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sueles jugar en modo multijugador online o individual?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Casi siempre multijugador con amigos"
+        },
+        {
+          "letra": "B",
+          "texto": "Multijugador con emparejamiento aleatorio"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero el modo historia / solitario"
+        },
+        {
+          "letra": "D",
+          "texto": "Ambos por igual según el juego"
+        }
+      ]
+    }
+  ]
+}

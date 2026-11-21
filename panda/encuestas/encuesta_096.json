@@ -1,0 +1,128 @@
+{
+  "id": "enc_096",
+  "numero": 96,
+  "titulo": "Carsharing, Alquiler de Vehículos y Viajes Compartidos",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "BlaBlaCar, alquiler vacacional, Zity y no tener coche propio.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has utilizado plataformas de viajes compartidos como BlaBlaCar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, como conductor o pasajero con frecuencia para ahorrar en viajes"
+        },
+        {
+          "letra": "B",
+          "texto": "Lo he usado en alguna ocasión puntual de urgencia"
+        },
+        {
+          "letra": "C",
+          "texto": "Conozco el servicio pero prefiero viajar en tren, bus o coche propio"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he compartido coche con desconocidos"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Utilizas servicios de carsharing por minutos en tu ciudad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es comodísimo para trayectos urbanos sin preocuparse de aparcar"
+        },
+        {
+          "letra": "B",
+          "texto": "Ocasionalmente si necesito mover bultos grandes"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero transporte público o mi propio vehículo"
+        },
+        {
+          "letra": "D",
+          "texto": "En mi ciudad no hay servicios de carsharing"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Crees que en el futuro las nuevas generaciones dejarán de comprar coche propio?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, en grandes ciudades saldrá más a cuenta pagar por uso"
+        },
+        {
+          "letra": "B",
+          "texto": "En ciudades sí, pero en zonas rurales o pueblos el coche es imprescindible"
+        },
+        {
+          "letra": "C",
+          "texto": "La gente siempre querrá tener su propio coche por independencia"
+        },
+        {
+          "letra": "D",
+          "texto": "Dependerá de los costes de adquisición y combustible"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué seguro contratas al alquilar un coche de vacaciones?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre seguro a todo riesgo sin franquicia para viajar con tranquilidad total"
+        },
+        {
+          "letra": "B",
+          "texto": "El seguro básico que viene incluido para pagar lo mínimo"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso el seguro de cobertura que ofrece mi tarjeta de crédito"
+        },
+        {
+          "letra": "D",
+          "texto": "Rara vez alquilo coches"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te gustaría que existieran taxis y transportes 100% autónomos sin conductor?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, el futuro de la conducción autónoma será más seguro y barato"
+        },
+        {
+          "letra": "B",
+          "texto": "Me daría cierta desconfianza subirme a un coche sin volante ni chófer"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero la conducción humana"
+        },
+        {
+          "letra": "D",
+          "texto": "Creo que aún faltan muchos años para que sea una realidad común"
+        }
+      ]
+    }
+  ]
+}

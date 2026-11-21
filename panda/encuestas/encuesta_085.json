@@ -1,0 +1,128 @@
+{
+  "id": "enc_085",
+  "numero": 85,
+  "titulo": "Cruceros y Grandes Barcos de Vacaciones",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Camarotes con balcón, escalas, piscinas en cubierta y buffet.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has realizado algún viaje en crucero turístico?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, he hecho uno o varios cruceros y la experiencia fue genial"
+        },
+        {
+          "letra": "B",
+          "texto": "Nunca he hecho un crucero pero me gustaría probar"
+        },
+        {
+          "letra": "C",
+          "texto": "No me llama la atención la idea de viajar en barco grande"
+        },
+        {
+          "letra": "D",
+          "texto": "Tengo miedo a marearme en alta mar"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué destino de crucero te parece más atractivo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Islas Griegas y Mediterráneo oriental"
+        },
+        {
+          "letra": "B",
+          "texto": "Fiordos Noruegos y paisajes glaciares"
+        },
+        {
+          "letra": "C",
+          "texto": "Islas del Caribe con escalas en playas privadas"
+        },
+        {
+          "letra": "D",
+          "texto": "Cruceros fluviales por el Danubio o el Rin"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué tipo de camarote elegirías en un crucero?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Camarote exterior con balcón privado para ver el mar"
+        },
+        {
+          "letra": "B",
+          "texto": "Camarote interior por ser la opción más económica"
+        },
+        {
+          "letra": "C",
+          "texto": "Camarote con ventana fija (ojo de buey)"
+        },
+        {
+          "letra": "D",
+          "texto": "Suite espaciosa con mayordomo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué servicio a bordo de los cruceros te parece más llamativo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Las piscinas con toboganes y jacuzzis en la cubierta alta"
+        },
+        {
+          "letra": "B",
+          "texto": "Los espectáculos teatrales nocturnos y casinos a bordo"
+        },
+        {
+          "letra": "C",
+          "texto": "Los buffets abiertos casi 24 horas con comida variada"
+        },
+        {
+          "letra": "D",
+          "texto": "Poder visitar varias ciudades distintas sin deshacer la maleta"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Prefieres hacer las excursiones organizadas del barco o por tu cuenta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Bajar por libre y explorar las ciudades a mi ritmo"
+        },
+        {
+          "letra": "B",
+          "texto": "Contratar las excursiones oficiales del barco por seguridad de horarios"
+        },
+        {
+          "letra": "C",
+          "texto": "Excursiones con agencias locales más baratas en el puerto"
+        },
+        {
+          "letra": "D",
+          "texto": "Quedarme en el barco disfrutando de las instalaciones vacías"
+        }
+      ]
+    }
+  ]
+}

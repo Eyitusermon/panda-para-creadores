@@ -1,0 +1,128 @@
+{
+  "id": "enc_015",
+  "numero": 15,
+  "titulo": "Computadoras Portátiles vs Sobremesa",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Elección de equipos para trabajo, estudio o entretenimiento.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué tipo de ordenador usas principalmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Laptop / Portátil ligero"
+        },
+        {
+          "letra": "B",
+          "texto": "PC de escritorio o torre montada por piezas"
+        },
+        {
+          "letra": "C",
+          "texto": "MacBook / Mac Mini de Apple"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso tableta como reemplazo de ordenador"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuánto tiempo tiene tu ordenador actual?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de 1 año (casi nuevo)"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 1 y 3 años"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 3 y 6 años"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de 6 años"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Sueles trabajar o estudiar con un segundo monitor?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, doble o triple monitor indispensable"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo un monitor externo para el portátil"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo con la pantalla única del equipo"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso la televisión como pantalla secundaria"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cuál es la característica técnica que más revisas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Memoria RAM y almacenamiento SSD rápido"
+        },
+        {
+          "letra": "B",
+          "texto": "Tarjeta gráfica dedicada (GPU)"
+        },
+        {
+          "letra": "C",
+          "texto": "Potencia del procesador (CPU)"
+        },
+        {
+          "letra": "D",
+          "texto": "Peso, diseño y autonomía de batería"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Has montado un ordenador por piezas alguna vez?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, yo mismo elegí y armé cada componente"
+        },
+        {
+          "letra": "B",
+          "texto": "He cambiado piezas sueltas (RAM, SSD)"
+        },
+        {
+          "letra": "C",
+          "texto": "Me lo armó un conocido o tienda"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he abierto un ordenador"
+        }
+      ]
+    }
+  ]
+}

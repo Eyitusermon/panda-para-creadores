@@ -1,0 +1,128 @@
+{
+  "id": "enc_080",
+  "numero": 80,
+  "titulo": "Vino, Enología y Bodegas",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "Tintos crianza, blancos frescos, uvas y catas de vino.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué tipo de vino sueles pedir con más frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Vino tinto con cuerpo (Ribera del Duero, Rioja, Malbec)"
+        },
+        {
+          "letra": "B",
+          "texto": "Vino blanco fresco y afrutado (Albariño, Rueda, Verdejo)"
+        },
+        {
+          "letra": "C",
+          "texto": "Vino rosado o espumoso (Cava, Champagne, Prosecco)"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo beber vino"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Con qué frecuencia tomas una copa de vino?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En comidas o cenas de fin de semana con buena comida"
+        },
+        {
+          "letra": "B",
+          "texto": "Casi a diario con la comida principal"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en celebraciones especiales o brindis"
+        },
+        {
+          "letra": "D",
+          "texto": "Muy rara vez"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has visitado alguna vez una bodega con cata guiada de vinos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, he hecho enoturismo y me pareció una experiencia genial"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gustaría visitar alguna bodega próximamente"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo he asistido a catas en restaurantes o eventos"
+        },
+        {
+          "letra": "D",
+          "texto": "No he visitado bodegas"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cuánto sueles gastar en una botella de vino para casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Entre $5 y $10 USD para consumo habitual"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre $10 y $20 USD para una cena especial"
+        },
+        {
+          "letra": "C",
+          "texto": "Más de $25 USD buscando añadas o bodegas de autor"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca compro botellas de vino"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te fijas en la Denominación de Origen al elegir un vino en el supermercado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre, tengo mis regiones y variedades de uva favoritas"
+        },
+        {
+          "letra": "B",
+          "texto": "Miro el diseño de la etiqueta y el rango de precio"
+        },
+        {
+          "letra": "C",
+          "texto": "Pido consejo a amigos o dependientes de la tienda"
+        },
+        {
+          "letra": "D",
+          "texto": "Cojo la botella que esté en oferta"
+        }
+      ]
+    }
+  ]
+}

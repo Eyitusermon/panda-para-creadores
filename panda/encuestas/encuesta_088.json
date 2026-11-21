@@ -1,0 +1,128 @@
+{
+  "id": "enc_088",
+  "numero": 88,
+  "titulo": "Fotografía de Viajes y Creación de Recuerdos",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Cámaras réflex, fotos con smartphone, álbumes y Reels.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué cámara utilizas para hacer fotos durante tus viajes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La cámara de mi smartphone de gama alta"
+        },
+        {
+          "letra": "B",
+          "texto": "Cámara réflex o sin espejo (Mirrorless) con objetivos dedicados"
+        },
+        {
+          "letra": "C",
+          "texto": "Cámara de acción deportiva (GoPro) para actividades"
+        },
+        {
+          "letra": "D",
+          "texto": "Cámara analógica clásica con carrete de película"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Sueles imprimir álbumes de fotos físicos después de un gran viaje?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, diseño e imprimo un fotolibro de cada gran viaje"
+        },
+        {
+          "letra": "B",
+          "texto": "Imprimo un par de fotos destacadas para enmarcar en casa"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo las guardo en carpetas en la nube o disco duro"
+        },
+        {
+          "letra": "D",
+          "texto": "Las subo a redes sociales y no las imprimo en papel"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Dedicas mucho tiempo a posar para la foto perfecta en lugares turísticos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Hago un par de fotos rápidas del paisaje y sigo disfrutando"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gusta buscar buenos ángulos y luz para tener fotos bonitas"
+        },
+        {
+          "letra": "C",
+          "texto": "Me agobia la gente que hace colas de 1 hora solo para un selfie"
+        },
+        {
+          "letra": "D",
+          "texto": "Rara vez salgo en las fotos, solo fotografío el entorno"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Compras recuerdos típicos (souvenirs) en cada ciudad que visitas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, imanes para la nevera de cada lugar son tradición sagrada"
+        },
+        {
+          "letra": "B",
+          "texto": "Compro camisetas, tazas o artesanía local auténtica"
+        },
+        {
+          "letra": "C",
+          "texto": "Compro productos gastronómicos típicos para comer en casa"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo comprar souvenirs porque acumulan polvo"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Llevas un diario de viaje escrito con notas de tus experiencias?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, apunto anécdotas, restaurantes y gastos de cada día"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo notas en el móvil con recomendaciones"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo confío en mi memoria y en las fotos tomadas"
+        },
+        {
+          "letra": "D",
+          "texto": "No llevo registro escrito"
+        }
+      ]
+    }
+  ]
+}

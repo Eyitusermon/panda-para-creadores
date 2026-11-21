@@ -1,0 +1,128 @@
+{
+  "id": "enc_008",
+  "numero": 8,
+  "titulo": "Servicios de Suscripción para Jugadores",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "Game Pass, PlayStation Plus y bibliotecas digitales.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuentas con alguna suscripción activa tipo Game Pass o PS Plus?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, Xbox Game Pass Ultimate"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, PlayStation Plus Extra / Premium"
+        },
+        {
+          "letra": "C",
+          "texto": "Sí, más de una suscripción activa"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo ninguna suscripción gamer"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Prefieres comprar juegos en propiedad o pagar mensualidad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Pagar suscripción con catálogo amplio"
+        },
+        {
+          "letra": "B",
+          "texto": "Comprar en digital para tener biblioteca"
+        },
+        {
+          "letra": "C",
+          "texto": "Comprar en formato físico coleccionable"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo juego títulos Free to Play"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Utilizas el juego en la nube (Cloud Gaming / xCloud)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A menudo desde teléfono o PC modesto"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo para probar títulos sin descargarlos"
+        },
+        {
+          "letra": "C",
+          "texto": "Lo he probado pero prefiero instalar local"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he jugado en la nube"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Consideras justo el precio actual de los lanzamientos AAA ($70)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Muy elevado, espero siempre a rebajas"
+        },
+        {
+          "letra": "B",
+          "texto": "Aceptable si el juego ofrece +50 horas"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo lo pago para mis 1 o 2 sagas favoritas"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero el modelo gratuito con pases"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Aprovechas los juegos gratis de plataformas como Epic Games?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Reclamo religiosamente cada semana"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando regalan títulos muy conocidos"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo la cuenta pero olvido reclamar"
+        },
+        {
+          "letra": "D",
+          "texto": "No utilizo esas plataformas"
+        }
+      ]
+    }
+  ]
+}

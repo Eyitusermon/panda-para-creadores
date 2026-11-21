@@ -1,0 +1,128 @@
+{
+  "id": "enc_047",
+  "numero": 47,
+  "titulo": "Mascotas y Cuidado Animal",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Perros, gatos, alimentación premium y accesorios.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Tienes alguna mascota en tu hogar actualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, uno o más perros"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, uno o más gatos"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo tanto perros como gatos u otros animales"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo mascotas actualmente"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué tipo de alimentación le das a tu mascota?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Pienso / croquetas de gama premium veterinaria"
+        },
+        {
+          "letra": "B",
+          "texto": "Alimento seco estándar comercial"
+        },
+        {
+          "letra": "C",
+          "texto": "Comida húmeda combinada con pienso"
+        },
+        {
+          "letra": "D",
+          "texto": "Dieta natural (BARF) cocinada en casa"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cuánto gastas aproximadamente al mes en tu mascota?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de $30 USD"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre $30 y $80 USD"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre $80 y $150 USD incluyendo veterinario y juguetes"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo mascota"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Le compras juguetes o accesorios con frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me encanta mimarle con juguetes y snacks nuevos"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando rompe los anteriores"
+        },
+        {
+          "letra": "C",
+          "texto": "Muy ocasionalmente en su cumpleaños o fechas clave"
+        },
+        {
+          "letra": "D",
+          "texto": "No compro accesorios con frecuencia"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Llevarías a tu mascota contigo de vacaciones?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre que puedo busco hoteles y lugares pet-friendly"
+        },
+        {
+          "letra": "B",
+          "texto": "Prefiero dejarla con familiares de confianza"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso residencias caninas / cuidadores profesionales"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo mascota"
+        }
+      ]
+    }
+  ]
+}

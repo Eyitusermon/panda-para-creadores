@@ -1,0 +1,918 @@
+:root {
+  --bg-dark: #060913;
+  --bg-card: #0c1222;
+  --bg-card-inner: #111a33;
+  --accent-gold: #ffb700;
+  --accent-red: #ff0055;
+  --accent-cyan: #00f0ff;
+  --accent-green: #00e701;
+  --accent-purple: #bd00ff;
+  --text-main: #ffffff;
+  --text-muted: #8e9bb0;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-vault: rgba(0, 240, 255, 0.35);
+  --border-gold: rgba(255, 183, 0, 0.35);
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #263859 #060913;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060913;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1e2f4d 0%, #16233b 100%);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+html, body {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden; /* Cero scroll en escritorio */
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(255, 183, 0, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(189, 0, 255, 0.05) 0%, transparent 60%);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+/* TOPBAR */
+.topbar {
+  background: rgba(10, 15, 28, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.35rem 1.25rem;
+  height: 48px;
+  min-height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.15rem;
+}
+
+.brand-logo span.gold {
+  color: var(--accent-gold);
+}
+
+.game-tag-pill {
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid var(--border-vault);
+  color: var(--accent-cyan);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.wallet-box {
+  background: #0e1529;
+  border: 1px solid var(--border-gold);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-diamonds {
+  color: var(--accent-gold);
+  font-weight: 900;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+}
+
+.wallet-usdt {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.btn-top-action {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-top-action:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--accent-cyan);
+}
+
+.btn-sound-toggle {
+  background: #111a33;
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.35rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-sound-toggle:hover {
+  border-color: var(--accent-cyan);
+}
+
+/* LAYOUT PRINCIPAL (3 COLUMNAS FIT-SCREEN 100VH) */
+.doors-layout {
+  max-width: 1400px;
+  height: calc(100vh - 48px);
+  max-height: calc(100vh - 48px);
+  margin: 0 auto;
+  padding: 0.5rem 0.85rem 0.6rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 310px 1fr 280px;
+  gap: 0.75rem;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* PANELES LATERALES */
+.panel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-vault);
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.panel-header {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.35rem;
+  flex-shrink: 0;
+}
+
+.panel-header h3 {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.panel-header p {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* CONTROLES DE CONFIGURACIÓN */
+.controls-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.control-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.bet-input-wrap {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.bet-input {
+  flex: 1;
+  background: #080d1a;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  color: var(--accent-gold);
+  font-size: 0.95rem;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  outline: none;
+  width: 100%;
+}
+
+.bet-input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+.btn-mod {
+  background: #141c33;
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.45rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-mod:hover:not(:disabled) {
+  background: #0d253f;
+  border-color: var(--accent-cyan);
+}
+
+.quick-bets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+}
+
+.btn-qbet {
+  background: #0e1529;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.28rem 0.25rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.btn-qbet:hover:not(:disabled),
+.btn-qbet.active:not(:disabled) {
+  background: #092138;
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+/* SELECTOR DE PUERTAS Y BLOQUEADAS */
+.doors-config-card {
+  background: #090e1d;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.doors-stepper-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.doors-stepper-btn {
+  background: #131c36;
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.doors-stepper-btn:hover:not(:disabled) {
+  background: #1c2b54;
+  border-color: var(--accent-cyan);
+}
+
+.doors-stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.doors-count-display {
+  font-size: 1rem;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  color: var(--accent-cyan);
+  text-align: center;
+}
+
+.quick-doors-pills {
+  display: flex;
+  gap: 0.2rem;
+  justify-content: space-between;
+}
+
+.btn-door-pill {
+  flex: 1;
+  background: #0e1529;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.btn-door-pill:hover:not(:disabled),
+.btn-door-pill.active:not(:disabled) {
+  background: #092138;
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.btn-door-pill.blocked-active {
+  background: #2b0e1b;
+  color: #ff3377;
+  border-color: #ff0055;
+}
+
+/* CAJA DE PRÓXIMO MULTIPLICADOR Y PROGRESO */
+.step-preview-box {
+  background: #070d1a;
+  border: 1px solid rgba(255, 183, 0, 0.3);
+  border-radius: 8px;
+  padding: 0.45rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.step-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+}
+
+.step-val-current {
+  color: var(--accent-gold);
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+.step-val-next {
+  color: var(--accent-green);
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+
+/* BOTONES DE ACCIÓN */
+.actions-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.btn-doors-main {
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 1.05rem;
+  font-weight: 900;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: transform 0.12s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-doors-main * {
+  pointer-events: none;
+}
+
+.btn-doors-main.btn-start {
+  background: linear-gradient(135deg, #00f0ff 0%, #0099b8 100%);
+  color: #02121e;
+  box-shadow: 0 4px 18px rgba(0, 240, 255, 0.4);
+}
+
+.btn-doors-main.btn-start:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(0, 240, 255, 0.55);
+}
+
+.btn-doors-main.btn-cashout {
+  background: linear-gradient(135deg, #00e701 0%, #009900 100%);
+  color: #051405;
+  box-shadow: 0 0 25px rgba(0, 231, 1, 0.5);
+  animation: pulseDoorsCashout 0.8s infinite alternate;
+}
+
+@keyframes pulseDoorsCashout {
+  0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 231, 1, 0.4); }
+  100% { transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 231, 1, 0.7); }
+}
+
+.btn-doors-main:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.btn-autopick {
+  background: #111a33;
+  border: 1px solid var(--border-gold);
+  color: var(--accent-gold);
+  border-radius: 6px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.btn-autopick:hover:not(:disabled) {
+  background: rgba(255, 183, 0, 0.15);
+  box-shadow: 0 0 12px rgba(255, 183, 0, 0.3);
+}
+
+.btn-autopick:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* COLUMNA CENTRAL: BÓVEDA 3D Y PUERTAS */
+.board-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-vault);
+  border-radius: 12px;
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.45rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.vault-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #080d1a;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.35rem 0.85rem;
+  flex-shrink: 0;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.stat-pill.safe {
+  color: var(--accent-green);
+}
+
+.stat-pill.blocked {
+  color: #ff3377;
+}
+
+/* ZONA DE PUERTAS DE LA BÓVEDA */
+.vault-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 0.4rem;
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 50%, #0d1933 0%, #050a17 80%),
+    repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.02) 0px, rgba(0, 240, 255, 0.02) 2px, transparent 2px, transparent 24px);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+.doors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 100%;
+  perspective: 1200px;
+}
+
+/* CADA PUERTA 3D */
+.door-item {
+  width: 105px;
+  height: 165px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  user-select: none;
+  transform-style: preserve-3d;
+  transition: transform 0.25s, filter 0.2s;
+  padding: 0;
+}
+
+.door-item:hover:not(.opened):not(:disabled) {
+  transform: translateY(-4px) scale(1.02);
+  filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.5));
+}
+
+.door-item:disabled {
+  cursor: default;
+}
+
+/* MARCO EXTERIOR Y HOJA DE LA PUERTA */
+.door-frame {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #182645 0%, #0a1122 100%);
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  border-radius: 8px 8px 3px 3px;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.7), 0 8px 18px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left center;
+}
+
+/* CUANDO LA PUERTA SE ABRE */
+.door-item.opened .door-frame {
+  transform: rotateY(-80deg);
+  opacity: 0.15;
+}
+
+.door-top-badge {
+  font-size: 0.65rem;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  color: var(--accent-cyan);
+  text-align: center;
+  letter-spacing: 0.05em;
+  background: rgba(0, 240, 255, 0.1);
+  border-radius: 4px;
+  padding: 2px 0;
+}
+
+.door-lock-mechanism {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.lock-wheel {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #253966 0%, #0d172e 100%);
+  border: 2px solid var(--accent-gold);
+  box-shadow: 0 0 10px rgba(255, 183, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: transform 0.3s;
+}
+
+.door-item:hover:not(.opened):not(:disabled) .lock-wheel {
+  transform: rotate(35deg);
+  box-shadow: 0 0 16px rgba(255, 183, 0, 0.7);
+}
+
+.door-handle {
+  width: 22px;
+  height: 6px;
+  background: #ffb700;
+  border-radius: 2px;
+}
+
+.door-bottom-led {
+  width: 100%;
+  height: 3px;
+  background: var(--accent-cyan);
+  border-radius: 99px;
+  box-shadow: 0 0 6px var(--accent-cyan);
+}
+
+/* INTERIOR DE LA BÓVEDA (REVELADO DETRÁS DE LA PUERTA) */
+.door-interior {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px 8px 3px 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.door-interior.is-safe {
+  background: radial-gradient(circle, #0e3020 0%, #04140b 100%);
+  border: 2px solid #00e701;
+  box-shadow: inset 0 0 18px rgba(0, 231, 1, 0.3), 0 0 20px rgba(0, 231, 1, 0.4);
+}
+
+.door-interior.is-blocked {
+  background: radial-gradient(circle, #3d0c1e 0%, #17040a 100%);
+  border: 2px solid #ff0055;
+  box-shadow: inset 0 0 18px rgba(255, 0, 85, 0.3), 0 0 20px rgba(255, 0, 85, 0.5);
+  animation: shakeBlocked 0.3s ease-out;
+}
+
+.door-interior.is-dimmed {
+  opacity: 0.45;
+  filter: grayscale(40%);
+}
+
+@keyframes shakeBlocked {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.vault-treasure-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 10px #00e701);
+  animation: bounceTreasure 1.6s infinite alternate;
+}
+
+@keyframes bounceTreasure {
+  0% { transform: translateY(-2px); }
+  100% { transform: translateY(2px); }
+}
+
+.vault-blocked-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 10px #ff0055);
+}
+
+.vault-payout-label {
+  font-size: 0.68rem;
+  font-weight: 900;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+
+/* MODAL DE RESULTADO FLOTANTE */
+.game-result-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(12, 18, 34, 0.95);
+  border: 2px solid var(--accent-gold);
+  border-radius: 14px;
+  padding: 1.2rem 1.8rem;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 183, 0, 0.3);
+  backdrop-filter: blur(14px);
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.game-result-modal.show {
+  display: flex;
+  animation: popModal 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popModal {
+  to { transform: translate(-50%, -50%) scale(1); }
+}
+
+.game-result-modal.winner {
+  border-color: #00e701;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 231, 1, 0.4);
+}
+
+.game-result-modal.loser {
+  border-color: #ff0055;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 85, 0.4);
+}
+
+/* TICKER INFERIOR */
+.doors-ticker-bar {
+  background: #080d1a;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.3rem 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
+/* COLUMNA DERECHA: TABLA DE PAGOS E HISTORIAL */
+.side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.info-card,
+.history-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-vault);
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.info-card {
+  flex: 0 0 auto;
+  max-height: 240px;
+}
+
+.history-card {
+  flex: 1 1 0;
+  overflow: hidden;
+}
+
+/* ESCALERA DE MULTIPLICADORES PREVIOS */
+.ladder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  overflow-y: auto;
+  max-height: 155px;
+  padding-right: 0.2rem;
+}
+
+.ladder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #080d1a;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.22rem 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.ladder-item.active {
+  background: rgba(0, 231, 1, 0.15);
+  border-color: #00e701;
+  color: #00e701;
+  font-weight: 900;
+}
+
+.ladder-item.next {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* HISTORIAL DE PARTIDAS */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  padding-right: 0.2rem;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #080d1a;
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.7rem;
+}
+
+/* RESPONSIVE MÓVIL */
+@media (max-width: 980px) {
+  html, body {
+    height: auto;
+    max-height: none;
+    overflow-y: auto;
+  }
+  .doors-layout {
+    height: auto;
+    max-height: none;
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+  .doors-grid {
+    gap: 8px;
+  }
+  .door-item {
+    width: 82px;
+    height: 135px;
+  }
+}

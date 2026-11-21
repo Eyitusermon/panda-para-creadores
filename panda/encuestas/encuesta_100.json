@@ -1,0 +1,128 @@
+{
+  "id": "enc_100",
+  "numero": 100,
+  "titulo": "Coches Clásicos, Concentraciones y Cultura del Motor",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Youngtimers de los 90, coches vintage, ferias y restauración.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Te atraen los coches clásicos o deportivos de los años 80 y 90 (Youngtimers)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me apasionan, tenían mucha más personalidad mecánica y alma que los actuales"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gusta verlos en exhibiciones aunque prefiero la seguridad moderna"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo los superdeportivos clásicos legendarios (Ferrari F40, Porsche 911)"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero los coches modernos tecnológicos"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Has asistido a concentraciones de coches o quedadas del motor?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, asisto a quedadas (Cars & Coffee, etc.) con frecuencia"
+        },
+        {
+          "letra": "B",
+          "texto": "He ido a salones del automóvil o ferias de clásicos"
+        },
+        {
+          "letra": "C",
+          "texto": "Miro vídeos en YouTube de eventos del motor"
+        },
+        {
+          "letra": "D",
+          "texto": "No me interesan las concentraciones de coches"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Te gustaría tener un coche histórico guardado en el garaje para pasear los domingos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es uno de mis sueños dorados como aficionado al motor"
+        },
+        {
+          "letra": "B",
+          "texto": "Si tuviera presupuesto de sobra y espacio propio sí"
+        },
+        {
+          "letra": "C",
+          "texto": "Me daría pereza el mantenimiento y encontrar piezas de recambio"
+        },
+        {
+          "letra": "D",
+          "texto": "No me llama la atención tener vehículos antiguos"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué sonido de motor te parece el más emocionante?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El aullido agudo de un motor V10 o V12 atmosférico a altas revoluciones"
+        },
+        {
+          "letra": "B",
+          "texto": "El rugido bronco y grave de un motor V8 americano clásico"
+        },
+        {
+          "letra": "C",
+          "texto": "El petardeo deportivo y turbo de un 4 cilindros rabioso (GTI, etc.)"
+        },
+        {
+          "letra": "D",
+          "texto": "El silencio absoluto y aceleración instantánea de los motores eléctricos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué modelo de coche consideras el más icónico de la historia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porsche 911 con su silueta inconfundible durante 60 años"
+        },
+        {
+          "letra": "B",
+          "texto": "Ford Mustang clásico de 1967"
+        },
+        {
+          "letra": "C",
+          "texto": "Volkswagen Escarabajo / Golf GTI Mk1"
+        },
+        {
+          "letra": "D",
+          "texto": "Ferrari 250 GTO"
+        }
+      ]
+    }
+  ]
+}

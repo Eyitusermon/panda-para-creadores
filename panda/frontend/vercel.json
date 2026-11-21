@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/portal", "destination": "/portal_directo.html" },
+    { "source": "/dashboard", "destination": "/dashboard_directo.html" },
+    { "source": "/lobby", "destination": "/dashboard_directo.html" },
+    { "source": "/recargar", "destination": "/recargar.html" },
+    { "source": "/retirar", "destination": "/retirar.html" },
+    { "source": "/perfil", "destination": "/perfil.html" },
+    { "source": "/misiones", "destination": "/misiones.html" },
+    { "source": "/terminos", "destination": "/terminos.html" },
+    { "source": "/juegos/slots", "destination": "/juegos/slots/jugar_slots.html" },
+    { "source": "/juegos/plinko", "destination": "/juegos/plinko/jugar_plinko.html" },
+    { "source": "/juegos/rocket", "destination": "/juegos/rocket/jugar_rocket.html" },
+    { "source": "/juegos/minas", "destination": "/juegos/minas/jugar_minas.html" },
+    { "source": "/juegos/llaves", "destination": "/juegos/llaves/jugar_llaves.html" },
+    { "source": "/api/(.*)", "destination": "https://pandabet-backend.onrender.com/api/$1" }
+  ]
+}

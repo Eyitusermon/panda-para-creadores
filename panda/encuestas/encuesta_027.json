@@ -1,0 +1,128 @@
+{
+  "id": "enc_027",
+  "numero": 27,
+  "titulo": "Juegos de Casino Online y Gestión de Banca (Bankroll)",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Límites de juego responsable, presupuestos y control emocional.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Fijas un presupuesto máximo antes de comenzar a jugar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre, y lo respeto estrictamente"
+        },
+        {
+          "letra": "B",
+          "texto": "Generalmente sí, con pequeñas excepciones"
+        },
+        {
+          "letra": "C",
+          "texto": "Juego según las ganancias que vaya obteniendo"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo fijar un límite cerrado"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué porcentaje de tu saldo arriesgas en una sola jugada?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Entre el 1% y el 3% (gestión muy conservadora)"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre el 5% y el 10% de mi saldo"
+        },
+        {
+          "letra": "C",
+          "texto": "Más del 20% si me siento con suerte"
+        },
+        {
+          "letra": "D",
+          "texto": "Varío según la racha de partidas"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué haces cuando alcanzas una ganancia importante?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Retiro una buena parte y juego solo con el resto"
+        },
+        {
+          "letra": "B",
+          "texto": "Retiro la totalidad de mis ganancias de inmediato"
+        },
+        {
+          "letra": "C",
+          "texto": "Sigo jugando para intentar aumentarla más"
+        },
+        {
+          "letra": "D",
+          "texto": "Aumento el valor de mis apuestas"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué herramientas de juego responsable consideras más útiles?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Límites diarios de recarga configurables"
+        },
+        {
+          "letra": "B",
+          "texto": "Historial detallado de apuestas y balance"
+        },
+        {
+          "letra": "C",
+          "texto": "Alertas de tiempo de sesión en pantalla"
+        },
+        {
+          "letra": "D",
+          "texto": "Autoexclusión temporal voluntaria"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Juegas para divertirte o como método de generar ingresos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Puramente por diversión y entretenimiento"
+        },
+        {
+          "letra": "B",
+          "texto": "Por diversión, pero con el objetivo de ganar premios"
+        },
+        {
+          "letra": "C",
+          "texto": "Como un pasatiempo emocionante en ratos libres"
+        },
+        {
+          "letra": "D",
+          "texto": "Para aprovechar bonos y promociones semanales"
+        }
+      ]
+    }
+  ]
+}

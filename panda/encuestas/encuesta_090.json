@@ -1,0 +1,128 @@
+{
+  "id": "enc_090",
+  "numero": 90,
+  "titulo": "Turismo Temático: Parques de Atracciones y Eventos",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Disneyland, Universal Studios, PortAventura y montañas rusas.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Te gustan los parques de atracciones temáticos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me fascinan, viajo específicamente para visitar grandes parques"
+        },
+        {
+          "letra": "B",
+          "texto": "Me encantan las montañas rusas fuertes con caídas y loopings"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero atracciones oscuras inmersivas y espectáculos familiares"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gustan las atracciones fuertes porque me mareo"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué parque temático consideras el mejor al que has ido o sueñas ir?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Universal Studios (Orlando / Osaka) por las zonas de Harry Potter / Nintendo"
+        },
+        {
+          "letra": "B",
+          "texto": "Disneyland / Disney World por la magia y ambientación perfecta"
+        },
+        {
+          "letra": "C",
+          "texto": "PortAventura / Europa-Park por sus montañas rusas de récord"
+        },
+        {
+          "letra": "D",
+          "texto": "Parques acuáticos gigantescos con toboganes extremos"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Pagarías por pases rápidos (Fast Pass / Express) para evitar colas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sin duda, mi tiempo de vacaciones vale más que esperar 2 horas por atracción"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en días de máxima afluencia en atracciones estrella"
+        },
+        {
+          "letra": "C",
+          "texto": "Me niego a pagar suplementos extra abusivos"
+        },
+        {
+          "letra": "D",
+          "texto": "Aprovecho las colas de Single Rider (viajero individual) para avanzar rápido"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué atracción te produce más adrenalina?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Montaña rusa de aceleración magnética que alcanza +130 km/h en segundos"
+        },
+        {
+          "letra": "B",
+          "texto": "Torre de caída libre de más de 80 metros de altura"
+        },
+        {
+          "letra": "C",
+          "texto": "Atracciones con caídas verticales de más de 90 grados"
+        },
+        {
+          "letra": "D",
+          "texto": "Simuladores inmersivos con pantallas envolventes 4D"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Comes en los restaurantes temáticos dentro del parque?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, para sumergirme al 100% en la experiencia temática"
+        },
+        {
+          "letra": "B",
+          "texto": "Pido comida rápida básica dentro del parque para no perder tiempo"
+        },
+        {
+          "letra": "C",
+          "texto": "Llevo mis propios bocadillos y snacks si el parque lo permite"
+        },
+        {
+          "letra": "D",
+          "texto": "Salgo a comer fuera del parque"
+        }
+      ]
+    }
+  ]
+}

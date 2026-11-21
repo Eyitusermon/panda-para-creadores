@@ -1,0 +1,128 @@
+{
+  "id": "enc_033",
+  "numero": 33,
+  "titulo": "Experiencia en Cines vs Cine en Casa",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Salas IMAX, palomitas, estrenos y proyectores caseros.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia asistes a salas de cine comerciales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Al menos una vez al mes para grandes estrenos"
+        },
+        {
+          "letra": "B",
+          "texto": "Cada 2 o 3 meses solo para películas esperadas"
+        },
+        {
+          "letra": "C",
+          "texto": "Una o dos veces al año"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca voy al cine, espero al streaming"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué formato de sala prefieres si está disponible?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "IMAX o pantalla gigante con sonido envolvente"
+        },
+        {
+          "letra": "B",
+          "texto": "Salas VIP con butacas reclinables y servicio"
+        },
+        {
+          "letra": "C",
+          "texto": "Sala tradicional 2D estándar"
+        },
+        {
+          "letra": "D",
+          "texto": "Salas con efectos 4DX de movimiento y aire"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Compras palomitas y refrescos en el cine?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre, palomitas grandes y refresco son sagrados"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo palomitas si voy acompañado"
+        },
+        {
+          "letra": "C",
+          "texto": "A veces llevo mis propios snacks discretamente"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca consumo comida durante la película"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Prefieres ver películas en versión original subtitulada o doblada?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Doblada a mi idioma materno"
+        },
+        {
+          "letra": "B",
+          "texto": "Versión original en inglés con subtítulos"
+        },
+        {
+          "letra": "C",
+          "texto": "Depende del género y los actores"
+        },
+        {
+          "letra": "D",
+          "texto": "Versión original sin subtítulos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué género cinematográfico disfrutas más en pantalla grande?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ciencia ficción y efectos especiales espectaculares"
+        },
+        {
+          "letra": "B",
+          "texto": "Acción y superhéroes"
+        },
+        {
+          "letra": "C",
+          "texto": "Terror y suspenso con audio inmersivo"
+        },
+        {
+          "letra": "D",
+          "texto": "Comedias y animación familiar"
+        }
+      ]
+    }
+  ]
+}

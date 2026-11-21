@@ -1,0 +1,128 @@
+{
+  "id": "enc_052",
+  "numero": 52,
+  "titulo": "Gimnasio y Entrenamiento de Fuerza",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Pesas, hipertrofia, mancuernas y rutinas de fitness.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Vas al gimnasio a entrenar con regularidad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, entre 4 y 6 días por semana rigurosamente"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 2 y 3 días por semana"
+        },
+        {
+          "letra": "C",
+          "texto": "Estoy inscrito pero voy de forma intermitente"
+        },
+        {
+          "letra": "D",
+          "texto": "No voy al gimnasio, entreno en casa o no hago pesas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es tu objetivo principal en el entrenamiento físico?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ganar masa muscular e hipertrofia"
+        },
+        {
+          "letra": "B",
+          "texto": "Perder grasa corporal y tonificar"
+        },
+        {
+          "letra": "C",
+          "texto": "Mejorar fuerza, salud cardiovascular y energía"
+        },
+        {
+          "letra": "D",
+          "texto": "Despejar la mente y reducir el estrés diario"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Tomas suplementos deportivos (proteína en polvo, creatina)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, proteína de suero y creatina monohidrato a diario"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo batidos de proteína después de entrenar"
+        },
+        {
+          "letra": "C",
+          "texto": "He tomado en el pasado pero ahora solo como comida real"
+        },
+        {
+          "letra": "D",
+          "texto": "No tomo ningún tipo de suplemento deportivo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Prefieres entrenar solo o con un compañero de entrenamiento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo con auriculares para concentrarme al 100%"
+        },
+        {
+          "letra": "B",
+          "texto": "Con un compañero para motivarnos y ayudarnos en series"
+        },
+        {
+          "letra": "C",
+          "texto": "En clases grupales dirigidas"
+        },
+        {
+          "letra": "D",
+          "texto": "Me da igual con tal de entrenar bien"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuánto dura habitualmente tu sesión de gimnasio?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de 45 minutos (entrenamiento ágil e intenso)"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 60 y 75 minutos"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 90 y 120 minutos incluyendo cardio y estiramientos"
+        },
+        {
+          "letra": "D",
+          "texto": "No voy al gimnasio"
+        }
+      ]
+    }
+  ]
+}

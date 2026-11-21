@@ -1,0 +1,128 @@
+{
+  "id": "enc_016",
+  "numero": 16,
+  "titulo": "Almacenamiento en la Nube y Backups",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Google Drive, iCloud, OneDrive y discos externos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Dónde guardas tus fotografías y documentos importantes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Google Fotos / Google Drive"
+        },
+        {
+          "letra": "B",
+          "texto": "iCloud de Apple"
+        },
+        {
+          "letra": "C",
+          "texto": "Disco duro externo / Memoria USB física"
+        },
+        {
+          "letra": "D",
+          "texto": "En la memoria interna del teléfono o PC"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Pagas alguna cuota mensual por almacenamiento cloud extra?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, pago 100GB o 200GB (Google One / iCloud)"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, tengo 1TB o 2TB familiares"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo aprovecho el espacio gratuito"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso servicios gratuitos múltiples para ahorrar"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Haces copias de seguridad de forma periódica?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Copia automática diaria en la nube"
+        },
+        {
+          "letra": "B",
+          "texto": "Copia manual cada pocas semanas"
+        },
+        {
+          "letra": "C",
+          "texto": "Casi nunca hago copias de respaldo"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo cuando voy a cambiar de dispositivo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Alguna vez has perdido fotos o datos por no tener backup?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, fue una experiencia muy frustrante"
+        },
+        {
+          "letra": "B",
+          "texto": "Casi pierdo datos pero pude recuperarlos"
+        },
+        {
+          "letra": "C",
+          "texto": "Nunca me ha ocurrido, soy muy precavido"
+        },
+        {
+          "letra": "D",
+          "texto": "No guardo información crítica"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Prefieres tener copias físicas en discos o en servidores cloud?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En la nube por accesibilidad en todo lugar"
+        },
+        {
+          "letra": "B",
+          "texto": "En discos físicos por control y privacidad"
+        },
+        {
+          "letra": "C",
+          "texto": "Estrategia 3-2-1: copia local y en nube"
+        },
+        {
+          "letra": "D",
+          "texto": "Donde sea más económico"
+        }
+      ]
+    }
+  ]
+}

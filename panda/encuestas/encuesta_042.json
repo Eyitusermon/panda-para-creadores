@@ -1,0 +1,128 @@
+{
+  "id": "enc_042",
+  "numero": 42,
+  "titulo": "Supermercados y Alimentación Cotidiana",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Cestas de la compra, marcas blancas y productos frescos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sueles comprar productos de marca blanca (marca del distribuidor)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Casi siempre, tienen excelente calidad/precio"
+        },
+        {
+          "letra": "B",
+          "texto": "Para productos básicos sí, para marcas líderes en otros"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero marcas tradicionales conocidas"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo fijarme en las marcas de supermercado"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Haces la compra del supermercado en tienda física o por internet?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre en tienda física para elegir productos frescos"
+        },
+        {
+          "letra": "B",
+          "texto": "Pido online para entregas pesadas y frescos en tienda"
+        },
+        {
+          "letra": "C",
+          "texto": "Hago toda la compra mensual por app con entrega a domicilio"
+        },
+        {
+          "letra": "D",
+          "texto": "Compro día a día en tiendas de barrio"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Llevas una lista cerrada de la compra antes de salir de casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, en el móvil o papel y la sigo rigurosamente"
+        },
+        {
+          "letra": "B",
+          "texto": "Llevo lista mental y suelo comprar algún capricho"
+        },
+        {
+          "letra": "C",
+          "texto": "No llevo lista, recorro los pasillos y decido"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo compro lo que me falta en el momento"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Aprovechas las tarjetas de fidelización de los supermercados?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, acumulo puntos, cupones y descuentos siempre"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo la tarjeta del supermercado que más frecuento"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo tarjetas pero casi nunca uso los cupones"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gusta dar mis datos en programas de puntos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Revisas la fecha de caducidad antes de meter el producto al carro?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre, buscando las fechas más lejanas posibles"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en lácteos, carnes y productos perecederos"
+        },
+        {
+          "letra": "C",
+          "texto": "Casi nunca la reviso en el supermercado"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo cuando llego a casa antes de cocinar"
+        }
+      ]
+    }
+  ]
+}

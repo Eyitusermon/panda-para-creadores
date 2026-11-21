@@ -1,0 +1,128 @@
+{
+  "id": "enc_087",
+  "numero": 87,
+  "titulo": "Turismo Rural y Desconexión en Pueblos",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Casas rurales con chimenea, gastronomía tradicional y calma.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia haces escapadas de turismo rural a pueblos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Varias veces al año en puentes y fines de semana de otoño/invierno"
+        },
+        {
+          "letra": "B",
+          "texto": "Al menos una vez al año para reunir a toda la familia o amigos"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo de paso en vacaciones de verano"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca, soy una persona 100% urbanita"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué buscas principalmente en una casa rural?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Chimenea de leña, barbacoa exterior y jardín privado"
+        },
+        {
+          "letra": "B",
+          "texto": "Piscina privada para el verano y vistas a la montaña"
+        },
+        {
+          "letra": "C",
+          "texto": "Cocina amplia y mesa grande para comidas en grupo"
+        },
+        {
+          "letra": "D",
+          "texto": "Buena conexión a internet por si necesito trabajar"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Comprarías una casa de pueblo para restaurar como segunda residencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me encantaría tener un refugio de paz en el campo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si estuviera lista para entrar a vivir sin obras complejas"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero alquilar para no tener ataduras ni gastos fijos"
+        },
+        {
+          "letra": "D",
+          "texto": "No me interesa tener casa en un pueblo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué actividades disfrutas más en un entorno rural?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Senderismo suave por el bosque y respirar aire puro"
+        },
+        {
+          "letra": "B",
+          "texto": "Comer en mesones tradicionales guisos y carnes asadas"
+        },
+        {
+          "letra": "C",
+          "texto": "Hacer sobremesa larga junto a la chimenea jugando a juegos"
+        },
+        {
+          "letra": "D",
+          "texto": "Comprar productos artesanos locales (miel, embutidos, quesos)"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuánto tiempo puedes estar en un pueblo sin aburrirte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Podría vivir allí permanentemente sin problemas"
+        },
+        {
+          "letra": "B",
+          "texto": "Un fin de semana largo de 3 o 4 días es perfecto"
+        },
+        {
+          "letra": "C",
+          "texto": "A los 2 días ya echo de menos la actividad de la ciudad"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo paso el día y vuelvo a dormir a mi casa"
+        }
+      ]
+    }
+  ]
+}

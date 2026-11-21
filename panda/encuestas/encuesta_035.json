@@ -1,0 +1,128 @@
+{
+  "id": "enc_035",
+  "numero": 35,
+  "titulo": "Transmisiones en Vivo y Creadores de Contenido",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Ibai, Auron, Speed, eventos como La Velada del Año.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sigues transmisiones en vivo de creadores de contenido?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, sigo streamers a diario mientras ceno o trabajo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo eventos multitudinarios especiales (La Velada, etc.)"
+        },
+        {
+          "letra": "C",
+          "texto": "Miro clips destacados en redes en vez de directos"
+        },
+        {
+          "letra": "D",
+          "texto": "No sigo a ningún streamer ni canal en vivo"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué tipo de transmisiones disfrutas más?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Just Chatting, charlas y reacciones a temas"
+        },
+        {
+          "letra": "B",
+          "texto": "Gameplays de títulos competitivos o novedades"
+        },
+        {
+          "letra": "C",
+          "texto": "Eventos especiales y programas producidos"
+        },
+        {
+          "letra": "D",
+          "texto": "Retos en la calle y transmisiones IRL"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Alguna vez te has suscrito de pago o donado a un streamer?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, uso mi suscripción gratuita de Amazon Prime"
+        },
+        {
+          "letra": "B",
+          "texto": "He pagado suscripciones con dinero real"
+        },
+        {
+          "letra": "C",
+          "texto": "He donado bits o propinas en directos"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he pagado ni donado en transmisiones"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Participas activamente en el chat durante los directos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, comento y uso emoticonos con frecuencia"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en canales pequeños donde leen los mensajes"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo el chat oculto para ver la pantalla completa"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca escribo en los chats"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué duración de directo consideras ideal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Directos de 2 a 3 horas muy dinámicos"
+        },
+        {
+          "letra": "B",
+          "texto": "Maratones de más de 5 horas de fondo"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero resúmenes editados de 15 minutos en YouTube"
+        },
+        {
+          "letra": "D",
+          "texto": "Cualquier duración me sirve si el tema entretiene"
+        }
+      ]
+    }
+  ]
+}

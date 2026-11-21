@@ -1,0 +1,128 @@
+{
+  "id": "enc_022",
+  "numero": 22,
+  "titulo": "Exchanges y Billeteras Cripto",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Plataformas de intercambio, Binance, Bybit y wallets de autocustodia.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué plataforma de intercambio (Exchange) usas más?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Binance"
+        },
+        {
+          "letra": "B",
+          "texto": "Bybit / OKX"
+        },
+        {
+          "letra": "C",
+          "texto": "Coinbase / Kraken"
+        },
+        {
+          "letra": "D",
+          "texto": "KuCoin / Bitget u otros"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Dónde almacenas tus criptomonedas de mayor valor?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En la cuenta del exchange por comodidad"
+        },
+        {
+          "letra": "B",
+          "texto": "En monederos software móviles (Trust Wallet, Exodus)"
+        },
+        {
+          "letra": "C",
+          "texto": "En hardware wallet fría (Ledger, Trezor)"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo criptomonedas actualmente"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has utilizado el comercio P2P (Persona a Persona) para comprar saldo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es mi método favorito para comprar y vender"
+        },
+        {
+          "letra": "B",
+          "texto": "Ocasionalmente con usuarios verificados"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero comprar directamente con tarjeta bancaria"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he utilizado plataformas P2P"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cuánto tiempo tardas en verificar una transacción en la blockchain?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Reviso el explorador (Tronscan / Etherscan) al instante"
+        },
+        {
+          "letra": "B",
+          "texto": "Espero la notificación de la app del exchange"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo compruebo cuando tarda más de 5 minutos"
+        },
+        {
+          "letra": "D",
+          "texto": "No sé consultar exploradores de bloques"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué comisión consideras aceptable para un retiro de USDT?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de 1 USDT (típico de TRC-20/BEP-20)"
+        },
+        {
+          "letra": "B",
+          "texto": "Hasta 2 o 3 USDT"
+        },
+        {
+          "letra": "C",
+          "texto": "Hasta 10 USDT en caso de red Ethereum"
+        },
+        {
+          "letra": "D",
+          "texto": "Exijo retiros con 0 comisión"
+        }
+      ]
+    }
+  ]
+}

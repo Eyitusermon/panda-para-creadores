@@ -1,0 +1,128 @@
+{
+  "id": "enc_038",
+  "numero": 38,
+  "titulo": "Anime y Animación Japonesa",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Shonen, Crunchyroll, manga y películas de anime.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia ves series o películas de anime?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sigo temporadas activas cada semana a ritmo japonés"
+        },
+        {
+          "letra": "B",
+          "texto": "Veo series populares completas de vez en cuando"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo he visto clásicos históricos (Dragon Ball, Naruto, etc.)"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo ver animación japonesa"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué plataforma utilizas para ver anime?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Crunchyroll"
+        },
+        {
+          "letra": "B",
+          "texto": "Netflix / Prime Video con catálogo de anime"
+        },
+        {
+          "letra": "C",
+          "texto": "Sitios especializados en internet"
+        },
+        {
+          "letra": "D",
+          "texto": "No consumo anime"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres el audio original en japonés con subtítulos o doblado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Original en japonés con subtítulos en español (Vostfr)"
+        },
+        {
+          "letra": "B",
+          "texto": "Doblado al español latino o castellano"
+        },
+        {
+          "letra": "C",
+          "texto": "Me da igual mientras la actuación de voz sea buena"
+        },
+        {
+          "letra": "D",
+          "texto": "No veo anime"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Lees manga japonés o cómics además de ver anime?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, leo capítulos semanales de manga / manhwa"
+        },
+        {
+          "letra": "B",
+          "texto": "Ocasionalmente si la serie me deja intrigado"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo he comprado tomos físicos coleccionables"
+        },
+        {
+          "letra": "D",
+          "texto": "No leo manga"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuál es tu género de anime favorito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Shonen de acción y peleas (Jujutsu Kaisen, One Piece)"
+        },
+        {
+          "letra": "B",
+          "texto": "Seinen / Thriller psicológico (Death Note, Attack on Titan)"
+        },
+        {
+          "letra": "C",
+          "texto": "Isekai y fantasía de mundos paralelos"
+        },
+        {
+          "letra": "D",
+          "texto": "Slice of Life, comedia y romance escolar"
+        }
+      ]
+    }
+  ]
+}

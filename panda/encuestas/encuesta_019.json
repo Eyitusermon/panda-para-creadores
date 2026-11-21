@@ -1,0 +1,128 @@
+{
+  "id": "enc_019",
+  "numero": 19,
+  "titulo": "Televisores y Entretenimiento en el Salón",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Tecnologías OLED, 4K, Smart TV y barras de sonido.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿De cuántas pulgadas es la televisión principal de tu casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de 43 pulgadas"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 43 y 55 pulgadas"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 55 y 65 pulgadas"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de 65 pulgadas o proyector"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué sistema de Smart TV te parece más cómodo y fluido?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Google TV / Android TV"
+        },
+        {
+          "letra": "B",
+          "texto": "LG webOS"
+        },
+        {
+          "letra": "C",
+          "texto": "Samsung Tizen OS"
+        },
+        {
+          "letra": "D",
+          "texto": "Dispositivo externo (Chromecast, Fire TV, Apple TV)"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Utilizas barra de sonido o equipo de audio externo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, barra de sonido con subwoofer"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, sistema envolvente 5.1 / Dolby Atmos"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo los altavoces integrados de la TV"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso auriculares conectados a la TV"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Con qué frecuencia ves televisión tradicional por antena?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Casi nunca, solo consumo plataformas de streaming"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo para ver noticias o eventos deportivos en directo"
+        },
+        {
+          "letra": "C",
+          "texto": "Un par de horas a la semana"
+        },
+        {
+          "letra": "D",
+          "texto": "A diario sigo canales de televisión abierta"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Juegas consolas en tu televisor principal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es mi pantalla principal para videojuegos"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo juego títulos familiares o casuales"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero jugar en monitor de escritorio"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo consolas conectadas a la TV"
+        }
+      ]
+    }
+  ]
+}

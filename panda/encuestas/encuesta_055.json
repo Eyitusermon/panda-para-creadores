@@ -1,0 +1,128 @@
+{
+  "id": "enc_055",
+  "numero": 55,
+  "titulo": "Nutrición, Dietas y Hábitos Alimenticios",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Comida sana, ayuno intermitente, macro y micro nutrientes.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuidas conscientemente la cantidad de proteína y calorías que comes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, peso mi comida o calculo macros con una app (MyFitnessPal)"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo una idea aproximada de comer sano sin obsesión"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo intento comer menos ultraprocesados y más verduras"
+        },
+        {
+          "letra": "D",
+          "texto": "No me fijo en calorías ni nutrientes"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Has probado alguna vez el ayuno intermitente (16/8)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es mi estilo de vida habitual y me sienta genial"
+        },
+        {
+          "letra": "B",
+          "texto": "Lo he probado durante algunas semanas o meses"
+        },
+        {
+          "letra": "C",
+          "texto": "Lo conozco pero me cuesta saltarme el desayuno"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he probado el ayuno voluntario"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cuántos litros de agua bebes aproximadamente al día?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Más de 2.5 litros de agua al día"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 1.5 y 2 litros al día"
+        },
+        {
+          "letra": "C",
+          "texto": "Menos de 1 litro al día"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo bebo agua cuando tengo mucha sed"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Con qué frecuencia consumes comida rápida o ultraprocesados?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Rara vez, menos de 1 vez cada 15 días"
+        },
+        {
+          "letra": "B",
+          "texto": "Una o dos veces por semana (comida trampa / cheat meal)"
+        },
+        {
+          "letra": "C",
+          "texto": "Casi a diario por comodidad o falta de tiempo"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo en reuniones sociales con amigos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Tomas suplementos vitamínicos (vitamina D, omega 3, magnesio)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tomo suplementos diarios pautados"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en épocas de invierno o cansancio"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero obtener todos los nutrientes de la comida"
+        },
+        {
+          "letra": "D",
+          "texto": "No tomo vitaminas ni suplementos"
+        }
+      ]
+    }
+  ]
+}

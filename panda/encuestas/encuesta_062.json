@@ -1,0 +1,128 @@
+{
+  "id": "enc_062",
+  "numero": 62,
+  "titulo": "Teletrabajo vs Trabajo Presencial en Oficina",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Productividad remota, desplazamientos y conciliación.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuál es tu modalidad de trabajo o estudio habitual?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "100% en remoto desde casa"
+        },
+        {
+          "letra": "B",
+          "texto": "Modelo híbrido (2 o 3 días en casa y el resto en oficina)"
+        },
+        {
+          "letra": "C",
+          "texto": "100% presencial en el lugar de trabajo"
+        },
+        {
+          "letra": "D",
+          "texto": "Actualmente estoy desempleado o estudiando presencial"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué ventaja valoras más de trabajar desde casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ahorro de tiempo y dinero en desplazamientos"
+        },
+        {
+          "letra": "B",
+          "texto": "Mayor flexibilidad horaria y conciliación familiar"
+        },
+        {
+          "letra": "C",
+          "texto": "Trabajar en ropa cómoda sin estrés de oficina"
+        },
+        {
+          "letra": "D",
+          "texto": "Comer comida casera sana todos los días"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Sientes que eres más productivo en casa o en la oficina?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Mucho más productivo en casa sin interrupciones"
+        },
+        {
+          "letra": "B",
+          "texto": "Más productivo en la oficina con equipo cerca"
+        },
+        {
+          "letra": "C",
+          "texto": "Similar en ambos entornos"
+        },
+        {
+          "letra": "D",
+          "texto": "En casa a veces me distraigo con facilidad"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cuánto tiempo tardas en desplazarte a tu trabajo diario?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de 15 minutos o no me desplazo"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 15 y 30 minutos por trayecto"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 30 y 60 minutos por trayecto"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de 1 hora de ida y otra de vuelta"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Aceptarías un trabajo con salario menor a cambio de ser 100% remoto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, la libertad geográfica y el tiempo valen más"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si la diferencia de sueldo es pequeña (menos del 10%)"
+        },
+        {
+          "letra": "C",
+          "texto": "No, prefiero maximizar mis ingresos aunque sea presencial"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero el ambiente social de la oficina"
+        }
+      ]
+    }
+  ]
+}

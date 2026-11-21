@@ -1,0 +1,128 @@
+{
+  "id": "enc_077",
+  "numero": 77,
+  "titulo": "Desayunos y Brunches de Fin de Semana",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "Huevos benedict, tostadas de aguacate, tortitas y zumo.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué sueles desayunar habitualmente entre semana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Café solo o con leche y nada más (desayuno rápido)"
+        },
+        {
+          "letra": "B",
+          "texto": "Tostada con aceite de oliva virgen extra y tomate / pavo"
+        },
+        {
+          "letra": "C",
+          "texto": "Cereales, avena o yogur con frutos secos"
+        },
+        {
+          "letra": "D",
+          "texto": "Huevos revueltos o tortilla con fruta"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Te gustan los brunches de fin de semana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me encantan, es mi plan favorito de sábado o domingo"
+        },
+        {
+          "letra": "B",
+          "texto": "He ido en algunas ocasiones y se come de lujo"
+        },
+        {
+          "letra": "C",
+          "texto": "Me parece una moda cara para lo que sirven"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero el almuerzo tradicional a mediodía"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres desayuno dulce o desayuno salado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Salado (tostadas, huevos, queso, jamón)"
+        },
+        {
+          "letra": "B",
+          "texto": "Dulce (croissants, tortitas, gofres con sirope)"
+        },
+        {
+          "letra": "C",
+          "texto": "Combinación de ambos (primero salado y luego dulce)"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo líquidos (café, té o zumo)"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué plato de brunch no puede faltar en tu mesa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Huevos Benedictine con salsa holandesa sobre pan brioche"
+        },
+        {
+          "letra": "B",
+          "texto": "Tostada de pan de masa madre con aguacate y huevo poché"
+        },
+        {
+          "letra": "C",
+          "texto": "Pancakes esponjosos con sirope de arce y frutos rojos"
+        },
+        {
+          "letra": "D",
+          "texto": "Açai bowl frío con granola crujiente"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Zumo de naranja recién exprimido o zumo envasado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Exprimido natural en el momento, no hay comparación"
+        },
+        {
+          "letra": "B",
+          "texto": "Zumo envasado 100% fruta refrigerado por rapidez"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero batidos verdes (smoothies) de frutas y verduras"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo tomar zumos en el desayuno"
+        }
+      ]
+    }
+  ]
+}

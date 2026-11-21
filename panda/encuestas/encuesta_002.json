@@ -1,0 +1,128 @@
+{
+  "id": "enc_002",
+  "numero": 2,
+  "titulo": "Juegos de Azar y Juegos Arcade en Línea",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "Opinión sobre dinámicas de Crash, Plinko y slots digitales.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué juego estilo casino te resulta más entretenido?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Plinko de rebotes rápidos"
+        },
+        {
+          "letra": "B",
+          "texto": "Crash Rocket / Aviator"
+        },
+        {
+          "letra": "C",
+          "texto": "Cyber Mines / Buscaminas"
+        },
+        {
+          "letra": "D",
+          "texto": "Golden Slots clásicas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué factor valoras más al probar un juego arcade?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Multiplicadores altos y emoción"
+        },
+        {
+          "letra": "B",
+          "texto": "Diseño visual y animaciones"
+        },
+        {
+          "letra": "C",
+          "texto": "Control manual de retiro rápido"
+        },
+        {
+          "letra": "D",
+          "texto": "Baja volatilidad y premios frecuentes"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres partidas cortas y ágiles o sesiones largas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Partidas ultrarrápidas de segundos"
+        },
+        {
+          "letra": "B",
+          "texto": "Sesiones medianas de 10 a 20 minutos"
+        },
+        {
+          "letra": "C",
+          "texto": "Sesiones extendidas de relax"
+        },
+        {
+          "letra": "D",
+          "texto": "Depende de mi balance disponible"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Utilizas la función de autoretiro o retiro manual?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre autoretiro programado"
+        },
+        {
+          "letra": "B",
+          "texto": "Casi siempre manual para mayor control"
+        },
+        {
+          "letra": "C",
+          "texto": "Alterno entre ambos"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca utilizo autoretiro"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te gustan las mecánicas con multiplicadores progresivos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me encantan, son las más divertidas"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gustan con riesgo moderado"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero multiplicadores fijos"
+        },
+        {
+          "letra": "D",
+          "texto": "Me resultan indiferentes"
+        }
+      ]
+    }
+  ]
+}

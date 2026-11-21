@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PANDA CASH - Términos y Condiciones & Política de Privacidad</title>
+  <script src="./config.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐼</text></svg>">
+  <style>
+    :root {
+      --bg-main: #0a0f1d;
+      --bg-card: #111a2e;
+      --bg-card-inner: #142037;
+      --bg-header: #0d1527;
+      --primary-green: #00e701;
+      --accent-cyan: #00f0ff;
+      --accent-gold: #ffb700;
+      --accent-red: #ff3366;
+      --text-white: #ffffff;
+      --text-muted: #8e9bb0;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: #d1d5db;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* BARRA SUPERIOR */
+    .topbar {
+      background: rgba(13, 21, 39, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: #152238;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .brand-name span {
+      color: var(--primary-green);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .main-container {
+      max-width: 980px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* HERO BANNER */
+    .terms-hero {
+      background: linear-gradient(135deg, rgba(17, 26, 46, 0.95) 0%, rgba(20, 32, 55, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terms-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(0, 231, 1, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 183, 0, 0.12);
+      border: 1px solid rgba(255, 183, 0, 0.35);
+      color: var(--accent-gold);
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 750px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .hero-meta strong {
+      color: #fff;
+    }
+
+    /* ÍNDICE DE NAVEGACIÓN RÁPIDA */
+    .quick-index-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .quick-index-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .quick-index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.5rem 1.25rem;
+      list-style: none;
+    }
+
+    .quick-index-grid a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-size: 0.84rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.15s ease;
+    }
+
+    .quick-index-grid a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* TARJETAS DE ALERTA DESTACADAS */
+    .alert-card {
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .alert-card.warning {
+      background: rgba(255, 183, 0, 0.08);
+      border: 1px solid rgba(255, 183, 0, 0.35);
+    }
+
+    .alert-card.warning .alert-icon {
+      font-size: 1.75rem;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .alert-card.security {
+      background: rgba(0, 231, 1, 0.08);
+      border: 1px solid rgba(0, 231, 1, 0.35);
+    }
+
+    .alert-card.security .alert-icon {
+      font-size: 1.75rem;
+      color: var(--primary-green);
+      flex-shrink: 0;
+    }
+
+    .alert-content h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .alert-content p {
+      font-size: 0.84rem;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+
+    /* SECCIONES DE TÉRMINOS */
+    .terms-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 231, 1, 0.15);
+      border: 1px solid rgba(0, 231, 1, 0.4);
+      color: var(--primary-green);
+      font-weight: 900;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .terms-text {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .terms-text p {
+      margin-bottom: 0.85rem;
+    }
+
+    .terms-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .terms-list {
+      list-style: none;
+      margin: 0.75rem 0 0.85rem;
+      padding-left: 0.5rem;
+    }
+
+    .terms-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.88rem;
+    }
+
+    .terms-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary-green);
+      font-weight: 900;
+    }
+
+    /* PIE DE PÁGINA */
+    .page-footer {
+      background: #080d19;
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-top: 3rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .topbar {
+        padding: 0.65rem 1rem;
+      }
+      .brand-name {
+        font-size: 1.1rem;
+      }
+      .main-container {
+        padding: 0 1rem;
+        margin: 1.25rem auto;
+      }
+      .terms-hero {
+        padding: 1.5rem 1.25rem;
+      }
+      .hero-title {
+        font-size: 1.5rem;
+      }
+      .terms-section {
+        padding: 1.25rem 1.25rem;
+      }
+      .section-title {
+        font-size: 1.05rem;
+      }
+      .alert-card {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR -->
+  <header class="topbar">
+    <a class="brand-logo" href="portal_directo.html">
+      <div class="brand-icon">🐼</div>
+      <div class="brand-name">PANDA<span> CASH</span></div>
+    </a>
+
+    <a class="btn-back" href="portal_directo.html">
+      <span>◀</span> Volver al Portal
+    </a>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-container">
+
+    <!-- HERO HEADER -->
+    <div class="terms-hero">
+      <div class="hero-badge">📜 Documento Oficial</div>
+      <h1 class="hero-title">Términos y Condiciones de Uso & Política de Privacidad</h1>
+      <p class="hero-subtitle">
+        Al crear una cuenta, iniciar sesión o interactuar en la plataforma <strong>PANDA CASH</strong>, aceptas de manera libre, informada y voluntaria las siguientes directrices operativas, deslindes de responsabilidad y garantías de protección de datos.
+      </p>
+
+      <div class="hero-meta">
+        <div>Última actualización: <strong>Noviembre 2026</strong></div>
+        <div>Aplicabilidad: <strong>Global / Todos los usuarios registrados</strong></div>
+        <div>Edad Mínima Legal: <strong>+18 Años Obligatorio</strong></div>
+      </div>
+    </div>
+
+    <!-- NAVEGACIÓN RÁPIDA -->
+    <nav class="quick-index-card">
+      <div class="quick-index-title">📌 Índice de Contenidos</div>
+      <ul class="quick-index-grid">
+        <li><a href="#sec1">1. Mayoría de Edad y Aceptación</a></li>
+        <li><a href="#sec2">2. Deslinde de Responsabilidad y Juego Responsable</a></li>
+        <li><a href="#sec3">3. Seguridad, Privacidad y Protección de Datos</a></li>
+        <li><a href="#sec4">4. Economía de Diamantes y Equivalencia USDT</a></li>
+        <li><a href="#sec5">5. Política de Verificación y Retiros</a></li>
+        <li><a href="#sec6">6. Prohibición de Bots, Trampas y Cuentas Duplicadas</a></li>
+        <li><a href="#sec7">7. Juego Justo y Generación Aleatoria (RNG)</a></li>
+        <li><a href="#sec8">8. Modificaciones y Jurisdicción Aplicable</a></li>
+      </ul>
+    </nav>
+
+    <!-- ALERTA DESTACADA 1: JUEGO RESPONSABLE -->
+    <div class="alert-card warning">
+      <div class="alert-icon">⚖️</div>
+      <div class="alert-content">
+        <h4>Aviso Crucial de Juego Responsable y Mayoría de Edad</h4>
+        <p>
+          Los juegos en <strong>PANDA CASH</strong> están diseñados con fines recreativos y de entretenimiento digital. No constituyen una vía de inversión ni una garantía de rentabilidad financiera. Juega siempre con moderación y exclusivamente con importes destinados a tu ocio personal.
+        </p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1 -->
+    <section class="terms-section" id="sec1">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <h2 class="section-title">Mayoría de Edad y Aceptación de los Términos</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          El registro, uso y participación en cualquiera de las actividades, juegos de azar o recompensas ofrecidas por <strong>PANDA CASH</strong> está estrictamente reservado a personas físicas que hayan alcanzado la <strong>mayoría de edad legal (+18 años)</strong> o la edad requerida por la legislación de su país de residencia.
+        </p>
+        <p>
+          Al marcar la casilla <em>"Acepto los Términos y Condiciones"</em> en el formulario de registro, declaras bajo juramento ser mayor de edad y tener plena capacidad jurídica para celebrar acuerdos vinculantes. Toda cuenta que pertenezca o sea utilizada por un menor de edad será cerrada de forma inmediata e irrevocable.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: DESLINDE DE RESPONSABILIDAD -->
+    <section class="terms-section" id="sec2">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <h2 class="section-title">Deslinde de Responsabilidad sobre Conductas Compulsivas y Adicción</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          <strong>PANDA CASH se deslinda expresamente de cualquier responsabilidad legal, médica, patrimonial, emocional o psicológica</strong> derivada del uso compulsivo, excesivo, irresponsable o adictivo de la plataforma:
+        </p>
+        <ul class="terms-list">
+          <li><strong>Ocio y Entretenimiento Personal:</strong> La plataforma proporciona una experiencia lúdica y no asume obligación alguna por decisiones individuales de apuesta o consumo tomadas por el usuario.</li>
+          <li><strong>Riesgo Inherente del Juego:</strong> El usuario reconoce y acepta voluntariamente que los juegos de casino, minas, slots, ruleta, plinko y multiplicadores conllevan el riesgo natural de pérdida de saldo de diamantes. En ningún caso las pérdidas ocasionadas darán derecho a reclamaciones, devoluciones o compensaciones.</li>
+          <li><strong>Exclusión de Asesoramiento Financiero:</strong> Ninguna mecánica de bonos, cofres, multiplicadores ni encuestas patrocinadas constituye promesa de enriquecimiento, asesoría financiera, depósito bancario ni instrumento de inversión.</li>
+          <li><strong>Autoexclusión y Pausa Voluntaria:</strong> El usuario tiene a su disposición en todo momento el derecho a pausar o cerrar definitivamente su cuenta contactando al soporte oficial si considera que está perdiendo el control de su actividad lúdica.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ALERTA DESTACADA 2: PRIVACIDAD Y SEGURIDAD -->
+    <div class="alert-card security">
+      <div class="alert-icon">🛡️</div>
+      <div class="alert-content">
+        <h4>Compromiso de Privacidad y Cero Comercialización de Datos</h4>
+        <p>
+          Tus datos personales y respuestas de seguridad se encuentran <strong>encriptados y protegidos</strong>. Jamás vendemos, alquilamos ni compartimos la información de nuestros usuarios con terceras empresas publicitarias.
+        </p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: PROTECCIÓN DE DATOS -->
+    <section class="terms-section" id="sec3">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <h2 class="section-title">Garantía de Seguridad, Privacidad y Tratamiento de Datos</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          En <strong>PANDA CASH</strong> aplicamos rigurosos estándares técnicos para proteger la integridad, confidencialidad y disponibilidad de la información de cada jugador:
+        </p>
+        <ul class="terms-list">
+          <li><strong>Cero Venta de Datos a Terceros:</strong> Garantizamos de forma taxativa que tu dirección de correo electrónico, nombre de usuario, número telefónico y registros de juego <strong>nunca serán transferidos ni comercializados</strong> con intermediarios, redes de publicidad o corredores de datos.</li>
+          <li><strong>Hasheo Criptográfico Irreversible:</strong> Todas las contraseñas de acceso y las respuestas secretas a las preguntas de seguridad se almacenan en la base de datos transformadas mediante algoritmos criptográficos unidireccionales (bcrypt y SHA-256 con salt dinámico). Ningún empleado o administrador de Panda Cash puede visualizar tus credenciales en texto legible.</li>
+          <li><strong>Billeteras Blockchain y Cero Custodia de Claves:</strong> Las direcciones USDT (Red TRC-20) registradas por el usuario se emplean únicamente como destino para acreditar retiros solicitados. Panda Cash <strong>jamás te solicitará tus claves privadas (private keys), contraseñas de wallet ni frases de recuperación (seed phrases)</strong>.</li>
+          <li><strong>Navegación Cifrada:</strong> Toda la transmisión de datos entre tu navegador web y nuestros servidores viaja protegida mediante protocolos seguros SSL/TLS para prevenir ataques de interceptación.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: ECONOMÍA DE DIAMANTES -->
+    <section class="terms-section" id="sec4">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <h2 class="section-title">Economía de la Plataforma: Diamantes (💎) y Tasa de Cambio</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          La moneda interna operativa de la plataforma son los <strong>Diamantes (💎)</strong>. Toda apuesta, premio, cofre diario y bono se cuantifica en esta unidad:
+        </p>
+        <ul class="terms-list">
+          <li><strong>Tasa Fija de Referencia:</strong> Se establece una equivalencia fija de <strong>1 USDT = 10 Diamantes (💎)</strong>.</li>
+          <li><strong>Tipos de Saldo:</strong> El balance del jugador se divide en <em>Saldo Real de Diamantes</em> (disponible para jugar o retirar según condiciones) y <em>Saldo de Bono</em> (sujeto a requisitos de rollover antes de su conversión).</li>
+          <li><strong>Recargas:</strong> Los depósitos se realizan mediante transferencias en criptomoneda estable USDT (Red TRC-20) y se acreditan automáticamente al balance en su valor correspondiente en diamantes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: POLÍTICA DE RETIROS Y VERIFICACIÓN -->
+    <section class="terms-section" id="sec5">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <h2 class="section-title">Política de Retiros y Estado de Cuenta Verificada</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          Para mantener la seguridad del ecosistema, prevenir fraudes y dar cumplimiento a normativas internacionales contra el blanqueo de capitales (AML), se aplican las siguientes reglas:
+        </p>
+        <ul class="terms-list">
+          <li><strong>Verificación Obligatoria para Retirar:</strong> Cualquier usuario recién registrado puede depositar y jugar libremente. Sin embargo, para procesar <strong>retiros de ganancias</strong> hacia una billetera externa USDT, la cuenta debe encontrarse en estado <em>Verificada</em>, abonando la tasa única de verificación estipulada en la plataforma (100 💎 / 10 USDT).</li>
+          <li><strong>Límites de Retiro:</strong> El importe mínimo de retiro se especifica en la sección de retiro del panel de jugador. Los fondos son remitidos a la dirección de billetera TRC-20 configurada en el perfil del usuario.</li>
+          <li><strong>Tiempos de Procesamiento:</strong> Las transacciones salientes se confirman en la red blockchain descentralizada, dependiendo de la velocidad de congestión de la red TRON.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: CONDUCTA Y PROHIBICIONES -->
+    <section class="terms-section" id="sec6">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <h2 class="section-title">Prohibición de Trampas, Bots y Cuentas Múltiples</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          Queda terminantemente prohibido a los usuarios:
+        </p>
+        <ul class="terms-list">
+          <li>Crear múltiples cuentas pertenecientes a la misma persona física con el fin de abusar de bonos de bienvenida, cofres diarios o promociones.</li>
+          <li>Emplear software automatizado (bots, scripts, macros o extensiones maliciosas) que interfiera en la aleatoriedad natural de los juegos o encuestas.</li>
+          <li>Explotar vulnerabilidades técnicas o bugs de software. Cualquier saldo obtenido ilícitamente mediante fallos de software será cancelado.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: RNG Y JUEGO JUSTO -->
+    <section class="terms-section" id="sec7">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <h2 class="section-title">Juego Justo y Generador de Números Aleatorios (RNG)</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          Todos los juegos presentes en <strong>PANDA CASH</strong> (Golden Slots, Cyber Mines, Neon Plinko, Panda Crash Rocket y Llaves y Puertas) operan bajo algoritmos de Generación de Números Pseudoaleatorios (PRNG) rigurosamente testeados que aseguran que cada resultado sea impredecible, matemáticamente independiente de partidas previas y no manipulable en tiempo real.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: MODIFICACIONES -->
+    <section class="terms-section" id="sec8">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <h2 class="section-title">Modificaciones de los Términos y Soporte</h2>
+      </div>
+      <div class="terms-text">
+        <p>
+          <strong>PANDA CASH</strong> se reserva el derecho de actualizar o modificar estos Términos y Condiciones en cualquier momento para adaptarlos a nuevas funcionalidades técnicas o requerimientos normativos. El uso continuado de la plataforma tras la publicación de modificaciones implica su plena aceptación.
+        </p>
+        <p>
+          Para cualquier consulta relativa a estos términos, protección de datos o juego responsable, puedes contactar con nuestro equipo de asistencia técnica a través del canal de soporte oficial en la plataforma.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="page-footer">
+    <div class="footer-links">
+      <a href="portal_directo.html">Inicio</a>
+      <a href="dashboard_directo.html">Lobby de Juegos</a>
+      <a href="perfil.html">Mi Perfil</a>
+      <a href="misiones.html">Misiones</a>
+      <a href="terminos.html" style="color: var(--accent-gold);">Términos y Condiciones</a>
+    </div>
+    <p>© 2026 PANDA CASH. Todos los derechos reservados. Plataforma de juegos recreativos y recompensas de ocio digital (+18).</p>
+  </footer>
+
+</body>
+</html>

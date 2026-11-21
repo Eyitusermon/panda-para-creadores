@@ -1,0 +1,128 @@
+{
+  "id": "enc_037",
+  "numero": 37,
+  "titulo": "Coleccionismo Musical: Vinilos, CDs y Merchandising",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "El renacer del vinilo físico y camisetas de bandas.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Tienes reproductor de vinilos (tocadiscos) en casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, colecciono vinilos y los escucho con frecuencia"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo tocadiscos pero más como objeto decorativo"
+        },
+        {
+          "letra": "C",
+          "texto": "No tengo pero me gustaría iniciar una colección"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo interés en formatos físicos analógicos"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Comprarías el vinilo de un álbum que ya puedes escuchar gratis en Spotify?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, por el valor artístico de la portada y el objeto"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo de mis 2 o 3 álbumes favoritos de la vida"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo si es una edición especial limitada de coleccionista"
+        },
+        {
+          "letra": "D",
+          "texto": "No gastaría dinero en un formato que ya tengo en digital"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Tienes camisetas o merchandising de artistas o grupos musicales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, varias camisetas compradas en conciertos oficiales"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo alguna prenda casual"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo posters, tazas u otros accesorios"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo merchandising musical"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Crees que el formato vinilo suena mejor que el audio digital en alta resolución?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tiene una calidez analógica inigualable"
+        },
+        {
+          "letra": "B",
+          "texto": "Suena diferente, pero el digital es más limpio y nítido"
+        },
+        {
+          "letra": "C",
+          "texto": "Es más un ritual nostálgico que una ventaja sonora real"
+        },
+        {
+          "letra": "D",
+          "texto": "No noto la diferencia acústica"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué formato físico guardas con más nostalgia de tu infancia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Casetes de cinta magnética"
+        },
+        {
+          "letra": "B",
+          "texto": "Discos compactos (CDs) con sus libretos"
+        },
+        {
+          "letra": "C",
+          "texto": "Vinilos familiares antiguos"
+        },
+        {
+          "letra": "D",
+          "texto": "Crecí directamente en la era del MP3 y descargas"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,596 @@
+:root {
+  --bg-dark: #070d18;
+  --bg-card: #0f182c;
+  --bg-card-inner: #142037;
+  --accent-gold: #ffb700;
+  --accent-gold-hover: #e6a500;
+  --accent-green: #00e701;
+  --accent-cyan: #00f0ff;
+  --accent-red: #ff3366;
+  --text-main: #ffffff;
+  --text-muted: #8e9bb0;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(255, 183, 0, 0.38);
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #263859 #070d18;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070d18;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1e2f4d 0%, #16233b 100%);
+  border: 1px solid rgba(255, 183, 0, 0.28);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffb700;
+  border-color: #ffb700;
+}
+
+html, body {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden; /* Cero scroll en escritorio */
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(255, 183, 0, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 80% 85%, rgba(0, 231, 1, 0.04) 0%, transparent 45%);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+/* TOPBAR COMPACTA */
+.topbar {
+  background: rgba(11, 18, 32, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.35rem 1.25rem;
+  height: 48px;
+  min-height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.15rem;
+}
+
+.brand-logo span.gold {
+  color: var(--accent-gold);
+}
+
+.game-tag-pill {
+  background: rgba(255, 183, 0, 0.14);
+  border: 1px solid var(--border-gold);
+  color: var(--accent-gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.wallet-box {
+  background: #111b2e;
+  border: 1px solid var(--border-gold);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-diamonds {
+  color: var(--accent-gold);
+  font-weight: 900;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+}
+
+.wallet-usdt {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.btn-top-action {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-top-action:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-gold);
+}
+
+/* LAYOUT PRINCIPAL: OCUPA EXACTAMENTE EL ALTO RESTANTE SIN SCROLL EN ESCRITORIO */
+.slots-main-layout {
+  max-width: 1320px;
+  height: calc(100vh - 48px);
+  max-height: calc(100vh - 48px);
+  margin: 0 auto;
+  padding: 0.5rem 0.85rem 0.6rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 0.75rem;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* GABINETE DE TRAGAMONEDAS */
+.slot-cabinet-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 0.6rem 0.85rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.45rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cabinet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.35rem;
+  flex-shrink: 0;
+}
+
+.cabinet-title-wrap h1 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cabinet-title-wrap p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.multiplier-status-banner {
+  background: #09101d;
+  border: 1px solid var(--border-gold);
+  border-radius: 6px;
+  padding: 0.25rem 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mult-value-big {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--accent-green);
+  font-family: 'Courier New', monospace;
+}
+
+/* MARCO DEL CANVAS DE RODILLOS */
+.reels-viewport {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  background: #060a12;
+  border: 2px solid #ffb700;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.88), 0 0 18px rgba(255, 183, 0, 0.12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#slotCanvas {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  aspect-ratio: 760 / 390;
+  display: block;
+}
+
+/* BARRA DE RESULTADO DE RONDA */
+.win-ticker-bar {
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  min-height: 34px;
+  flex-shrink: 0;
+}
+
+.win-ticker-bar.winner {
+  border-color: var(--accent-green);
+  background: linear-gradient(90deg, rgba(0, 231, 1, 0.14), rgba(20, 32, 55, 0.95));
+}
+
+/* CONTROLES DE INVERSIÓN Y GIRO COMPACTOS */
+.controls-panel {
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.bet-config-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.bet-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #d1d5db;
+}
+
+.bet-input-group {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.bet-input {
+  flex: 1;
+  background: #080e1a;
+  border: 1px solid rgba(255, 183, 0, 0.35);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  color: var(--accent-gold);
+  font-size: 0.95rem;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  outline: none;
+  width: 100%;
+}
+
+.btn-bet-mod {
+  background: #1a2947;
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.45rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-bet-mod:hover {
+  background: #243860;
+  border-color: var(--accent-gold);
+}
+
+.quick-bets-row {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.btn-quick-bet {
+  flex: 1;
+  min-width: 48px;
+  background: #0d1629;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.28rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-quick-bet:hover,
+.btn-quick-bet.active {
+  background: #1c2e52;
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.spin-actions-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.btn-spin-main {
+  background: linear-gradient(180deg, #ffc72c 0%, #ff9900 100%);
+  color: #09101d;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 900;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 15px rgba(255, 183, 0, 0.3);
+  transition: transform 0.12s, opacity 0.15s;
+  font-family: inherit;
+}
+
+.btn-spin-main:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn-spin-main:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.spin-sub-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+}
+
+.btn-sub-mode {
+  background: #0d1629;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.32rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-sub-mode.active {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  background: rgba(0, 231, 1, 0.1);
+}
+
+.security-footer-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.66rem;
+  color: var(--text-muted);
+  padding: 0.2rem 0.4rem;
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+/* PANEL LATERAL: TABLA DE MULTIPLICADORES E HISTORIAL */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.side-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  flex-shrink: 0;
+}
+
+.side-card h3 {
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.paytable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.paytable-item {
+  background: var(--bg-card-inner);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.pay-sym {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.pay-sym span.ico {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pay-sym span.ico img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.pay-mults {
+  color: var(--accent-gold);
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  font-size: 0.68rem;
+}
+
+.side-card.history-card {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+}
+
+.history-row {
+  background: var(--bg-card-inner);
+  border-radius: 5px;
+  padding: 0.35rem 0.55rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+}
+
+/* RESPONSIVE: EN TELÉFONOS MÓVILES SE HABILITA EL SCROLL */
+@media (max-width: 900px), (max-height: 580px) {
+  html, body {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: auto !important; /* Permitir scroll solo en teléfonos o pantallas muy pequeñas */
+  }
+
+  .topbar {
+    position: static;
+    height: auto;
+    padding: 0.65rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .slots-main-layout {
+    height: auto !important;
+    max-height: none !important;
+    grid-template-columns: 1fr;
+    padding: 0.75rem 0.75rem 2.5rem;
+    overflow: visible !important;
+  }
+
+  .slot-cabinet-card {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .reels-viewport {
+    height: auto !important;
+    min-height: 250px;
+  }
+
+  #slotCanvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .controls-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .side-card.history-card {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .history-list {
+    max-height: 220px;
+  }
+}

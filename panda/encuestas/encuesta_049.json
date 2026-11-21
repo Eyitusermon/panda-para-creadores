@@ -1,0 +1,128 @@
+{
+  "id": "enc_049",
+  "numero": 49,
+  "titulo": "Libros, Lectura y Formatos Digitales",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Kindle, libros físicos en papel, audiolibros y novelas.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿En qué formato prefieres leer habitualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Libro físico en papel por el tacto y olor"
+        },
+        {
+          "letra": "B",
+          "texto": "Lector electrónico de tinta electrónica (Kindle, Kobo)"
+        },
+        {
+          "letra": "C",
+          "texto": "En la pantalla del iPad, tablet o móvil"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo leer libros por falta de tiempo"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuántos libros leíste aproximadamente en el último año?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Más de 10 libros completos"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 4 y 10 libros"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 1 y 3 libros"
+        },
+        {
+          "letra": "D",
+          "texto": "No leí ningún libro completo"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has probado alguna vez los audiolibros (Audible, Storytel)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, escucho audiolibros mientras conduzco o entreno"
+        },
+        {
+          "letra": "B",
+          "texto": "He probado alguno pero prefiero leer con mis ojos"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gustaría probarlos pero aún no lo he hecho"
+        },
+        {
+          "letra": "D",
+          "texto": "No me llama la atención el formato de audio"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué género literario te atrapa con mayor facilidad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Thriller, novela negra y misterio policíaco"
+        },
+        {
+          "letra": "B",
+          "texto": "Fantasía épica y ciencia ficción"
+        },
+        {
+          "letra": "C",
+          "texto": "Desarrollo personal, negocios y psicología"
+        },
+        {
+          "letra": "D",
+          "texto": "Novela histórica o biografías reales"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sueles comprar libros en librerías de barrio o por internet?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me encanta visitar librerías físicas y curiosear mesas"
+        },
+        {
+          "letra": "B",
+          "texto": "Compro por Amazon u otras tiendas online por rapidez"
+        },
+        {
+          "letra": "C",
+          "texto": "Consigo versiones digitales para mi lector"
+        },
+        {
+          "letra": "D",
+          "texto": "Suelo pedirlos prestados en bibliotecas o a amigos"
+        }
+      ]
+    }
+  ]
+}

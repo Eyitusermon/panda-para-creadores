@@ -1,0 +1,128 @@
+{
+  "id": "enc_079",
+  "numero": 79,
+  "titulo": "Cervezas Artesanales e Industriales",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "IPAs aromáticas, lagers rubias, cervezas tostadas y catas.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué tipo de cerveza prefieres habitualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Lager rubia tradicional ligera y muy fría"
+        },
+        {
+          "letra": "B",
+          "texto": "IPA (India Pale Ale) aromática y lupulada"
+        },
+        {
+          "letra": "C",
+          "texto": "Cerveza tostada o de trigo (tipo belga / alemana)"
+        },
+        {
+          "letra": "D",
+          "texto": "Stout o cerveza negra con notas de café y cacao"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Consumes cerveza artesanal (Craft Beer)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, busco marcas locales y nuevos lotes en latas de diseño"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gusta probarlas cuando voy a cervecerías especializadas"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero las marcas comerciales de toda la vida"
+        },
+        {
+          "letra": "D",
+          "texto": "No tomo cerveza"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Bebes la cerveza directamente del botellín o en vaso de cristal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En copa o vaso de cristal fino bien tirada"
+        },
+        {
+          "letra": "B",
+          "texto": "Directamente del botellín bien frío"
+        },
+        {
+          "letra": "C",
+          "texto": "En jarra congelada en verano"
+        },
+        {
+          "letra": "D",
+          "texto": "En lata directamente"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué opinas de la cerveza 0,0% sin alcohol?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Han mejorado muchísimo y son una gran opción para cuidarse"
+        },
+        {
+          "letra": "B",
+          "texto": "Las tomo cuando tengo que conducir"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero tomar agua antes que cerveza sin alcohol"
+        },
+        {
+          "letra": "D",
+          "texto": "No tomo cerveza"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuál es el mejor momento para una cerveza bien fría?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Al salir de trabajar con compañeros (Afterwork)"
+        },
+        {
+          "letra": "B",
+          "texto": "El fin de semana al mediodía con el aperitivo al sol"
+        },
+        {
+          "letra": "C",
+          "texto": "Viendo un partido de fútbol emocionante"
+        },
+        {
+          "letra": "D",
+          "texto": "Por la noche cenando con amigos"
+        }
+      ]
+    }
+  ]
+}

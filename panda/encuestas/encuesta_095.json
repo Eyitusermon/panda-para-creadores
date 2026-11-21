@@ -1,0 +1,128 @@
+{
+  "id": "enc_095",
+  "numero": 95,
+  "titulo": "Fórmula 1 y Automovilismo Deportivo",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Grandes Premios, Ferrari, Red Bull, Fernando Alonso y adelantamientos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sigues las carreras de Fórmula 1 los fines de semana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, veo clasificación el sábado y carrera el domingo religiosamente"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo las carreras más espectaculares (Mónaco, Silverstone, Spa)"
+        },
+        {
+          "letra": "C",
+          "texto": "Miro los resúmenes de adelantamientos y polémicas en YouTube"
+        },
+        {
+          "letra": "D",
+          "texto": "No sigo la Fórmula 1"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es tu piloto o escudería favorita en la parrilla?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fernando Alonso / Aston Martin"
+        },
+        {
+          "letra": "B",
+          "texto": "Ferrari (Scuderia Ferrari)"
+        },
+        {
+          "letra": "C",
+          "texto": "Max Verstappen / Red Bull Racing"
+        },
+        {
+          "letra": "D",
+          "texto": "Lewis Hamilton / Mercedes"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has asistido a un circuito a ver un Gran Premio de F1 o MotoGP en directo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, el sonido de los motores en vivo y el ambiente es sobrecogedor"
+        },
+        {
+          "letra": "B",
+          "texto": "Me encantaría ir al menos una vez en la vida"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero verlo por televisión con comentarios técnicos y repeticiones"
+        },
+        {
+          "letra": "D",
+          "texto": "No me interesa el automovilismo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué circuito del calendario de F1 te parece el más legendario?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Spa-Francorchamps en Bélgica con la subida de Eau Rouge"
+        },
+        {
+          "letra": "B",
+          "texto": "Monza en Italia por la velocidad pura del Templo de la Velocidad"
+        },
+        {
+          "letra": "C",
+          "texto": "Mónaco por el glamour y la precisión milimétrica entre muros"
+        },
+        {
+          "letra": "D",
+          "texto": "Suzuka en Japón por sus curvas enlazadas en S"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te gustan los simuladores de conducción con volante y pedales (Simracing)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo volante Force Feedback y juego a Assetto Corsa / iRacing / F1"
+        },
+        {
+          "letra": "B",
+          "texto": "He probado volantes de amigos y me parece súper inmersivo"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero jugar a juegos de carreras con mando tradicional"
+        },
+        {
+          "letra": "D",
+          "texto": "No juego a títulos de carreras"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_020",
+  "numero": 20,
+  "titulo": "Movilidad Eléctrica y Tecnología Urbana",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Patinetes eléctricos, bicicletas a batería y coches EV.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Utilizas patinetes o bicicletas eléctricas en tu ciudad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tengo patinete propio y lo uso a diario"
+        },
+        {
+          "letra": "B",
+          "texto": "Uso servicios de alquiler compartido por app"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo bicicleta convencional sin motor"
+        },
+        {
+          "letra": "D",
+          "texto": "No utilizo vehículos de micromovilidad"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué opinas de los coches eléctricos (Tesla, BYD, etc.)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Son el futuro indiscutible del transporte"
+        },
+        {
+          "letra": "B",
+          "texto": "Tecnología interesante pero aún con precio alto"
+        },
+        {
+          "letra": "C",
+          "texto": "Tienen problemas de autonomía e infraestructura"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero motores híbridos o de combustión"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Comprarías un vehículo 100% eléctrico en los próximos 3 años?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, mi próximo coche será eléctrico"
+        },
+        {
+          "letra": "B",
+          "texto": "Prefiero optar por un híbrido enchufable"
+        },
+        {
+          "letra": "C",
+          "texto": "Esperaré a que madure la red de cargadores"
+        },
+        {
+          "letra": "D",
+          "texto": "No planeo comprar vehículo eléctrico"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué aplicación de mapas y navegación usas más?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Google Maps"
+        },
+        {
+          "letra": "B",
+          "texto": "Waze por los avisos de tráfico en tiempo real"
+        },
+        {
+          "letra": "C",
+          "texto": "Apple Maps"
+        },
+        {
+          "letra": "D",
+          "texto": "Transporte público local (Moovit, etc.)"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué beneficio consideras mayor en la movilidad eléctrica?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cero emisiones y reducción de contaminación"
+        },
+        {
+          "letra": "B",
+          "texto": "Ahorro en combustible frente a gasolina"
+        },
+        {
+          "letra": "C",
+          "texto": "Conducción silenciosa y suave"
+        },
+        {
+          "letra": "D",
+          "texto": "Acceso a zonas de bajas emisiones urbanas"
+        }
+      ]
+    }
+  ]
+}

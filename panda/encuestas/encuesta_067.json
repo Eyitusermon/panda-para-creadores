@@ -1,0 +1,128 @@
+{
+  "id": "enc_067",
+  "numero": 67,
+  "titulo": "Cuidado de la Salud Mental y Manejo del Estrés",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Meditación, paseos en la naturaleza, terapia y descanso.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué actividad te ayuda más a desconectar y reducir el estrés?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Hacer deporte intenso o ir al gimnasio"
+        },
+        {
+          "letra": "B",
+          "texto": "Jugar a videojuegos o ver una buena serie"
+        },
+        {
+          "letra": "C",
+          "texto": "Salir a caminar al aire libre o escuchar música"
+        },
+        {
+          "letra": "D",
+          "texto": "Dormir una siesta o leer un libro tranquilo"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Has practicado meditación guiada o mindfulness alguna vez?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, utilizo apps (Headspace, Calm) con regularidad"
+        },
+        {
+          "letra": "B",
+          "texto": "Lo he probado en algunas ocasiones"
+        },
+        {
+          "letra": "C",
+          "texto": "Me cuesta calmar la mente y quedarme quieto"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he probado la meditación"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué opinas de acudir a terapia psicológica para el bienestar personal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fundamental, todo el mundo debería tener acceso a terapia"
+        },
+        {
+          "letra": "B",
+          "texto": "Muy positivo en momentos de cambios o crisis vitales"
+        },
+        {
+          "letra": "C",
+          "texto": "Útil si tienes un problema grave sin resolver"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero gestionar mis problemas de forma personal"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Sientes que el ritmo de vida actual es demasiado acelerado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Totalmente, la sociedad vive con exceso de prisa y sobreestimulación"
+        },
+        {
+          "letra": "B",
+          "texto": "A veces es exigente pero se puede encontrar equilibrio"
+        },
+        {
+          "letra": "C",
+          "texto": "A mí me gusta el ritmo dinámico y activo"
+        },
+        {
+          "letra": "D",
+          "texto": "Depende de la etapa en la que te encuentres"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te permites tener días enteros de descanso sin sentirte culpable?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, descansar es productivo para recargar energía"
+        },
+        {
+          "letra": "B",
+          "texto": "A veces siento ligera culpa si no hago algo útil"
+        },
+        {
+          "letra": "C",
+          "texto": "Me cuesta muchísimo estar parado sin hacer tareas"
+        },
+        {
+          "letra": "D",
+          "texto": "Disfruto al 100% de los días de relax"
+        }
+      ]
+    }
+  ]
+}

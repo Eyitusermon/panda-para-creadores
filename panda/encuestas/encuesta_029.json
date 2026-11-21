@@ -1,0 +1,128 @@
+{
+  "id": "enc_029",
+  "numero": 29,
+  "titulo": "Comercio Electrónico y Métodos de Pago Digital",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Pasarelas de pago, compras en línea y confianza.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia compras productos por Internet?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Varias veces por semana (Amazon, AliExpress, etc.)"
+        },
+        {
+          "letra": "B",
+          "texto": "Una o dos veces al mes"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en fechas especiales (Black Friday, rebajas)"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca compro productos en línea"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué método de pago te genera mayor tranquilidad online?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "PayPal con protección al comprador"
+        },
+        {
+          "letra": "B",
+          "texto": "Tarjeta virtual desechable de un solo uso"
+        },
+        {
+          "letra": "C",
+          "texto": "Billetera digital (Apple Pay / Google Pay)"
+        },
+        {
+          "letra": "D",
+          "texto": "Transferencia bancaria directa"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has abandonado un carrito de compras por falta de métodos de pago?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, si no veo mi método preferido me voy"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si la web me pide datos sospechosos"
+        },
+        {
+          "letra": "C",
+          "texto": "Intento adaptarme a los métodos disponibles"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca abandono por esa razón"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Compras más desde el teléfono móvil o desde el ordenador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Más del 80% desde la app móvil"
+        },
+        {
+          "letra": "B",
+          "texto": "Desde el ordenador para comparar mejor"
+        },
+        {
+          "letra": "C",
+          "texto": "Miro en el móvil y compro desde el PC"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso ambos de forma indistinta"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué factor te convence más para comprar en una tienda online nueva?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Opiniones y reseñas positivas de otros usuarios"
+        },
+        {
+          "letra": "B",
+          "texto": "Diseño profesional y pasarela de pago segura"
+        },
+        {
+          "letra": "C",
+          "texto": "Sellos de garantía y política de devoluciones claras"
+        },
+        {
+          "letra": "D",
+          "texto": "Precios considerablemente más bajos que la competencia"
+        }
+      ]
+    }
+  ]
+}

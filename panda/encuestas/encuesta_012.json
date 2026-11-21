@@ -1,0 +1,128 @@
+{
+  "id": "enc_012",
+  "numero": 12,
+  "titulo": "Inteligencia Artificial en el Día a Día",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Uso de chatbots, asistentes virtuales y automatización.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia utilizas herramientas de IA (ChatGPT, Gemini)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A diario para estudio o trabajo"
+        },
+        {
+          "letra": "B",
+          "texto": "Varias veces por semana"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo para consultas curiosas esporádicas"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca utilizo IA generativa"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Para qué tarea te resulta más útil la Inteligencia Artificial?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Redacción y resumen de textos"
+        },
+        {
+          "letra": "B",
+          "texto": "Resolución de dudas y explicaciones de temas"
+        },
+        {
+          "letra": "C",
+          "texto": "Programación y código informático"
+        },
+        {
+          "letra": "D",
+          "texto": "Creatividad, ideas y entretenimiento"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Confías plenamente en las respuestas generadas por IA?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Confío pero siempre verifico datos clave"
+        },
+        {
+          "letra": "B",
+          "texto": "Confío bastante en tareas cotidianas"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo dudas frecuentes sobre la precisión"
+        },
+        {
+          "letra": "D",
+          "texto": "Desconfío de la mayoría de respuestas"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Pagarías una suscripción mensual por una IA avanzada?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ya pago alguna versión Plus / Pro"
+        },
+        {
+          "letra": "B",
+          "texto": "Pagaría si aumentara mi productividad laboral"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo utilizo versiones 100% gratuitas"
+        },
+        {
+          "letra": "D",
+          "texto": "No pagaría bajo ninguna circunstancia"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Crees que la IA mejorará el futuro del empleo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Creará nuevas oportunidades y eficiencia"
+        },
+        {
+          "letra": "B",
+          "texto": "Eliminará empleos de forma preocupante"
+        },
+        {
+          "letra": "C",
+          "texto": "Transformará profesiones sin destruirlas"
+        },
+        {
+          "letra": "D",
+          "texto": "Aún es pronto para saber el impacto real"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_078",
+  "numero": 78,
+  "titulo": "Barbacoas, Asados y Carnes a la Brasa",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "Chuletones, costillares BBQ, carbón y parrilladas familiares.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuál es tu punto favorito de cocción de la carne roja?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Poco hecho (sangrante y muy tierno)"
+        },
+        {
+          "letra": "B",
+          "texto": "Al punto (rosado en el centro y sellado por fuera)"
+        },
+        {
+          "letra": "C",
+          "texto": "Al punto más (casi hecho pero jugoso)"
+        },
+        {
+          "letra": "D",
+          "texto": "Muy hecho (bien cocido sin zonas rojas)"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Prefieres barbacoa de carbón tradicional o de gas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "De carbón o leña por el inconfundible aroma a humo"
+        },
+        {
+          "letra": "B",
+          "texto": "De gas por rapidez de encendido y limpieza fácil"
+        },
+        {
+          "letra": "C",
+          "texto": "Parrilla eléctrica o plancha en cocina"
+        },
+        {
+          "letra": "D",
+          "texto": "Cualquiera mientras la carne sea de calidad"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué corte de carne disfrutas más en un asado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Chuletón madurado / Ribeye grueso"
+        },
+        {
+          "letra": "B",
+          "texto": "Costillas de cerdo marinadas en salsa barbacoa"
+        },
+        {
+          "letra": "C",
+          "texto": "Chorizo criollo, morcilla y panceta crujiente"
+        },
+        {
+          "letra": "D",
+          "texto": "Picaña o entraña a fuego lento"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Sueles ser el encargado de la parrilla en reuniones con amigos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, soy el maestro asador oficial de mi grupo"
+        },
+        {
+          "letra": "B",
+          "texto": "Ayudo con el fuego y los platos"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero ocuparme de las ensaladas, bebidas o postre"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo me siento a disfrutar de la comida lista"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué guarnición no puede faltar con un buen asado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Patatas asadas en papel de aluminio con mantequilla"
+        },
+        {
+          "letra": "B",
+          "texto": "Ensalada fresca mixta para desengrasar"
+        },
+        {
+          "letra": "C",
+          "texto": "Pimientos asados a la brasa"
+        },
+        {
+          "letra": "D",
+          "texto": "Pan rústico crujiente con chimichurri"
+        }
+      ]
+    }
+  ]
+}

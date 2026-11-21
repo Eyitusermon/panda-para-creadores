@@ -1,0 +1,128 @@
+{
+  "id": "enc_069",
+  "numero": 69,
+  "titulo": "Cocina Casera y Gastronomía en el Hogar",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Air fryer, cocinar a diario, recetas de YouTube e ingredientes.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cocinas tus propias comidas habitualmente en casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, cocino casi todos los días desde cero"
+        },
+        {
+          "letra": "B",
+          "texto": "Cocino cosas sencillas y rápidas entre semana"
+        },
+        {
+          "letra": "C",
+          "texto": "Cocino principalmente los fines de semana"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi no cocino, dependo de delivery o comida preparada"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Tienes una freidora de aire (Air Fryer) en tu cocina?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es el electrodoméstico que más utilizo en mi día a día"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo una pero no la uso tanto como pensaba"
+        },
+        {
+          "letra": "C",
+          "texto": "No tengo pero tengo muchas ganas de comprar una"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero el horno convencional o sartenes de toda la vida"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Dónde buscas inspiración para nuevas recetas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En vídeos de TikTok e Instagram Reels rápidos"
+        },
+        {
+          "letra": "B",
+          "texto": "En canales de cocina de YouTube detallados"
+        },
+        {
+          "letra": "C",
+          "texto": "En recetarios clásicos o recetas de mi familia"
+        },
+        {
+          "letra": "D",
+          "texto": "Improviso con lo que tengo en la nevera"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Practicas el batch cooking (cocinar el domingo para toda la semana)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me ahorra muchísimo tiempo de lunes a viernes"
+        },
+        {
+          "letra": "B",
+          "texto": "Preparo comida para 2 o 3 días como máximo"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero cocinar raciones frescas en el momento"
+        },
+        {
+          "letra": "D",
+          "texto": "No planifico las comidas de la semana"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué tipo de cocina internacional disfrutas más preparar en casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Comida italiana (pasta fresca, salsas caseras, pizzas)"
+        },
+        {
+          "letra": "B",
+          "texto": "Comida mexicana (fajitas, tacos con guacamole fresco)"
+        },
+        {
+          "letra": "C",
+          "texto": "Comida asiática (arroz frito, fideos salteados, curris)"
+        },
+        {
+          "letra": "D",
+          "texto": "Comida tradicional casera de mi país"
+        }
+      ]
+    }
+  ]
+}

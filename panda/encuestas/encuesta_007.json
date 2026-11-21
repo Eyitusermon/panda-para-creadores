@@ -1,0 +1,128 @@
+{
+  "id": "enc_007",
+  "numero": 7,
+  "titulo": "Realidad Virtual y Futuro del Gaming",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "Inmersión con visores VR y mundos tridimensionales.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has probado visores de Realidad Virtual (Meta Quest, PSVR)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo un visor en casa"
+        },
+        {
+          "letra": "B",
+          "texto": "Lo he probado en ferias o con amigos"
+        },
+        {
+          "letra": "C",
+          "texto": "Aún no lo he probado pero tengo curiosidad"
+        },
+        {
+          "letra": "D",
+          "texto": "No me llama la atención"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Experimentas mareos o cinetosis en juegos de realidad virtual?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Nunca me mareo en VR"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en giros muy bruscos o carreras"
+        },
+        {
+          "letra": "C",
+          "texto": "Sí, me cuesta acostumbrarme"
+        },
+        {
+          "letra": "D",
+          "texto": "No he probado lo suficiente"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Crees que la VR reemplazará a las pantallas tradicionales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, a largo plazo dominará el ocio"
+        },
+        {
+          "letra": "B",
+          "texto": "Convivirán como alternativas distintas"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo será para nichos muy específicos"
+        },
+        {
+          "letra": "D",
+          "texto": "No creo que sustituya a monitores y TV"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué experiencia en VR te gustaría probar más?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Juegos de aventura y simulación"
+        },
+        {
+          "letra": "B",
+          "texto": "Casinos y salas de juegos sociales 3D"
+        },
+        {
+          "letra": "C",
+          "texto": "Conciertos y eventos en vivo"
+        },
+        {
+          "letra": "D",
+          "texto": "Recorridos virtuales de viajes"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuánto pagarías por un visor de gama alta independiente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de $300 USD"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre $300 y $600 USD"
+        },
+        {
+          "letra": "C",
+          "texto": "Hasta $1,000 USD si es de élite"
+        },
+        {
+          "letra": "D",
+          "texto": "No planeo comprar visores VR"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_032",
+  "numero": 32,
+  "titulo": "Música en Streaming y Podcasts",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Spotify, Apple Music, YouTube Music y programas de audio.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué plataforma utilizas para escuchar música habitualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Spotify"
+        },
+        {
+          "letra": "B",
+          "texto": "YouTube Music"
+        },
+        {
+          "letra": "C",
+          "texto": "Apple Music"
+        },
+        {
+          "letra": "D",
+          "texto": "Amazon Music u otra"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Pagas suscripción Premium o usas la versión gratuita con anuncios?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Suscripción individual Premium"
+        },
+        {
+          "letra": "B",
+          "texto": "Plan familiar compartido con amigos o familia"
+        },
+        {
+          "letra": "C",
+          "texto": "Plan de estudiante bonificado"
+        },
+        {
+          "letra": "D",
+          "texto": "Versión gratuita con anuncios"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Escuchas podcasts o programas de radio digital?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, a diario mientras viajo o hago tareas"
+        },
+        {
+          "letra": "B",
+          "texto": "Varias veces por semana mis 2 o 3 favoritos"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo entrevistas o episodios puntuales"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo escuchar podcasts"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué género musical escuchas con mayor frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Música Urbana / Reggaetón / Trap"
+        },
+        {
+          "letra": "B",
+          "texto": "Pop / Pop Electrónico internacional"
+        },
+        {
+          "letra": "C",
+          "texto": "Rock / Indie / Metal"
+        },
+        {
+          "letra": "D",
+          "texto": "Electrónica / Techno / House"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Esperas con emoción el resumen anual (Spotify Wrapped)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me encanta compartirlo en mis redes"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gusta verlo por curiosidad personal"
+        },
+        {
+          "letra": "C",
+          "texto": "Lo miro pero no suelo publicarlo"
+        },
+        {
+          "letra": "D",
+          "texto": "Me da completamente igual"
+        }
+      ]
+    }
+  ]
+}

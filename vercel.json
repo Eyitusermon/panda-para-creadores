@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/panda/frontend/index.html" },
+    { "source": "/portal", "destination": "/panda/frontend/portal_directo.html" },
+    { "source": "/dashboard", "destination": "/panda/frontend/dashboard_directo.html" },
+    { "source": "/lobby", "destination": "/panda/frontend/dashboard_directo.html" },
+    { "source": "/recargar", "destination": "/panda/frontend/recargar.html" },
+    { "source": "/retirar", "destination": "/panda/frontend/retirar.html" },
+    { "source": "/perfil", "destination": "/panda/frontend/perfil.html" },
+    { "source": "/misiones", "destination": "/panda/frontend/misiones.html" },
+    { "source": "/terminos", "destination": "/panda/frontend/terminos.html" },
+    { "source": "/juegos/slots", "destination": "/panda/frontend/juegos/slots/jugar_slots.html" },
+    { "source": "/juegos/plinko", "destination": "/panda/frontend/juegos/plinko/jugar_plinko.html" },
+    { "source": "/juegos/rocket", "destination": "/panda/frontend/juegos/rocket/jugar_rocket.html" },
+    { "source": "/juegos/minas", "destination": "/panda/frontend/juegos/minas/jugar_minas.html" },
+    { "source": "/juegos/llaves", "destination": "/panda/frontend/juegos/llaves/jugar_llaves.html" },
+    { "source": "/api/(.*)", "destination": "https://pandabet-backend.onrender.com/api/$1" }
+  ]
+}

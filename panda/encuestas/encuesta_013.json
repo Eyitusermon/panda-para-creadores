@@ -1,0 +1,128 @@
+{
+  "id": "enc_013",
+  "numero": 13,
+  "titulo": "Ciberseguridad y Hábitos de Privacidad",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Contraseñas seguras, autenticación en dos pasos y VPNs.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Utilizas la autenticación en dos pasos (2FA) en tus cuentas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, con app autenticadora (Google Auth)"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, mediante código por SMS / WhatsApp"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en el banco o monederos cripto"
+        },
+        {
+          "letra": "D",
+          "texto": "No la tengo activada en mis cuentas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Repites contraseñas entre distintos sitios web?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tengo contraseñas únicas con gestor"
+        },
+        {
+          "letra": "B",
+          "texto": "Uso variaciones de 2 o 3 contraseñas"
+        },
+        {
+          "letra": "C",
+          "texto": "Casi siempre la misma para no olvidarla"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso inicio de sesión directo con Google/Apple"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has utilizado servicios de red privada virtual (VPN)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, a diario para privacidad y navegación"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo para acceder a catálogos extranjeros"
+        },
+        {
+          "letra": "C",
+          "texto": "Lo he probado en versión gratuita"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he utilizado una VPN"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Te preocupas por los permisos que conceden tus apps móviles?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Reviso rigurosamente cámara, micrófono y GPS"
+        },
+        {
+          "letra": "B",
+          "texto": "Acepto lo básico pero rechazo rastreo"
+        },
+        {
+          "letra": "C",
+          "texto": "Suelo aceptar todo sin leer para continuar"
+        },
+        {
+          "letra": "D",
+          "texto": "No me fijo en los permisos solicitados"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Has sufrido algún intento de estafa por phishing o SMS?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, pero lo identifiqué a tiempo"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, lamentablemente caí en una ocasión"
+        },
+        {
+          "letra": "C",
+          "texto": "He recibido mensajes sospechosos frecuentemente"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he recibido intentos de estafa"
+        }
+      ]
+    }
+  ]
+}

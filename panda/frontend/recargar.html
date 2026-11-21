@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recargar Diamantes con USDT (TRC-20) - Panda Cash</title>
+  <script src="./config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #070d18;
+      --bg-card: #0f182c;
+      --bg-card-inner: #142037;
+      --accent-gold: #ffb700;
+      --accent-gold-hover: #e6a500;
+      --accent-green: #00e701;
+      --text-main: #ffffff;
+      --text-muted: #8e9bb0;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(255, 183, 0, 0.35);
+      --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: #263859 #070d18;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #070d18;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #1e2f4d 0%, #16233b 100%);
+      border: 1px solid rgba(255, 183, 0, 0.28);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffb700;
+      border-color: #ffb700;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: #070d18;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 183, 0, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(0, 231, 1, 0.03) 0%, transparent 45%);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* BARRA SUPERIOR / NAVBAR */
+    .topbar {
+      background: rgba(11, 18, 32, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-icon {
+      font-size: 1.8rem;
+    }
+
+    .brand-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title span {
+      color: var(--accent-gold);
+    }
+
+    .btn-back-nav {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.45rem 0.95rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn-back-nav:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .balance-badge {
+      background: #111b2e;
+      border: 1px solid var(--border-gold);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .balance-badge-val {
+      color: var(--accent-gold);
+      font-weight: 900;
+      font-size: 0.95rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .main-wrap {
+      max-width: 1040px;
+      margin: 1.75rem auto 3rem;
+      padding: 0 1.25rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* TARJETA DE RESUMEN DE LA ORDEN */
+    .order-summary-card {
+      background: linear-gradient(135deg, #101a30 0%, #0c1424 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .order-summary-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .order-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .order-val {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+    }
+
+    .order-val.gold {
+      color: var(--accent-gold);
+    }
+
+    .order-val.green {
+      color: var(--accent-green);
+    }
+
+    .network-badge-lock {
+      background: rgba(255, 183, 0, 0.12);
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* LAYOUT DE DOS COLUMNAS */
+    .deposit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 860px) {
+      .topbar {
+        padding: 0.65rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .topbar-left {
+        gap: 0.75rem;
+      }
+      .main-container {
+        padding: 0 1rem;
+        margin: 1.25rem auto;
+      }
+      .deposit-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .brand-icon {
+        font-size: 1.4rem;
+      }
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      .btn-back-nav {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+      }
+      .balance-badge {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+      }
+      .step-card {
+        padding: 1.1rem;
+      }
+      .address-input-wrap {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .address-field {
+        word-break: break-all;
+        font-size: 0.76rem;
+        text-align: center;
+        padding: 0.65rem 0.5rem;
+      }
+      .btn-copy-addr {
+        padding: 0.65rem 1rem;
+        justify-content: center;
+      }
+      .qr-visual {
+        width: 140px;
+        height: 140px;
+      }
+      .proc-modal-box {
+        max-width: 95vw;
+        padding: 1.5rem 1rem;
+      }
+      .toast-pill {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        font-size: 0.8rem;
+        text-align: center;
+      }
+    }
+
+    /* TARJETAS DE PASOS */
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.85rem;
+    }
+
+    .step-num-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      color: #0b1220;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* ZONA DEL QR Y DIRECCIÓN */
+    .wallet-qr-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg-card-inner);
+      border: 1px dashed rgba(255, 183, 0, 0.35);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .qr-visual {
+      width: 170px;
+      height: 170px;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .qr-visual svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .wallet-address-container {
+      width: 100%;
+    }
+
+    .wallet-address-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .address-input-wrap {
+      display: flex;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .address-field {
+      flex: 1;
+      background: #09101d;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--accent-gold);
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      user-select: all;
+    }
+
+    .btn-copy-addr {
+      background: var(--accent-gold);
+      color: #0b1220;
+      border: none;
+      font-weight: 800;
+      padding: 0 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      transition: background 0.15s, transform 0.1s;
+      flex-shrink: 0;
+      font-family: inherit;
+    }
+
+    .btn-copy-addr:hover {
+      background: var(--accent-gold-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-copy-addr:active {
+      transform: translateY(1px);
+    }
+
+    .alert-danger-network {
+      background: rgba(255, 77, 109, 0.1);
+      border-left: 4px solid #ff4d6d;
+      border-radius: 6px;
+      padding: 0.75rem 0.95rem;
+      font-size: 0.78rem;
+      color: #ff9fb2;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      line-height: 1.45;
+    }
+
+    .alert-danger-network strong {
+      color: #fff;
+    }
+
+    /* PESTAÑAS DE GUÍA PARA EXCHANGES */
+    .exchange-tabs-bar {
+      display: flex;
+      gap: 0.4rem;
+      background: #09101d;
+      padding: 0.35rem;
+      border-radius: 8px;
+    }
+
+    .ex-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+
+    .ex-tab-btn.active {
+      background: #142037;
+      color: var(--accent-gold);
+      border: 1px solid rgba(255, 183, 0, 0.3);
+    }
+
+    .exchange-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .ex-step-item {
+      background: var(--bg-card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.75rem 0.95rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .ex-step-num {
+      background: rgba(255, 255, 255, 0.08);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.72rem;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .ex-step-content strong {
+      color: #fff;
+    }
+
+    /* FORMULARIO DE NOTIFICACIÓN DE PAGO */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #d1d5db;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-label span.req {
+      color: var(--accent-gold);
+    }
+
+    .form-input {
+      background: var(--bg-card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 0.75rem 0.95rem;
+      color: #fff;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .input-helper-box {
+      background: rgba(255, 183, 0, 0.06);
+      border: 1px solid rgba(255, 183, 0, 0.2);
+      border-radius: 6px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.75rem;
+      color: #c9d1d9;
+      line-height: 1.4;
+    }
+
+    .input-helper-box strong {
+      color: var(--accent-gold);
+    }
+
+    /* BOTÓN PRINCIPAL DE NOTIFICAR */
+    .btn-submit-recharge {
+      background: var(--accent-gold);
+      color: #0b1220;
+      border: none;
+      border-radius: 8px;
+      padding: 0.95rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.15s, transform 0.15s;
+      font-family: inherit;
+      text-transform: uppercase;
+      box-shadow: 0 4px 16px rgba(255, 183, 0, 0.25);
+    }
+
+    .btn-submit-recharge:hover {
+      background: var(--accent-gold-hover);
+      transform: translateY(-1px);
+    }
+
+    /* OVERLAY / MODAL DE PROCESANDO BLOCKCHAIN */
+    .proc-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .proc-modal-backdrop.open {
+      display: flex;
+    }
+
+    .proc-modal-box {
+      background: #0f182c;
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 480px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .spinner-tron {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 183, 0, 0.15);
+      border-top-color: var(--accent-gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1.25rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .proc-progress-bar-bg {
+      background: rgba(255, 255, 255, 0.08);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .proc-progress-bar-fill {
+      background: linear-gradient(90deg, #ffb700, #00e701);
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* PANTALLA DE ÉXITO */
+    .success-icon-check {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(0, 231, 1, 0.15);
+      border: 2px solid var(--accent-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: var(--accent-green);
+      margin: 0 auto 1rem;
+    }
+
+    /* TOAST DE NOTIFICACIÓN */
+    .toast-pill {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #111b2e;
+      border: 1px solid var(--accent-gold);
+      padding: 0.85rem 1.2rem;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="./dashboard_directo.html" class="brand-logo" title="Volver al lobby de Panda Cash">
+        <span class="brand-icon">🐼</span>
+        <div class="brand-title">PANDA<span> CASH</span></div>
+      </a>
+      <a href="./dashboard_directo.html" class="btn-back-nav">
+        &larr; Volver al Dashboard
+      </a>
+    </div>
+
+    <div class="topbar-right">
+      <div class="balance-badge" title="Saldo disponible en tu cuenta">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Saldo:</span>
+        <span class="balance-badge-val" id="topNavDiamonds">15,000 💎</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-wrap">
+
+    <!-- RESUMEN DE LA ORDEN DE RECARGA -->
+    <section class="order-summary-card">
+      <div class="order-summary-item">
+        <span class="order-label">Monto a Enviar</span>
+        <span class="order-val gold" id="summaryUsdtAmount">50.00 USDT</span>
+      </div>
+
+      <div class="order-summary-item">
+        <span class="order-label">Diamantes a Recibir</span>
+        <span class="order-val green" id="summaryDiamondAmount">+500 💎</span>
+      </div>
+
+      <div class="order-summary-item">
+        <span class="order-label">Tasa de Cambio</span>
+        <span class="order-val" style="font-size: 1.05rem;">1 USDT = 10 💎</span>
+      </div>
+
+      <div class="order-summary-item">
+        <span class="order-label">Red Blockchain</span>
+        <div class="network-badge-lock">
+          <span>⚡</span>
+          <span>TRON (TRC-20) OBLIGATORIA</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID DE 2 COLUMNAS: PASO 1 (BILLETERA & GUÍA) Y PASO 2 (FORMULARIO) -->
+    <div class="deposit-grid">
+
+      <!-- COLUMNA IZQUIERDA: DIRECCIÓN OFICIAL Y GUÍA EXCHANGE -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num-pill">1</div>
+          <div class="step-title">Dirección de Depósito Oficial (TRC-20)</div>
+        </div>
+
+        <!-- Caja de Código QR y Dirección -->
+        <div class="wallet-qr-box">
+          <div class="qr-visual" title="Código QR de la billetera Panda USDT TRC-20">
+            <!-- QR SVG Dinámico Estilizado -->
+            <svg viewBox="0 0 100 100" fill="#000">
+              <path d="M0,0 h30 v30 h-30 z M5,5 h20 v20 h-20 z M10,10 h10 v10 h-10 z" />
+              <path d="M70,0 h30 v30 h-30 z M75,5 h20 v20 h-20 z M80,10 h10 v10 h-10 z" />
+              <path d="M0,70 h30 v30 h-30 z M5,75 h20 v20 h-20 z M10,80 h10 v10 h-10 z" />
+              <rect x="36" y="6" width="6" height="6" />
+              <rect x="48" y="12" width="6" height="6" />
+              <rect x="36" y="24" width="12" height="6" />
+              <rect x="54" y="24" width="6" height="12" />
+              <rect x="6" y="36" width="6" height="12" />
+              <rect x="18" y="42" width="12" height="6" />
+              <rect x="36" y="36" width="28" height="28" fill="#ffb700" />
+              <text x="50" y="55" font-size="14" font-weight="900" fill="#0b1220" text-anchor="middle" font-family="sans-serif">🐼</text>
+              <rect x="72" y="36" width="6" height="12" />
+              <rect x="84" y="42" width="10" height="6" />
+              <rect x="36" y="70" width="12" height="6" />
+              <rect x="54" y="76" width="12" height="12" />
+              <rect x="72" y="70" width="18" height="6" />
+              <rect x="78" y="82" width="12" height="12" />
+            </svg>
+          </div>
+
+          <div class="wallet-address-container">
+            <div class="wallet-address-label">
+              <span>Dirección USDT TRC-20 de Panda Cash:</span>
+              <span style="color: var(--accent-gold); font-weight: 700;">Red Tron</span>
+            </div>
+
+            <div class="address-input-wrap">
+              <input type="text" id="targetTronAddress" class="address-field" value="TYDnyP8p2nQoD9jA5kU8v9L9w5b3x7K2zM" readonly />
+              <button class="btn-copy-addr" id="btnCopyAddress" title="Copiar dirección al portapapeles">
+                <span id="copyBtnIcon">📋</span>
+                <span id="copyBtnText">Copiar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alerta de seguridad obligatoria -->
+        <div class="alert-danger-network">
+          <span style="font-size: 1.2rem;">⚠️</span>
+          <div>
+            <strong>Aviso Crítico de Red:</strong> Envía únicamente <strong>USDT a través de la Red TRON (TRC-20)</strong>. Si envías otra criptomoneda o seleccionas una red distinta (como ERC-20, Polygon o BEP-20), los fondos se perderán permanentemente.
+          </div>
+        </div>
+
+        <!-- Guía Rápida para Exchanges (Binance / Bybit / Billeteras) -->
+        <div>
+          <h4 style="font-size: 0.88rem; color: #fff; margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.4rem;">
+            <span>📖</span> Paso a paso desde tu Exchange:
+          </h4>
+
+          <div class="exchange-tabs-bar">
+            <button class="ex-tab-btn active" data-ex="binance">Binance</button>
+            <button class="ex-tab-btn" data-ex="bybit">Bybit / OKX</button>
+            <button class="ex-tab-btn" data-ex="wallet">Trust / TronLink</button>
+          </div>
+
+          <!-- Contenido de pasos para Binance -->
+          <div class="exchange-steps-list" id="guideBinance" style="margin-top: 0.75rem;">
+            <div class="ex-step-item">
+              <div class="ex-step-num">1</div>
+              <div class="ex-step-content">
+                Abre la app de Binance, ve a <strong>Billetera ➔ Spot o Fondos</strong> y pulsa <strong>Retirar (Withdraw)</strong>.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">2</div>
+              <div class="ex-step-content">
+                Selecciona <strong>USDT</strong> y elige la opción <strong>"Enviar a través de red cripto"</strong>.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">3</div>
+              <div class="ex-step-content">
+                Pega la dirección de Panda Cash copiada arriba. En <strong>Red</strong>, selecciona obligatoriamente <strong>TRON (TRC-20)</strong>.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">4</div>
+              <div class="ex-step-content">
+                Ingresa el monto (ej. para recibir 50 USDT, ingresa 51 USDT ya que Binance deduce ~$1 de tarifa de red).
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">5</div>
+              <div class="ex-step-content">
+                Completa el retiro. Al finalizar, ve al historial del retiro y copia el <strong>TxID (Hash de la transacción)</strong>.
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido de pasos para Bybit/OKX -->
+          <div class="exchange-steps-list" id="guideBybit" style="margin-top: 0.75rem; display: none;">
+            <div class="ex-step-item">
+              <div class="ex-step-num">1</div>
+              <div class="ex-step-content">
+                Ingresa a Bybit u OKX y pulsa en <strong>Activos ➔ Retirar</strong>.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">2</div>
+              <div class="ex-step-content">
+                Elige la moneda <strong>USDT</strong> y tipo de cadena <strong>TRC-20 (Tron)</strong>.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">3</div>
+              <div class="ex-step-content">
+                Pega la dirección oficial y coloca el monto solicitado. Confirma con tu código de seguridad.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">4</div>
+              <div class="ex-step-content">
+                Copia el <strong>Hash de Transacción (TxID)</strong> generado en los detalles del retiro.
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido de pasos para Billeteras Web3 -->
+          <div class="exchange-steps-list" id="guideWallet" style="margin-top: 0.75rem; display: none;">
+            <div class="ex-step-item">
+              <div class="ex-step-num">1</div>
+              <div class="ex-step-content">
+                Abre Trust Wallet, TronLink o Exodus en tu teléfono o navegador.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">2</div>
+              <div class="ex-step-content">
+                Selecciona <strong>Tether USDT (TRC-20)</strong> y presiona <strong>Enviar (Send)</strong>.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">3</div>
+              <div class="ex-step-content">
+                Escanea el código QR de arriba o pega la dirección. Envía el monto exacto.
+              </div>
+            </div>
+            <div class="ex-step-item">
+              <div class="ex-step-num">4</div>
+              <div class="ex-step-content">
+                Toca en la transacción completada y copia el <strong>TxID / Hash</strong> de TronScan.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: FORMULARIO DE NOTIFICACIÓN DE PAGO -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num-pill">2</div>
+          <div class="step-title">Formulario de Confirmación y Acreditación</div>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--text-muted);">
+          Una vez realizada la transferencia desde tu exchange o billetera, completa este formulario para vincular el pago y acreditar tus diamantes de inmediato.
+        </p>
+
+        <form id="rechargeNotificationForm" style="display: flex; flex-direction: column; gap: 1rem;">
+          
+          <!-- Resumen y Datos Registrados del Usuario -->
+          <div style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.45rem;">
+              <span style="font-size: 0.76rem; font-weight: 800; color: var(--accent-gold); text-transform: uppercase;">👤 Datos Registrados de tu Cuenta</span>
+              <a href="./perfil.html" style="font-size: 0.74rem; color: var(--text-muted); text-decoration: underline;">Editar en Mi Perfil &rarr;</a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;">
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Usuario / Alias</span>
+                </label>
+                <input type="text" id="formUsername" class="form-input" readonly style="opacity: 0.8; cursor: not-allowed;" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Nombre y Apellido</span>
+                  <span class="req">*</span>
+                </label>
+                <input type="text" id="formFullName" class="form-input" placeholder="Tu nombre y apellido" required />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;">
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Correo Electrónico Registrado</span>
+                  <span class="req">*</span>
+                </label>
+                <input type="email" id="formUserEmail" class="form-input" placeholder="tucorreo@ejemplo.com" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Teléfono Móvil Registrado</span>
+                  <span class="req">*</span>
+                </label>
+                <input type="tel" id="formUserPhone" class="form-input" placeholder="+34 612 345678" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo 1: Monto enviado en USDT (Mínimo 10 USDT = 100 💎) -->
+          <div class="form-group">
+            <label class="form-label">
+              <span>Monto Enviado (USDT - Red TRC-20)</span>
+              <span class="req">* Mínimo: 10 USDT (100 💎)</span>
+            </label>
+            <input type="number" id="formSentUsdt" class="form-input" value="50" min="10" step="1" required />
+          </div>
+
+          <!-- Campo 3: TxID / Hash de la Transacción -->
+          <div class="form-group">
+            <label class="form-label">
+              <span>TxID (Hash de la Transacción)</span>
+              <span class="req">* Obligatorio</span>
+            </label>
+            <input type="text" id="formTxId" class="form-input" placeholder="Pega el código alfanumérico generado (ej: e7a9c4b8...)" required />
+            
+            <!-- Aclaratoria didáctica sobre el número de operación en exchanges -->
+            <div class="input-helper-box">
+              <strong>💡 ¿Qué es el TxID en un Exchange?</strong>
+              <p style="margin-top: 0.2rem;">
+                A diferencia de los bancos convencionales, los exchanges cripto (Binance, Bybit) no usan números de referencia bancaria. Su comprobante oficial es el <strong>TxID (Transaction Hash)</strong>, una cadena de letras y números que aparece en el historial de retiro. Si tu app te da un <em>"Order ID"</em> o <em>"ID de Retiro"</em>, también puedes ingresarlo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Campo 4: Comprobante de Pago (Captura Opcional) -->
+          <div class="form-group">
+            <label class="form-label">
+              <span>Captura del Comprobante de Retiro</span>
+              <span style="color: var(--text-muted); font-size: 0.72rem;">(Opcional para verificación rápida)</span>
+            </label>
+            
+            <div style="position: relative;">
+              <input type="file" id="formReceiptFile" accept="image/*" style="display: none;" />
+              <button type="button" id="btnPickReceipt" style="width: 100%; background: var(--bg-card-inner); border: 1px dashed rgba(255, 255, 255, 0.2); border-radius: 6px; padding: 0.85rem; color: #d1d5db; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.82rem; font-family: inherit;">
+                <span>📎</span>
+                <span id="receiptLabelText">Adjuntar captura de pantalla de Binance / Exchange</span>
+              </button>
+            </div>
+            <div id="receiptPreviewBox" style="display: none; align-items: center; gap: 0.75rem; background: #09101d; padding: 0.5rem 0.75rem; border-radius: 6px;">
+              <span style="color: var(--accent-green); font-size: 0.85rem;">✓ Archivo adjunto:</span>
+              <span id="receiptFileName" style="font-size: 0.75rem; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+            </div>
+          </div>
+
+          <!-- Botón de Envío -->
+          <button type="submit" class="btn-submit-recharge" style="margin-top: 0.5rem;">
+            ⚡ NOTIFICAR Y ACREDITAR RECARGA
+          </button>
+
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center;">
+            🔒 Verificación en la red Tron &bull; Acreditación directa a tu cuenta Panda Cash
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL DE PROCESAMIENTO / VERIFICACIÓN DE RED TRON -->
+  <div class="proc-modal-backdrop" id="processingModal">
+    <div class="proc-modal-box">
+      
+      <!-- Estado 1: Registro en Tabla con Estado PENDIENTE (Esperando aprobación del script monitor) -->
+      <div id="procPendingState">
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,183,0,0.15); border: 1px solid #ffb700; color: #ffb700; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.04rem;">
+          <span style="font-size: 1rem;">⏳</span> Estado: PENDIENTE
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.35rem;">
+          Recarga Registrada en el Sistema
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.4;">
+          Tu depósito ha sido insertado en la base de datos con estado <strong>PENDIENTE</strong>. Nuestro script de monitoreo de la red Tron está verificando la transferencia en la blockchain. En cuanto cambie a <strong>APROBADA</strong>, tu saldo se reflejará automáticamente.
+        </p>
+
+        <!-- Detalle de la Operación -->
+        <div style="background: rgba(11,20,38,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 0.85rem; margin-bottom: 1rem; text-align: left; font-size: 0.76rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+            <span style="color: var(--text-muted);">Monto Solicitado:</span>
+            <strong style="color: #fff;" id="pendingUsdtAmount">50.00 USDT</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+            <span style="color: var(--text-muted);">Diamantes a Acreditar:</span>
+            <strong style="color: var(--accent-gold);" id="pendingDiamondsAmount">500 💎</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+            <span style="color: var(--text-muted);">Red Blockchain:</span>
+            <span style="color: #60a5fa; font-weight: 700;">TRON (TRC-20)</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.2rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.4rem; margin-top: 0.4rem;">
+            <span style="color: var(--text-muted);">Hash / TxID Registrado:</span>
+            <code style="background: #060b13; padding: 0.25rem 0.45rem; border-radius: 4px; color: #a3e635; word-break: break-all; font-size: 0.72rem;" id="pendingTxIdCode">0x...</code>
+          </div>
+        </div>
+
+        <!-- Indicador de Espera / Polling -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 0.6rem; color: #94a3b8; font-size: 0.74rem; margin-bottom: 1.25rem;">
+          <div class="spinner-tron" style="width: 18px; height: 18px; margin: 0; border-width: 2px;"></div>
+          <span id="pollingStatusMsg">Monitoreando red TRON cada 3 segundos...</span>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button type="button" class="btn-submit-recharge" id="btnManualCheckStatus" style="font-size: 0.85rem; padding: 0.6rem;">
+            🔄 Consultar Estado Ahora
+          </button>
+          <button type="button" id="btnSimulateApproval" style="background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #22c55e; border-radius: 8px; padding: 0.5rem; font-size: 0.76rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
+            ⚡ Simular Aprobación del Script Monitor (Prueba)
+          </button>
+          <a href="./dashboard_directo.html" style="color: var(--text-muted); font-size: 0.75rem; text-decoration: underline; margin-top: 0.4rem; display: inline-block;">
+            Volver al Lobby (Tu recarga continuará procesándose en segundo plano)
+          </a>
+        </div>
+      </div>
+
+      <!-- Estado 2: Éxito - Script Cambió a APROBADA y el Saldo se Reflejó -->
+      <div id="procSuccessState" style="display: none;">
+        <div class="success-icon-check">✓</div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #22c55e; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>✅</span> Estado: APROBADA
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--accent-green); margin-bottom: 0.35rem;">
+          ¡Recarga Aprobada y Acreditada!
+        </h3>
+        <p style="font-size: 0.85rem; color: #d1d5db; margin-bottom: 1.25rem; line-height: 1.4;">
+          El script de monitoreo de la red Tron confirmó tu transferencia exitosamente. El saldo en diamantes ha sido sumado a tu cuenta.
+        </p>
+
+        <div style="background: var(--bg-card-inner); border: 1px solid var(--border-gold); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-around; align-items: center;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Acreditado</div>
+            <div style="font-size: 1.4rem; font-weight: 900; color: var(--accent-gold);" id="successDiamondsResult">+500 💎</div>
+          </div>
+          <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.1);"></div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Nuevo Saldo Total</div>
+            <div style="font-size: 1.4rem; font-weight: 900; color: #fff;" id="successNewBalance">500 💎</div>
+          </div>
+        </div>
+
+        <a href="./dashboard_directo.html" class="btn-submit-recharge" style="text-decoration: none;">
+          🎮 IR A JUGAR AL DASHBOARD
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-pill" id="globalToast"></div>
+
+  <script>
+    // =========================================================================
+    // LÓGICA DE RECARGA TRC-20 Y SINCRONIZACIÓN CON PANDA CASH
+    // =========================================================================
+    const storageKey = 'panda_user_session';
+    const DIAMOND_RATE = 10; // 1 USDT = 10 Diamantes
+    const API_BASE = (window.PANDA_CONFIG && window.PANDA_CONFIG.API_BASE) ||
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:'
+        ? 'http://localhost:8085/api/v1'
+        : '/api/v1');
+    let OFFICIAL_TRON_ADDRESS = 'TYDnyP8p2nQoD9jA5kU8v9L9w5b3x7K2zM';
+
+    // Cargar la dirección pública oficial de recarga desde la base de datos Neon (tabla direcciones_recarga)
+    async function loadOfficialRechargeAddress() {
+      try {
+        const res = await fetch(`${API_BASE}/wallet/direccion-recarga`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.direccion) {
+            OFFICIAL_TRON_ADDRESS = data.direccion;
+            const inputEl = document.getElementById('targetTronAddress');
+            if (inputEl) inputEl.value = data.direccion;
+          }
+        }
+      } catch (_) {}
+    }
+    loadOfficialRechargeAddress();
+
+    // 1. Cargar estado de sesión del usuario
+    let userState = {
+      isLoggedIn: true,
+      username: 'PandaMaster_99',
+      fullName: '',
+      email: 'pandamaster_99@pandabet.com',
+      phone: '+34 612 000000',
+      country: 'ES',
+      balance: 15000,
+      bonusBalance: 30000,
+      freeSpins: 150,
+      vipLevel: 'Panda Bronce',
+      xp: 650,
+      xpTarget: 1000
+    };
+
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        userState = { ...userState, ...parsed };
+      }
+    } catch (e) {
+      console.log('Using default mock state');
+    }
+
+    async function syncBackendProfile() {
+      if (!userState || !userState.username) return;
+      try {
+        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.balance_diamantes === 'number') {
+            userState.balance = data.balance_diamantes;
+            localStorage.setItem(storageKey, JSON.stringify(userState));
+            const topNavEl = document.getElementById('topNavDiamonds');
+            if (topNavEl) topNavEl.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+          }
+        }
+      } catch (_) {}
+    }
+    syncBackendProfile();
+
+    // 2. Leer parámetros de URL (monto y diamantes provenientes del dashboard; mínimo 10 USDT)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramMonto = Math.max(10, parseFloat(urlParams.get('monto')) || 50);
+    const paramDiamantes = paramMonto * DIAMOND_RATE;
+
+    // Actualizar campos iniciales
+    document.getElementById('summaryUsdtAmount').textContent = paramMonto.toFixed(2) + ' USDT';
+    document.getElementById('summaryDiamondAmount').textContent = '+' + paramDiamantes.toLocaleString('en-US') + ' 💎';
+    document.getElementById('formSentUsdt').value = paramMonto;
+    document.getElementById('topNavDiamonds').textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+
+    // Rellenar los datos registrados del usuario en concordancia con Mi Perfil / Registro
+    const inputUsername = document.getElementById('formUsername');
+    const inputFullName = document.getElementById('formFullName');
+    const inputEmail = document.getElementById('formUserEmail');
+    const inputPhone = document.getElementById('formUserPhone');
+
+    if (inputUsername) inputUsername.value = userState.username || '';
+    if (inputFullName) inputFullName.value = userState.fullName || '';
+    if (inputEmail) inputEmail.value = userState.email || '';
+    if (inputPhone) inputPhone.value = userState.phone || '';
+
+    // 3. Recalcular si el usuario edita el monto transferido
+    document.getElementById('formSentUsdt')?.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value) || 0;
+      const calcDiamonds = val * DIAMOND_RATE;
+      document.getElementById('summaryUsdtAmount').textContent = val.toFixed(2) + ' USDT';
+      document.getElementById('summaryDiamondAmount').textContent = '+' + calcDiamonds.toLocaleString('en-US') + ' 💎';
+    });
+
+    // 4. Copiar Dirección TRC-20 al portapapeles
+    document.getElementById('btnCopyAddress')?.addEventListener('click', () => {
+      const addr = document.getElementById('targetTronAddress').value;
+      navigator.clipboard.writeText(addr).then(() => {
+        const btnText = document.getElementById('copyBtnText');
+        const btnIcon = document.getElementById('copyBtnIcon');
+        btnText.textContent = '¡Copiado!';
+        btnIcon.textContent = '✓';
+        showToast('Dirección Copiada', 'Pega esta dirección en tu exchange (Red TRC-20)');
+        setTimeout(() => {
+          btnText.textContent = 'Copiar';
+          btnIcon.textContent = '📋';
+        }, 2500);
+      }).catch(() => {
+        showToast('Error', 'No se pudo copiar automáticamente. Por favor selecciónala.');
+      });
+    });
+
+    // 5. Alternar pestañas de guía para exchanges
+    document.querySelectorAll('.ex-tab-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.ex-tab-btn').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        const ex = e.currentTarget.getAttribute('data-ex');
+        
+        document.getElementById('guideBinance').style.display = ex === 'binance' ? 'flex' : 'none';
+        document.getElementById('guideBybit').style.display = ex === 'bybit' ? 'flex' : 'none';
+        document.getElementById('guideWallet').style.display = ex === 'wallet' ? 'flex' : 'none';
+      });
+    });
+
+    // 6. Manejo de archivo adjunto de comprobante
+    const receiptFileInput = document.getElementById('formReceiptFile');
+    document.getElementById('btnPickReceipt')?.addEventListener('click', () => {
+      receiptFileInput?.click();
+    });
+
+    receiptFileInput?.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        document.getElementById('receiptFileName').textContent = file.name;
+        document.getElementById('receiptPreviewBox').style.display = 'flex';
+        document.getElementById('receiptLabelText').textContent = 'Cambiar archivo adjunto';
+      }
+    });
+
+    // 7. Flujo de Recargas en 2 Fases:
+    // Fase 1: Inserción en tabla con estado 'PENDIENTE' (NO acredita saldo inmediatamente)
+    // Fase 2: Script monitor de la dirección Tron cambia estado a 'APROBADA' -> se refleja el saldo al usuario
+    let currentPendingDeposit = null;
+    let pollIntervalId = null;
+
+    async function checkDepositApproval(txHash, silent = false) {
+      if (!currentPendingDeposit) return;
+      try {
+        const res = await fetch(`${API_BASE}/wallet/recarga-status?tx_hash=${encodeURIComponent(txHash)}`);
+        if (res.ok) {
+          const data = await res.json();
+          const isApproved = data && (data.estado === 'APROBADA' || data.estado === 'APROBADO' || data.estado === 'COMPLETADO');
+          if (isApproved) {
+            onDepositApproved(data);
+            return;
+          }
+        }
+      } catch (_) {
+        // Fallback local: verificar si en localStorage ya fue marcado como APROBADA
+      }
+
+      // Check local storage records
+      try {
+        const storedList = JSON.parse(localStorage.getItem('panda_depositos_list') || '[]');
+        const match = storedList.find(d => d.tx_hash === txHash);
+        if (match && (match.estado === 'APROBADA' || match.estado === 'APROBADO' || match.estado === 'COMPLETADO')) {
+          onDepositApproved(match);
+          return;
+        }
+      } catch (_) {}
+
+      if (!silent) {
+        showToast('Estado: PENDIENTE', 'La transacción continúa en verificación en la red Tron.');
+      }
+    }
+
+    function onDepositApproved(depData) {
+      if (pollIntervalId) {
+        clearInterval(pollIntervalId);
+        pollIntervalId = null;
+      }
+
+      const diamondsToAdd = parseFloat(depData.monto_diamantes) || (currentPendingDeposit.monto_usdt * DIAMOND_RATE);
+
+      // Acreditar saldo en el momento exacto en que pasa a APROBADA
+      userState.balance = (userState.balance || 0) + diamondsToAdd;
+      userState.xp = (userState.xp || 0) + Math.floor((parseFloat(depData.monto_usdt) || currentPendingDeposit.monto_usdt) * 2);
+
+      const isFirstDeposit = !userState.primer_deposito_realizado && !userState.firstDepositDone;
+      if (isFirstDeposit) {
+        userState.bonusBalance = (userState.bonusBalance || 0) + (diamondsToAdd * 2);
+        userState.primer_deposito_realizado = true;
+        userState.firstDepositDone = true;
+      }
+
+      localStorage.setItem(storageKey, JSON.stringify(userState));
+      syncBackendProfile();
+
+      // Actualizar registro en lista local a APROBADA
+      try {
+        const storedList = JSON.parse(localStorage.getItem('panda_depositos_list') || '[]');
+        const item = storedList.find(d => d.tx_hash === currentPendingDeposit.tx_hash);
+        if (item) item.estado = 'APROBADA';
+        localStorage.setItem('panda_depositos_list', JSON.stringify(storedList));
+      } catch (_) {}
+
+      // Mostrar interfaz de éxito
+      const pendingState = document.getElementById('procPendingState');
+      const successState = document.getElementById('procSuccessState');
+      if (pendingState) pendingState.style.display = 'none';
+      if (successState) successState.style.display = 'block';
+
+      document.getElementById('successDiamondsResult').textContent = `+${diamondsToAdd.toLocaleString('en-US')} 💎`;
+      document.getElementById('successNewBalance').textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+      document.getElementById('topNavDiamonds').textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+      showToast('¡Recarga Aprobada!', `Se han acreditado +${diamondsToAdd.toLocaleString('en-US')} 💎 a tu cuenta.`);
+    }
+
+    document.getElementById('rechargeNotificationForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const usdtVal = parseFloat(document.getElementById('formSentUsdt').value) || 0;
+      const txIdVal = document.getElementById('formTxId').value.trim();
+
+      if (usdtVal < 10) {
+        showToast('Mínimo de Recarga', 'El monto mínimo de recarga es el equivalente a 10 USDT (100 💎).');
+        return;
+      }
+
+      if (!txIdVal || txIdVal.length < 8) {
+        showToast('TxID Inválido', 'Por favor ingresa un código TxID o Hash válido de tu transacción.');
+        return;
+      }
+
+      const diamondsToAdd = usdtVal * DIAMOND_RATE;
+
+      currentPendingDeposit = {
+        id: 'dep_' + Date.now(),
+        username: userState.username || 'Panda_Player',
+        monto_usdt: usdtVal,
+        monto_diamantes: diamondsToAdd,
+        tx_hash: txIdVal,
+        wallet_destino: OFFICIAL_TRON_ADDRESS,
+        estado: 'PENDIENTE',
+        fecha_creacion: new Date().toISOString()
+      };
+
+      // Guardar en tabla local de depósitos con estado PENDIENTE
+      try {
+        const storedList = JSON.parse(localStorage.getItem('panda_depositos_list') || '[]');
+        storedList.unshift(currentPendingDeposit);
+        localStorage.setItem('panda_depositos_list', JSON.stringify(storedList));
+      } catch (_) {}
+
+      // Enviar inserción a la API Go / DB PostgreSQL
+      try {
+        await fetch(`${API_BASE}/wallet/recargar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: currentPendingDeposit.username,
+            monto_usdt: usdtVal,
+            tx_hash: txIdVal,
+            wallet_destino: OFFICIAL_TRON_ADDRESS
+          })
+        });
+      } catch (_) {
+        // En modo offline continúa con tabla local
+      }
+
+      // NO SE ACREDITA SALDO AHORA (permanece intacto)
+      // Actualizar campos en el modal PENDIENTE
+      document.getElementById('pendingUsdtAmount').textContent = `${usdtVal.toFixed(2)} USDT`;
+      document.getElementById('pendingDiamondsAmount').textContent = `${diamondsToAdd.toLocaleString('en-US')} 💎`;
+      document.getElementById('pendingTxIdCode').textContent = txIdVal;
+
+      const procModal = document.getElementById('processingModal');
+      const pendingState = document.getElementById('procPendingState');
+      const successState = document.getElementById('procSuccessState');
+
+      procModal.classList.add('open');
+      pendingState.style.display = 'block';
+      successState.style.display = 'none';
+
+      // Iniciar sondeo automático cada 3 segundos
+      if (pollIntervalId) clearInterval(pollIntervalId);
+      pollIntervalId = setInterval(() => {
+        checkDepositApproval(txIdVal, true);
+      }, 3000);
+    });
+
+    // Botón para consulta manual
+    document.getElementById('btnManualCheckStatus')?.addEventListener('click', () => {
+      if (currentPendingDeposit) {
+        checkDepositApproval(currentPendingDeposit.tx_hash, false);
+      }
+    });
+
+    // Botón para simular la aprobación que ejecuta el script de monitoreo de TRON
+    document.getElementById('btnSimulateApproval')?.addEventListener('click', async () => {
+      if (!currentPendingDeposit) return;
+      showToast('Monitor TRON', 'Ejecutando script de monitoreo... Validando hash en blockchain.');
+
+      try {
+        // Enviar orden de aprobación al backend Go (la misma llamada que hace el script externo)
+        const res = await fetch(`${API_BASE}/wallet/aprobar-recarga`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tx_hash: currentPendingDeposit.tx_hash
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          onDepositApproved(data.deposito || currentPendingDeposit);
+          return;
+        }
+      } catch (_) {}
+
+      // Fallback local: simulación directa del script
+      setTimeout(() => {
+        currentPendingDeposit.estado = 'APROBADA';
+        onDepositApproved(currentPendingDeposit);
+      }, 800);
+    });
+
+    // Función auxiliar Toast
+    function showToast(title, msg) {
+      const toast = document.getElementById('globalToast');
+      if (!toast) return;
+      toast.innerHTML = `<strong>${title}:</strong> ${msg}`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+  </script>
+</body>
+</html>

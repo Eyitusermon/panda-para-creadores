@@ -1,0 +1,128 @@
+{
+  "id": "enc_026",
+  "numero": 26,
+  "titulo": "Finanzas Personales y Hábitos de Ahorro",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Presupuestos mensuales, control de gastos e inversión.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Llevas un registro de tus ingresos y gastos mensuales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, en app especializada o plantilla de Excel"
+        },
+        {
+          "letra": "B",
+          "texto": "Llevo un cálculo mental aproximado"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo reviso el extracto a fin de mes"
+        },
+        {
+          "letra": "D",
+          "texto": "No llevo control de mis gastos"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué porcentaje de tus ingresos consigues ahorrar al mes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Más del 30% de mis ingresos"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre el 10% y el 25%"
+        },
+        {
+          "letra": "C",
+          "texto": "Menos del 10%"
+        },
+        {
+          "letra": "D",
+          "texto": "Llego justo a fin de mes sin poder ahorrar"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Dispones de un fondo de emergencia para imprevistos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, equivalente a 3 a 6 meses de gastos"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo un pequeño fondo para urgencias"
+        },
+        {
+          "letra": "C",
+          "texto": "Estoy construyéndolo actualmente"
+        },
+        {
+          "letra": "D",
+          "texto": "No dispongo de fondo de emergencia"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿En qué instrumentos inviertes tus ahorros además de cripto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fondos indexados / ETFs (S&P 500, MSCI)"
+        },
+        {
+          "letra": "B",
+          "texto": "Acciones individuales de empresas"
+        },
+        {
+          "letra": "C",
+          "texto": "Cuentas remuneradas o depósitos a plazo fijo"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo inversiones fuera del efectivo"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿A qué edad comenzaste a interesarte por la educación financiera?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Antes de los 20 años"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre los 20 y los 25 años"
+        },
+        {
+          "letra": "C",
+          "texto": "Después de los 25 años"
+        },
+        {
+          "letra": "D",
+          "texto": "Apenas estoy empezando a interesarme"
+        }
+      ]
+    }
+  ]
+}

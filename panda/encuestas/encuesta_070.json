@@ -1,0 +1,128 @@
+{
+  "id": "enc_070",
+  "numero": 70,
+  "titulo": "Relaciones Sociales y Vida con Amigos",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Planes de fin de semana, quedadas, llamadas y comunidad.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia te reúnes en persona con tu grupo de amigos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Todas las semanas al menos una o dos veces"
+        },
+        {
+          "letra": "B",
+          "texto": "Cada dos o tres semanas"
+        },
+        {
+          "letra": "C",
+          "texto": "Una vez al mes o en ocasiones señaladas"
+        },
+        {
+          "letra": "D",
+          "texto": "Menos de una vez al mes por distancia o rutinas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es tu plan preferido para un fin de semana con amigos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cena en restaurante rico y tomar algo en buen ambiente"
+        },
+        {
+          "letra": "B",
+          "texto": "Juntarnos en casa de alguien para jugar a juegos de mesa o consola"
+        },
+        {
+          "letra": "C",
+          "texto": "Plan al aire libre, barbacoa o excursión de día"
+        },
+        {
+          "letra": "D",
+          "texto": "Ir de fiesta o a conciertos nocturnos"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres un círculo pequeño de amigos íntimos o muchos conocidos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un grupo muy reducido de 3 a 5 amigos leales de toda la vida"
+        },
+        {
+          "letra": "B",
+          "texto": "Varios grupos distintos según el ambiente (ocio, deporte, trabajo)"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gusta tener una red social amplia y conocer gente nueva"
+        },
+        {
+          "letra": "D",
+          "texto": "Soy una persona bastante solitaria"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cómo mantienes el contacto con tus amigos en el día a día?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A través de un grupo activo de WhatsApp con memes y audios"
+        },
+        {
+          "letra": "B",
+          "texto": "Por mensajes privados en Instagram o TikTok"
+        },
+        {
+          "letra": "C",
+          "texto": "Nos llamamos por teléfono o Discord con frecuencia"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo hablamos cuando vamos a quedar físicamente"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te cuesta hacer nuevos amigos en la edad adulta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, con el trabajo y la rutina es más difícil conectar"
+        },
+        {
+          "letra": "B",
+          "texto": "A través de aficiones compartidas (gimnasio, juegos) surge natural"
+        },
+        {
+          "letra": "C",
+          "texto": "No tengo problemas para entablar conversación con desconocidos"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo buscar nuevas amistades activamente"
+        }
+      ]
+    }
+  ]
+}

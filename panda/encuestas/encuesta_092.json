@@ -1,0 +1,128 @@
+{
+  "id": "enc_092",
+  "numero": 92,
+  "titulo": "Cambio Manual vs Cambio Automático",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Palanca de cambios, doble embrague, levas y comodidad en atascos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Prefieres conducir con cambio manual o cambio automático?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Automático siempre, la comodidad en ciudad y atascos no tiene precio"
+        },
+        {
+          "letra": "B",
+          "texto": "Manual por el control total de las marchas y el placer de conducir"
+        },
+        {
+          "letra": "C",
+          "texto": "Automático con levas en el volante para poder cambiar cuando quiera"
+        },
+        {
+          "letra": "D",
+          "texto": "Me es indiferente, me adapto a cualquier coche"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Aprendiste a conducir en un coche con cambio manual?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, como la inmensa mayoría de conductores en mi país"
+        },
+        {
+          "letra": "B",
+          "texto": "Aprendí directamente en un coche automático"
+        },
+        {
+          "letra": "C",
+          "texto": "Tuve clases en manual pero en cuanto pude pasé a automático"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo carnet de conducir"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Consideras que el cambio automático es más seguro?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, permite mantener las dos manos en el volante y menos distracciones"
+        },
+        {
+          "letra": "B",
+          "texto": "Es igual de seguro, depende de la atención del conductor"
+        },
+        {
+          "letra": "C",
+          "texto": "El manual da mejor retención con freno motor en bajadas pronunciadas"
+        },
+        {
+          "letra": "D",
+          "texto": "No noto diferencia en seguridad"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Has conducido coches con levas de cambio detrás del volante?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es divertidísimo para reducir marchas en carreteras de curvas"
+        },
+        {
+          "letra": "B",
+          "texto": "Las he probado pero casi siempre dejo el modo D automático"
+        },
+        {
+          "letra": "C",
+          "texto": "Mi coche no tiene levas pero me gustaría probarlas"
+        },
+        {
+          "letra": "D",
+          "texto": "No he conducido coches con levas"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Pagarías el sobrecoste habitual de $1,500-$2,000 por la caja automática?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sin dudarlo, es el extra más rentable de cualquier coche moderno"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si voy a usar el coche mucho en ciudad"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero ahorrarme ese dinero o gastarlo en otro equipamiento"
+        },
+        {
+          "letra": "D",
+          "texto": "No pagaría por cambio automático"
+        }
+      ]
+    }
+  ]
+}

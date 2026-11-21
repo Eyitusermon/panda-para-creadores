@@ -1,0 +1,128 @@
+{
+  "id": "enc_036",
+  "numero": 36,
+  "titulo": "Festivales de Música y Conciertos en Vivo",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Música en directo, festivales de verano y entradas.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia asistes a conciertos o festivales de música?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A varios festivales cada año"
+        },
+        {
+          "letra": "B",
+          "texto": "Al menos a 1 o 2 conciertos importantes al año"
+        },
+        {
+          "letra": "C",
+          "texto": "Cada varios años para artistas muy especiales"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca voy a eventos musicales en vivo"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Prefieres festivales multitudinarios o conciertos íntimos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Festivales con muchos escenarios y artistas variados"
+        },
+        {
+          "letra": "B",
+          "texto": "Conciertos individuales de mi artista favorito"
+        },
+        {
+          "letra": "C",
+          "texto": "Salas pequeñas con buena acústica y cercanía"
+        },
+        {
+          "letra": "D",
+          "texto": "Cualquiera mientras el ambiente sea divertido"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cuánto es lo máximo que has pagado por una entrada de concierto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de $40 USD"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre $40 y $100 USD"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre $100 y $250 USD"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de $250 USD para un tour histórico"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Grabas con el teléfono durante el concierto o prefieres disfrutar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Grabo un par de canciones clave de recuerdo y guardo el móvil"
+        },
+        {
+          "letra": "B",
+          "texto": "Grabo bastante para compartirlo en Stories"
+        },
+        {
+          "letra": "C",
+          "texto": "Disfruto sin sacar el teléfono casi en todo el show"
+        },
+        {
+          "letra": "D",
+          "texto": "Me molesta la gente que graba con el brazo levantado"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué género musical disfrutas más en directo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Música electrónica / DJ sets con visuales y luces"
+        },
+        {
+          "letra": "B",
+          "texto": "Rock / Indie con banda en vivo e instrumentos"
+        },
+        {
+          "letra": "C",
+          "texto": "Música urbana y trap con energía de masas"
+        },
+        {
+          "letra": "D",
+          "texto": "Pop comercial con gran coreografía y show"
+        }
+      ]
+    }
+  ]
+}

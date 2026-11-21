@@ -1,0 +1,128 @@
+{
+  "id": "enc_014",
+  "numero": 14,
+  "titulo": "Hogar Inteligente y Domótica",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Asistentes de voz, bombillas inteligentes y automatización.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Tienes algún asistente de voz en casa (Alexa, Google Nest)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, altavoces inteligentes en varias habitaciones"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo un altavoz en el salón o dormitorio"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo el asistente integrado en mi teléfono"
+        },
+        {
+          "letra": "D",
+          "texto": "No uso ni quiero altavoces con micrófono"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué dispositivo inteligente tienes o te gustaría tener?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Bombillas e iluminación RGB programable"
+        },
+        {
+          "letra": "B",
+          "texto": "Cámaras de seguridad y timbres con vídeo"
+        },
+        {
+          "letra": "C",
+          "texto": "Enchufes inteligentes con monitor de consumo"
+        },
+        {
+          "letra": "D",
+          "texto": "Robot aspirador automático"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Controlas electrodomésticos desde el smartphone?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, aire acondicionado, luces o TV"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo para encender o apagar la televisión"
+        },
+        {
+          "letra": "C",
+          "texto": "No, prefiero controles manuales físicos"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo electrodomésticos conectados"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Crees que la domótica ahorra energía eléctrica en el hogar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, programando apagados y horarios clave"
+        },
+        {
+          "letra": "B",
+          "texto": "Ahorra comodidad más que dinero"
+        },
+        {
+          "letra": "C",
+          "texto": "Gasta más por los dispositivos siempre conectados"
+        },
+        {
+          "letra": "D",
+          "texto": "No he notado diferencias en la factura"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuál es el mayor obstáculo para domotizar una casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El precio elevado de los dispositivos"
+        },
+        {
+          "letra": "B",
+          "texto": "La complejidad de configuración"
+        },
+        {
+          "letra": "C",
+          "texto": "Preocupaciones por la privacidad"
+        },
+        {
+          "letra": "D",
+          "texto": "La falta de compatibilidad entre marcas"
+        }
+      ]
+    }
+  ]
+}

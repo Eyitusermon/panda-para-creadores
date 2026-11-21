@@ -1,0 +1,128 @@
+{
+  "id": "enc_071",
+  "numero": 71,
+  "titulo": "Comida Rápida y Cadenas de Hamburguesas",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "McDonalds, Burger King, Five Guys y smash burgers.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué cadena de comida rápida prefieres para una hamburguesa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "McDonalds por las patatas y hamburguesas clásicas"
+        },
+        {
+          "letra": "B",
+          "texto": "Burger King por el sabor a la parrilla"
+        },
+        {
+          "letra": "C",
+          "texto": "Cadenas de Smash Burgers gourmet"
+        },
+        {
+          "letra": "D",
+          "texto": "Wendy / Carl Jr / Five Guys"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Prefieres hamburguesa clásica gruesa o smash burger crujiente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Smash burger fina con bordes caramelizados"
+        },
+        {
+          "letra": "B",
+          "texto": "Hamburguesa gruesa al punto jugosa"
+        },
+        {
+          "letra": "C",
+          "texto": "Hamburguesa de pollo frito crujiente"
+        },
+        {
+          "letra": "D",
+          "texto": "Hamburguesa vegetal / vegetariana"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué salsa es imprescindible en tus patatas fritas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ketchup clásico de tomate"
+        },
+        {
+          "letra": "B",
+          "texto": "Mayonesa o alioli cremoso"
+        },
+        {
+          "letra": "C",
+          "texto": "Salsa barbacoa ahumada (BBQ)"
+        },
+        {
+          "letra": "D",
+          "texto": "Salsa de queso cheddar fundido"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Pides por el autoservicio (Auto-King / McAuto) o en sala?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Por el autoservicio desde el coche para llevar"
+        },
+        {
+          "letra": "B",
+          "texto": "En los quioscos táctiles de la sala para comer allí"
+        },
+        {
+          "letra": "C",
+          "texto": "Pido a domicilio por aplicación"
+        },
+        {
+          "letra": "D",
+          "texto": "Para llevar en mostrador"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Pruebas las ediciones especiales y promociones temporales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, siempre pruebo la hamburguesa especial de temporada"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si tiene ingredientes que me llamen mucho"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero pedir siempre mi menú favorito de siempre"
+        },
+        {
+          "letra": "D",
+          "texto": "Rara vez me fijo en las promociones"
+        }
+      ]
+    }
+  ]
+}

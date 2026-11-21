@@ -1,0 +1,128 @@
+{
+  "id": "enc_066",
+  "numero": 66,
+  "titulo": "Lectura de Noticias y Actualidad Informativa",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Prensa digital, boletines (newsletters) y verificación.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Dónde te informas principalmente de las noticias del mundo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Redes sociales (X / Twitter, Reddit)"
+        },
+        {
+          "letra": "B",
+          "texto": "Diarios digitales de noticias y periódicos online"
+        },
+        {
+          "letra": "C",
+          "texto": "Canales de YouTube y podcasts de análisis"
+        },
+        {
+          "letra": "D",
+          "texto": "Televisión tradicional o radio"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué nivel de confianza tienes en los medios de comunicación masivos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Poca confianza, contrarresto varias fuentes independientes"
+        },
+        {
+          "letra": "B",
+          "texto": "Confianza moderada según el medio y la firma"
+        },
+        {
+          "letra": "C",
+          "texto": "Bastante confianza en periódicos de prestigio reconocido"
+        },
+        {
+          "letra": "D",
+          "texto": "Desconfío casi por completo de las noticias"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Estás suscrito a boletines de noticias (newsletters) por email?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, leo newsletters especializadas todas las mañanas"
+        },
+        {
+          "letra": "B",
+          "texto": "Estoy suscrito a un par pero no siempre las abro"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero leer noticias en feeds o agregadores"
+        },
+        {
+          "letra": "D",
+          "texto": "No utilizo newsletters por correo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Intentas verificar una noticia llamativa antes de reenviarla?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre busco en Google si es real antes de compartir"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si me parece demasiado exagerada o sospechosa"
+        },
+        {
+          "letra": "C",
+          "texto": "A veces comparto titulares llamativos sin profundizar"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo compartir noticias"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué sección de noticias te interesa más consultar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tecnología, ciencia e innovación digital"
+        },
+        {
+          "letra": "B",
+          "texto": "Economía, mercados financieros y negocios"
+        },
+        {
+          "letra": "C",
+          "texto": "Actualidad política internacional"
+        },
+        {
+          "letra": "D",
+          "texto": "Deportes y entretenimiento"
+        }
+      ]
+    }
+  ]
+}

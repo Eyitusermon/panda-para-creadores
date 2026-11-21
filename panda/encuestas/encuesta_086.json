@@ -1,0 +1,128 @@
+{
+  "id": "enc_086",
+  "numero": 86,
+  "titulo": "Idiomas, Choque Cultural y Adaptación",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Comunicación en el extranjero, costumbres locales y respeto.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cómo te comunicas cuando viajas a un país donde no hablan tu idioma?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En inglés con soltura en la mayoría de situaciones"
+        },
+        {
+          "letra": "B",
+          "texto": "Con ayuda de Google Traductor con la cámara y voz"
+        },
+        {
+          "letra": "C",
+          "texto": "Con gestos, señas y una sonrisa universal"
+        },
+        {
+          "letra": "D",
+          "texto": "Intento aprender de antemano palabras básicas de cortesía"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Te gusta probar la comida callejera (Street Food) local en tus viajes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es la forma más auténtica y rica de conocer un país"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en puestos concurridos que tengan buenas valoraciones higiénicas"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero restaurantes cerrados con garantías sanitarias"
+        },
+        {
+          "letra": "D",
+          "texto": "No me atrevo con la comida callejera por miedo a ponerme malo"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has experimentado un choque cultural muy fuerte en algún viaje?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, en países asiáticos o de oriente medio, fue muy enriquecedor"
+        },
+        {
+          "letra": "B",
+          "texto": "Ligeras diferencias pero me adapté con facilidad"
+        },
+        {
+          "letra": "C",
+          "texto": "Intento informarme bien de las costumbres locales antes de ir"
+        },
+        {
+          "letra": "D",
+          "texto": "Apenas he viajado fuera de mi entorno cultural"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué haces con el cambio de moneda cuando viajas fuera de tu divisa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Uso tarjetas sin comisiones de cambio (Revolut, N26)"
+        },
+        {
+          "letra": "B",
+          "texto": "Saco efectivo en cajeros locales del destino"
+        },
+        {
+          "letra": "C",
+          "texto": "Cambio billetes en el aeropuerto o banco antes de salir"
+        },
+        {
+          "letra": "D",
+          "texto": "Pago todo con mi tarjeta bancaria habitual"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Compras eSIMs digitales de datos móviles para viajar al extranjero?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, activo una eSIM digital (Airalo, Holafly) antes de aterrizar"
+        },
+        {
+          "letra": "B",
+          "texto": "Compro una tarjeta SIM física prepago local en el aeropuerto"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo uso el WiFi gratuito de hoteles y cafeterías"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso el roaming de mi compañía telefónica"
+        }
+      ]
+    }
+  ]
+}

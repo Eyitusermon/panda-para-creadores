@@ -1,0 +1,128 @@
+{
+  "id": "enc_072",
+  "numero": 72,
+  "titulo": "Pizzas: Masa, Ingredientes y Tradición",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "Pizza napolitana, masa fina, bordes rellenos y pepperoni.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué estilo de masa de pizza te gusta más?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Masa napolitana fina con borde inflado y alveolado"
+        },
+        {
+          "letra": "B",
+          "texto": "Masa fina y crujiente estilo romana"
+        },
+        {
+          "letra": "C",
+          "texto": "Masa gruesa y esponjosa estilo Chicago / Deep Dish"
+        },
+        {
+          "letra": "D",
+          "texto": "Masa con borde relleno de queso"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es tu pizza favorita de todos los tiempos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Pepperoni clásico con mozzarella y orégano"
+        },
+        {
+          "letra": "B",
+          "texto": "Pizza Barbacoa con carne picada y bacon"
+        },
+        {
+          "letra": "C",
+          "texto": "Cuatro Quesos (Quattro Formaggi) cremosa"
+        },
+        {
+          "letra": "D",
+          "texto": "Margarita tradicional con albahaca fresca"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Piña en la pizza (Pizza Hawaiana): a favor o en contra?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Totalmente a favor, el contraste dulce-salado es genial"
+        },
+        {
+          "letra": "B",
+          "texto": "En contra, la fruta caliente no pertenece a la pizza"
+        },
+        {
+          "letra": "C",
+          "texto": "Me da igual, la como si la ponen pero no la pido"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca la he probado"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Comes la pizza con las manos o con cubiertos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre con las manos doblando la porción"
+        },
+        {
+          "letra": "B",
+          "texto": "Con cuchillo y tenedor para no mancharme"
+        },
+        {
+          "letra": "C",
+          "texto": "Empiezo con cubiertos y termino con las manos"
+        },
+        {
+          "letra": "D",
+          "texto": "Depende de si estoy en casa o en un restaurante elegante"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te comes los bordes de la pizza o los dejas en el plato?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me los como siempre, especialmente con salsa o aceite picante"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si la masa está tierna y recién horneada"
+        },
+        {
+          "letra": "C",
+          "texto": "Suelo dejar los bordes para no llenarme tanto"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo si vienen rellenos de queso"
+        }
+      ]
+    }
+  ]
+}

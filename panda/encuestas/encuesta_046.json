@@ -1,0 +1,128 @@
+{
+  "id": "enc_046",
+  "numero": 46,
+  "titulo": "Cuidado Personal, Perfumería y Belleza",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Rutinas faciales, perfumes de autor y aseo personal.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Tienes una rutina de cuidado facial (skincare) diaria?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, limpiador, sérum, hidratante y protector solar a diario"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo crema hidratante y lavado básico"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo me pongo protector solar en verano o playa"
+        },
+        {
+          "letra": "D",
+          "texto": "No sigo ninguna rutina de cuidado facial"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Utilizas perfume o colonia con regularidad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre antes de salir de casa, es mi seña de identidad"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo para ocasiones especiales o citas"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso desodorante corporal principalmente"
+        },
+        {
+          "letra": "D",
+          "texto": "Rara vez me aplico perfume"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Dónde compras habitualmente tus productos de higiene y cosmética?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Perfumerías especializadas (Sephora, Primor, etc.)"
+        },
+        {
+          "letra": "B",
+          "texto": "Directamente en el pasillo de cosmética del supermercado"
+        },
+        {
+          "letra": "C",
+          "texto": "Por internet en tiendas oficiales o farmacias online"
+        },
+        {
+          "letra": "D",
+          "texto": "En salones de peluquería o barberías"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cuántos frascos de perfume sueles tener abiertos a la vez?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tengo 1 solo perfume que es mi fragancia fija"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 2 y 4 para alternar según el clima o noche/día"
+        },
+        {
+          "letra": "C",
+          "texto": "Colecciono más de 5 fragancias distintas"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo comprar frascos de perfume"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Con qué frecuencia vas a la peluquería o barbería?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cada 2 o 3 semanas para mantener el corte perfecto"
+        },
+        {
+          "letra": "B",
+          "texto": "Una vez al mes religiosamente"
+        },
+        {
+          "letra": "C",
+          "texto": "Cada 2 a 3 meses cuando el pelo ya está largo"
+        },
+        {
+          "letra": "D",
+          "texto": "Me corto el pelo yo mismo en casa"
+        }
+      ]
+    }
+  ]
+}

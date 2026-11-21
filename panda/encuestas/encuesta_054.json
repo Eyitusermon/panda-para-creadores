@@ -1,0 +1,128 @@
+{
+  "id": "enc_054",
+  "numero": 54,
+  "titulo": "Pádel y Deportes de Raqueta",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "El boom del pádel, palas, partidos con amigos y competencias.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Juegas al pádel con amigos o compañeros de trabajo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, al menos una o dos partidas cada semana"
+        },
+        {
+          "letra": "B",
+          "texto": "Juego un par de veces al mes de forma casual"
+        },
+        {
+          "letra": "C",
+          "texto": "He jugado alguna vez pero no con frecuencia"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he jugado al pádel"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Tienes tu propia pala de pádel o la alquilas en la pista?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tengo mi propia pala de gama media o alta"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo una pala básica para jugar de vez en cuando"
+        },
+        {
+          "letra": "C",
+          "texto": "La alquilo en el club cada vez que voy a jugar"
+        },
+        {
+          "letra": "D",
+          "texto": "No juego al pádel"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres jugar en el lado del revés o de la derecha?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Juego en el revés para definir puntos y rematar"
+        },
+        {
+          "letra": "B",
+          "texto": "Juego en la derecha para defender y armar juego"
+        },
+        {
+          "letra": "C",
+          "texto": "Me adapto al lado que deje libre mi compañero"
+        },
+        {
+          "letra": "D",
+          "texto": "No conozco la diferencia técnica de posiciones"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué tipo de pista de pádel prefieres?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Pista techada o indoor sin viento ni sol molesto"
+        },
+        {
+          "letra": "B",
+          "texto": "Pista al aire libre con cristal panorámico"
+        },
+        {
+          "letra": "C",
+          "texto": "Pistas con césped rizado de última generación"
+        },
+        {
+          "letra": "D",
+          "texto": "Me resulta indiferente mientras esté bien cuidada"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué te parece el auge y la popularidad actual del pádel?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un deporte divertidísimo y muy social para todas las edades"
+        },
+        {
+          "letra": "B",
+          "texto": "Muy entretenido aunque a veces cuesta encontrar pistas libres"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero deportes individuales o el tenis tradicional"
+        },
+        {
+          "letra": "D",
+          "texto": "Me parece una moda pasajera"
+        }
+      ]
+    }
+  ]
+}

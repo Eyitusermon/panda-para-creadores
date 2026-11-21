@@ -1,0 +1,128 @@
+{
+  "id": "enc_056",
+  "numero": 56,
+  "titulo": "Baloncesto, NBA y Deporte de Canasta",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Partidos de la NBA, mates, triples y liga ACB/Euroliga.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sigues la NBA o partidos de baloncesto profesional?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, trasnocho para ver partidos de la NBA en vivo"
+        },
+        {
+          "letra": "B",
+          "texto": "Veo los resúmenes de jugadas destacadas por la mañana"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo veo los Playoffs y las Finales de la NBA"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo seguir el baloncesto"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Quién consideras el mejor jugador de la historia del baloncesto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Michael Jordan"
+        },
+        {
+          "letra": "B",
+          "texto": "LeBron James"
+        },
+        {
+          "letra": "C",
+          "texto": "Kobe Bryant"
+        },
+        {
+          "letra": "D",
+          "texto": "Stephen Curry"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Juegas al baloncesto en canchas urbanas o ligas locales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, juego pick-up games en canchas de calle habitualmente"
+        },
+        {
+          "letra": "B",
+          "texto": "Juego de forma casual con amigos de vez en cuando"
+        },
+        {
+          "letra": "C",
+          "texto": "Jugaba en el colegio o instituto pero ya no"
+        },
+        {
+          "letra": "D",
+          "texto": "No practico baloncesto"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Te gustan las zapatillas retro de baloncesto para vestir a diario?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo modelos clásicos (Jordan 1, Dunk, Air Force 1)"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gustan para ocasiones informales"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero zapatillas más ligeras de running"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gustan las zapatillas voluminosas de basket"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué jugada te parece más espectacular en un partido?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un mate potente posterizando a un defensor"
+        },
+        {
+          "letra": "B",
+          "texto": "Un triple decisivo sobre la bocina para ganar (Buzzer Beater)"
+        },
+        {
+          "letra": "C",
+          "texto": "Un pase milimétrico sin mirar entre varios rivales"
+        },
+        {
+          "letra": "D",
+          "texto": "Un tapón salvaje en el tablero"
+        }
+      ]
+    }
+  ]
+}

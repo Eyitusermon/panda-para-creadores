@@ -1,0 +1,128 @@
+{
+  "id": "enc_082",
+  "numero": 82,
+  "titulo": "Destinos de Playa: Caribe vs Mediterráneo",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Aguas cristalinas, resorts todo incluido, calas y verano.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué tipo de destino de playa prefieres para relajarte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Resorts todo incluido en el Caribe (Cancún, Punta Cana)"
+        },
+        {
+          "letra": "B",
+          "texto": "Calas vírgenes de aguas turquesas en el Mediterráneo (Baleares, Grecia)"
+        },
+        {
+          "letra": "C",
+          "texto": "Playas de arena dorada con olas para hacer surf"
+        },
+        {
+          "letra": "D",
+          "texto": "Playas tranquilas familiares de fácil acceso"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Te gusta pasar todo el día tumbado en la hamaca al sol?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, desconexión total con libro, bebida y siesta"
+        },
+        {
+          "letra": "B",
+          "texto": "Un par de horas al sol y luego prefiero bañarme o pasear"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero hacer actividades acuáticas (snorkel, kayak, moto de agua)"
+        },
+        {
+          "letra": "D",
+          "texto": "No aguanto mucho tiempo al sol, busco la sombra"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has estado en un hotel con régimen de Todo Incluido (All Inclusive)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me encanta la comodidad de comer y beber sin pensar en gastos"
+        },
+        {
+          "letra": "B",
+          "texto": "He estado pero prefiero salir a explorar restaurantes locales"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gustaría probar la experiencia algún día"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero apartamentos para cocinar mi propia comida"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué protector solar utilizas en la playa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Factor de protección muy alto SPF 50+ siempre"
+        },
+        {
+          "letra": "B",
+          "texto": "Factor SPF 30 resistente al agua"
+        },
+        {
+          "letra": "C",
+          "texto": "Aceite bronceador para coger color rápido"
+        },
+        {
+          "letra": "D",
+          "texto": "Rara vez me aplico protector solar"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Prefieres bañarte en el mar o en la piscina del hotel?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En el mar, el agua salada y la naturaleza no tienen rival"
+        },
+        {
+          "letra": "B",
+          "texto": "En la piscina del hotel con hamacas cómodas sin arena"
+        },
+        {
+          "letra": "C",
+          "texto": "Alterno entre ambas a lo largo del día"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi no me baño, voy por la brisa y las vistas"
+        }
+      ]
+    }
+  ]
+}

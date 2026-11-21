@@ -1,0 +1,128 @@
+{
+  "id": "enc_044",
+  "numero": 44,
+  "titulo": "Café y Hábitos de Consumo de Bebidas",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Cafeterías de especialidad, cápsulas Nespresso y café frío.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Tomas café habitualmente a lo largo del día?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, de 2 a 3 tazas al día indispensables"
+        },
+        {
+          "letra": "B",
+          "texto": "Una taza obligatoria por la mañana para despertar"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo ocasionalmente en cafeterías con amigos"
+        },
+        {
+          "letra": "D",
+          "texto": "No tomo café, prefiero té u otras bebidas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cómo preparas el café en tu hogar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cafetera de cápsulas rápida (Nespresso, Dolce Gusto)"
+        },
+        {
+          "letra": "B",
+          "texto": "Cafetera italiana / moka clásica sobre fuego"
+        },
+        {
+          "letra": "C",
+          "texto": "Cafetera superautomática de grano recién molido"
+        },
+        {
+          "letra": "D",
+          "texto": "Café soluble instantáneo o prensa francesa"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Te gusta el café de especialidad (Specialty Coffee)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me encanta, aprecio los orígenes y notas de sabor"
+        },
+        {
+          "letra": "B",
+          "texto": "Lo he probado y me parece rico pero caro"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero el café tradicional de cafetería de barrio"
+        },
+        {
+          "letra": "D",
+          "texto": "No noto la diferencia entre tipos de grano"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cómo tomas habitualmente el café?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo / Espresso corto sin azúcar"
+        },
+        {
+          "letra": "B",
+          "texto": "Cortado o café con leche tradicional"
+        },
+        {
+          "letra": "C",
+          "texto": "Capuchino o café latte con espuma"
+        },
+        {
+          "letra": "D",
+          "texto": "Café helado (Iced Coffee) con jarabes o sabores"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuánto consideras un precio justo por un buen café en cafetería?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Entre $1.00 y $1.80 USD"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre $2.00 y $3.50 USD"
+        },
+        {
+          "letra": "C",
+          "texto": "Hasta $5.00 USD si es un café de especialidad grande"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de $2.50 USD me parece excesivo"
+        }
+      ]
+    }
+  ]
+}

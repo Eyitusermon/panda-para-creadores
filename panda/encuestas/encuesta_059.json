@@ -1,0 +1,128 @@
+{
+  "id": "enc_059",
+  "numero": 59,
+  "titulo": "Calistenia y Entrenamiento con Peso Corporal",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Dominadas, fondos, parques de street workout y flexibilidad.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Practicas ejercicios de calistenia con tu propio peso corporal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, entreno regularmente en barras de parque o casa"
+        },
+        {
+          "letra": "B",
+          "texto": "Combino calistenia con pesas en el gimnasio"
+        },
+        {
+          "letra": "C",
+          "texto": "Hago flexiones y fondos ocasionales en casa"
+        },
+        {
+          "letra": "D",
+          "texto": "No practico calistenia"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuántas dominadas estrictas puedes hacer seguidas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Más de 15 dominadas perfectas"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 8 y 15 dominadas"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 1 y 7 dominadas"
+        },
+        {
+          "letra": "D",
+          "texto": "Todavía no puedo hacer una dominada completa"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Tienes barra de dominadas instalada en casa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, barra en el marco de la puerta o anclada a la pared"
+        },
+        {
+          "letra": "B",
+          "texto": "No, prefiero ir al parque de barras o al gimnasio"
+        },
+        {
+          "letra": "C",
+          "texto": "Tuve una en el pasado"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo barras en casa"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Te gustaría dominar trucos estáticos como el Muscle-up o Front Lever?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, entreno específicamente para sacar esos movimientos"
+        },
+        {
+          "letra": "B",
+          "texto": "El Muscle-up me encantaría conseguirlo"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo busco ponerme en forma sin hacer trucos complejos"
+        },
+        {
+          "letra": "D",
+          "texto": "No me interesa la calistenia"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué ventaja consideras superior en el entrenamiento calisténico?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Puedes entrenar gratis en cualquier parque del mundo"
+        },
+        {
+          "letra": "B",
+          "texto": "Desarrollo de fuerza funcional y control milimétrico del cuerpo"
+        },
+        {
+          "letra": "C",
+          "texto": "Menor riesgo de lesiones graves articulares"
+        },
+        {
+          "letra": "D",
+          "texto": "Cuerpo atlético y definido sin hipertrofia excesiva"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_006",
+  "numero": 6,
+  "titulo": "Juegos Retro y Nostalgia",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "La era dorada de los 8-bit, 16-bit y salones recreativos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Te atraen los juegos con estética pixel-art o retro?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me encantan, tienen personalidad única"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gustan si la jugabilidad es moderna"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero gráficos hiperrealistas 3D"
+        },
+        {
+          "letra": "D",
+          "texto": "Me resultan anticuados"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Llegaste a jugar en máquinas recreativas de fichas (Arcades)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, pasé muchas tardes en salones arcade"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo ocasionalmente de niño"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en emuladores o versiones modernas"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he jugado en máquinas físicas"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cuál era tu consola favorita de generaciones pasadas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Super Nintendo / Sega Genesis"
+        },
+        {
+          "letra": "B",
+          "texto": "PlayStation 1 o 2 / Nintendo 64"
+        },
+        {
+          "letra": "C",
+          "texto": "Game Boy / Nintendo DS portátil"
+        },
+        {
+          "letra": "D",
+          "texto": "Empecé a jugar en épocas recientes"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Comprarías una remasterización de tu juego clásico favorito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sin dudarlo en el día de lanzamiento"
+        },
+        {
+          "letra": "B",
+          "texto": "Esperaría a ver opiniones y precio"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo si incluye contenido nuevo"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero jugar títulos 100% nuevos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué música de videojuegos recuerdas con más cariño?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Chiptune 8/16-bits pegadizo"
+        },
+        {
+          "letra": "B",
+          "texto": "Bandas sonoras orquestales épicas"
+        },
+        {
+          "letra": "C",
+          "texto": "Música synthwave / futurista"
+        },
+        {
+          "letra": "D",
+          "texto": "Rock o metal enérgico"
+        }
+      ]
+    }
+  ]
+}

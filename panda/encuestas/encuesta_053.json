@@ -1,0 +1,128 @@
+{
+  "id": "enc_053",
+  "numero": 53,
+  "titulo": "Running y Carreras Populares",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Correr al aire libre, maratones, 10K y zapatillas de running.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sueles salir a correr (running) de forma habitual?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, varios días por semana llueva o haga sol"
+        },
+        {
+          "letra": "B",
+          "texto": "Salgo a correr 1 o 2 veces por semana"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero caminar a buen paso en vez de correr"
+        },
+        {
+          "letra": "D",
+          "texto": "No practico running"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿En qué superficie prefieres salir a correr?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En parques o senderos de tierra al aire libre"
+        },
+        {
+          "letra": "B",
+          "texto": "Por el asfalto y aceras de la ciudad"
+        },
+        {
+          "letra": "C",
+          "texto": "En la cinta de correr del gimnasio"
+        },
+        {
+          "letra": "D",
+          "texto": "En pistas de atletismo de tartán"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has participado alguna vez en una carrera popular (5K, 10K, etc.)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, he corrido medias maratones o maratones"
+        },
+        {
+          "letra": "B",
+          "texto": "He participado en carreras de 5K o 10K con amigos"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gustaría apuntarme a una próximamente"
+        },
+        {
+          "letra": "D",
+          "texto": "No me interesa competir en carreras"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué aplicación o reloj utilizas para registrar tus carreras?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Strava para compartir con la comunidad"
+        },
+        {
+          "letra": "B",
+          "texto": "Garmin Connect / Apple Fitness"
+        },
+        {
+          "letra": "C",
+          "texto": "Nike Run Club u otra app en el móvil"
+        },
+        {
+          "letra": "D",
+          "texto": "No registro mis tiempos ni distancias"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué es lo más difícil al iniciarse en el running?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La constancia y crear el hábito las primeras semanas"
+        },
+        {
+          "letra": "B",
+          "texto": "El cansancio respiratorio y controlar las pulsaciones"
+        },
+        {
+          "letra": "C",
+          "texto": "El dolor en articulaciones o sobrecarga muscular"
+        },
+        {
+          "letra": "D",
+          "texto": "Salir en días de frío o mal tiempo"
+        }
+      ]
+    }
+  ]
+}

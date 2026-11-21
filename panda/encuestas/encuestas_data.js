@@ -1,0 +1,12804 @@
+// Catálogo Oficial de 100 Encuestas PANDA CASH
+// Cada encuesta contiene 5 preguntas estructuradas con 4 opciones.
+window.PANDA_ENCUESTAS_DATA = [
+  {
+    "id": "enc_001",
+    "numero": 1,
+    "titulo": "Preferencias de Plataformas de Videojuegos",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Tu experiencia con consolas, PC y plataformas gaming modernas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿En qué plataforma juegas con mayor frecuencia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "PC Gaming"
+          },
+          {
+            "letra": "B",
+            "texto": "PlayStation 5 / 4"
+          },
+          {
+            "letra": "C",
+            "texto": "Xbox Series / One"
+          },
+          {
+            "letra": "D",
+            "texto": "Dispositivo Móvil / Tablet"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuántas horas a la semana dedicas a jugar videojuegos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de 5 horas"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 5 y 15 horas"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 15 y 30 horas"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de 30 horas"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué género de videojuegos prefieres habitualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Arcade y Crash Games"
+          },
+          {
+            "letra": "B",
+            "texto": "Shooters / Battle Royale (FPS)"
+          },
+          {
+            "letra": "C",
+            "texto": "RPG y Mundo Abierto"
+          },
+          {
+            "letra": "D",
+            "texto": "Estrategia y Simulación"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Compras pases de batalla o microtransacciones estéticas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Con regularidad cada mes"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en ofertas especiales"
+          },
+          {
+            "letra": "C",
+            "texto": "Rara vez"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca compro micropagos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sueles jugar en modo multijugador online o individual?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Casi siempre multijugador con amigos"
+          },
+          {
+            "letra": "B",
+            "texto": "Multijugador con emparejamiento aleatorio"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero el modo historia / solitario"
+          },
+          {
+            "letra": "D",
+            "texto": "Ambos por igual según el juego"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_002",
+    "numero": 2,
+    "titulo": "Juegos de Azar y Juegos Arcade en Línea",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Opinión sobre dinámicas de Crash, Plinko y slots digitales.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué juego estilo casino te resulta más entretenido?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Plinko de rebotes rápidos"
+          },
+          {
+            "letra": "B",
+            "texto": "Crash Rocket / Aviator"
+          },
+          {
+            "letra": "C",
+            "texto": "Cyber Mines / Buscaminas"
+          },
+          {
+            "letra": "D",
+            "texto": "Golden Slots clásicas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué factor valoras más al probar un juego arcade?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Multiplicadores altos y emoción"
+          },
+          {
+            "letra": "B",
+            "texto": "Diseño visual y animaciones"
+          },
+          {
+            "letra": "C",
+            "texto": "Control manual de retiro rápido"
+          },
+          {
+            "letra": "D",
+            "texto": "Baja volatilidad y premios frecuentes"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres partidas cortas y ágiles o sesiones largas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Partidas ultrarrápidas de segundos"
+          },
+          {
+            "letra": "B",
+            "texto": "Sesiones medianas de 10 a 20 minutos"
+          },
+          {
+            "letra": "C",
+            "texto": "Sesiones extendidas de relax"
+          },
+          {
+            "letra": "D",
+            "texto": "Depende de mi balance disponible"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Utilizas la función de autoretiro o retiro manual?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre autoretiro programado"
+          },
+          {
+            "letra": "B",
+            "texto": "Casi siempre manual para mayor control"
+          },
+          {
+            "letra": "C",
+            "texto": "Alterno entre ambos"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca utilizo autoretiro"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te gustan las mecánicas con multiplicadores progresivos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me encantan, son las más divertidas"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gustan con riesgo moderado"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero multiplicadores fijos"
+          },
+          {
+            "letra": "D",
+            "texto": "Me resultan indiferentes"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_003",
+    "numero": 3,
+    "titulo": "Accesorios y Periféricos Gaming",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Equipamiento, pantallas y comodidad para largas sesiones.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué periférico consideras el más crucial para jugar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ratón / Mouse de alta precisión"
+          },
+          {
+            "letra": "B",
+            "texto": "Auriculares con audio espacial 7.1"
+          },
+          {
+            "letra": "C",
+            "texto": "Monitor con alta tasa de refresco (144Hz+)"
+          },
+          {
+            "letra": "D",
+            "texto": "Mando / Control ergonómico"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Prefieres periféricos inalámbricos o con cable?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Totalmente inalámbricos por comodidad"
+          },
+          {
+            "letra": "B",
+            "texto": "Con cable por latencia ultra baja"
+          },
+          {
+            "letra": "C",
+            "texto": "Inalámbricos solo auriculares"
+          },
+          {
+            "letra": "D",
+            "texto": "Indiferente mientras funcionen bien"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Tienes iluminación RGB en tu zona de juego?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, sincronizada en todo el setup"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en teclado o ratón"
+          },
+          {
+            "letra": "C",
+            "texto": "No tengo pero me gustaría"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gusta la iluminación RGB"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Usas silla ergonómica de oficina o silla gamer?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Silla gamer deportiva"
+          },
+          {
+            "letra": "B",
+            "texto": "Silla ergonómica de oficina"
+          },
+          {
+            "letra": "C",
+            "texto": "Silla estándar convencional"
+          },
+          {
+            "letra": "D",
+            "texto": "Juego desde el sofá o cama"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Con qué frecuencia renuevas tus periféricos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cada año para estar actualizado"
+          },
+          {
+            "letra": "B",
+            "texto": "Cada 2 a 3 años"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo cuando se dañan"
+          },
+          {
+            "letra": "D",
+            "texto": "Rara vez los renuevo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_004",
+    "numero": 4,
+    "titulo": "Juegos Móviles y Hábitos en Smartphones",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "El auge del gaming en dispositivos iOS y Android.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Juegas en tu teléfono móvil habitualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Todos los días en ratos libres"
+          },
+          {
+            "letra": "B",
+            "texto": "Varios días a la semana"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo en viajes o traslados"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca juego en el móvil"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué sistema operativo tiene tu dispositivo principal?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Android (Samsung, Xiaomi, etc.)"
+          },
+          {
+            "letra": "B",
+            "texto": "iOS (iPhone / iPad)"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso ambos activamente"
+          },
+          {
+            "letra": "D",
+            "texto": "Otro sistema operativo"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Te molestan los anuncios publicitarios en juegos móviles?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, arruinan la experiencia"
+          },
+          {
+            "letra": "B",
+            "texto": "Los tolero si dan recompensas"
+          },
+          {
+            "letra": "C",
+            "texto": "Pago para eliminarlos siempre"
+          },
+          {
+            "letra": "D",
+            "texto": "No me molestan en absoluto"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Utilizas controles táctiles o mandos Bluetooth externos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Controles táctiles en pantalla"
+          },
+          {
+            "letra": "B",
+            "texto": "Mando gamepad por Bluetooth"
+          },
+          {
+            "letra": "C",
+            "texto": "Gatillos mecánicos para móvil"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo juegos de un solo toque"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Descargas juegos por recomendaciones de amigos o redes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Recomendaciones de amigos"
+          },
+          {
+            "letra": "B",
+            "texto": "Publicidad en TikTok / YouTube"
+          },
+          {
+            "letra": "C",
+            "texto": "Explorando la tienda de apps"
+          },
+          {
+            "letra": "D",
+            "texto": "Reseñas de creadores especializados"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_005",
+    "numero": 5,
+    "titulo": "Comunidades de Jugadores y Esports",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Torneos profesionales, creadores de contenido y Discord.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sigues transmisiones de Esports o torneos profesionales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, sigo ligas enteras en vivo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo eventos mundiales destacados"
+          },
+          {
+            "letra": "C",
+            "texto": "Ocasionalmente resúmenes en YouTube"
+          },
+          {
+            "letra": "D",
+            "texto": "No sigo competiciones de Esports"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué plataforma usas para ver transmisiones en directo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Twitch"
+          },
+          {
+            "letra": "B",
+            "texto": "YouTube Live"
+          },
+          {
+            "letra": "C",
+            "texto": "Kick"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo ver streams"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Perteneces a comunidades activas en Discord de juegos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, modero o participo a diario"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, pero solo para leer noticias"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo cuenta pero poco uso"
+          },
+          {
+            "letra": "D",
+            "texto": "No utilizo Discord"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Has participado en torneos comunitarios o amateurs?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, con regularidad con mi equipo"
+          },
+          {
+            "letra": "B",
+            "texto": "En un par de ocasiones"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gustaría pero aún no lo he hecho"
+          },
+          {
+            "letra": "D",
+            "texto": "No me interesa competir"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te motivan las tablas de clasificación y rankings mundiales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Mucho, juego para estar en el top"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gusta comparar mi nivel con otros"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo compito contra mi récord personal"
+          },
+          {
+            "letra": "D",
+            "texto": "No le presto atención a los rankings"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_006",
+    "numero": 6,
+    "titulo": "Juegos Retro y Nostalgia",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "La era dorada de los 8-bit, 16-bit y salones recreativos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Te atraen los juegos con estética pixel-art o retro?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me encantan, tienen personalidad única"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gustan si la jugabilidad es moderna"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero gráficos hiperrealistas 3D"
+          },
+          {
+            "letra": "D",
+            "texto": "Me resultan anticuados"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Llegaste a jugar en máquinas recreativas de fichas (Arcades)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, pasé muchas tardes en salones arcade"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo ocasionalmente de niño"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo en emuladores o versiones modernas"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he jugado en máquinas físicas"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuál era tu consola favorita de generaciones pasadas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Super Nintendo / Sega Genesis"
+          },
+          {
+            "letra": "B",
+            "texto": "PlayStation 1 o 2 / Nintendo 64"
+          },
+          {
+            "letra": "C",
+            "texto": "Game Boy / Nintendo DS portátil"
+          },
+          {
+            "letra": "D",
+            "texto": "Empecé a jugar en épocas recientes"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Comprarías una remasterización de tu juego clásico favorito?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sin dudarlo en el día de lanzamiento"
+          },
+          {
+            "letra": "B",
+            "texto": "Esperaría a ver opiniones y precio"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo si incluye contenido nuevo"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero jugar títulos 100% nuevos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué música de videojuegos recuerdas con más cariño?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Chiptune 8/16-bits pegadizo"
+          },
+          {
+            "letra": "B",
+            "texto": "Bandas sonoras orquestales épicas"
+          },
+          {
+            "letra": "C",
+            "texto": "Música synthwave / futurista"
+          },
+          {
+            "letra": "D",
+            "texto": "Rock o metal enérgico"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_007",
+    "numero": 7,
+    "titulo": "Realidad Virtual y Futuro del Gaming",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Inmersión con visores VR y mundos tridimensionales.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has probado visores de Realidad Virtual (Meta Quest, PSVR)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo un visor en casa"
+          },
+          {
+            "letra": "B",
+            "texto": "Lo he probado en ferias o con amigos"
+          },
+          {
+            "letra": "C",
+            "texto": "Aún no lo he probado pero tengo curiosidad"
+          },
+          {
+            "letra": "D",
+            "texto": "No me llama la atención"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Experimentas mareos o cinetosis en juegos de realidad virtual?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Nunca me mareo en VR"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en giros muy bruscos o carreras"
+          },
+          {
+            "letra": "C",
+            "texto": "Sí, me cuesta acostumbrarme"
+          },
+          {
+            "letra": "D",
+            "texto": "No he probado lo suficiente"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Crees que la VR reemplazará a las pantallas tradicionales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, a largo plazo dominará el ocio"
+          },
+          {
+            "letra": "B",
+            "texto": "Convivirán como alternativas distintas"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo será para nichos muy específicos"
+          },
+          {
+            "letra": "D",
+            "texto": "No creo que sustituya a monitores y TV"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué experiencia en VR te gustaría probar más?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Juegos de aventura y simulación"
+          },
+          {
+            "letra": "B",
+            "texto": "Casinos y salas de juegos sociales 3D"
+          },
+          {
+            "letra": "C",
+            "texto": "Conciertos y eventos en vivo"
+          },
+          {
+            "letra": "D",
+            "texto": "Recorridos virtuales de viajes"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuánto pagarías por un visor de gama alta independiente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de $300 USD"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre $300 y $600 USD"
+          },
+          {
+            "letra": "C",
+            "texto": "Hasta $1,000 USD si es de élite"
+          },
+          {
+            "letra": "D",
+            "texto": "No planeo comprar visores VR"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_008",
+    "numero": 8,
+    "titulo": "Servicios de Suscripción para Jugadores",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Game Pass, PlayStation Plus y bibliotecas digitales.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuentas con alguna suscripción activa tipo Game Pass o PS Plus?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, Xbox Game Pass Ultimate"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, PlayStation Plus Extra / Premium"
+          },
+          {
+            "letra": "C",
+            "texto": "Sí, más de una suscripción activa"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo ninguna suscripción gamer"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Prefieres comprar juegos en propiedad o pagar mensualidad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Pagar suscripción con catálogo amplio"
+          },
+          {
+            "letra": "B",
+            "texto": "Comprar en digital para tener biblioteca"
+          },
+          {
+            "letra": "C",
+            "texto": "Comprar en formato físico coleccionable"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo juego títulos Free to Play"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Utilizas el juego en la nube (Cloud Gaming / xCloud)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A menudo desde teléfono o PC modesto"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo para probar títulos sin descargarlos"
+          },
+          {
+            "letra": "C",
+            "texto": "Lo he probado pero prefiero instalar local"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he jugado en la nube"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Consideras justo el precio actual de los lanzamientos AAA ($70)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Muy elevado, espero siempre a rebajas"
+          },
+          {
+            "letra": "B",
+            "texto": "Aceptable si el juego ofrece +50 horas"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo lo pago para mis 1 o 2 sagas favoritas"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero el modelo gratuito con pases"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Aprovechas los juegos gratis de plataformas como Epic Games?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Reclamo religiosamente cada semana"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando regalan títulos muy conocidos"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo la cuenta pero olvido reclamar"
+          },
+          {
+            "letra": "D",
+            "texto": "No utilizo esas plataformas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_009",
+    "numero": 9,
+    "titulo": "Narrativa y Doblaje en Videojuegos",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Historias conmovedoras, cinemáticas y localización.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué importancia le das a la historia de un juego?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Fundamental, busco tramas cinematográficas"
+          },
+          {
+            "letra": "B",
+            "texto": "Importante, pero la jugabilidad manda"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo si no corta el ritmo de juego"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nula, suelo saltarme los diálogos"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿En qué idioma prefieres jugar títulos narrativos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Doblaje en Español Latino"
+          },
+          {
+            "letra": "B",
+            "texto": "Doblaje en Español de España"
+          },
+          {
+            "letra": "C",
+            "texto": "Audio original en inglés con subtítulos"
+          },
+          {
+            "letra": "D",
+            "texto": "Me da igual mientras esté subtitulado"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Te gustan los juegos con finales múltiples según decisiones?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me fascinan, los rejuego para ver todos"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gustan para una sola partida única"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero un final canónico bien cerrado"
+          },
+          {
+            "letra": "D",
+            "texto": "Me da pereza repetir decisiones"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Has llegado a emocionarte o llorar con el final de un juego?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, con historias muy emotivas"
+          },
+          {
+            "letra": "B",
+            "texto": "Alguna vez se me ha puesto la piel de gallina"
+          },
+          {
+            "letra": "C",
+            "texto": "No tanto como llorar, pero me ha impactado"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca me ha ocurrido"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Prefieres cinemáticas largas o narrativa en tiempo real?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Narrativa integrada en la jugabilidad"
+          },
+          {
+            "letra": "B",
+            "texto": "Cinemáticas espectaculares estilo película"
+          },
+          {
+            "letra": "C",
+            "texto": "Mezcla equilibrada de ambas"
+          },
+          {
+            "letra": "D",
+            "texto": "Pocas cinemáticas y mucha acción"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_010",
+    "numero": 10,
+    "titulo": "Sonido y Música en el Gaming",
+    "categoria": "Videojuegos & Gaming",
+    "categoria_icono": "🎮",
+    "descripcion": "Efectos sonoros, bandas sonoras y concentración auditiva.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Juegas habitualmente con auriculares o altavoces?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Auriculares cerrados para inmersión total"
+          },
+          {
+            "letra": "B",
+            "texto": "Altavoces o barra de sonido"
+          },
+          {
+            "letra": "C",
+            "texto": "Altavoces del televisor o monitor"
+          },
+          {
+            "letra": "D",
+            "texto": "Altavoz del móvil a volumen bajo"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Escuchas tu propia música mientras juegas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, siempre con Spotify de fondo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en partidas casuales o arcade"
+          },
+          {
+            "letra": "C",
+            "texto": "Nunca, priorizo la música del juego"
+          },
+          {
+            "letra": "D",
+            "texto": "A veces escucho podcasts"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Te ayuda el sonido a anticipar eventos en el juego?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Totalmente, escucho pasos y señales clave"
+          },
+          {
+            "letra": "B",
+            "texto": "Me ayuda pero juego por vista principalmente"
+          },
+          {
+            "letra": "C",
+            "texto": "No suelo prestarle tanta atención técnica"
+          },
+          {
+            "letra": "D",
+            "texto": "A veces juego con volumen silenciado"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué tipo de efectos de sonido te resultan más gratificantes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sonido metálico de monedas o diamantes ganados"
+          },
+          {
+            "letra": "B",
+            "texto": "Explosiones y disparos potentes con bajos"
+          },
+          {
+            "letra": "C",
+            "texto": "Música victoriosa de victoria / nivel superado"
+          },
+          {
+            "letra": "D",
+            "texto": "Efectos retro de campanillas y bonus"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Comprarías o escucharías la banda sonora de un juego en Spotify?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo varias playlists de OST de juegos"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo de temas principales icónicos"
+          },
+          {
+            "letra": "C",
+            "texto": "Rara vez fuera del juego"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca escucho música de videojuegos fuera"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_011",
+    "numero": 11,
+    "titulo": "Smartphones y Renovación de Dispositivos",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Criterios de compra, cámaras, baterías y pantallas OLED.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué marca de smartphone utilizas actualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Apple iPhone"
+          },
+          {
+            "letra": "B",
+            "texto": "Samsung Galaxy"
+          },
+          {
+            "letra": "C",
+            "texto": "Xiaomi / Poco / Redmi"
+          },
+          {
+            "letra": "D",
+            "texto": "Motorola / Google Pixel / Otra"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es el factor decisivo al comprar un teléfono nuevo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Duración de batería y carga rápida"
+          },
+          {
+            "letra": "B",
+            "texto": "Calidad de cámaras fotográficas"
+          },
+          {
+            "letra": "C",
+            "texto": "Rendimiento y fluidez del procesador"
+          },
+          {
+            "letra": "D",
+            "texto": "Precio ajustado y relación calidad/precio"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cada cuánto tiempo cambias de teléfono móvil?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cada año o 18 meses"
+          },
+          {
+            "letra": "B",
+            "texto": "Cada 2 a 3 años"
+          },
+          {
+            "letra": "C",
+            "texto": "Cada 4 años o cuando ya no funciona"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo compro de segunda mano o reacondicionado"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Prefieres pantallas grandes (+6.7\") o compactas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Pantallas grandes para vídeos y juegos"
+          },
+          {
+            "letra": "B",
+            "texto": "Tamaño estándar equilibrado (6.1\" a 6.4\")"
+          },
+          {
+            "letra": "C",
+            "texto": "Dispositivos compactos manejables con una mano"
+          },
+          {
+            "letra": "D",
+            "texto": "Pantallas plegables tipo Fold o Flip"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Utilizas fundas protectoras y vidrio templado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, funda robusta y cristal desde el día 1"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo funda delgada transparente"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo cristal templado sin funda"
+          },
+          {
+            "letra": "D",
+            "texto": "Lo uso al descubierto sin protecciones"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_012",
+    "numero": 12,
+    "titulo": "Inteligencia Artificial en el Día a Día",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Uso de chatbots, asistentes virtuales y automatización.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia utilizas herramientas de IA (ChatGPT, Gemini)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A diario para estudio o trabajo"
+          },
+          {
+            "letra": "B",
+            "texto": "Varias veces por semana"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo para consultas curiosas esporádicas"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca utilizo IA generativa"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Para qué tarea te resulta más útil la Inteligencia Artificial?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Redacción y resumen de textos"
+          },
+          {
+            "letra": "B",
+            "texto": "Resolución de dudas y explicaciones de temas"
+          },
+          {
+            "letra": "C",
+            "texto": "Programación y código informático"
+          },
+          {
+            "letra": "D",
+            "texto": "Creatividad, ideas y entretenimiento"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Confías plenamente en las respuestas generadas por IA?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Confío pero siempre verifico datos clave"
+          },
+          {
+            "letra": "B",
+            "texto": "Confío bastante en tareas cotidianas"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo dudas frecuentes sobre la precisión"
+          },
+          {
+            "letra": "D",
+            "texto": "Desconfío de la mayoría de respuestas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Pagarías una suscripción mensual por una IA avanzada?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ya pago alguna versión Plus / Pro"
+          },
+          {
+            "letra": "B",
+            "texto": "Pagaría si aumentara mi productividad laboral"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo utilizo versiones 100% gratuitas"
+          },
+          {
+            "letra": "D",
+            "texto": "No pagaría bajo ninguna circunstancia"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Crees que la IA mejorará el futuro del empleo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Creará nuevas oportunidades y eficiencia"
+          },
+          {
+            "letra": "B",
+            "texto": "Eliminará empleos de forma preocupante"
+          },
+          {
+            "letra": "C",
+            "texto": "Transformará profesiones sin destruirlas"
+          },
+          {
+            "letra": "D",
+            "texto": "Aún es pronto para saber el impacto real"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_013",
+    "numero": 13,
+    "titulo": "Ciberseguridad y Hábitos de Privacidad",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Contraseñas seguras, autenticación en dos pasos y VPNs.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Utilizas la autenticación en dos pasos (2FA) en tus cuentas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, con app autenticadora (Google Auth)"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, mediante código por SMS / WhatsApp"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo en el banco o monederos cripto"
+          },
+          {
+            "letra": "D",
+            "texto": "No la tengo activada en mis cuentas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Repites contraseñas entre distintos sitios web?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tengo contraseñas únicas con gestor"
+          },
+          {
+            "letra": "B",
+            "texto": "Uso variaciones de 2 o 3 contraseñas"
+          },
+          {
+            "letra": "C",
+            "texto": "Casi siempre la misma para no olvidarla"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso inicio de sesión directo con Google/Apple"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has utilizado servicios de red privada virtual (VPN)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, a diario para privacidad y navegación"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo para acceder a catálogos extranjeros"
+          },
+          {
+            "letra": "C",
+            "texto": "Lo he probado en versión gratuita"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he utilizado una VPN"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Te preocupas por los permisos que conceden tus apps móviles?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Reviso rigurosamente cámara, micrófono y GPS"
+          },
+          {
+            "letra": "B",
+            "texto": "Acepto lo básico pero rechazo rastreo"
+          },
+          {
+            "letra": "C",
+            "texto": "Suelo aceptar todo sin leer para continuar"
+          },
+          {
+            "letra": "D",
+            "texto": "No me fijo en los permisos solicitados"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Has sufrido algún intento de estafa por phishing o SMS?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, pero lo identifiqué a tiempo"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, lamentablemente caí en una ocasión"
+          },
+          {
+            "letra": "C",
+            "texto": "He recibido mensajes sospechosos frecuentemente"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he recibido intentos de estafa"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_014",
+    "numero": 14,
+    "titulo": "Hogar Inteligente y Domótica",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Asistentes de voz, bombillas inteligentes y automatización.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tienes algún asistente de voz en casa (Alexa, Google Nest)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, altavoces inteligentes en varias habitaciones"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo un altavoz en el salón o dormitorio"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo el asistente integrado en mi teléfono"
+          },
+          {
+            "letra": "D",
+            "texto": "No uso ni quiero altavoces con micrófono"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué dispositivo inteligente tienes o te gustaría tener?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Bombillas e iluminación RGB programable"
+          },
+          {
+            "letra": "B",
+            "texto": "Cámaras de seguridad y timbres con vídeo"
+          },
+          {
+            "letra": "C",
+            "texto": "Enchufes inteligentes con monitor de consumo"
+          },
+          {
+            "letra": "D",
+            "texto": "Robot aspirador automático"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Controlas electrodomésticos desde el smartphone?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, aire acondicionado, luces o TV"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo para encender o apagar la televisión"
+          },
+          {
+            "letra": "C",
+            "texto": "No, prefiero controles manuales físicos"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo electrodomésticos conectados"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Crees que la domótica ahorra energía eléctrica en el hogar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, programando apagados y horarios clave"
+          },
+          {
+            "letra": "B",
+            "texto": "Ahorra comodidad más que dinero"
+          },
+          {
+            "letra": "C",
+            "texto": "Gasta más por los dispositivos siempre conectados"
+          },
+          {
+            "letra": "D",
+            "texto": "No he notado diferencias en la factura"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuál es el mayor obstáculo para domotizar una casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "El precio elevado de los dispositivos"
+          },
+          {
+            "letra": "B",
+            "texto": "La complejidad de configuración"
+          },
+          {
+            "letra": "C",
+            "texto": "Preocupaciones por la privacidad"
+          },
+          {
+            "letra": "D",
+            "texto": "La falta de compatibilidad entre marcas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_015",
+    "numero": 15,
+    "titulo": "Computadoras Portátiles vs Sobremesa",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Elección de equipos para trabajo, estudio o entretenimiento.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué tipo de ordenador usas principalmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Laptop / Portátil ligero"
+          },
+          {
+            "letra": "B",
+            "texto": "PC de escritorio o torre montada por piezas"
+          },
+          {
+            "letra": "C",
+            "texto": "MacBook / Mac Mini de Apple"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso tableta como reemplazo de ordenador"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuánto tiempo tiene tu ordenador actual?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de 1 año (casi nuevo)"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 1 y 3 años"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 3 y 6 años"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de 6 años"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Sueles trabajar o estudiar con un segundo monitor?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, doble o triple monitor indispensable"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo un monitor externo para el portátil"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo con la pantalla única del equipo"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso la televisión como pantalla secundaria"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cuál es la característica técnica que más revisas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Memoria RAM y almacenamiento SSD rápido"
+          },
+          {
+            "letra": "B",
+            "texto": "Tarjeta gráfica dedicada (GPU)"
+          },
+          {
+            "letra": "C",
+            "texto": "Potencia del procesador (CPU)"
+          },
+          {
+            "letra": "D",
+            "texto": "Peso, diseño y autonomía de batería"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Has montado un ordenador por piezas alguna vez?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, yo mismo elegí y armé cada componente"
+          },
+          {
+            "letra": "B",
+            "texto": "He cambiado piezas sueltas (RAM, SSD)"
+          },
+          {
+            "letra": "C",
+            "texto": "Me lo armó un conocido o tienda"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he abierto un ordenador"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_016",
+    "numero": 16,
+    "titulo": "Almacenamiento en la Nube y Backups",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Google Drive, iCloud, OneDrive y discos externos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Dónde guardas tus fotografías y documentos importantes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Google Fotos / Google Drive"
+          },
+          {
+            "letra": "B",
+            "texto": "iCloud de Apple"
+          },
+          {
+            "letra": "C",
+            "texto": "Disco duro externo / Memoria USB física"
+          },
+          {
+            "letra": "D",
+            "texto": "En la memoria interna del teléfono o PC"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Pagas alguna cuota mensual por almacenamiento cloud extra?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, pago 100GB o 200GB (Google One / iCloud)"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, tengo 1TB o 2TB familiares"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo aprovecho el espacio gratuito"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso servicios gratuitos múltiples para ahorrar"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Haces copias de seguridad de forma periódica?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Copia automática diaria en la nube"
+          },
+          {
+            "letra": "B",
+            "texto": "Copia manual cada pocas semanas"
+          },
+          {
+            "letra": "C",
+            "texto": "Casi nunca hago copias de respaldo"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo cuando voy a cambiar de dispositivo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Alguna vez has perdido fotos o datos por no tener backup?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, fue una experiencia muy frustrante"
+          },
+          {
+            "letra": "B",
+            "texto": "Casi pierdo datos pero pude recuperarlos"
+          },
+          {
+            "letra": "C",
+            "texto": "Nunca me ha ocurrido, soy muy precavido"
+          },
+          {
+            "letra": "D",
+            "texto": "No guardo información crítica"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Prefieres tener copias físicas en discos o en servidores cloud?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En la nube por accesibilidad en todo lugar"
+          },
+          {
+            "letra": "B",
+            "texto": "En discos físicos por control y privacidad"
+          },
+          {
+            "letra": "C",
+            "texto": "Estrategia 3-2-1: copia local y en nube"
+          },
+          {
+            "letra": "D",
+            "texto": "Donde sea más económico"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_017",
+    "numero": 17,
+    "titulo": "Smartwatches y Pulseras de Actividad",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Monitoreo de salud, pasos, pulsaciones y notificaciones.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Llevas a diario algún reloj inteligente o pulsera smart?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Apple Watch"
+          },
+          {
+            "letra": "B",
+            "texto": "Galaxy Watch / WearOS"
+          },
+          {
+            "letra": "C",
+            "texto": "Pulsera fitness básica (Xiaomi Band, etc.)"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero relojes clásicos o no llevar nada"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué función utilizas más en tu smartwatch?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Contador de pasos y actividad física diaria"
+          },
+          {
+            "letra": "B",
+            "texto": "Lectura de notificaciones de WhatsApp / llamadas"
+          },
+          {
+            "letra": "C",
+            "texto": "Monitoreo de calidad de sueño"
+          },
+          {
+            "letra": "D",
+            "texto": "Control de música y alarmas silenciosas"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuántos días suele durar la batería de tu reloj?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "1 día (debo cargarlo cada noche)"
+          },
+          {
+            "letra": "B",
+            "texto": "De 2 a 3 días"
+          },
+          {
+            "letra": "C",
+            "texto": "De 1 a 2 semanas"
+          },
+          {
+            "letra": "D",
+            "texto": "No utilizo reloj inteligente"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Te ayuda el smartwatch a mantenerte más activo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, cumplo metas diarias de pasos y calorías"
+          },
+          {
+            "letra": "B",
+            "texto": "Al principio sí, luego me acostumbré"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo me sirve para mirar la hora y avisos"
+          },
+          {
+            "letra": "D",
+            "texto": "No me motiva para hacer más ejercicio"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Pagarías con tu reloj mediante NFC en comercios?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Pago casi todo con el reloj por comodidad"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando olvido la cartera o teléfono"
+          },
+          {
+            "letra": "C",
+            "texto": "No tengo configurado el pago por NFC"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero pagar con tarjeta física o efectivo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_018",
+    "numero": 18,
+    "titulo": "Auriculares Inalámbricos y Cancelación de Ruido",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "AirPods, buds y auriculares de diadema ANC.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué formato de auriculares prefieres para tu día a día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "True Wireless de botón (AirPods, Galaxy Buds)"
+          },
+          {
+            "letra": "B",
+            "texto": "Auriculares de diadema cerrados sobre la oreja"
+          },
+          {
+            "letra": "C",
+            "texto": "Auriculares de cable clásicos"
+          },
+          {
+            "letra": "D",
+            "texto": "Auriculares de conducción ósea para deporte"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Utilizas la función de Cancelación Activa de Ruido (ANC)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Imprescindible en transporte público y calle"
+          },
+          {
+            "letra": "B",
+            "texto": "La uso solo en aviones o viajes largos"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero el modo transparencia o ambiente"
+          },
+          {
+            "letra": "D",
+            "texto": "Mis auriculares no tienen cancelación de ruido"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuánto tiempo al día pasas con los auriculares puestos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más de 4 horas (trabajo, gym, ocio)"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 1 y 3 horas al día"
+          },
+          {
+            "letra": "C",
+            "texto": "Menos de 1 hora al día"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo los uso de manera muy puntual"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué aspecto priorizas en unos auriculares inalámbricos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Calidad acústica y nitidez de graves"
+          },
+          {
+            "letra": "B",
+            "texto": "Comodidad y sujeción en la oreja"
+          },
+          {
+            "letra": "C",
+            "texto": "Duración de batería de la caja"
+          },
+          {
+            "letra": "D",
+            "texto": "Claridad de micrófono en llamadas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Has extraviado alguna vez un auricular suelto o la caja?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, he tenido que comprar reemplazo"
+          },
+          {
+            "letra": "B",
+            "texto": "Casi los pierdo pero aparecieron"
+          },
+          {
+            "letra": "C",
+            "texto": "Nunca los he perdido, soy muy ordenado"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo uso auriculares con diadema o cable"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_019",
+    "numero": 19,
+    "titulo": "Televisores y Entretenimiento en el Salón",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Tecnologías OLED, 4K, Smart TV y barras de sonido.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿De cuántas pulgadas es la televisión principal de tu casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de 43 pulgadas"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 43 y 55 pulgadas"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 55 y 65 pulgadas"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de 65 pulgadas o proyector"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué sistema de Smart TV te parece más cómodo y fluido?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Google TV / Android TV"
+          },
+          {
+            "letra": "B",
+            "texto": "LG webOS"
+          },
+          {
+            "letra": "C",
+            "texto": "Samsung Tizen OS"
+          },
+          {
+            "letra": "D",
+            "texto": "Dispositivo externo (Chromecast, Fire TV, Apple TV)"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Utilizas barra de sonido o equipo de audio externo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, barra de sonido con subwoofer"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, sistema envolvente 5.1 / Dolby Atmos"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo los altavoces integrados de la TV"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso auriculares conectados a la TV"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Con qué frecuencia ves televisión tradicional por antena?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Casi nunca, solo consumo plataformas de streaming"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo para ver noticias o eventos deportivos en directo"
+          },
+          {
+            "letra": "C",
+            "texto": "Un par de horas a la semana"
+          },
+          {
+            "letra": "D",
+            "texto": "A diario sigo canales de televisión abierta"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Juegas consolas en tu televisor principal?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es mi pantalla principal para videojuegos"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo juego títulos familiares o casuales"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero jugar en monitor de escritorio"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo consolas conectadas a la TV"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_020",
+    "numero": 20,
+    "titulo": "Movilidad Eléctrica y Tecnología Urbana",
+    "categoria": "Tecnología & Dispositivos",
+    "categoria_icono": "📱",
+    "descripcion": "Patinetes eléctricos, bicicletas a batería y coches EV.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Utilizas patinetes o bicicletas eléctricas en tu ciudad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tengo patinete propio y lo uso a diario"
+          },
+          {
+            "letra": "B",
+            "texto": "Uso servicios de alquiler compartido por app"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo bicicleta convencional sin motor"
+          },
+          {
+            "letra": "D",
+            "texto": "No utilizo vehículos de micromovilidad"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué opinas de los coches eléctricos (Tesla, BYD, etc.)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Son el futuro indiscutible del transporte"
+          },
+          {
+            "letra": "B",
+            "texto": "Tecnología interesante pero aún con precio alto"
+          },
+          {
+            "letra": "C",
+            "texto": "Tienen problemas de autonomía e infraestructura"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero motores híbridos o de combustión"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Comprarías un vehículo 100% eléctrico en los próximos 3 años?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, mi próximo coche será eléctrico"
+          },
+          {
+            "letra": "B",
+            "texto": "Prefiero optar por un híbrido enchufable"
+          },
+          {
+            "letra": "C",
+            "texto": "Esperaré a que madure la red de cargadores"
+          },
+          {
+            "letra": "D",
+            "texto": "No planeo comprar vehículo eléctrico"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué aplicación de mapas y navegación usas más?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Google Maps"
+          },
+          {
+            "letra": "B",
+            "texto": "Waze por los avisos de tráfico en tiempo real"
+          },
+          {
+            "letra": "C",
+            "texto": "Apple Maps"
+          },
+          {
+            "letra": "D",
+            "texto": "Transporte público local (Moovit, etc.)"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué beneficio consideras mayor en la movilidad eléctrica?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cero emisiones y reducción de contaminación"
+          },
+          {
+            "letra": "B",
+            "texto": "Ahorro en combustible frente a gasolina"
+          },
+          {
+            "letra": "C",
+            "texto": "Conducción silenciosa y suave"
+          },
+          {
+            "letra": "D",
+            "texto": "Acceso a zonas de bajas emisiones urbanas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_021",
+    "numero": 21,
+    "titulo": "Uso de USDT y Stablecoins en el Día a Día",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Dólares digitales, transferencias TRC-20 y ahorro estable.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Utilizas la stablecoin USDT (Tether) habitualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, para recargar, jugar y mover capital"
+          },
+          {
+            "letra": "B",
+            "texto": "Para proteger mis ahorros de la inflación"
+          },
+          {
+            "letra": "C",
+            "texto": "Ocasionalmente para pagos internacionales"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo utilizar USDT"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué red blockchain prefieres para transferir USDT?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Red Tron (TRC-20) por comisiones bajas y rapidez"
+          },
+          {
+            "letra": "B",
+            "texto": "Red Binance Smart Chain (BEP-20)"
+          },
+          {
+            "letra": "C",
+            "texto": "Red Polygon o Arbitrum (Capa 2)"
+          },
+          {
+            "letra": "D",
+            "texto": "Red Ethereum (ERC-20)"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué porcentaje de tus inversiones mantienes en stablecoins?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más del 50% para tener liquidez segura"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre el 20% y el 50%"
+          },
+          {
+            "letra": "C",
+            "texto": "Menos del 20%, prefiero activos volátiles"
+          },
+          {
+            "letra": "D",
+            "texto": "No mantengo saldo en criptoactivos"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué ventaja valoras más de las monedas estables?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Paridad 1:1 con el dólar estadounidense"
+          },
+          {
+            "letra": "B",
+            "texto": "Disponibilidad inmediata 24/7 sin bancos"
+          },
+          {
+            "letra": "C",
+            "texto": "Transferencias internacionales en minutos"
+          },
+          {
+            "letra": "D",
+            "texto": "Privacidad y control sobre mis fondos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Has comprado bienes o servicios pagando con cripto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, en plataformas de ocio y tiendas online"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo entre amigos o conocidos"
+          },
+          {
+            "letra": "C",
+            "texto": "Aún no, pero me gustaría intentarlo"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero usar tarjeta bancaria tradicional"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_022",
+    "numero": 22,
+    "titulo": "Exchanges y Billeteras Cripto",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Plataformas de intercambio, Binance, Bybit y wallets de autocustodia.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué plataforma de intercambio (Exchange) usas más?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Binance"
+          },
+          {
+            "letra": "B",
+            "texto": "Bybit / OKX"
+          },
+          {
+            "letra": "C",
+            "texto": "Coinbase / Kraken"
+          },
+          {
+            "letra": "D",
+            "texto": "KuCoin / Bitget u otros"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Dónde almacenas tus criptomonedas de mayor valor?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En la cuenta del exchange por comodidad"
+          },
+          {
+            "letra": "B",
+            "texto": "En monederos software móviles (Trust Wallet, Exodus)"
+          },
+          {
+            "letra": "C",
+            "texto": "En hardware wallet fría (Ledger, Trezor)"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo criptomonedas actualmente"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has utilizado el comercio P2P (Persona a Persona) para comprar saldo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es mi método favorito para comprar y vender"
+          },
+          {
+            "letra": "B",
+            "texto": "Ocasionalmente con usuarios verificados"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero comprar directamente con tarjeta bancaria"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he utilizado plataformas P2P"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cuánto tiempo tardas en verificar una transacción en la blockchain?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Reviso el explorador (Tronscan / Etherscan) al instante"
+          },
+          {
+            "letra": "B",
+            "texto": "Espero la notificación de la app del exchange"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo compruebo cuando tarda más de 5 minutos"
+          },
+          {
+            "letra": "D",
+            "texto": "No sé consultar exploradores de bloques"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué comisión consideras aceptable para un retiro de USDT?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de 1 USDT (típico de TRC-20/BEP-20)"
+          },
+          {
+            "letra": "B",
+            "texto": "Hasta 2 o 3 USDT"
+          },
+          {
+            "letra": "C",
+            "texto": "Hasta 10 USDT en caso de red Ethereum"
+          },
+          {
+            "letra": "D",
+            "texto": "Exijo retiros con 0 comisión"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_023",
+    "numero": 23,
+    "titulo": "Bitcoin y Criptomonedas Principales",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Perspectivas sobre BTC, Ethereum y el mercado cripto.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuál es tu criptomoneda de mayor confianza a largo plazo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Bitcoin (BTC) como oro digital"
+          },
+          {
+            "letra": "B",
+            "texto": "Ethereum (ETH) por su ecosistema de contratos"
+          },
+          {
+            "letra": "C",
+            "texto": "Solana (SOL) por su velocidad y bajo coste"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero mantener stablecoins (USDT/USDC)"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu estrategia habitual en el mercado cripto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "HODL (comprar y guardar a largo plazo)"
+          },
+          {
+            "letra": "B",
+            "texto": "Trading a corto y medio plazo"
+          },
+          {
+            "letra": "C",
+            "texto": "Generar rendimiento en juegos y promociones"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo entro al mercado en momentos de euforia"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cómo conociste el ecosistema de las criptomonedas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Por amigos o familiares que ya invertían"
+          },
+          {
+            "letra": "B",
+            "texto": "Por creadores de contenido en YouTube / TikTok"
+          },
+          {
+            "letra": "C",
+            "texto": "Por noticias en medios de comunicación"
+          },
+          {
+            "letra": "D",
+            "texto": "A través de juegos y plataformas de recompensas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Crees que Bitcoin alcanzará nuevos máximos históricos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, con total certeza en los próximos años"
+          },
+          {
+            "letra": "B",
+            "texto": "Probablemente sí, con periodos de corrección"
+          },
+          {
+            "letra": "C",
+            "texto": "Creo que se mantendrá en un rango lateral"
+          },
+          {
+            "letra": "D",
+            "texto": "Tengo dudas sobre su crecimiento futuro"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué aplicación utilizas para seguir los precios de cripto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "CoinMarketCap"
+          },
+          {
+            "letra": "B",
+            "texto": "CoinGecko"
+          },
+          {
+            "letra": "C",
+            "texto": "TradingView con gráficos avanzados"
+          },
+          {
+            "letra": "D",
+            "texto": "Directamente desde mi aplicación de exchange"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_024",
+    "numero": 24,
+    "titulo": "Tarjetas Cripto y Pagos en Comercios",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Tarjetas de débito Visa/Mastercard vinculadas a saldo cripto.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tienes alguna tarjeta que gaste saldo de criptomonedas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tarjeta de Binance / Bybit"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, tarjeta de otro proveedor Fintech"
+          },
+          {
+            "letra": "C",
+            "texto": "He solicitado una pero aún no la tengo"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo tarjeta vinculada a cripto"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué incentivo te atrae más de las tarjetas de débito cripto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cashback directo en cada compra"
+          },
+          {
+            "letra": "B",
+            "texto": "Facilidad de gastar ganancias sin pasar por banco"
+          },
+          {
+            "letra": "C",
+            "texto": "Conversión automática de USDT a moneda local"
+          },
+          {
+            "letra": "D",
+            "texto": "Sin comisiones por compras internacionales"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres pagar con tarjeta física o añadirla a Apple/Google Pay?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre con el móvil (Apple Pay / Google Wallet)"
+          },
+          {
+            "letra": "B",
+            "texto": "Prefiero llevar la tarjeta física en la cartera"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso tarjeta virtual exclusivamente online"
+          },
+          {
+            "letra": "D",
+            "texto": "Indiferente según la situación"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿En qué tipo de comercios gastarías más con tarjeta cripto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Supermercados y compras cotidianas"
+          },
+          {
+            "letra": "B",
+            "texto": "Viajes, vuelos y reservas de hotel"
+          },
+          {
+            "letra": "C",
+            "texto": "Electrónica y compras por Internet"
+          },
+          {
+            "letra": "D",
+            "texto": "Salidas a restaurantes y ocio nocturno"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te preocupa la fiscalidad al convertir criptomonedas a moneda fiat?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, llevo control estricto de todas las operaciones"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo nociones básicas pero busco asesoría"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gustaría que fuera más sencillo y transparente"
+          },
+          {
+            "letra": "D",
+            "texto": "No opero con volúmenes que requieran declaración"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_025",
+    "numero": 25,
+    "titulo": "Bancos Digitales (Neobancos) vs Banca Tradicional",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Revolut, N26, Wise y la transformación bancaria móvil.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tienes cuenta en algún banco 100% digital (neobanco)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, Revolut / Wise / N26"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, fintech local de mi país (Mercado Pago, Nubank, etc.)"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo cuenta en más de dos neobancos"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo utilizo bancos tradicionales con sucursales"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué ventaja aprecias más de los bancos exclusivamente digitales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Apertura de cuenta en 3 minutos sin papeles"
+          },
+          {
+            "letra": "B",
+            "texto": "Notificaciones al milisegundo de cada gasto"
+          },
+          {
+            "letra": "C",
+            "texto": "Cambio de divisas con bajas comisiones"
+          },
+          {
+            "letra": "D",
+            "texto": "Herramientas de ahorro en huchas automáticas"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Pisarías una sucursal bancaria física hoy en día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Evito las sucursales a toda costa, todo por app"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si no queda más remedio para un trámite mayor"
+          },
+          {
+            "letra": "C",
+            "texto": "No me molesta ir si la atención es buena"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero el trato personal en ventanilla"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Confías en tener tus ahorros principales en un neobanco?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Totalmente, cuentan con licencia bancaria oficial"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo mantengo saldo para gastos del mes"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero tener la mayor parte en banco tradicional"
+          },
+          {
+            "letra": "D",
+            "texto": "Divido mis fondos en 3 entidades distintas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Utilizas transferencias inmediatas (Bizum, Pix, transferencias SEPA instant)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A diario para compartir gastos con amigos"
+          },
+          {
+            "letra": "B",
+            "texto": "Varias veces por semana"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo para pagos puntuales"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca utilizo pagos instantáneos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_026",
+    "numero": 26,
+    "titulo": "Finanzas Personales y Hábitos de Ahorro",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Presupuestos mensuales, control de gastos e inversión.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Llevas un registro de tus ingresos y gastos mensuales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, en app especializada o plantilla de Excel"
+          },
+          {
+            "letra": "B",
+            "texto": "Llevo un cálculo mental aproximado"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo reviso el extracto a fin de mes"
+          },
+          {
+            "letra": "D",
+            "texto": "No llevo control de mis gastos"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué porcentaje de tus ingresos consigues ahorrar al mes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más del 30% de mis ingresos"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre el 10% y el 25%"
+          },
+          {
+            "letra": "C",
+            "texto": "Menos del 10%"
+          },
+          {
+            "letra": "D",
+            "texto": "Llego justo a fin de mes sin poder ahorrar"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Dispones de un fondo de emergencia para imprevistos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, equivalente a 3 a 6 meses de gastos"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo un pequeño fondo para urgencias"
+          },
+          {
+            "letra": "C",
+            "texto": "Estoy construyéndolo actualmente"
+          },
+          {
+            "letra": "D",
+            "texto": "No dispongo de fondo de emergencia"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿En qué instrumentos inviertes tus ahorros además de cripto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Fondos indexados / ETFs (S&P 500, MSCI)"
+          },
+          {
+            "letra": "B",
+            "texto": "Acciones individuales de empresas"
+          },
+          {
+            "letra": "C",
+            "texto": "Cuentas remuneradas o depósitos a plazo fijo"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo inversiones fuera del efectivo"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿A qué edad comenzaste a interesarte por la educación financiera?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Antes de los 20 años"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre los 20 y los 25 años"
+          },
+          {
+            "letra": "C",
+            "texto": "Después de los 25 años"
+          },
+          {
+            "letra": "D",
+            "texto": "Apenas estoy empezando a interesarme"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_027",
+    "numero": 27,
+    "titulo": "Juegos de Casino Online y Gestión de Banca (Bankroll)",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Límites de juego responsable, presupuestos y control emocional.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Fijas un presupuesto máximo antes de comenzar a jugar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, y lo respeto estrictamente"
+          },
+          {
+            "letra": "B",
+            "texto": "Generalmente sí, con pequeñas excepciones"
+          },
+          {
+            "letra": "C",
+            "texto": "Juego según las ganancias que vaya obteniendo"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo fijar un límite cerrado"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué porcentaje de tu saldo arriesgas en una sola jugada?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Entre el 1% y el 3% (gestión muy conservadora)"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre el 5% y el 10% de mi saldo"
+          },
+          {
+            "letra": "C",
+            "texto": "Más del 20% si me siento con suerte"
+          },
+          {
+            "letra": "D",
+            "texto": "Varío según la racha de partidas"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué haces cuando alcanzas una ganancia importante?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Retiro una buena parte y juego solo con el resto"
+          },
+          {
+            "letra": "B",
+            "texto": "Retiro la totalidad de mis ganancias de inmediato"
+          },
+          {
+            "letra": "C",
+            "texto": "Sigo jugando para intentar aumentarla más"
+          },
+          {
+            "letra": "D",
+            "texto": "Aumento el valor de mis apuestas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué herramientas de juego responsable consideras más útiles?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Límites diarios de recarga configurables"
+          },
+          {
+            "letra": "B",
+            "texto": "Historial detallado de apuestas y balance"
+          },
+          {
+            "letra": "C",
+            "texto": "Alertas de tiempo de sesión en pantalla"
+          },
+          {
+            "letra": "D",
+            "texto": "Autoexclusión temporal voluntaria"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Juegas para divertirte o como método de generar ingresos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Puramente por diversión y entretenimiento"
+          },
+          {
+            "letra": "B",
+            "texto": "Por diversión, pero con el objetivo de ganar premios"
+          },
+          {
+            "letra": "C",
+            "texto": "Como un pasatiempo emocionante en ratos libres"
+          },
+          {
+            "letra": "D",
+            "texto": "Para aprovechar bonos y promociones semanales"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_028",
+    "numero": 28,
+    "titulo": "Microinversiones y Recompensas Digitales",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Cashback, programas de lealtad y puntos canjeables.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Participas en programas de recompensas o cashback semanal?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, busco siempre plataformas con buen retorno"
+          },
+          {
+            "letra": "B",
+            "texto": "Aprovecho los programas que ya vienen incluidos"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo si no requieren pasos complicados"
+          },
+          {
+            "letra": "D",
+            "texto": "No le presto atención al cashback"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué tipo de premio prefieres recibir en promociones?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Diamantes o saldo real retirable"
+          },
+          {
+            "letra": "B",
+            "texto": "Giros gratis en slots de alta volatilidad"
+          },
+          {
+            "letra": "C",
+            "texto": "Puntos de experiencia para subir rango VIP"
+          },
+          {
+            "letra": "D",
+            "texto": "Cofres sorpresa con premios aleatorios"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Completas encuestas o tareas remuneradas con frecuencia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me parece una excelente forma de sumar saldo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando las encuestas son cortas y bien pagadas"
+          },
+          {
+            "letra": "C",
+            "texto": "Ocasionalmente si tengo tiempo libre"
+          },
+          {
+            "letra": "D",
+            "texto": "Esta es una de mis primeras veces"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué opinas de recibir recompensas en Diamantes canjeables por USDT?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Excelente, da flexibilidad de jugar o retirar"
+          },
+          {
+            "letra": "B",
+            "texto": "Muy bueno, la tasa 1:10 es fácil de calcular"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero saldo directo en USDT en mi billetera"
+          },
+          {
+            "letra": "D",
+            "texto": "Me resulta indiferente el formato"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Recomendarías una plataforma a tus amigos por un bono de referido?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, si el servicio es de calidad y ambos ganamos"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo a amigos muy cercanos que ya juegan"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero no compartir enlaces de referido"
+          },
+          {
+            "letra": "D",
+            "texto": "Depende del monto del bono de recompensa"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_029",
+    "numero": 29,
+    "titulo": "Comercio Electrónico y Métodos de Pago Digital",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Pasarelas de pago, compras en línea y confianza.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia compras productos por Internet?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Varias veces por semana (Amazon, AliExpress, etc.)"
+          },
+          {
+            "letra": "B",
+            "texto": "Una o dos veces al mes"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo en fechas especiales (Black Friday, rebajas)"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca compro productos en línea"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué método de pago te genera mayor tranquilidad online?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "PayPal con protección al comprador"
+          },
+          {
+            "letra": "B",
+            "texto": "Tarjeta virtual desechable de un solo uso"
+          },
+          {
+            "letra": "C",
+            "texto": "Billetera digital (Apple Pay / Google Pay)"
+          },
+          {
+            "letra": "D",
+            "texto": "Transferencia bancaria directa"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has abandonado un carrito de compras por falta de métodos de pago?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, si no veo mi método preferido me voy"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si la web me pide datos sospechosos"
+          },
+          {
+            "letra": "C",
+            "texto": "Intento adaptarme a los métodos disponibles"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca abandono por esa razón"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Compras más desde el teléfono móvil o desde el ordenador?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más del 80% desde la app móvil"
+          },
+          {
+            "letra": "B",
+            "texto": "Desde el ordenador para comparar mejor"
+          },
+          {
+            "letra": "C",
+            "texto": "Miro en el móvil y compro desde el PC"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso ambos de forma indistinta"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué factor te convence más para comprar en una tienda online nueva?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Opiniones y reseñas positivas de otros usuarios"
+          },
+          {
+            "letra": "B",
+            "texto": "Diseño profesional y pasarela de pago segura"
+          },
+          {
+            "letra": "C",
+            "texto": "Sellos de garantía y política de devoluciones claras"
+          },
+          {
+            "letra": "D",
+            "texto": "Precios considerablemente más bajos que la competencia"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_030",
+    "numero": 30,
+    "titulo": "Préstamos, Crédito y Servicios Buy Now Pay Later (BNPL)",
+    "categoria": "Criptomonedas & Finanzas Digitales",
+    "categoria_icono": "💎",
+    "descripcion": "Klarna, tarjetas de crédito y aplazamiento de pagos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has utilizado servicios de pago a plazos sin intereses (BNPL)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, uso Klarna / Afterpay con frecuencia"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo para compras grandes puntuales"
+          },
+          {
+            "letra": "C",
+            "texto": "Lo conozco pero prefiero pagar de una vez"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he utilizado servicios de pago aplazado"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Utilizas tarjeta de crédito o prefieres siempre tarjeta de débito?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre tarjeta de débito con dinero propio"
+          },
+          {
+            "letra": "B",
+            "texto": "Tarjeta de crédito pagando a fin de mes (sin intereses)"
+          },
+          {
+            "letra": "C",
+            "texto": "Tarjeta de crédito a plazos financiados"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo uso efectivo o monederos digitales"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuál es tu política frente a las deudas de consumo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cero deudas, no compro nada que no pueda pagar ya"
+          },
+          {
+            "letra": "B",
+            "texto": "Deuda razonable solo para bienes duraderos"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso crédito para aprovechar promociones y liquidez"
+          },
+          {
+            "letra": "D",
+            "texto": "He tenido que financiar compras imprevistas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Revisas tu historial crediticio con regularidad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, consulto mi reporte de crédito al menos una vez al año"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando voy a solicitar un préstamo o hipoteca"
+          },
+          {
+            "letra": "C",
+            "texto": "Sé que existe pero nunca lo he solicitado"
+          },
+          {
+            "letra": "D",
+            "texto": "En mi país no es habitual revisarlo personalmente"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué opinas de las comisiones por descubierto o mora bancaria?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Abusivas, cambio de banco si me cobran una"
+          },
+          {
+            "letra": "B",
+            "texto": "Entiendo que cobren pero los montos son excesivos"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo alertas activadas para evitar caer en descubiertos"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca me han cobrado comisiones de ese tipo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_031",
+    "numero": 31,
+    "titulo": "Plataformas de Películas y Series en Streaming",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Netflix, Prime Video, HBO Max, Disney+ y catálogos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿A cuántas plataformas de vídeo estás suscrito actualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A 1 sola plataforma principal"
+          },
+          {
+            "letra": "B",
+            "texto": "A 2 o 3 plataformas combinadas"
+          },
+          {
+            "letra": "C",
+            "texto": "A más de 3 plataformas (o cuentas familiares)"
+          },
+          {
+            "letra": "D",
+            "texto": "No pago ninguna, uso cuentas compartidas o gratuitas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu plataforma de series favorita?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Netflix por variedad de catálogo y novedades"
+          },
+          {
+            "letra": "B",
+            "texto": "Max (HBO) por calidad de producciones"
+          },
+          {
+            "letra": "C",
+            "texto": "Prime Video por precio y envíos incluidos"
+          },
+          {
+            "letra": "D",
+            "texto": "Disney+ por franquicias (Marvel, Star Wars)"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué opinas de los planes con anuncios publicitarios?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "No los tolero, pago extra para no ver anuncios"
+          },
+          {
+            "letra": "B",
+            "texto": "Me parece bien si la suscripción es más económica"
+          },
+          {
+            "letra": "C",
+            "texto": "Tolerables si son anuncios muy cortos"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero plataformas 100% gratuitas con anuncios"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Con qué frecuencia ves películas o series?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Todos los días por la noche"
+          },
+          {
+            "letra": "B",
+            "texto": "Los fines de semana principalmente"
+          },
+          {
+            "letra": "C",
+            "texto": "Un par de veces por semana"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca tengo tiempo para ver series"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sueles ver temporadas completas en maratón (binge-watching)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me termino una temporada en un fin de semana"
+          },
+          {
+            "letra": "B",
+            "texto": "Prefiero ver 1 o 2 capítulos al día con calma"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero cuando estrenan un capítulo por semana"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca termino series largas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_032",
+    "numero": 32,
+    "titulo": "Música en Streaming y Podcasts",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Spotify, Apple Music, YouTube Music y programas de audio.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué plataforma utilizas para escuchar música habitualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Spotify"
+          },
+          {
+            "letra": "B",
+            "texto": "YouTube Music"
+          },
+          {
+            "letra": "C",
+            "texto": "Apple Music"
+          },
+          {
+            "letra": "D",
+            "texto": "Amazon Music u otra"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Pagas suscripción Premium o usas la versión gratuita con anuncios?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Suscripción individual Premium"
+          },
+          {
+            "letra": "B",
+            "texto": "Plan familiar compartido con amigos o familia"
+          },
+          {
+            "letra": "C",
+            "texto": "Plan de estudiante bonificado"
+          },
+          {
+            "letra": "D",
+            "texto": "Versión gratuita con anuncios"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Escuchas podcasts o programas de radio digital?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, a diario mientras viajo o hago tareas"
+          },
+          {
+            "letra": "B",
+            "texto": "Varias veces por semana mis 2 o 3 favoritos"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo entrevistas o episodios puntuales"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo escuchar podcasts"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué género musical escuchas con mayor frecuencia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Música Urbana / Reggaetón / Trap"
+          },
+          {
+            "letra": "B",
+            "texto": "Pop / Pop Electrónico internacional"
+          },
+          {
+            "letra": "C",
+            "texto": "Rock / Indie / Metal"
+          },
+          {
+            "letra": "D",
+            "texto": "Electrónica / Techno / House"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Esperas con emoción el resumen anual (Spotify Wrapped)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me encanta compartirlo en mis redes"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gusta verlo por curiosidad personal"
+          },
+          {
+            "letra": "C",
+            "texto": "Lo miro pero no suelo publicarlo"
+          },
+          {
+            "letra": "D",
+            "texto": "Me da completamente igual"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_033",
+    "numero": 33,
+    "titulo": "Experiencia en Cines vs Cine en Casa",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Salas IMAX, palomitas, estrenos y proyectores caseros.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia asistes a salas de cine comerciales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Al menos una vez al mes para grandes estrenos"
+          },
+          {
+            "letra": "B",
+            "texto": "Cada 2 o 3 meses solo para películas esperadas"
+          },
+          {
+            "letra": "C",
+            "texto": "Una o dos veces al año"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca voy al cine, espero al streaming"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué formato de sala prefieres si está disponible?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "IMAX o pantalla gigante con sonido envolvente"
+          },
+          {
+            "letra": "B",
+            "texto": "Salas VIP con butacas reclinables y servicio"
+          },
+          {
+            "letra": "C",
+            "texto": "Sala tradicional 2D estándar"
+          },
+          {
+            "letra": "D",
+            "texto": "Salas con efectos 4DX de movimiento y aire"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Compras palomitas y refrescos en el cine?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, palomitas grandes y refresco son sagrados"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo palomitas si voy acompañado"
+          },
+          {
+            "letra": "C",
+            "texto": "A veces llevo mis propios snacks discretamente"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca consumo comida durante la película"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Prefieres ver películas en versión original subtitulada o doblada?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Doblada a mi idioma materno"
+          },
+          {
+            "letra": "B",
+            "texto": "Versión original en inglés con subtítulos"
+          },
+          {
+            "letra": "C",
+            "texto": "Depende del género y los actores"
+          },
+          {
+            "letra": "D",
+            "texto": "Versión original sin subtítulos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué género cinematográfico disfrutas más en pantalla grande?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ciencia ficción y efectos especiales espectaculares"
+          },
+          {
+            "letra": "B",
+            "texto": "Acción y superhéroes"
+          },
+          {
+            "letra": "C",
+            "texto": "Terror y suspenso con audio inmersivo"
+          },
+          {
+            "letra": "D",
+            "texto": "Comedias y animación familiar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_034",
+    "numero": 34,
+    "titulo": "Vídeo en Formato Corto: TikTok, Reels y Shorts",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Consumo rápido de entretenimiento en vídeo vertical.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué plataforma de vídeo corto utilizas con más frecuencia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "TikTok"
+          },
+          {
+            "letra": "B",
+            "texto": "Instagram Reels"
+          },
+          {
+            "letra": "C",
+            "texto": "YouTube Shorts"
+          },
+          {
+            "letra": "D",
+            "texto": "No consumo vídeos en formato vertical"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuánto tiempo al día estimas que pasas viendo vídeos cortos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más de 2 horas al día"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 1 y 2 horas al día"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 20 y 45 minutos al día"
+          },
+          {
+            "letra": "D",
+            "texto": "Menos de 15 minutos de forma muy esporádica"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué temática de vídeos cortos te aparece más en el feed?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Humor, memes y situaciones cómicas"
+          },
+          {
+            "letra": "B",
+            "texto": "Videojuegos, jugadas épicas y trucos"
+          },
+          {
+            "letra": "C",
+            "texto": "Cocina, recetas fáciles y restaurantes"
+          },
+          {
+            "letra": "D",
+            "texto": "Tecnología, noticias y divulgación"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Creas y publicas tus propios vídeos o solo eres espectador?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Solo consumo contenido como espectador pasivo"
+          },
+          {
+            "letra": "B",
+            "texto": "He subido algún vídeo muy puntual para amigos"
+          },
+          {
+            "letra": "C",
+            "texto": "Publico con regularidad contenido propio"
+          },
+          {
+            "letra": "D",
+            "texto": "Tengo una cuenta con seguidores activa"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sientes que el formato corto afecta tu capacidad de concentración?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, a veces me cuesta ver películas largas sin mirar el móvil"
+          },
+          {
+            "letra": "B",
+            "texto": "Un poco, pero intento limitar el tiempo de uso"
+          },
+          {
+            "letra": "C",
+            "texto": "No he notado cambios en mi atención"
+          },
+          {
+            "letra": "D",
+            "texto": "No consumo suficiente para que me afecte"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_035",
+    "numero": 35,
+    "titulo": "Transmisiones en Vivo y Creadores de Contenido",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Ibai, Auron, Speed, eventos como La Velada del Año.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sigues transmisiones en vivo de creadores de contenido?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, sigo streamers a diario mientras ceno o trabajo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo eventos multitudinarios especiales (La Velada, etc.)"
+          },
+          {
+            "letra": "C",
+            "texto": "Miro clips destacados en redes en vez de directos"
+          },
+          {
+            "letra": "D",
+            "texto": "No sigo a ningún streamer ni canal en vivo"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué tipo de transmisiones disfrutas más?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Just Chatting, charlas y reacciones a temas"
+          },
+          {
+            "letra": "B",
+            "texto": "Gameplays de títulos competitivos o novedades"
+          },
+          {
+            "letra": "C",
+            "texto": "Eventos especiales y programas producidos"
+          },
+          {
+            "letra": "D",
+            "texto": "Retos en la calle y transmisiones IRL"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Alguna vez te has suscrito de pago o donado a un streamer?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, uso mi suscripción gratuita de Amazon Prime"
+          },
+          {
+            "letra": "B",
+            "texto": "He pagado suscripciones con dinero real"
+          },
+          {
+            "letra": "C",
+            "texto": "He donado bits o propinas en directos"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he pagado ni donado en transmisiones"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Participas activamente en el chat durante los directos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, comento y uso emoticonos con frecuencia"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en canales pequeños donde leen los mensajes"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo el chat oculto para ver la pantalla completa"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca escribo en los chats"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué duración de directo consideras ideal?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Directos de 2 a 3 horas muy dinámicos"
+          },
+          {
+            "letra": "B",
+            "texto": "Maratones de más de 5 horas de fondo"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero resúmenes editados de 15 minutos en YouTube"
+          },
+          {
+            "letra": "D",
+            "texto": "Cualquier duración me sirve si el tema entretiene"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_036",
+    "numero": 36,
+    "titulo": "Festivales de Música y Conciertos en Vivo",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Música en directo, festivales de verano y entradas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia asistes a conciertos o festivales de música?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A varios festivales cada año"
+          },
+          {
+            "letra": "B",
+            "texto": "Al menos a 1 o 2 conciertos importantes al año"
+          },
+          {
+            "letra": "C",
+            "texto": "Cada varios años para artistas muy especiales"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca voy a eventos musicales en vivo"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Prefieres festivales multitudinarios o conciertos íntimos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Festivales con muchos escenarios y artistas variados"
+          },
+          {
+            "letra": "B",
+            "texto": "Conciertos individuales de mi artista favorito"
+          },
+          {
+            "letra": "C",
+            "texto": "Salas pequeñas con buena acústica y cercanía"
+          },
+          {
+            "letra": "D",
+            "texto": "Cualquiera mientras el ambiente sea divertido"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuánto es lo máximo que has pagado por una entrada de concierto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de $40 USD"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre $40 y $100 USD"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre $100 y $250 USD"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de $250 USD para un tour histórico"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Grabas con el teléfono durante el concierto o prefieres disfrutar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Grabo un par de canciones clave de recuerdo y guardo el móvil"
+          },
+          {
+            "letra": "B",
+            "texto": "Grabo bastante para compartirlo en Stories"
+          },
+          {
+            "letra": "C",
+            "texto": "Disfruto sin sacar el teléfono casi en todo el show"
+          },
+          {
+            "letra": "D",
+            "texto": "Me molesta la gente que graba con el brazo levantado"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué género musical disfrutas más en directo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Música electrónica / DJ sets con visuales y luces"
+          },
+          {
+            "letra": "B",
+            "texto": "Rock / Indie con banda en vivo e instrumentos"
+          },
+          {
+            "letra": "C",
+            "texto": "Música urbana y trap con energía de masas"
+          },
+          {
+            "letra": "D",
+            "texto": "Pop comercial con gran coreografía y show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_037",
+    "numero": 37,
+    "titulo": "Coleccionismo Musical: Vinilos, CDs y Merchandising",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "El renacer del vinilo físico y camisetas de bandas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tienes reproductor de vinilos (tocadiscos) en casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, colecciono vinilos y los escucho con frecuencia"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo tocadiscos pero más como objeto decorativo"
+          },
+          {
+            "letra": "C",
+            "texto": "No tengo pero me gustaría iniciar una colección"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo interés en formatos físicos analógicos"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Comprarías el vinilo de un álbum que ya puedes escuchar gratis en Spotify?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, por el valor artístico de la portada y el objeto"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo de mis 2 o 3 álbumes favoritos de la vida"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo si es una edición especial limitada de coleccionista"
+          },
+          {
+            "letra": "D",
+            "texto": "No gastaría dinero en un formato que ya tengo en digital"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Tienes camisetas o merchandising de artistas o grupos musicales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, varias camisetas compradas en conciertos oficiales"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo alguna prenda casual"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo posters, tazas u otros accesorios"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo merchandising musical"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Crees que el formato vinilo suena mejor que el audio digital en alta resolución?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tiene una calidez analógica inigualable"
+          },
+          {
+            "letra": "B",
+            "texto": "Suena diferente, pero el digital es más limpio y nítido"
+          },
+          {
+            "letra": "C",
+            "texto": "Es más un ritual nostálgico que una ventaja sonora real"
+          },
+          {
+            "letra": "D",
+            "texto": "No noto la diferencia acústica"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué formato físico guardas con más nostalgia de tu infancia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Casetes de cinta magnética"
+          },
+          {
+            "letra": "B",
+            "texto": "Discos compactos (CDs) con sus libretos"
+          },
+          {
+            "letra": "C",
+            "texto": "Vinilos familiares antiguos"
+          },
+          {
+            "letra": "D",
+            "texto": "Crecí directamente en la era del MP3 y descargas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_038",
+    "numero": 38,
+    "titulo": "Anime y Animación Japonesa",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Shonen, Crunchyroll, manga y películas de anime.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia ves series o películas de anime?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sigo temporadas activas cada semana a ritmo japonés"
+          },
+          {
+            "letra": "B",
+            "texto": "Veo series populares completas de vez en cuando"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo he visto clásicos históricos (Dragon Ball, Naruto, etc.)"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo ver animación japonesa"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué plataforma utilizas para ver anime?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Crunchyroll"
+          },
+          {
+            "letra": "B",
+            "texto": "Netflix / Prime Video con catálogo de anime"
+          },
+          {
+            "letra": "C",
+            "texto": "Sitios especializados en internet"
+          },
+          {
+            "letra": "D",
+            "texto": "No consumo anime"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres el audio original en japonés con subtítulos o doblado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Original en japonés con subtítulos en español (Vostfr)"
+          },
+          {
+            "letra": "B",
+            "texto": "Doblado al español latino o castellano"
+          },
+          {
+            "letra": "C",
+            "texto": "Me da igual mientras la actuación de voz sea buena"
+          },
+          {
+            "letra": "D",
+            "texto": "No veo anime"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Lees manga japonés o cómics además de ver anime?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, leo capítulos semanales de manga / manhwa"
+          },
+          {
+            "letra": "B",
+            "texto": "Ocasionalmente si la serie me deja intrigado"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo he comprado tomos físicos coleccionables"
+          },
+          {
+            "letra": "D",
+            "texto": "No leo manga"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuál es tu género de anime favorito?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Shonen de acción y peleas (Jujutsu Kaisen, One Piece)"
+          },
+          {
+            "letra": "B",
+            "texto": "Seinen / Thriller psicológico (Death Note, Attack on Titan)"
+          },
+          {
+            "letra": "C",
+            "texto": "Isekai y fantasía de mundos paralelos"
+          },
+          {
+            "letra": "D",
+            "texto": "Slice of Life, comedia y romance escolar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_039",
+    "numero": 39,
+    "titulo": "Teatro, Musicales y Espectáculos en Vivo",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Comedias, musicales de Broadway y monólogos de humor.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has asistido a obras de teatro o musicales en los últimos dos años?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, voy varias veces al año al teatro"
+          },
+          {
+            "letra": "B",
+            "texto": "He ido a 1 o 2 espectáculos importantes"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo a monólogos de humoristas (Stand-up)"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo ir a funciones de teatro"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué formato de espectáculo escénico prefieres?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Musicales de gran producción (El Rey León, etc.)"
+          },
+          {
+            "letra": "B",
+            "texto": "Monólogos de comedia y stand-up para reír"
+          },
+          {
+            "letra": "C",
+            "texto": "Obras dramáticas o comedias teatrales de texto"
+          },
+          {
+            "letra": "D",
+            "texto": "Espectáculos de magia, circo o acrobacias"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué valoras más en una función en vivo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "El talento vocal y las actuaciones en directo"
+          },
+          {
+            "letra": "B",
+            "texto": "La escenografía, vestuario e iluminación"
+          },
+          {
+            "letra": "C",
+            "texto": "Un guion divertido y con ritmo"
+          },
+          {
+            "letra": "D",
+            "texto": "La conexión y cercanía con el público"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Comprarías entradas con meses de anticipación para un gran musical?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, para asegurar los mejores asientos centrales"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo con un par de semanas de margen"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero decidir a última hora según planes"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo si encuentro ofertas o descuentos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te gustan las salas históricas y teatros clásicos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me fascinan por su arquitectura y ambiente"
+          },
+          {
+            "letra": "B",
+            "texto": "Prefiero recintos modernos con butacas amplias"
+          },
+          {
+            "letra": "C",
+            "texto": "Me da igual el recinto mientras se vea bien"
+          },
+          {
+            "letra": "D",
+            "texto": "No le presto atención a la arquitectura de la sala"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_040",
+    "numero": 40,
+    "titulo": "Cultura de Memes e Internet",
+    "categoria": "Streaming, Cine & Música",
+    "categoria_icono": "🎬",
+    "descripcion": "Humor digital, viralidad y tendencias en redes.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Compartes memes con amigos o familiares en tu día a día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, envío memes a diario por WhatsApp o Instagram"
+          },
+          {
+            "letra": "B",
+            "texto": "Varias veces por semana en grupos de amigos"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo cuando veo algo realmente gracioso"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca comparto contenido de humor"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu formato de meme favorito?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Imágenes estáticas con texto ingenioso"
+          },
+          {
+            "letra": "B",
+            "texto": "Vídeos cortos con audios virales o remezclados"
+          },
+          {
+            "letra": "C",
+            "texto": "Stickers personalizados en chats de mensajería"
+          },
+          {
+            "letra": "D",
+            "texto": "GIFs animados de reacciones"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuánto tiempo crees que dura una tendencia o meme hoy en día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Apenas 1 o 2 semanas antes de cansar"
+          },
+          {
+            "letra": "B",
+            "texto": "Unos pocos días debido a la velocidad de TikTok"
+          },
+          {
+            "letra": "C",
+            "texto": "Algunos memes se convierten en clásicos duraderos"
+          },
+          {
+            "letra": "D",
+            "texto": "No me fijo en la vigencia de los memes"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Utilizas stickers personalizados con tus propias fotos o las de amigos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tenemos packs de stickers internos en nuestro grupo"
+          },
+          {
+            "letra": "B",
+            "texto": "Uso stickers descargados de internet"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo los emojis y reacciones estándar"
+          },
+          {
+            "letra": "D",
+            "texto": "No utilizo stickers en mis conversaciones"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Entiendes el humor absurdo / gen-z de internet?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me parece el humor más divertido actualmente"
+          },
+          {
+            "letra": "B",
+            "texto": "La mayoría de veces, aunque algunas cosas me desconciertan"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero el humor tradicional con chistes estructurados"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca le encuentro sentido a los memes modernos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_041",
+    "numero": 41,
+    "titulo": "Marcas de Ropa y Moda Urbana",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Sneakers, streetwear, marcas deportivas y compras online.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué marca de zapatillas deportivas (sneakers) prefieres?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Nike / Jordan"
+          },
+          {
+            "letra": "B",
+            "texto": "Adidas / Yeezy"
+          },
+          {
+            "letra": "C",
+            "texto": "New Balance / Asics"
+          },
+          {
+            "letra": "D",
+            "texto": "Puma / Vans / Converse"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Con qué frecuencia compras prendas de vestir o calzado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Al menos una vez al mes"
+          },
+          {
+            "letra": "B",
+            "texto": "Cada temporada o cambio de estación"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo cuando necesito reemplazar prendas viejas"
+          },
+          {
+            "letra": "D",
+            "texto": "En rebajas y periodos de descuentos"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Compras ropa por internet o prefieres probarte en tienda física?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Compro casi todo online por variedad y comodidad"
+          },
+          {
+            "letra": "B",
+            "texto": "Miro online pero me pruebo en tienda antes de comprar"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero tiendas físicas para comprobar tallas y tela"
+          },
+          {
+            "letra": "D",
+            "texto": "Indiferente según la prenda"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Te interesan las zapatillas de edición limitada o coleccionismo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, participo en sorteos (SNKRS) y lanzamientos"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gustan los modelos bonitos sin obsesión por reventa"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo busco comodidad para el día a día"
+          },
+          {
+            "letra": "D",
+            "texto": "No entiendo el fenómeno del coleccionismo de zapatillas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuál es tu prioridad al elegir una prenda de ropa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Comodidad y tejido agradable"
+          },
+          {
+            "letra": "B",
+            "texto": "Estilo, diseño y que favorezca mi figura"
+          },
+          {
+            "letra": "C",
+            "texto": "Precio accesible y durabilidad"
+          },
+          {
+            "letra": "D",
+            "texto": "Reconocimiento de marca o tendencia actual"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_042",
+    "numero": 42,
+    "titulo": "Supermercados y Alimentación Cotidiana",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Cestas de la compra, marcas blancas y productos frescos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sueles comprar productos de marca blanca (marca del distribuidor)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Casi siempre, tienen excelente calidad/precio"
+          },
+          {
+            "letra": "B",
+            "texto": "Para productos básicos sí, para marcas líderes en otros"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero marcas tradicionales conocidas"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo fijarme en las marcas de supermercado"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Haces la compra del supermercado en tienda física o por internet?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre en tienda física para elegir productos frescos"
+          },
+          {
+            "letra": "B",
+            "texto": "Pido online para entregas pesadas y frescos en tienda"
+          },
+          {
+            "letra": "C",
+            "texto": "Hago toda la compra mensual por app con entrega a domicilio"
+          },
+          {
+            "letra": "D",
+            "texto": "Compro día a día en tiendas de barrio"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Llevas una lista cerrada de la compra antes de salir de casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, en el móvil o papel y la sigo rigurosamente"
+          },
+          {
+            "letra": "B",
+            "texto": "Llevo lista mental y suelo comprar algún capricho"
+          },
+          {
+            "letra": "C",
+            "texto": "No llevo lista, recorro los pasillos y decido"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo compro lo que me falta en el momento"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Aprovechas las tarjetas de fidelización de los supermercados?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, acumulo puntos, cupones y descuentos siempre"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo la tarjeta del supermercado que más frecuento"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo tarjetas pero casi nunca uso los cupones"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gusta dar mis datos en programas de puntos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Revisas la fecha de caducidad antes de meter el producto al carro?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, buscando las fechas más lejanas posibles"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en lácteos, carnes y productos perecederos"
+          },
+          {
+            "letra": "C",
+            "texto": "Casi nunca la reviso en el supermercado"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo cuando llego a casa antes de cocinar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_043",
+    "numero": 43,
+    "titulo": "Servicios de Entrega a Domicilio (Delivery)",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Uber Eats, Glovo, pedidos de comida y rapidez.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia pides comida a domicilio por apps?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Varias veces por semana (2 o más)"
+          },
+          {
+            "letra": "B",
+            "texto": "Una vez por semana (típicamente fin de semana)"
+          },
+          {
+            "letra": "C",
+            "texto": "Una o dos veces al mes en ocasiones especiales"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca pido comida a domicilio"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué tipo de comida pides más a domicilio?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Hamburguesas gourmet y patatas fritas"
+          },
+          {
+            "letra": "B",
+            "texto": "Pizza artesanal o de cadena"
+          },
+          {
+            "letra": "C",
+            "texto": "Comida asiática (Sushi, Ramen, Wok)"
+          },
+          {
+            "letra": "D",
+            "texto": "Pollo frito o comida mexicana (Tacos, burritos)"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué valoras más al pedir por una aplicación de delivery?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Puntualidad y comida entregada caliente"
+          },
+          {
+            "letra": "B",
+            "texto": "Promociones 2x1 y gastos de envío gratis"
+          },
+          {
+            "letra": "C",
+            "texto": "Variedad de restaurantes locales en la zona"
+          },
+          {
+            "letra": "D",
+            "texto": "Seguimiento en tiempo real del repartidor en el mapa"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Pagas alguna suscripción de envíos gratis (Glovo Prime, Uber One)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, la amortizo con creces cada mes"
+          },
+          {
+            "letra": "B",
+            "texto": "La he probado en periodo gratuito"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero no pagar cuotas mensuales fijas"
+          },
+          {
+            "letra": "D",
+            "texto": "No pido con suficiente frecuencia"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sueles dejar propina al repartidor a través de la aplicación?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, casi siempre dejo propina digital o en efectivo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando el clima es malo (lluvia, frío) o son muy rápidos"
+          },
+          {
+            "letra": "C",
+            "texto": "Rara vez dejo propina"
+          },
+          {
+            "letra": "D",
+            "texto": "No acostumbro a dejar propina en delivery"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_044",
+    "numero": 44,
+    "titulo": "Café y Hábitos de Consumo de Bebidas",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Cafeterías de especialidad, cápsulas Nespresso y café frío.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tomas café habitualmente a lo largo del día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, de 2 a 3 tazas al día indispensables"
+          },
+          {
+            "letra": "B",
+            "texto": "Una taza obligatoria por la mañana para despertar"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo ocasionalmente en cafeterías con amigos"
+          },
+          {
+            "letra": "D",
+            "texto": "No tomo café, prefiero té u otras bebidas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cómo preparas el café en tu hogar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cafetera de cápsulas rápida (Nespresso, Dolce Gusto)"
+          },
+          {
+            "letra": "B",
+            "texto": "Cafetera italiana / moka clásica sobre fuego"
+          },
+          {
+            "letra": "C",
+            "texto": "Cafetera superautomática de grano recién molido"
+          },
+          {
+            "letra": "D",
+            "texto": "Café soluble instantáneo o prensa francesa"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Te gusta el café de especialidad (Specialty Coffee)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me encanta, aprecio los orígenes y notas de sabor"
+          },
+          {
+            "letra": "B",
+            "texto": "Lo he probado y me parece rico pero caro"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero el café tradicional de cafetería de barrio"
+          },
+          {
+            "letra": "D",
+            "texto": "No noto la diferencia entre tipos de grano"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cómo tomas habitualmente el café?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Solo / Espresso corto sin azúcar"
+          },
+          {
+            "letra": "B",
+            "texto": "Cortado o café con leche tradicional"
+          },
+          {
+            "letra": "C",
+            "texto": "Capuchino o café latte con espuma"
+          },
+          {
+            "letra": "D",
+            "texto": "Café helado (Iced Coffee) con jarabes o sabores"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuánto consideras un precio justo por un buen café en cafetería?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Entre $1.00 y $1.80 USD"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre $2.00 y $3.50 USD"
+          },
+          {
+            "letra": "C",
+            "texto": "Hasta $5.00 USD si es un café de especialidad grande"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de $2.50 USD me parece excesivo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_045",
+    "numero": 45,
+    "titulo": "Sostenibilidad y Hábitos Ecológicos",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Reciclaje, envases reutilizables y segunda mano.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Separas los residuos y basuras en casa para reciclar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, rigurosamente plástico, papel, vidrio y orgánico"
+          },
+          {
+            "letra": "B",
+            "texto": "Separo papel y plástico principalmente"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo cuando tengo contenedores cerca de casa"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo separar la basura en casa"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Compras o vendes artículos de segunda mano (Vinted, Wallapop)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, compro y vendo ropa o tecnología activamente"
+          },
+          {
+            "letra": "B",
+            "texto": "He vendido cosas que no uso para sacar dinero extra"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo he comprado en alguna ocasión puntual"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo utilizar plataformas de segunda mano"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Llevas tus propias bolsas reutilizables al supermercado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre llevo bolsas de tela en el coche o mochila"
+          },
+          {
+            "letra": "B",
+            "texto": "Casi siempre, aunque a veces se me olvidan"
+          },
+          {
+            "letra": "C",
+            "texto": "Compro bolsas de plástico en la caja cuando voy"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo acordarme de llevarlas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Pagarías más por un producto si su envase es 100% biodegradable?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, apoyo a las marcas con compromiso ecológico real"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si la diferencia de precio es mínima"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero el producto más económico independientemente del envase"
+          },
+          {
+            "letra": "D",
+            "texto": "Desconfío de las etiquetas ecológicas (greenwashing)"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Utilizas botellas de agua o termos reutilizables de acero?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, llevo mi botella térmica a todas partes"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo una en casa o en el trabajo"
+          },
+          {
+            "letra": "C",
+            "texto": "Suelo comprar botellas de agua desechables"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso vasos normales"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_046",
+    "numero": 46,
+    "titulo": "Cuidado Personal, Perfumería y Belleza",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Rutinas faciales, perfumes de autor y aseo personal.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tienes una rutina de cuidado facial (skincare) diaria?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, limpiador, sérum, hidratante y protector solar a diario"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo crema hidratante y lavado básico"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo me pongo protector solar en verano o playa"
+          },
+          {
+            "letra": "D",
+            "texto": "No sigo ninguna rutina de cuidado facial"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Utilizas perfume o colonia con regularidad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre antes de salir de casa, es mi seña de identidad"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo para ocasiones especiales o citas"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso desodorante corporal principalmente"
+          },
+          {
+            "letra": "D",
+            "texto": "Rara vez me aplico perfume"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Dónde compras habitualmente tus productos de higiene y cosmética?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Perfumerías especializadas (Sephora, Primor, etc.)"
+          },
+          {
+            "letra": "B",
+            "texto": "Directamente en el pasillo de cosmética del supermercado"
+          },
+          {
+            "letra": "C",
+            "texto": "Por internet en tiendas oficiales o farmacias online"
+          },
+          {
+            "letra": "D",
+            "texto": "En salones de peluquería o barberías"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cuántos frascos de perfume sueles tener abiertos a la vez?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tengo 1 solo perfume que es mi fragancia fija"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 2 y 4 para alternar según el clima o noche/día"
+          },
+          {
+            "letra": "C",
+            "texto": "Colecciono más de 5 fragancias distintas"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo comprar frascos de perfume"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Con qué frecuencia vas a la peluquería o barbería?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cada 2 o 3 semanas para mantener el corte perfecto"
+          },
+          {
+            "letra": "B",
+            "texto": "Una vez al mes religiosamente"
+          },
+          {
+            "letra": "C",
+            "texto": "Cada 2 a 3 meses cuando el pelo ya está largo"
+          },
+          {
+            "letra": "D",
+            "texto": "Me corto el pelo yo mismo en casa"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_047",
+    "numero": 47,
+    "titulo": "Mascotas y Cuidado Animal",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Perros, gatos, alimentación premium y accesorios.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tienes alguna mascota en tu hogar actualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, uno o más perros"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, uno o más gatos"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo tanto perros como gatos u otros animales"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo mascotas actualmente"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué tipo de alimentación le das a tu mascota?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Pienso / croquetas de gama premium veterinaria"
+          },
+          {
+            "letra": "B",
+            "texto": "Alimento seco estándar comercial"
+          },
+          {
+            "letra": "C",
+            "texto": "Comida húmeda combinada con pienso"
+          },
+          {
+            "letra": "D",
+            "texto": "Dieta natural (BARF) cocinada en casa"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuánto gastas aproximadamente al mes en tu mascota?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de $30 USD"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre $30 y $80 USD"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre $80 y $150 USD incluyendo veterinario y juguetes"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo mascota"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Le compras juguetes o accesorios con frecuencia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me encanta mimarle con juguetes y snacks nuevos"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando rompe los anteriores"
+          },
+          {
+            "letra": "C",
+            "texto": "Muy ocasionalmente en su cumpleaños o fechas clave"
+          },
+          {
+            "letra": "D",
+            "texto": "No compro accesorios con frecuencia"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Llevarías a tu mascota contigo de vacaciones?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre que puedo busco hoteles y lugares pet-friendly"
+          },
+          {
+            "letra": "B",
+            "texto": "Prefiero dejarla con familiares de confianza"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso residencias caninas / cuidadores profesionales"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo mascota"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_048",
+    "numero": 48,
+    "titulo": "Hogar, Bricolaje y Decoración",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "IKEA, muebles modulares, plantas y organización.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Compras muebles o artículos de decoración en IKEA?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, gran parte de mi hogar tiene muebles de IKEA"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo accesorios, velas y artículos de organización"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero tiendas de muebles clásicas o a medida"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca visito esas tiendas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Te consideras manitas para montar muebles y hacer arreglos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me encanta montar muebles y hacer bricolaje en casa"
+          },
+          {
+            "letra": "B",
+            "texto": "Me defiendo bien siguiendo las instrucciones paso a paso"
+          },
+          {
+            "letra": "C",
+            "texto": "Lo intento pero suelo frustrarme con los tornillos"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero pagar para que me monten e instalen todo"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Tienes plantas vivas dentro de tu casa o terraza?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo bastantes plantas y las cuido con mimo"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo 1 o 2 plantas fáciles que resisten bien"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero plantas artificiales decorativas"
+          },
+          {
+            "letra": "D",
+            "texto": "Se me mueren todas las plantas vivas que intento tener"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué estilo de decoración prefieres para tu vivienda?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Estilo minimalista nórdico con tonos claros y madera"
+          },
+          {
+            "letra": "B",
+            "texto": "Estilo industrial con metal negro y ladrillo"
+          },
+          {
+            "letra": "C",
+            "texto": "Estilo moderno con iluminación LED indirecta"
+          },
+          {
+            "letra": "D",
+            "texto": "Estilo acogedor tradicional y rústico"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué estancia de la casa consideras más importante que esté ordenada?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "El dormitorio para descansar con paz mental"
+          },
+          {
+            "letra": "B",
+            "texto": "El salón para recibir visitas y desconectar"
+          },
+          {
+            "letra": "C",
+            "texto": "La cocina y la zona de trabajo / escritorio"
+          },
+          {
+            "letra": "D",
+            "texto": "El baño"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_049",
+    "numero": 49,
+    "titulo": "Libros, Lectura y Formatos Digitales",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Kindle, libros físicos en papel, audiolibros y novelas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿En qué formato prefieres leer habitualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Libro físico en papel por el tacto y olor"
+          },
+          {
+            "letra": "B",
+            "texto": "Lector electrónico de tinta electrónica (Kindle, Kobo)"
+          },
+          {
+            "letra": "C",
+            "texto": "En la pantalla del iPad, tablet o móvil"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo leer libros por falta de tiempo"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuántos libros leíste aproximadamente en el último año?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más de 10 libros completos"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 4 y 10 libros"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 1 y 3 libros"
+          },
+          {
+            "letra": "D",
+            "texto": "No leí ningún libro completo"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has probado alguna vez los audiolibros (Audible, Storytel)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, escucho audiolibros mientras conduzco o entreno"
+          },
+          {
+            "letra": "B",
+            "texto": "He probado alguno pero prefiero leer con mis ojos"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gustaría probarlos pero aún no lo he hecho"
+          },
+          {
+            "letra": "D",
+            "texto": "No me llama la atención el formato de audio"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué género literario te atrapa con mayor facilidad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Thriller, novela negra y misterio policíaco"
+          },
+          {
+            "letra": "B",
+            "texto": "Fantasía épica y ciencia ficción"
+          },
+          {
+            "letra": "C",
+            "texto": "Desarrollo personal, negocios y psicología"
+          },
+          {
+            "letra": "D",
+            "texto": "Novela histórica o biografías reales"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sueles comprar libros en librerías de barrio o por internet?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me encanta visitar librerías físicas y curiosear mesas"
+          },
+          {
+            "letra": "B",
+            "texto": "Compro por Amazon u otras tiendas online por rapidez"
+          },
+          {
+            "letra": "C",
+            "texto": "Consigo versiones digitales para mi lector"
+          },
+          {
+            "letra": "D",
+            "texto": "Suelo pedirlos prestados en bibliotecas o a amigos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_050",
+    "numero": 50,
+    "titulo": "Bebidas Energéticas y Refrescos",
+    "categoria": "Hábitos de Consumo & Compras",
+    "categoria_icono": "🛍️",
+    "descripcion": "Red Bull, Monster Energy, refrescos sin azúcar y té frío.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Consumes bebidas energéticas (Red Bull, Monster, etc.)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, varias veces por semana para concentrarme o jugar"
+          },
+          {
+            "letra": "B",
+            "texto": "Ocasionalmente cuando tengo que estudiar o trabajar tarde"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo los fines de semana o en fiestas"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca o nunca tomo bebidas energéticas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué marca de bebida energética prefieres?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Monster Energy (especialmente las variedades Ultra sin azúcar)"
+          },
+          {
+            "letra": "B",
+            "texto": "Red Bull clásico o ediciones de sabores"
+          },
+          {
+            "letra": "C",
+            "texto": "Marcas para gamers (Ghost, G Fuel, Reign)"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo consumir estas marcas"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres refrescos normales con azúcar o versiones Zero / Light?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre versiones Zero azúcar / Sin calorías"
+          },
+          {
+            "letra": "B",
+            "texto": "Versiones clásicas con azúcar de toda la vida"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero agua con gas o tés fríos naturales"
+          },
+          {
+            "letra": "D",
+            "texto": "No consumo refrescos carbonatados"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cuál es tu refresco favorito de todos los tiempos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Coca-Cola (clásica o Zero)"
+          },
+          {
+            "letra": "B",
+            "texto": "Pepsi"
+          },
+          {
+            "letra": "C",
+            "texto": "Sprite / 7Up / Fanta de sabores frutales"
+          },
+          {
+            "letra": "D",
+            "texto": "Bebidas de té helado (Nestea, Lipton, Fuze)"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Consideras que las bebidas energéticas cumplen lo que prometen?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me dan un impulso de energía y concentración notable"
+          },
+          {
+            "letra": "B",
+            "texto": "Me despejan un rato pero luego siento bajón"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo me gusta el sabor refrescante"
+          },
+          {
+            "letra": "D",
+            "texto": "No noto que me den energía"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_051",
+    "numero": 51,
+    "titulo": "Fútbol y Competiciones Internacionales",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Champions League, ligas locales, Mundiales y afición.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia ves partidos de fútbol en televisión o estadios?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Todas las semanas veo los partidos de mi equipo favorito"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo partidos grandes (Champions, clásicos, finales)"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo durante el Mundial o torneos de selecciones"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo ver fútbol"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Has acudido a un estadio de fútbol a ver un partido en vivo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, voy al estadio varias veces por temporada"
+          },
+          {
+            "letra": "B",
+            "texto": "He ido en algunas ocasiones especiales"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo a estadios pequeños de categorías locales"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he estado en un estadio de fútbol"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué competición consideras la más emocionante del mundo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "La UEFA Champions League"
+          },
+          {
+            "letra": "B",
+            "texto": "La Copa Mundial de la FIFA de selecciones"
+          },
+          {
+            "letra": "C",
+            "texto": "Las ligas locales (LaLiga, Premier League, etc.)"
+          },
+          {
+            "letra": "D",
+            "texto": "La Copa Libertadores"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Juegas al fútbol con amigos o en ligas aficionadas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, juego fútbol 7 o fútbol sala cada semana"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo partidillos ocasionales en verano o fiestas"
+          },
+          {
+            "letra": "C",
+            "texto": "Antes jugaba mucho pero ya no"
+          },
+          {
+            "letra": "D",
+            "texto": "No practico fútbol"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Compras camisetas oficiales de tu equipo de fútbol?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo varias de distintas temporadas"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando mi equipo gana un título histórico"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero camisetas de entrenamiento o réplicas"
+          },
+          {
+            "letra": "D",
+            "texto": "No compro camisetas deportivas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_052",
+    "numero": 52,
+    "titulo": "Gimnasio y Entrenamiento de Fuerza",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Pesas, hipertrofia, mancuernas y rutinas de fitness.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Vas al gimnasio a entrenar con regularidad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, entre 4 y 6 días por semana rigurosamente"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 2 y 3 días por semana"
+          },
+          {
+            "letra": "C",
+            "texto": "Estoy inscrito pero voy de forma intermitente"
+          },
+          {
+            "letra": "D",
+            "texto": "No voy al gimnasio, entreno en casa o no hago pesas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu objetivo principal en el entrenamiento físico?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ganar masa muscular e hipertrofia"
+          },
+          {
+            "letra": "B",
+            "texto": "Perder grasa corporal y tonificar"
+          },
+          {
+            "letra": "C",
+            "texto": "Mejorar fuerza, salud cardiovascular y energía"
+          },
+          {
+            "letra": "D",
+            "texto": "Despejar la mente y reducir el estrés diario"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Tomas suplementos deportivos (proteína en polvo, creatina)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, proteína de suero y creatina monohidrato a diario"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo batidos de proteína después de entrenar"
+          },
+          {
+            "letra": "C",
+            "texto": "He tomado en el pasado pero ahora solo como comida real"
+          },
+          {
+            "letra": "D",
+            "texto": "No tomo ningún tipo de suplemento deportivo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Prefieres entrenar solo o con un compañero de entrenamiento?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Solo con auriculares para concentrarme al 100%"
+          },
+          {
+            "letra": "B",
+            "texto": "Con un compañero para motivarnos y ayudarnos en series"
+          },
+          {
+            "letra": "C",
+            "texto": "En clases grupales dirigidas"
+          },
+          {
+            "letra": "D",
+            "texto": "Me da igual con tal de entrenar bien"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuánto dura habitualmente tu sesión de gimnasio?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de 45 minutos (entrenamiento ágil e intenso)"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 60 y 75 minutos"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 90 y 120 minutos incluyendo cardio y estiramientos"
+          },
+          {
+            "letra": "D",
+            "texto": "No voy al gimnasio"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_053",
+    "numero": 53,
+    "titulo": "Running y Carreras Populares",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Correr al aire libre, maratones, 10K y zapatillas de running.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sueles salir a correr (running) de forma habitual?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, varios días por semana llueva o haga sol"
+          },
+          {
+            "letra": "B",
+            "texto": "Salgo a correr 1 o 2 veces por semana"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero caminar a buen paso en vez de correr"
+          },
+          {
+            "letra": "D",
+            "texto": "No practico running"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿En qué superficie prefieres salir a correr?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En parques o senderos de tierra al aire libre"
+          },
+          {
+            "letra": "B",
+            "texto": "Por el asfalto y aceras de la ciudad"
+          },
+          {
+            "letra": "C",
+            "texto": "En la cinta de correr del gimnasio"
+          },
+          {
+            "letra": "D",
+            "texto": "En pistas de atletismo de tartán"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has participado alguna vez en una carrera popular (5K, 10K, etc.)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, he corrido medias maratones o maratones"
+          },
+          {
+            "letra": "B",
+            "texto": "He participado en carreras de 5K o 10K con amigos"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gustaría apuntarme a una próximamente"
+          },
+          {
+            "letra": "D",
+            "texto": "No me interesa competir en carreras"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué aplicación o reloj utilizas para registrar tus carreras?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Strava para compartir con la comunidad"
+          },
+          {
+            "letra": "B",
+            "texto": "Garmin Connect / Apple Fitness"
+          },
+          {
+            "letra": "C",
+            "texto": "Nike Run Club u otra app en el móvil"
+          },
+          {
+            "letra": "D",
+            "texto": "No registro mis tiempos ni distancias"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué es lo más difícil al iniciarse en el running?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "La constancia y crear el hábito las primeras semanas"
+          },
+          {
+            "letra": "B",
+            "texto": "El cansancio respiratorio y controlar las pulsaciones"
+          },
+          {
+            "letra": "C",
+            "texto": "El dolor en articulaciones o sobrecarga muscular"
+          },
+          {
+            "letra": "D",
+            "texto": "Salir en días de frío o mal tiempo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_054",
+    "numero": 54,
+    "titulo": "Pádel y Deportes de Raqueta",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "El boom del pádel, palas, partidos con amigos y torneos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Juegas al pádel con amigos o compañeros de trabajo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, al menos una o dos partidas cada semana"
+          },
+          {
+            "letra": "B",
+            "texto": "Juego un par de veces al mes de forma casual"
+          },
+          {
+            "letra": "C",
+            "texto": "He jugado alguna vez pero no con frecuencia"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he jugado al pádel"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Tienes tu propia pala de pádel o la alquilas en la pista?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tengo mi propia pala de gama media o alta"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo una pala básica para jugar de vez en cuando"
+          },
+          {
+            "letra": "C",
+            "texto": "La alquilo en el club cada vez que voy a jugar"
+          },
+          {
+            "letra": "D",
+            "texto": "No juego al pádel"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres jugar en el lado del revés o de la derecha?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Juego en el revés para definir puntos y rematar"
+          },
+          {
+            "letra": "B",
+            "texto": "Juego en la derecha para defender y armar juego"
+          },
+          {
+            "letra": "C",
+            "texto": "Me adapto al lado que deje libre mi compañero"
+          },
+          {
+            "letra": "D",
+            "texto": "No conozco la diferencia técnica de posiciones"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué tipo de pista de pádel prefieres?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Pista techada o indoor sin viento ni sol molesto"
+          },
+          {
+            "letra": "B",
+            "texto": "Pista al aire libre con cristal panorámico"
+          },
+          {
+            "letra": "C",
+            "texto": "Pistas con césped rizado de última generación"
+          },
+          {
+            "letra": "D",
+            "texto": "Me resulta indiferente mientras esté bien cuidada"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué te parece el auge y la popularidad actual del pádel?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Un deporte divertidísimo y muy social para todas las edades"
+          },
+          {
+            "letra": "B",
+            "texto": "Muy entretenido aunque a veces cuesta encontrar pistas libres"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero deportes individuales o el tenis tradicional"
+          },
+          {
+            "letra": "D",
+            "texto": "Me parece una moda pasajera"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_055",
+    "numero": 55,
+    "titulo": "Nutrición, Dietas y Hábitos Alimenticios",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Comida sana, ayuno intermitente, macro y micro nutrientes.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuidas conscientemente la cantidad de proteína y calorías que comes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, peso mi comida o calculo macros con una app (MyFitnessPal)"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo una idea aproximada de comer sano sin obsesión"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo intento comer menos ultraprocesados y más verduras"
+          },
+          {
+            "letra": "D",
+            "texto": "No me fijo en calorías ni nutrientes"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Has probado alguna vez el ayuno intermitente (16/8)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es mi estilo de vida habitual y me sienta genial"
+          },
+          {
+            "letra": "B",
+            "texto": "Lo he probado durante algunas semanas o meses"
+          },
+          {
+            "letra": "C",
+            "texto": "Lo conozco pero me cuesta saltarme el desayuno"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he probado el ayuno voluntario"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuántos litros de agua bebes aproximadamente al día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más de 2.5 litros de agua al día"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 1.5 y 2 litros al día"
+          },
+          {
+            "letra": "C",
+            "texto": "Menos de 1 litro al día"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo bebo agua cuando tengo mucha sed"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Con qué frecuencia consumes comida rápida o ultraprocesados?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Rara vez, menos de 1 vez cada 15 días"
+          },
+          {
+            "letra": "B",
+            "texto": "Una o dos veces por semana (comida trampa / cheat meal)"
+          },
+          {
+            "letra": "C",
+            "texto": "Casi a diario por comodidad o falta de tiempo"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo en reuniones sociales con amigos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Tomas suplementos vitamínicos (vitamina D, omega 3, magnesio)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tomo suplementos diarios pautados"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en épocas de invierno o cansancio"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero obtener todos los nutrientes de la comida"
+          },
+          {
+            "letra": "D",
+            "texto": "No tomo vitaminas ni suplementos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_056",
+    "numero": 56,
+    "titulo": "Baloncesto, NBA y Deporte de Canasta",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Partidos de la NBA, mates, triples y liga ACB/Euroliga.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sigues la NBA o partidos de baloncesto profesional?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, trasnocho para ver partidos de la NBA en vivo"
+          },
+          {
+            "letra": "B",
+            "texto": "Veo los resúmenes de jugadas destacadas por la mañana"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo veo los Playoffs y las Finales de la NBA"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo seguir el baloncesto"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Quién consideras el mejor jugador de la historia del baloncesto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Michael Jordan"
+          },
+          {
+            "letra": "B",
+            "texto": "LeBron James"
+          },
+          {
+            "letra": "C",
+            "texto": "Kobe Bryant"
+          },
+          {
+            "letra": "D",
+            "texto": "Stephen Curry"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Juegas al baloncesto en canchas urbanas o ligas locales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, juego pick-up games en canchas de calle habitualmente"
+          },
+          {
+            "letra": "B",
+            "texto": "Juego de forma casual con amigos de vez en cuando"
+          },
+          {
+            "letra": "C",
+            "texto": "Jugaba en el colegio o instituto pero ya no"
+          },
+          {
+            "letra": "D",
+            "texto": "No practico baloncesto"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Te gustan las zapatillas retro de baloncesto para vestir a diario?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo modelos clásicos (Jordan 1, Dunk, Air Force 1)"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gustan para ocasiones informales"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero zapatillas más ligeras de running"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gustan las zapatillas voluminosas de basket"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué jugada te parece más espectacular en un partido?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Un mate potente posterizando a un defensor"
+          },
+          {
+            "letra": "B",
+            "texto": "Un triple decisivo sobre la bocina para ganar (Buzzer Beater)"
+          },
+          {
+            "letra": "C",
+            "texto": "Un pase milimétrico sin mirar entre varios rivales"
+          },
+          {
+            "letra": "D",
+            "texto": "Un tapón salvaje en el tablero"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_057",
+    "numero": 57,
+    "titulo": "Ciclismo, Bicicleta de Carretera y Montaña",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Rutas en bici, gravel, Tour de Francia y salidas en grupo.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Montas en bicicleta habitualmente los fines de semana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, salgo en rutas largas de carretera o montaña (MTB)"
+          },
+          {
+            "letra": "B",
+            "texto": "Uso la bicicleta como medio de transporte urbano"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo en paseos suaves y relajados de vez en cuando"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo bicicleta ni suelo montar"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué modalidad de ciclismo te gusta más?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ciclismo de carretera con bicicleta ligera"
+          },
+          {
+            "letra": "B",
+            "texto": "Bicicleta de montaña (MTB) por caminos y trialeras"
+          },
+          {
+            "letra": "C",
+            "texto": "Gravel por pistas de tierra y caminos mixtos"
+          },
+          {
+            "letra": "D",
+            "texto": "Bicicleta urbana de paseo"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Utilizas ropa técnica ciclista (maillot y culotte con badana)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, vestimenta completa para evitar rozaduras en rutas largas"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo culotte con badana para mayor comodidad en el sillín"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso ropa deportiva normal sin prendas técnicas"
+          },
+          {
+            "letra": "D",
+            "texto": "No practico ciclismo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Has seguido grandes vueltas ciclistas por televisión (Tour, Vuelta)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, sigo etapas completas de montaña con pasión"
+          },
+          {
+            "letra": "B",
+            "texto": "Pongo las etapas de fondo para las siestas de verano"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo miro los últimos kilómetros al sprint"
+          },
+          {
+            "letra": "D",
+            "texto": "No veo ciclismo por televisión"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Llevas casco obligatoriamente cada vez que subes a una bicicleta?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, la seguridad en la cabeza no es negociable"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en carretera o cuando salgo a velocidades altas"
+          },
+          {
+            "letra": "C",
+            "texto": "En ciudad a veces no me lo pongo en trayectos cortos"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo montar en bicicleta"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_058",
+    "numero": 58,
+    "titulo": "Deportes de Combate y Artes Marciales",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "UFC, boxeo profesional, jiu-jitsu y veladas de contacto.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sigues veladas de la UFC o combates de boxeo profesional?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, veo los eventos numerados de la UFC completos"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo combates mediáticos destacados (Topuria, Canelo, etc.)"
+          },
+          {
+            "letra": "C",
+            "texto": "Miro clips de nocauts impresionantes al día siguiente"
+          },
+          {
+            "letra": "D",
+            "texto": "No sigo los deportes de contacto"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Has practicado alguna vez artes marciales o deportes de lucha?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, entreno boxeo, kickboxing o muay thai"
+          },
+          {
+            "letra": "B",
+            "texto": "Sí, entreno artes marciales de agarre (BJJ, judo, lucha)"
+          },
+          {
+            "letra": "C",
+            "texto": "Hice kárate o taekwondo de niño"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he practicado deportes de contacto"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué te parece la disciplina física y mental que exigen estos deportes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Admirable, requiere un nivel de sacrificio y respeto absoluto"
+          },
+          {
+            "letra": "B",
+            "texto": "Muy exigente físicamente, excelente para la defensa personal"
+          },
+          {
+            "letra": "C",
+            "texto": "Me parece demasiado lesivo o violento para mi gusto"
+          },
+          {
+            "letra": "D",
+            "texto": "No me llama la atención"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué finalización te parece más impresionante en un combate?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Un nocaut fulminante limpio con un solo golpe"
+          },
+          {
+            "letra": "B",
+            "texto": "Una sumisión técnica compleja con palanca o estrangulación"
+          },
+          {
+            "letra": "C",
+            "texto": "Una guerra épica a los 5 asaltos que se decide a los puntos"
+          },
+          {
+            "letra": "D",
+            "texto": "Cualquiera que demuestre técnica superior"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Comprarías un paquete Pay-Per-View (PPV) para ver una gran pelea?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, si el cartel de peleas es de altísimo nivel"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si nos juntamos varios amigos en casa para pagar entre todos"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero verlo en diferido al día siguiente"
+          },
+          {
+            "letra": "D",
+            "texto": "No pagaría por eventos deportivos individuales"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_059",
+    "numero": 59,
+    "titulo": "Calistenia y Entrenamiento con Peso Corporal",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Dominadas, fondos, parques de street workout y flexibilidad.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Practicas ejercicios de calistenia con tu propio peso corporal?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, entreno regularmente en barras de parque o casa"
+          },
+          {
+            "letra": "B",
+            "texto": "Combino calistenia con pesas en el gimnasio"
+          },
+          {
+            "letra": "C",
+            "texto": "Hago flexiones y fondos ocasionales en casa"
+          },
+          {
+            "letra": "D",
+            "texto": "No practico calistenia"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuántas dominadas estrictas puedes hacer seguidas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Más de 15 dominadas perfectas"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 8 y 15 dominadas"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 1 y 7 dominadas"
+          },
+          {
+            "letra": "D",
+            "texto": "Todavía no puedo hacer una dominada completa"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Tienes barra de dominadas instalada en casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, barra en el marco de la puerta o anclada a la pared"
+          },
+          {
+            "letra": "B",
+            "texto": "No, prefiero ir al parque de barras o al gimnasio"
+          },
+          {
+            "letra": "C",
+            "texto": "Tuve una en el pasado"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo barras en casa"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Te gustaría dominar trucos estáticos como el Muscle-up o Front Lever?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, entreno específicamente para sacar esos movimientos"
+          },
+          {
+            "letra": "B",
+            "texto": "El Muscle-up me encantaría conseguirlo"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo busco ponerme en forma sin hacer trucos complejos"
+          },
+          {
+            "letra": "D",
+            "texto": "No me interesa la calistenia"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué ventaja consideras superior en el entrenamiento calisténico?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Puedes entrenar gratis en cualquier parque del mundo"
+          },
+          {
+            "letra": "B",
+            "texto": "Desarrollo de fuerza funcional y control milimétrico del cuerpo"
+          },
+          {
+            "letra": "C",
+            "texto": "Menor riesgo de lesiones graves articulares"
+          },
+          {
+            "letra": "D",
+            "texto": "Cuerpo atlético y definido sin hipertrofia excesiva"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_060",
+    "numero": 60,
+    "titulo": "Deportes de Invierno y Actividades de Aventura",
+    "categoria": "Deportes & Vida Saludable",
+    "categoria_icono": "⚽",
+    "descripcion": "Esquí, snowboard, senderismo de montaña y escalada.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has practicado esquí o snowboard en estaciones de nieve?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, subo a la nieve todos los inviernos sin falta"
+          },
+          {
+            "letra": "B",
+            "texto": "He ido en 2 o 3 ocasiones a probar"
+          },
+          {
+            "letra": "C",
+            "texto": "Nunca he probado pero tengo muchas ganas de ir"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gustan el frío ni los deportes de nieve"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Prefieres el esquí tradicional o la tabla de snowboard?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Esquí tradicional de dos tablas"
+          },
+          {
+            "letra": "B",
+            "texto": "Tabla de snowboard por la sensación de surf en nieve"
+          },
+          {
+            "letra": "C",
+            "texto": "Me defiendo bien en ambas disciplinas"
+          },
+          {
+            "letra": "D",
+            "texto": "No he practicado ninguna"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Haces senderismo o rutas de montaña en la naturaleza?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me encanta desconectar haciendo trekkings los fines de semana"
+          },
+          {
+            "letra": "B",
+            "texto": "Hago rutas sencillas de vez en cuando en primavera u otoño"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero el mar y la playa antes que la montaña"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gusta caminar por la montaña"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Has probado la escalada en rocódromo o roca natural?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, voy a rocódromos de bloque (boulder) con frecuencia"
+          },
+          {
+            "letra": "B",
+            "texto": "He probado la escalada con arnés alguna vez"
+          },
+          {
+            "letra": "C",
+            "texto": "Me da respeto o vértigo la altura"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he escalado"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te atreverías a saltar en paracaídas o hacer puenting?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sin dudarlo, me apasiona la adrenalina extrema"
+          },
+          {
+            "letra": "B",
+            "texto": "En paracaídas sí con instructor, pero puenting no"
+          },
+          {
+            "letra": "C",
+            "texto": "Me lo pensaría mucho, me da bastante miedo"
+          },
+          {
+            "letra": "D",
+            "texto": "Bajo ningún concepto lo haría"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_061",
+    "numero": 61,
+    "titulo": "Calidad del Sueño y Descanso Nocturno",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Horas de sueño, colchón, insomnio y rutinas nocturnas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuántas horas duermes de media cada noche?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de 6 horas (suelo dormir poco)"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 6 y 7 horas"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 7 y 8 horas (lo recomendado)"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de 8 horas plácidamente"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Miras la pantalla del móvil en la cama antes de dormir?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, me duermo con el móvil en la mano"
+          },
+          {
+            "letra": "B",
+            "texto": "Miro 10 o 15 minutos y lo dejo en la mesita"
+          },
+          {
+            "letra": "C",
+            "texto": "Intento evitar pantallas al menos 30 minutos antes"
+          },
+          {
+            "letra": "D",
+            "texto": "Dejo el móvil fuera del dormitorio"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Te despiertas con sensación de energía y descanso?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Casi siempre me levanto renovado y listo"
+          },
+          {
+            "letra": "B",
+            "texto": "Me cuesta arrancar los primeros 20 minutos"
+          },
+          {
+            "letra": "C",
+            "texto": "Suelo levantarme cansado y con sueño"
+          },
+          {
+            "letra": "D",
+            "texto": "Depende de los días de la semana"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Utilizas antifaz para dormir o tapones para los oídos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, antifaz o tapones son indispensables para mi descanso"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando viajo o duermo en hoteles"
+          },
+          {
+            "letra": "C",
+            "texto": "Oscuridad total con persianas bajadas sin accesorios"
+          },
+          {
+            "letra": "D",
+            "texto": "No necesito nada especial para dormir"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Invertirías en un colchón o almohada de gama alta ergonómica?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Es la mejor inversión para la salud de la espalda"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo un buen colchón que compré hace pocos años"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso un colchón estándar que venía con el piso"
+          },
+          {
+            "letra": "D",
+            "texto": "No le presto tanta atención al colchón"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_062",
+    "numero": 62,
+    "titulo": "Teletrabajo vs Trabajo Presencial en Oficina",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Productividad remota, desplazamientos y conciliación.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuál es tu modalidad de trabajo o estudio habitual?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "100% en remoto desde casa"
+          },
+          {
+            "letra": "B",
+            "texto": "Modelo híbrido (2 o 3 días en casa y el resto en oficina)"
+          },
+          {
+            "letra": "C",
+            "texto": "100% presencial en el lugar de trabajo"
+          },
+          {
+            "letra": "D",
+            "texto": "Actualmente estoy desempleado o estudiando presencial"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué ventaja valoras más de trabajar desde casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ahorro de tiempo y dinero en desplazamientos"
+          },
+          {
+            "letra": "B",
+            "texto": "Mayor flexibilidad horaria y conciliación familiar"
+          },
+          {
+            "letra": "C",
+            "texto": "Trabajar en ropa cómoda sin estrés de oficina"
+          },
+          {
+            "letra": "D",
+            "texto": "Comer comida casera sana todos los días"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Sientes que eres más productivo en casa o en la oficina?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Mucho más productivo en casa sin interrupciones"
+          },
+          {
+            "letra": "B",
+            "texto": "Más productivo en la oficina con equipo cerca"
+          },
+          {
+            "letra": "C",
+            "texto": "Similar en ambos entornos"
+          },
+          {
+            "letra": "D",
+            "texto": "En casa a veces me distraigo con facilidad"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cuánto tiempo tardas en desplazarte a tu trabajo diario?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Menos de 15 minutos o no me desplazo"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre 15 y 30 minutos por trayecto"
+          },
+          {
+            "letra": "C",
+            "texto": "Entre 30 y 60 minutos por trayecto"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de 1 hora de ida y otra de vuelta"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Aceptarías un trabajo con salario menor a cambio de ser 100% remoto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, la libertad geográfica y el tiempo valen más"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si la diferencia de sueldo es pequeña (menos del 10%)"
+          },
+          {
+            "letra": "C",
+            "texto": "No, prefiero maximizar mis ingresos aunque sea presencial"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero el ambiente social de la oficina"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_063",
+    "numero": 63,
+    "titulo": "Gestión del Tiempo y Productividad Personal",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Método Pomodoro, listas de tareas, agendas y Notion.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Utilizas alguna aplicación para gestionar tus tareas y notas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Notion / Obsidian para organizar toda mi vida"
+          },
+          {
+            "letra": "B",
+            "texto": "Google Calendar / Apple Calendar principalmente"
+          },
+          {
+            "letra": "C",
+            "texto": "App sencilla de listas (Todoist, Recordatorios, Keep)"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero libreta y bolígrafo de papel"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Has utilizado la técnica Pomodoro (25 min de foco y 5 de descanso)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es mi método favorito para sesiones de estudio o trabajo"
+          },
+          {
+            "letra": "B",
+            "texto": "La he probado pero a veces interrumpe mi estado de flujo"
+          },
+          {
+            "letra": "C",
+            "texto": "La conozco pero me cuesta ser constante"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he probado esa técnica"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Tiendes a procrastinar tareas importantes y dejarlas para el final?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A menudo lo dejo todo para la fecha límite"
+          },
+          {
+            "letra": "B",
+            "texto": "A veces procrastino tareas tediosas pero cumplo"
+          },
+          {
+            "letra": "C",
+            "texto": "Rara vez, soy muy organizado y me anticipo"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo cuando estoy muy cansado o desmotivado"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Silencias las notificaciones del móvil durante tus horas de trabajo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, modo No Molestar o Enfoque activado siempre"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo silencio llamadas y dejo mensajes importantes"
+          },
+          {
+            "letra": "C",
+            "texto": "No silencio el móvil, miro cada aviso que llega"
+          },
+          {
+            "letra": "D",
+            "texto": "Tengo el móvil en silencio permanente las 24 horas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sientes que tienes suficiente tiempo libre para tus aficiones?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, consigo equilibrar obligaciones y ocio"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gustaría tener un par de horas más libres al día"
+          },
+          {
+            "letra": "C",
+            "texto": "Apenas me queda tiempo libre entre semana"
+          },
+          {
+            "letra": "D",
+            "texto": "Tengo bastante tiempo libre actualmente"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_064",
+    "numero": 64,
+    "titulo": "Viajes, Escapadas y Vacaciones",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Destinos de playa o montaña, vuelos baratos y hoteles.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué tipo de viaje prefieres para tus vacaciones principales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Viaje internacional a un país con cultura muy distinta"
+          },
+          {
+            "letra": "B",
+            "texto": "Escapada de sol, playa y relax sin prisas"
+          },
+          {
+            "letra": "C",
+            "texto": "Ruta de turismo cultural por ciudades históricas"
+          },
+          {
+            "letra": "D",
+            "texto": "Aventura en la naturaleza y paisajes salvajes"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Con qué antelación sueles planificar tus viajes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Con varios meses de antelación para conseguir buenos precios"
+          },
+          {
+            "letra": "B",
+            "texto": "Con 3 o 4 semanas de margen"
+          },
+          {
+            "letra": "C",
+            "texto": "Suelo decidir y reservar a última hora en ofertas"
+          },
+          {
+            "letra": "D",
+            "texto": "Soy muy espontáneo, viajo casi sin plan"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres alojarte en hoteles o en apartamentos vacacionales (Airbnb)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Hoteles por el servicio, limpieza y desayuno incluido"
+          },
+          {
+            "letra": "B",
+            "texto": "Apartamentos completos por tener cocina y más espacio"
+          },
+          {
+            "letra": "C",
+            "texto": "Hostales juveniles para conocer a otros viajeros"
+          },
+          {
+            "letra": "D",
+            "texto": "Casas rurales tranquilas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué herramienta utilizas para buscar vuelos y alojamientos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Skyscanner / Google Flights para vuelos baratos"
+          },
+          {
+            "letra": "B",
+            "texto": "Booking.com para hoteles y alojamientos"
+          },
+          {
+            "letra": "C",
+            "texto": "Airbnb para estancias largas"
+          },
+          {
+            "letra": "D",
+            "texto": "Directamente en las webs de las aerolíneas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sueles viajar solo, en pareja o con grupo de amigos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En pareja"
+          },
+          {
+            "letra": "B",
+            "texto": "Con amigos para pasarlo bien"
+          },
+          {
+            "letra": "C",
+            "texto": "Con mi familia"
+          },
+          {
+            "letra": "D",
+            "texto": "He viajado solo y me parece una experiencia fantástica"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_065",
+    "numero": 65,
+    "titulo": "Redes Sociales y Tiempo de Pantalla",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Instagram, X (Twitter), desconexión digital y salud mental.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuál es la red social en la que pasas más tiempo al día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Instagram"
+          },
+          {
+            "letra": "B",
+            "texto": "TikTok"
+          },
+          {
+            "letra": "C",
+            "texto": "X (Twitter)"
+          },
+          {
+            "letra": "D",
+            "texto": "Reddit / YouTube"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Revisas el tiempo de pantalla diario en los ajustes de tu teléfono?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, lo miro todas las semanas y me sorprende la cifra"
+          },
+          {
+            "letra": "B",
+            "texto": "Ocasionalmente por curiosidad"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero no mirarlo para no asustarme"
+          },
+          {
+            "letra": "D",
+            "texto": "No sé dónde se consulta esa métrica"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has hecho alguna vez un detox digital (días sin redes sociales)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, y la sensación de paz mental fue increíble"
+          },
+          {
+            "letra": "B",
+            "texto": "He borrado apps durante un fin de semana"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gustaría hacerlo pero dependo del móvil para trabajar"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he intentado desconectarme"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Te genera ansiedad o FOMO (miedo a perderse algo) no mirar el móvil?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A veces siento la necesidad compulsiva de refrescar el feed"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si estoy esperando un mensaje importante"
+          },
+          {
+            "letra": "C",
+            "texto": "Para nada, puedo pasar horas sin tocar el teléfono"
+          },
+          {
+            "letra": "D",
+            "texto": "Rara vez me genera inquietud"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sueles publicar historias o publicaciones de tu vida privada?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Publico historias de mis viajes y planes con frecuencia"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo subo contenido muy seleccionado en ocasiones especiales"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo cuenta pero casi nunca publico fotos mías"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo consumo contenido ajeno de forma anónima"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_066",
+    "numero": 66,
+    "titulo": "Lectura de Noticias y Actualidad Informativa",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Prensa digital, boletines (newsletters) y verificación.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Dónde te informas principalmente de las noticias del mundo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Redes sociales (X / Twitter, Reddit)"
+          },
+          {
+            "letra": "B",
+            "texto": "Diarios digitales de noticias y periódicos online"
+          },
+          {
+            "letra": "C",
+            "texto": "Canales de YouTube y podcasts de análisis"
+          },
+          {
+            "letra": "D",
+            "texto": "Televisión tradicional o radio"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué nivel de confianza tienes en los medios de comunicación masivos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Poca confianza, contrarresto varias fuentes independientes"
+          },
+          {
+            "letra": "B",
+            "texto": "Confianza moderada según el medio y la firma"
+          },
+          {
+            "letra": "C",
+            "texto": "Bastante confianza en periódicos de prestigio reconocido"
+          },
+          {
+            "letra": "D",
+            "texto": "Desconfío casi por completo de las noticias"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Estás suscrito a boletines de noticias (newsletters) por email?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, leo newsletters especializadas todas las mañanas"
+          },
+          {
+            "letra": "B",
+            "texto": "Estoy suscrito a un par pero no siempre las abro"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero leer noticias en feeds o agregadores"
+          },
+          {
+            "letra": "D",
+            "texto": "No utilizo newsletters por correo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Intentas verificar una noticia llamativa antes de reenviarla?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre busco en Google si es real antes de compartir"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si me parece demasiado exagerada o sospechosa"
+          },
+          {
+            "letra": "C",
+            "texto": "A veces comparto titulares llamativos sin profundizar"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo compartir noticias"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué sección de noticias te interesa más consultar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tecnología, ciencia e innovación digital"
+          },
+          {
+            "letra": "B",
+            "texto": "Economía, mercados financieros y negocios"
+          },
+          {
+            "letra": "C",
+            "texto": "Actualidad política internacional"
+          },
+          {
+            "letra": "D",
+            "texto": "Deportes y entretenimiento"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_067",
+    "numero": 67,
+    "titulo": "Cuidado de la Salud Mental y Manejo del Estrés",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Meditación, paseos en la naturaleza, terapia y descanso.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué actividad te ayuda más a desconectar y reducir el estrés?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Hacer deporte intenso o ir al gimnasio"
+          },
+          {
+            "letra": "B",
+            "texto": "Jugar a videojuegos o ver una buena serie"
+          },
+          {
+            "letra": "C",
+            "texto": "Salir a caminar al aire libre o escuchar música"
+          },
+          {
+            "letra": "D",
+            "texto": "Dormir una siesta o leer un libro tranquilo"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Has practicado meditación guiada o mindfulness alguna vez?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, utilizo apps (Headspace, Calm) con regularidad"
+          },
+          {
+            "letra": "B",
+            "texto": "Lo he probado en algunas ocasiones"
+          },
+          {
+            "letra": "C",
+            "texto": "Me cuesta calmar la mente y quedarme quieto"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he probado la meditación"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué opinas de acudir a terapia psicológica para el bienestar personal?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Fundamental, todo el mundo debería tener acceso a terapia"
+          },
+          {
+            "letra": "B",
+            "texto": "Muy positivo en momentos de cambios o crisis vitales"
+          },
+          {
+            "letra": "C",
+            "texto": "Útil si tienes un problema grave sin resolver"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero gestionar mis problemas de forma personal"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Sientes que el ritmo de vida actual es demasiado acelerado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Totalmente, la sociedad vive con exceso de prisa y sobreestimulación"
+          },
+          {
+            "letra": "B",
+            "texto": "A veces es exigente pero se puede encontrar equilibrio"
+          },
+          {
+            "letra": "C",
+            "texto": "A mí me gusta el ritmo dinámico y activo"
+          },
+          {
+            "letra": "D",
+            "texto": "Depende de la etapa en la que te encuentres"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te permites tener días enteros de descanso sin sentirte culpable?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, descansar es productivo para recargar energía"
+          },
+          {
+            "letra": "B",
+            "texto": "A veces siento ligera culpa si no hago algo útil"
+          },
+          {
+            "letra": "C",
+            "texto": "Me cuesta muchísimo estar parado sin hacer tareas"
+          },
+          {
+            "letra": "D",
+            "texto": "Disfruto al 100% de los días de relax"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_068",
+    "numero": 68,
+    "titulo": "Idiomas y Aprendizaje Continuo",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Duolingo, inglés profesional, cursos online y fluidez.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuántos idiomas hablas o estudias actualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Español nativo e Inglés fluido (bilingüe)"
+          },
+          {
+            "letra": "B",
+            "texto": "Español nativo e Inglés intermedio en mejora"
+          },
+          {
+            "letra": "C",
+            "texto": "Tres o más idiomas distintos"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo mi lengua materna"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Has utilizado aplicaciones como Duolingo para aprender idiomas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, mantengo mi racha activa a diario"
+          },
+          {
+            "letra": "B",
+            "texto": "La he probado durante un tiempo"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero academias presenciales o profesores particulares"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero aprender viendo series y leyendo en versión original"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué habilidad de un nuevo idioma te cuesta más dominar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Hablar con fluidez y soltura en una conversación real"
+          },
+          {
+            "letra": "B",
+            "texto": "Entender el acento nativo rápido en audios"
+          },
+          {
+            "letra": "C",
+            "texto": "La gramática y conjugaciones complejas"
+          },
+          {
+            "letra": "D",
+            "texto": "Aprender y retener vocabulario nuevo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Haces cursos online para mejorar tus conocimientos profesionales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, con frecuencia en plataformas como Udemy, Coursera, etc."
+          },
+          {
+            "letra": "B",
+            "texto": "He completado algún curso puntual para mi currículum"
+          },
+          {
+            "letra": "C",
+            "texto": "Aprendo de forma autodidacta con tutoriales de YouTube"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca hago cursos por internet"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué idioma te gustaría aprender si tuvieras tiempo libre garantizado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Japonés por su cultura, anime y caligrafía"
+          },
+          {
+            "letra": "B",
+            "texto": "Alemán o Francés por oportunidades laborales en Europa"
+          },
+          {
+            "letra": "C",
+            "texto": "Chino mandarín por su peso global en el comercio"
+          },
+          {
+            "letra": "D",
+            "texto": "Italiano o Portugués por su belleza y cercanía"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_069",
+    "numero": 69,
+    "titulo": "Cocina Casera y Gastronomía en el Hogar",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Air fryer, cocinar a diario, recetas de YouTube e ingredientes.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cocinas tus propias comidas habitualmente en casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, cocino casi todos los días desde cero"
+          },
+          {
+            "letra": "B",
+            "texto": "Cocino cosas sencillas y rápidas entre semana"
+          },
+          {
+            "letra": "C",
+            "texto": "Cocino principalmente los fines de semana"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi no cocino, dependo de delivery o comida preparada"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Tienes una freidora de aire (Air Fryer) en tu cocina?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es el electrodoméstico que más utilizo en mi día a día"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo una pero no la uso tanto como pensaba"
+          },
+          {
+            "letra": "C",
+            "texto": "No tengo pero tengo muchas ganas de comprar una"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero el horno convencional o sartenes de toda la vida"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Dónde buscas inspiración para nuevas recetas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En vídeos de TikTok e Instagram Reels rápidos"
+          },
+          {
+            "letra": "B",
+            "texto": "En canales de cocina de YouTube detallados"
+          },
+          {
+            "letra": "C",
+            "texto": "En recetarios clásicos o recetas de mi familia"
+          },
+          {
+            "letra": "D",
+            "texto": "Improviso con lo que tengo en la nevera"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Practicas el batch cooking (cocinar el domingo para toda la semana)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me ahorra muchísimo tiempo de lunes a viernes"
+          },
+          {
+            "letra": "B",
+            "texto": "Preparo comida para 2 o 3 días como máximo"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero cocinar raciones frescas en el momento"
+          },
+          {
+            "letra": "D",
+            "texto": "No planifico las comidas de la semana"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué tipo de cocina internacional disfrutas más preparar en casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Comida italiana (pasta fresca, salsas caseras, pizzas)"
+          },
+          {
+            "letra": "B",
+            "texto": "Comida mexicana (fajitas, tacos con guacamole fresco)"
+          },
+          {
+            "letra": "C",
+            "texto": "Comida asiática (arroz frito, fideos salteados, curris)"
+          },
+          {
+            "letra": "D",
+            "texto": "Comida tradicional casera de mi país"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_070",
+    "numero": 70,
+    "titulo": "Relaciones Sociales y Vida con Amigos",
+    "categoria": "Estilo de Vida & Hábitos Diarios",
+    "categoria_icono": "☕",
+    "descripcion": "Planes de fin de semana, quedadas, llamadas y comunidad.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia te reúnes en persona con tu grupo de amigos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Todas las semanas al menos una o dos veces"
+          },
+          {
+            "letra": "B",
+            "texto": "Cada dos o tres semanas"
+          },
+          {
+            "letra": "C",
+            "texto": "Una vez al mes o en ocasiones señaladas"
+          },
+          {
+            "letra": "D",
+            "texto": "Menos de una vez al mes por distancia o rutinas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu plan preferido para un fin de semana con amigos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cena en restaurante rico y tomar algo en buen ambiente"
+          },
+          {
+            "letra": "B",
+            "texto": "Juntarnos en casa de alguien para jugar a juegos de mesa o consola"
+          },
+          {
+            "letra": "C",
+            "texto": "Plan al aire libre, barbacoa o excursión de día"
+          },
+          {
+            "letra": "D",
+            "texto": "Ir de fiesta o a conciertos nocturnos"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres un círculo pequeño de amigos íntimos o muchos conocidos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Un grupo muy reducido de 3 a 5 amigos leales de toda la vida"
+          },
+          {
+            "letra": "B",
+            "texto": "Varios grupos distintos según el ambiente (ocio, deporte, trabajo)"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gusta tener una red social amplia y conocer gente nueva"
+          },
+          {
+            "letra": "D",
+            "texto": "Soy una persona bastante solitaria"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cómo mantienes el contacto con tus amigos en el día a día?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A través de un grupo activo de WhatsApp con memes y audios"
+          },
+          {
+            "letra": "B",
+            "texto": "Por mensajes privados en Instagram o TikTok"
+          },
+          {
+            "letra": "C",
+            "texto": "Nos llamamos por teléfono o Discord con frecuencia"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo hablamos cuando vamos a quedar físicamente"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te cuesta hacer nuevos amigos en la edad adulta?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, con el trabajo y la rutina es más difícil conectar"
+          },
+          {
+            "letra": "B",
+            "texto": "A través de aficiones compartidas (gimnasio, juegos) surge natural"
+          },
+          {
+            "letra": "C",
+            "texto": "No tengo problemas para entablar conversación con desconocidos"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo buscar nuevas amistades activamente"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_071",
+    "numero": 71,
+    "titulo": "Comida Rápida y Cadenas de Hamburguesas",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "McDonalds, Burger King, Five Guys y smash burgers.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué cadena de comida rápida prefieres para una hamburguesa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "McDonalds por las patatas y hamburguesas clásicas"
+          },
+          {
+            "letra": "B",
+            "texto": "Burger King por el sabor a la parrilla"
+          },
+          {
+            "letra": "C",
+            "texto": "Cadenas de Smash Burgers gourmet"
+          },
+          {
+            "letra": "D",
+            "texto": "Wendy / Carl Jr / Five Guys"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Prefieres hamburguesa clásica gruesa o smash burger crujiente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Smash burger fina con bordes caramelizados"
+          },
+          {
+            "letra": "B",
+            "texto": "Hamburguesa gruesa al punto jugosa"
+          },
+          {
+            "letra": "C",
+            "texto": "Hamburguesa de pollo frito crujiente"
+          },
+          {
+            "letra": "D",
+            "texto": "Hamburguesa vegetal / vegetariana"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué salsa es imprescindible en tus patatas fritas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ketchup clásico de tomate"
+          },
+          {
+            "letra": "B",
+            "texto": "Mayonesa o alioli cremoso"
+          },
+          {
+            "letra": "C",
+            "texto": "Salsa barbacoa ahumada (BBQ)"
+          },
+          {
+            "letra": "D",
+            "texto": "Salsa de queso cheddar fundido"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Pides por el autoservicio (Auto-King / McAuto) o en sala?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Por el autoservicio desde el coche para llevar"
+          },
+          {
+            "letra": "B",
+            "texto": "En los quioscos táctiles de la sala para comer allí"
+          },
+          {
+            "letra": "C",
+            "texto": "Pido a domicilio por aplicación"
+          },
+          {
+            "letra": "D",
+            "texto": "Para llevar en mostrador"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Pruebas las ediciones especiales y promociones temporales?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, siempre pruebo la hamburguesa especial de temporada"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si tiene ingredientes que me llamen mucho"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero pedir siempre mi menú favorito de siempre"
+          },
+          {
+            "letra": "D",
+            "texto": "Rara vez me fijo en las promociones"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_072",
+    "numero": 72,
+    "titulo": "Pizzas: Masa, Ingredientes y Tradición",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Pizza napolitana, masa fina, bordes rellenos y pepperoni.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué estilo de masa de pizza te gusta más?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Masa napolitana fina con borde inflado y alveolado"
+          },
+          {
+            "letra": "B",
+            "texto": "Masa fina y crujiente estilo romana"
+          },
+          {
+            "letra": "C",
+            "texto": "Masa gruesa y esponjosa estilo Chicago / Deep Dish"
+          },
+          {
+            "letra": "D",
+            "texto": "Masa con borde relleno de queso"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu pizza favorita de todos los tiempos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Pepperoni clásico con mozzarella y orégano"
+          },
+          {
+            "letra": "B",
+            "texto": "Pizza Barbacoa con carne picada y bacon"
+          },
+          {
+            "letra": "C",
+            "texto": "Cuatro Quesos (Quattro Formaggi) cremosa"
+          },
+          {
+            "letra": "D",
+            "texto": "Margarita tradicional con albahaca fresca"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Piña en la pizza (Pizza Hawaiana): a favor o en contra?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Totalmente a favor, el contraste dulce-salado es genial"
+          },
+          {
+            "letra": "B",
+            "texto": "En contra, la fruta caliente no pertenece a la pizza"
+          },
+          {
+            "letra": "C",
+            "texto": "Me da igual, la como si la ponen pero no la pido"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca la he probado"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Comes la pizza con las manos o con cubiertos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre con las manos doblando la porción"
+          },
+          {
+            "letra": "B",
+            "texto": "Con cuchillo y tenedor para no mancharme"
+          },
+          {
+            "letra": "C",
+            "texto": "Empiezo con cubiertos y termino con las manos"
+          },
+          {
+            "letra": "D",
+            "texto": "Depende de si estoy en casa o en un restaurante elegante"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te comes los bordes de la pizza o los dejas en el plato?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me los como siempre, especialmente con salsa o aceite picante"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si la masa está tierna y recién horneada"
+          },
+          {
+            "letra": "C",
+            "texto": "Suelo dejar los bordes para no llenarme tanto"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo si vienen rellenos de queso"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_073",
+    "numero": 73,
+    "titulo": "Sushi y Cocina Japonesa",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Nigiris, makis, salmón, atún rojo y restaurantes buffet libre.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia comes sushi o comida japonesa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Al menos 2 o 3 veces al mes"
+          },
+          {
+            "letra": "B",
+            "texto": "Una vez al mes como premio especial"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo en ocasiones muy puntuales con amigos"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gusta el pescado crudo ni el sushi"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué tipo de pieza de sushi es tu favorita?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Nigiris de salmón flameado con salsas"
+          },
+          {
+            "letra": "B",
+            "texto": "Makis y rolls tempurizados crujientes"
+          },
+          {
+            "letra": "C",
+            "texto": "Sashimi puro de atún rojo o salmón fresco"
+          },
+          {
+            "letra": "D",
+            "texto": "Gunkans o temakis especiales"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Sabes comer con palillos japoneses con soltura?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, los domino perfectamente sin esfuerzo"
+          },
+          {
+            "letra": "B",
+            "texto": "Me defiendo bien aunque a veces se me resbala alguna pieza"
+          },
+          {
+            "letra": "C",
+            "texto": "Pido adaptador o tenedor cuando puedo"
+          },
+          {
+            "letra": "D",
+            "texto": "Como las piezas de sushi con las manos como en Japón tradicional"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Le pones wasabi y jengibre al sushi?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Disuelvo wasabi en la soja para darle toque picante"
+          },
+          {
+            "letra": "B",
+            "texto": "Me encanta el jengibre encurtido entre pieza y pieza"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo salsa de soja suave sin wasabi"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero salsas dulces como teriyaki o anguila"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Prefieres restaurantes buffet a la carta con tablet o restaurante tradicional?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Buffet a la carta con pedidos infinitos por tablet"
+          },
+          {
+            "letra": "B",
+            "texto": "Restaurante tradicional con menú degustación cuidado"
+          },
+          {
+            "letra": "C",
+            "texto": "Locales de cinta giratoria (Kaitenzushi)"
+          },
+          {
+            "letra": "D",
+            "texto": "Pido bandejas de sushi para comer en casa"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_074",
+    "numero": 74,
+    "titulo": "Tacos, Comida Mexicana y Especias",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Tacos al pastor, birria, guacamole casero y salsas picantes.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuál es tu platillo mexicano favorito?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tacos al pastor con piña y cilantro"
+          },
+          {
+            "letra": "B",
+            "texto": "Tacos de birria con queso y consomé para dipear"
+          },
+          {
+            "letra": "C",
+            "texto": "Burritos grandes y quesadillas"
+          },
+          {
+            "letra": "D",
+            "texto": "Nachos con guacamole, queso fundido y frijoles"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué tolerancia tienes al picante en las comidas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Alta, me encantan las salsas muy picantes (Habanero, Jalapeño)"
+          },
+          {
+            "letra": "B",
+            "texto": "Media, disfruto el picante suave que realce el sabor"
+          },
+          {
+            "letra": "C",
+            "texto": "Baja, el picante fuerte me arruina la comida"
+          },
+          {
+            "letra": "D",
+            "texto": "Cero, no tolero el picante en absoluto"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres tortillas de maíz o tortillas de trigo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tortillas de maíz nixtamalizado tradicionales"
+          },
+          {
+            "letra": "B",
+            "texto": "Tortillas de harina de trigo suaves"
+          },
+          {
+            "letra": "C",
+            "texto": "Totopos crujientes de maíz"
+          },
+          {
+            "letra": "D",
+            "texto": "Me gustan ambas por igual"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cómo prefieres el guacamole?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Casero en molcajete con trozos de aguacate, tomate, cebolla y lima"
+          },
+          {
+            "letra": "B",
+            "texto": "Totalmente triturado y cremoso sin grumos"
+          },
+          {
+            "letra": "C",
+            "texto": "Con toque de cilantro y chile jalapeño picado"
+          },
+          {
+            "letra": "D",
+            "texto": "Comprado ya preparado en tarrina por rapidez"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué bebida acompaña mejor a una buena comida mexicana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cerveza mexicana bien fría con lima (Corona, Modelo)"
+          },
+          {
+            "letra": "B",
+            "texto": "Margarita con sal en el borde"
+          },
+          {
+            "letra": "C",
+            "texto": "Aguas frescas naturales (Horchata, Jamaica)"
+          },
+          {
+            "letra": "D",
+            "texto": "Refrescos clásicos de cola"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_075",
+    "numero": 75,
+    "titulo": "Postres, Helados y Dulces",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Tarta de queso, chocolate, heladerías artesanales y tiramisú.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Pides postre habitualmente cuando sales a comer a un restaurante?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, dejo hueco obligatorio para el dulce"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si la carta tiene tarta de queso fluida o chocolate"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo para compartir entre varios comensales"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca pido postre, prefiero terminar con café"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu sabor de helado predilecto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Pistacho cremoso o avellana tostada"
+          },
+          {
+            "letra": "B",
+            "texto": "Chocolate negro intenso o con cookies"
+          },
+          {
+            "letra": "C",
+            "texto": "Vainilla Bourbon o dulce de leche"
+          },
+          {
+            "letra": "D",
+            "texto": "Sabores frutales refrescantes (Limón, mango, fresa)"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres el helado en tarrina o en cucurucho de barquillo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cucurucho de galleta crujiente siempre"
+          },
+          {
+            "letra": "B",
+            "texto": "En tarrina con cuchara para no gotear"
+          },
+          {
+            "letra": "C",
+            "texto": "En tarrina con galleta encima"
+          },
+          {
+            "letra": "D",
+            "texto": "En copa grande con nata y sirope"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué tarta te parece la reina de la repostería?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tarta de queso horneada cremosa estilo Donostia"
+          },
+          {
+            "letra": "B",
+            "texto": "Tarta de chocolate con capas y trufa"
+          },
+          {
+            "letra": "C",
+            "texto": "Tarta de zanahoria (Carrot cake) con frosting de queso"
+          },
+          {
+            "letra": "D",
+            "texto": "Tiramisú italiano tradicional con mascarpone"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Eres más de chocolate negro puro, con leche o blanco?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Chocolate negro (+70% de cacao) intenso"
+          },
+          {
+            "letra": "B",
+            "texto": "Chocolate con leche dulce y cremoso"
+          },
+          {
+            "letra": "C",
+            "texto": "Chocolate blanco mantecoso"
+          },
+          {
+            "letra": "D",
+            "texto": "Cualquiera mientras lleve avellanas o almendras"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_076",
+    "numero": 76,
+    "titulo": "Tapas, Raciones y Gastronomía Española",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Tortilla de patatas, jamón ibérico, croquetas y bravas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Tortilla de patatas: con cebolla o sin cebolla?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Con cebolla siempre, le da jugosidad y dulzor"
+          },
+          {
+            "letra": "B",
+            "texto": "Sin cebolla, solo patata, huevo y sal"
+          },
+          {
+            "letra": "C",
+            "texto": "Me como cualquiera mientras esté poco cuajada"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero la tortilla muy cuajada y firme"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cómo te gusta la tortilla de patatas por dentro?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Muy jugosa y líquida (estilo Betanzos)"
+          },
+          {
+            "letra": "B",
+            "texto": "En su punto medio cremoso pero que no se desparrame"
+          },
+          {
+            "letra": "C",
+            "texto": "Bien cuajada y compacta para cortar en dados"
+          },
+          {
+            "letra": "D",
+            "texto": "Rellena de jamón y queso"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Cuál es tu ración imprescindible de tapas con amigos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Croquetas cremosas caseras (de jamón o boletus)"
+          },
+          {
+            "letra": "B",
+            "texto": "Patatas bravas con salsa picante auténtica"
+          },
+          {
+            "letra": "C",
+            "texto": "Jamón ibérico de bellota con pan con tomate"
+          },
+          {
+            "letra": "D",
+            "texto": "Calamares a la romana o rabas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué bebida pides habitualmente para el aperitivo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cerveza caña bien tirada con espuma"
+          },
+          {
+            "letra": "B",
+            "texto": "Vermut rojo con hielo y rodaja de naranja"
+          },
+          {
+            "letra": "C",
+            "texto": "Vino tinto o blanco fresco"
+          },
+          {
+            "letra": "D",
+            "texto": "Refresco o agua con gas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Prefieres el tapeo de pie de barra en barra o mesa sentado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ir de bar en bar probando la tapa estrella de cada uno"
+          },
+          {
+            "letra": "B",
+            "texto": "Sentados tranquilamente en terraza al sol"
+          },
+          {
+            "letra": "C",
+            "texto": "Mesa en salón interior con sobremesa larga"
+          },
+          {
+            "letra": "D",
+            "texto": "Cualquiera mientras haya buen ambiente y comida rica"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_077",
+    "numero": 77,
+    "titulo": "Desayunos y Brunches de Fin de Semana",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Huevos benedict, tostadas de aguacate, tortitas y zumo.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué sueles desayunar habitualmente entre semana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Café solo o con leche y nada más (desayuno rápido)"
+          },
+          {
+            "letra": "B",
+            "texto": "Tostada con aceite de oliva virgen extra y tomate / pavo"
+          },
+          {
+            "letra": "C",
+            "texto": "Cereales, avena o yogur con frutos secos"
+          },
+          {
+            "letra": "D",
+            "texto": "Huevos revueltos o tortilla con fruta"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Te gustan los brunches de fin de semana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me encantan, es mi plan favorito de sábado o domingo"
+          },
+          {
+            "letra": "B",
+            "texto": "He ido en algunas ocasiones y se come de lujo"
+          },
+          {
+            "letra": "C",
+            "texto": "Me parece una moda cara para lo que sirven"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero el almuerzo tradicional a mediodía"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Prefieres desayuno dulce o desayuno salado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Salado (tostadas, huevos, queso, jamón)"
+          },
+          {
+            "letra": "B",
+            "texto": "Dulce (croissants, tortitas, gofres con sirope)"
+          },
+          {
+            "letra": "C",
+            "texto": "Combinación de ambos (primero salado y luego dulce)"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo líquidos (café, té o zumo)"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué plato de brunch no puede faltar en tu mesa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Huevos Benedictine con salsa holandesa sobre pan brioche"
+          },
+          {
+            "letra": "B",
+            "texto": "Tostada de pan de masa madre con aguacate y huevo poché"
+          },
+          {
+            "letra": "C",
+            "texto": "Pancakes esponjosos con sirope de arce y frutos rojos"
+          },
+          {
+            "letra": "D",
+            "texto": "Açai bowl frío con granola crujiente"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Zumo de naranja recién exprimido o zumo envasado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Exprimido natural en el momento, no hay comparación"
+          },
+          {
+            "letra": "B",
+            "texto": "Zumo envasado 100% fruta refrigerado por rapidez"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero batidos verdes (smoothies) de frutas y verduras"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo tomar zumos en el desayuno"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_078",
+    "numero": 78,
+    "titulo": "Barbacoas, Asados y Carnes a la Brasa",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Chuletones, costillares BBQ, carbón y parrilladas familiares.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuál es tu punto favorito de cocción de la carne roja?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Poco hecho (sangrante y muy tierno)"
+          },
+          {
+            "letra": "B",
+            "texto": "Al punto (rosado en el centro y sellado por fuera)"
+          },
+          {
+            "letra": "C",
+            "texto": "Al punto más (casi hecho pero jugoso)"
+          },
+          {
+            "letra": "D",
+            "texto": "Muy hecho (bien cocido sin zonas rojas)"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Prefieres barbacoa de carbón tradicional o de gas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "De carbón o leña por el inconfundible aroma a humo"
+          },
+          {
+            "letra": "B",
+            "texto": "De gas por rapidez de encendido y limpieza fácil"
+          },
+          {
+            "letra": "C",
+            "texto": "Parrilla eléctrica o plancha en cocina"
+          },
+          {
+            "letra": "D",
+            "texto": "Cualquiera mientras la carne sea de calidad"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué corte de carne disfrutas más en un asado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Chuletón madurado / Ribeye grueso"
+          },
+          {
+            "letra": "B",
+            "texto": "Costillas de cerdo marinadas en salsa barbacoa"
+          },
+          {
+            "letra": "C",
+            "texto": "Chorizo criollo, morcilla y panceta crujiente"
+          },
+          {
+            "letra": "D",
+            "texto": "Picaña o entraña a fuego lento"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Sueles ser el encargado de la parrilla en reuniones con amigos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, soy el maestro asador oficial de mi grupo"
+          },
+          {
+            "letra": "B",
+            "texto": "Ayudo con el fuego y los platos"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero ocuparme de las ensaladas, bebidas o postre"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo me siento a disfrutar de la comida lista"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué guarnición no puede faltar con un buen asado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Patatas asadas en papel de aluminio con mantequilla"
+          },
+          {
+            "letra": "B",
+            "texto": "Ensalada fresca mixta para desengrasar"
+          },
+          {
+            "letra": "C",
+            "texto": "Pimientos asados a la brasa"
+          },
+          {
+            "letra": "D",
+            "texto": "Pan rústico crujiente con chimichurri"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_079",
+    "numero": 79,
+    "titulo": "Cervezas Artesanales e Industriales",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "IPAs aromáticas, lagers rubias, cervezas tostadas y catas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué tipo de cerveza prefieres habitualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Lager rubia tradicional ligera y muy fría"
+          },
+          {
+            "letra": "B",
+            "texto": "IPA (India Pale Ale) aromática y lupulada"
+          },
+          {
+            "letra": "C",
+            "texto": "Cerveza tostada o de trigo (tipo belga / alemana)"
+          },
+          {
+            "letra": "D",
+            "texto": "Stout o cerveza negra con notas de café y cacao"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Consumes cerveza artesanal (Craft Beer)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, busco marcas locales y nuevos lotes en latas de diseño"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gusta probarlas cuando voy a cervecerías especializadas"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero las marcas comerciales de toda la vida"
+          },
+          {
+            "letra": "D",
+            "texto": "No tomo cerveza"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Bebes la cerveza directamente del botellín o en vaso de cristal?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En copa o vaso de cristal fino bien tirada"
+          },
+          {
+            "letra": "B",
+            "texto": "Directamente del botellín bien frío"
+          },
+          {
+            "letra": "C",
+            "texto": "En jarra congelada en verano"
+          },
+          {
+            "letra": "D",
+            "texto": "En lata directamente"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué opinas de la cerveza 0,0% sin alcohol?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Han mejorado muchísimo y son una gran opción para cuidarse"
+          },
+          {
+            "letra": "B",
+            "texto": "Las tomo cuando tengo que conducir"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero tomar agua antes que cerveza sin alcohol"
+          },
+          {
+            "letra": "D",
+            "texto": "No tomo cerveza"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuál es el mejor momento para una cerveza bien fría?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Al salir de trabajar con compañeros (Afterwork)"
+          },
+          {
+            "letra": "B",
+            "texto": "El fin de semana al mediodía con el aperitivo al sol"
+          },
+          {
+            "letra": "C",
+            "texto": "Viendo un partido de fútbol emocionante"
+          },
+          {
+            "letra": "D",
+            "texto": "Por la noche cenando con amigos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_080",
+    "numero": 80,
+    "titulo": "Vino, Enología y Bodegas",
+    "categoria": "Gastronomía & Restaurantes",
+    "categoria_icono": "🍕",
+    "descripcion": "Tintos crianza, blancos frescos, uvas y catas de vino.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué tipo de vino sueles pedir con más frecuencia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Vino tinto con cuerpo (Ribera del Duero, Rioja, Malbec)"
+          },
+          {
+            "letra": "B",
+            "texto": "Vino blanco fresco y afrutado (Albariño, Rueda, Verdejo)"
+          },
+          {
+            "letra": "C",
+            "texto": "Vino rosado o espumoso (Cava, Champagne, Prosecco)"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo beber vino"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Con qué frecuencia tomas una copa de vino?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En comidas o cenas de fin de semana con buena comida"
+          },
+          {
+            "letra": "B",
+            "texto": "Casi a diario con la comida principal"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo en celebraciones especiales o brindis"
+          },
+          {
+            "letra": "D",
+            "texto": "Muy rara vez"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has visitado alguna vez una bodega con cata guiada de vinos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, he hecho enoturismo y me pareció una experiencia genial"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gustaría visitar alguna bodega próximamente"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo he asistido a catas en restaurantes o eventos"
+          },
+          {
+            "letra": "D",
+            "texto": "No he visitado bodegas"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Cuánto sueles gastar en una botella de vino para casa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Entre $5 y $10 USD para consumo habitual"
+          },
+          {
+            "letra": "B",
+            "texto": "Entre $10 y $20 USD para una cena especial"
+          },
+          {
+            "letra": "C",
+            "texto": "Más de $25 USD buscando añadas o bodegas de autor"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca compro botellas de vino"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te fijas en la Denominación de Origen al elegir un vino en el supermercado?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, tengo mis regiones y variedades de uva favoritas"
+          },
+          {
+            "letra": "B",
+            "texto": "Miro el diseño de la etiqueta y el rango de precio"
+          },
+          {
+            "letra": "C",
+            "texto": "Pido consejo a amigos o dependientes de la tienda"
+          },
+          {
+            "letra": "D",
+            "texto": "Cojo la botella que esté en oferta"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_081",
+    "numero": 81,
+    "titulo": "Aerolíneas de Bajo Coste vs Aerolíneas Tradicionales",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Ryanair, equipaje de mano, embarque prioritario y vuelos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sueles viajar con aerolíneas Low Cost (Ryanair, Vueling, EasyJet)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, casi siempre para encontrar los billetes más baratos"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo para vuelos cortos de menos de 2 horas"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero aerolíneas tradicionales con más servicios incluidos"
+          },
+          {
+            "letra": "D",
+            "texto": "Evito las low cost por la incomodidad y políticas de maletas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Pagas por añadir equipaje de mano en cabina o viajas solo con mochila?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Viajo solo con una mochila bajo el asiento para no pagar extras"
+          },
+          {
+            "letra": "B",
+            "texto": "Pago siempre por la maleta de cabina de 10 kg"
+          },
+          {
+            "letra": "C",
+            "texto": "Facturo maleta grande en bodega para llevar todo cómodo"
+          },
+          {
+            "letra": "D",
+            "texto": "Depende de la duración del viaje"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Pagas por elegir asiento en el avión?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "No, dejo que el sistema me asigne asiento aleatorio gratis"
+          },
+          {
+            "letra": "B",
+            "texto": "Pago para asegurar ventanilla o salida de emergencia"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo si viajo acompañado para ir sentados juntos"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo en vuelos intercontinentales largos"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué es lo que más te molesta en un aeropuerto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Las colas interminables en los controles de seguridad"
+          },
+          {
+            "letra": "B",
+            "texto": "Los retrasos imprevistos y cancelaciones de vuelos"
+          },
+          {
+            "letra": "C",
+            "texto": "Los precios desorbitados del agua y comida en terminales"
+          },
+          {
+            "letra": "D",
+            "texto": "La gente que se agolpa en la puerta antes de su turno de embarque"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Con cuánta antelación llegas al aeropuerto antes del despegue?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Con 2 horas para vuelos nacionales / europeos"
+          },
+          {
+            "letra": "B",
+            "texto": "Con más de 3 horas para vuelos internacionales largos"
+          },
+          {
+            "letra": "C",
+            "texto": "Con el tiempo justo (1 hora o menos si llevo solo mochila)"
+          },
+          {
+            "letra": "D",
+            "texto": "Siempre con margen holgado para no estresarme"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_082",
+    "numero": 82,
+    "titulo": "Destinos de Playa: Caribe vs Mediterráneo",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Aguas cristalinas, resorts todo incluido, calas y verano.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué tipo de destino de playa prefieres para relajarte?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Resorts todo incluido en el Caribe (Cancún, Punta Cana)"
+          },
+          {
+            "letra": "B",
+            "texto": "Calas vírgenes de aguas turquesas en el Mediterráneo (Baleares, Grecia)"
+          },
+          {
+            "letra": "C",
+            "texto": "Playas de arena dorada con olas para hacer surf"
+          },
+          {
+            "letra": "D",
+            "texto": "Playas tranquilas familiares de fácil acceso"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Te gusta pasar todo el día tumbado en la hamaca al sol?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, desconexión total con libro, bebida y siesta"
+          },
+          {
+            "letra": "B",
+            "texto": "Un par de horas al sol y luego prefiero bañarme o pasear"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero hacer actividades acuáticas (snorkel, kayak, moto de agua)"
+          },
+          {
+            "letra": "D",
+            "texto": "No aguanto mucho tiempo al sol, busco la sombra"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has estado en un hotel con régimen de Todo Incluido (All Inclusive)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me encanta la comodidad de comer y beber sin pensar en gastos"
+          },
+          {
+            "letra": "B",
+            "texto": "He estado pero prefiero salir a explorar restaurantes locales"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gustaría probar la experiencia algún día"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero apartamentos para cocinar mi propia comida"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué protector solar utilizas en la playa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Factor de protección muy alto SPF 50+ siempre"
+          },
+          {
+            "letra": "B",
+            "texto": "Factor SPF 30 resistente al agua"
+          },
+          {
+            "letra": "C",
+            "texto": "Aceite bronceador para coger color rápido"
+          },
+          {
+            "letra": "D",
+            "texto": "Rara vez me aplico protector solar"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Prefieres bañarte en el mar o en la piscina del hotel?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En el mar, el agua salada y la naturaleza no tienen rival"
+          },
+          {
+            "letra": "B",
+            "texto": "En la piscina del hotel con hamacas cómodas sin arena"
+          },
+          {
+            "letra": "C",
+            "texto": "Alterno entre ambas a lo largo del día"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi no me baño, voy por la brisa y las vistas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_083",
+    "numero": 83,
+    "titulo": "Turismo en Grandes Capitales del Mundo",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Nueva York, Tokio, Londres, París y rascacielos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cuál es la gran capital mundial que más sueñas con visitar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Tokio (Japón) por su fascinante mezcla de tradición y futuro"
+          },
+          {
+            "letra": "B",
+            "texto": "Nueva York (EE.UU.) por su energía de película y rascacielos"
+          },
+          {
+            "letra": "C",
+            "texto": "Londres o París por su historia, museos y elegancia"
+          },
+          {
+            "letra": "D",
+            "texto": "Roma por sus monumentos milenarios en cada esquina"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cómo te desplazas cuando haces turismo en una gran ciudad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En metro y autobús público como un ciudadano local"
+          },
+          {
+            "letra": "B",
+            "texto": "Caminando decenas de kilómetros al día hasta cansarme"
+          },
+          {
+            "letra": "C",
+            "texto": "En Uber o taxis para ir directo a cada punto"
+          },
+          {
+            "letra": "D",
+            "texto": "En autobuses turísticos descapotables (Hop-on Hop-off)"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Visitas museos de arte e historia en tus viajes urbanos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, reservo entradas para los museos más importantes"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo 1 o 2 museos emblemáticos si son imprescindibles"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero pasear por las calles y barrios antes que entrar a museos"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gusta visitar museos"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Subes a miradores de rascacielos para ver la ciudad desde arriba?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, siempre busco el mirador más alto de la ciudad al atardecer"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si no hay que hacer colas desmesuradas"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero miradores naturales gratuitos en colinas"
+          },
+          {
+            "letra": "D",
+            "texto": "Tengo algo de vértigo y evito las alturas extremas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuánto tiempo consideras ideal para conocer una gran capital?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Entre 4 y 6 días completos para ver lo principal con calma"
+          },
+          {
+            "letra": "B",
+            "texto": "Una escapada rápida de fin de semana (2 a 3 días)"
+          },
+          {
+            "letra": "C",
+            "texto": "Al menos una semana entera o 10 días"
+          },
+          {
+            "letra": "D",
+            "texto": "Más de dos semanas para empaparme de la vida local"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_084",
+    "numero": 84,
+    "titulo": "Viajes en Furgoneta Camper y Caravaning",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Libertad sobre ruedas, acampada libre, rutas y naturaleza.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has viajado alguna vez en furgoneta camperizada o autocaravana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo mi propia camper o he hecho viajes inolvidables"
+          },
+          {
+            "letra": "B",
+            "texto": "He alquilado una camper un fin de semana para probar"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo muchas ganas de hacer un viaje así con amigos o pareja"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero la comodidad de un hotel con cama y baño privado"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué es lo que más te atrae del estilo de vida camper?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Despertarte cada día frente a un paisaje natural diferente"
+          },
+          {
+            "letra": "B",
+            "texto": "La libertad de cambiar de ruta sobre la marcha sin reservas previas"
+          },
+          {
+            "letra": "C",
+            "texto": "Viajar con tu mascota y todo tu equipaje deportivo a cuestas"
+          },
+          {
+            "letra": "D",
+            "texto": "El contacto directo con la naturaleza y las estrellas"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué te parece el aspecto más complicado de viajar en camper?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "El espacio reducido y la gestión del agua y WC químico"
+          },
+          {
+            "letra": "B",
+            "texto": "Encontrar sitios legales y seguros para pernoctar"
+          },
+          {
+            "letra": "C",
+            "texto": "El consumo de combustible de un vehículo voluminoso"
+          },
+          {
+            "letra": "D",
+            "texto": "Tener que cocinar y fregar en un espacio pequeño"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué ruta camper te gustaría recorrer más?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "La costa de Portugal y Algarve recorriendo playas salvajes"
+          },
+          {
+            "letra": "B",
+            "texto": "La Ruta 66 en Estados Unidos o los fiordos de Noruega"
+          },
+          {
+            "letra": "C",
+            "texto": "El norte de España (Asturias, Cantabria y País Vasco)"
+          },
+          {
+            "letra": "D",
+            "texto": "Los Alpes suizos y puertos de montaña alpinos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Comprarías una camper para viajar todos los fines de semana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es mi sueño de ocio a medio plazo"
+          },
+          {
+            "letra": "B",
+            "texto": "Prefiero alquilar puntualmente para no tener gastos de mantenimiento"
+          },
+          {
+            "letra": "C",
+            "texto": "No me compensa económicamente"
+          },
+          {
+            "letra": "D",
+            "texto": "No es mi estilo de viaje"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_085",
+    "numero": 85,
+    "titulo": "Cruceros y Grandes Barcos de Vacaciones",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Camarotes con balcón, escalas, piscinas en cubierta y buffet.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has realizado algún viaje en crucero turístico?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, he hecho uno o varios cruceros y la experiencia fue genial"
+          },
+          {
+            "letra": "B",
+            "texto": "Nunca he hecho un crucero pero me gustaría probar"
+          },
+          {
+            "letra": "C",
+            "texto": "No me llama la atención la idea de viajar en barco grande"
+          },
+          {
+            "letra": "D",
+            "texto": "Tengo miedo a marearme en alta mar"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué destino de crucero te parece más atractivo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Islas Griegas y Mediterráneo oriental"
+          },
+          {
+            "letra": "B",
+            "texto": "Fiordos Noruegos y paisajes glaciares"
+          },
+          {
+            "letra": "C",
+            "texto": "Islas del Caribe con escalas en playas privadas"
+          },
+          {
+            "letra": "D",
+            "texto": "Cruceros fluviales por el Danubio o el Rin"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué tipo de camarote elegirías en un crucero?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Camarote exterior con balcón privado para ver el mar"
+          },
+          {
+            "letra": "B",
+            "texto": "Camarote interior por ser la opción más económica"
+          },
+          {
+            "letra": "C",
+            "texto": "Camarote con ventana fija (ojo de buey)"
+          },
+          {
+            "letra": "D",
+            "texto": "Suite espaciosa con mayordomo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué servicio a bordo de los cruceros te parece más llamativo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Las piscinas con toboganes y jacuzzis en la cubierta alta"
+          },
+          {
+            "letra": "B",
+            "texto": "Los espectáculos teatrales nocturnos y casinos a bordo"
+          },
+          {
+            "letra": "C",
+            "texto": "Los buffets abiertos casi 24 horas con comida variada"
+          },
+          {
+            "letra": "D",
+            "texto": "Poder visitar varias ciudades distintas sin deshacer la maleta"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Prefieres hacer las excursiones organizadas del barco o por tu cuenta?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Bajar por libre y explorar las ciudades a mi ritmo"
+          },
+          {
+            "letra": "B",
+            "texto": "Contratar las excursiones oficiales del barco por seguridad de horarios"
+          },
+          {
+            "letra": "C",
+            "texto": "Excursiones con agencias locales más baratas en el puerto"
+          },
+          {
+            "letra": "D",
+            "texto": "Quedarme en el barco disfrutando de las instalaciones vacías"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_086",
+    "numero": 86,
+    "titulo": "Idiomas, Choque Cultural y Adaptación",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Comunicación en el extranjero, costumbres locales y respeto.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cómo te comunicas cuando viajas a un país donde no hablan tu idioma?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "En inglés con soltura en la mayoría de situaciones"
+          },
+          {
+            "letra": "B",
+            "texto": "Con ayuda de Google Traductor con la cámara y voz"
+          },
+          {
+            "letra": "C",
+            "texto": "Con gestos, señas y una sonrisa universal"
+          },
+          {
+            "letra": "D",
+            "texto": "Intento aprender de antemano palabras básicas de cortesía"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Te gusta probar la comida callejera (Street Food) local en tus viajes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es la forma más auténtica y rica de conocer un país"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en puestos concurridos que tengan buenas valoraciones higiénicas"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero restaurantes cerrados con garantías sanitarias"
+          },
+          {
+            "letra": "D",
+            "texto": "No me atrevo con la comida callejera por miedo a ponerme malo"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has experimentado un choque cultural muy fuerte en algún viaje?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, en países asiáticos o de oriente medio, fue muy enriquecedor"
+          },
+          {
+            "letra": "B",
+            "texto": "Ligeras diferencias pero me adapté con facilidad"
+          },
+          {
+            "letra": "C",
+            "texto": "Intento informarme bien de las costumbres locales antes de ir"
+          },
+          {
+            "letra": "D",
+            "texto": "Apenas he viajado fuera de mi entorno cultural"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué haces con el cambio de moneda cuando viajas fuera de tu divisa?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Uso tarjetas sin comisiones de cambio (Revolut, N26)"
+          },
+          {
+            "letra": "B",
+            "texto": "Saco efectivo en cajeros locales del destino"
+          },
+          {
+            "letra": "C",
+            "texto": "Cambio billetes en el aeropuerto o banco antes de salir"
+          },
+          {
+            "letra": "D",
+            "texto": "Pago todo con mi tarjeta bancaria habitual"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Compras eSIMs digitales de datos móviles para viajar al extranjero?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, activo una eSIM digital (Airalo, Holafly) antes de aterrizar"
+          },
+          {
+            "letra": "B",
+            "texto": "Compro una tarjeta SIM física prepago local en el aeropuerto"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo uso el WiFi gratuito de hoteles y cafeterías"
+          },
+          {
+            "letra": "D",
+            "texto": "Uso el roaming de mi compañía telefónica"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_087",
+    "numero": 87,
+    "titulo": "Turismo Rural y Desconexión en Pueblos",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Casas rurales con chimenea, gastronomía tradicional y calma.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Con qué frecuencia haces escapadas de turismo rural a pueblos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Varias veces al año en puentes y fines de semana de otoño/invierno"
+          },
+          {
+            "letra": "B",
+            "texto": "Al menos una vez al año para reunir a toda la familia o amigos"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo de paso en vacaciones de verano"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca, soy una persona 100% urbanita"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué buscas principalmente en una casa rural?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Chimenea de leña, barbacoa exterior y jardín privado"
+          },
+          {
+            "letra": "B",
+            "texto": "Piscina privada para el verano y vistas a la montaña"
+          },
+          {
+            "letra": "C",
+            "texto": "Cocina amplia y mesa grande para comidas en grupo"
+          },
+          {
+            "letra": "D",
+            "texto": "Buena conexión a internet por si necesito trabajar"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Comprarías una casa de pueblo para restaurar como segunda residencia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, me encantaría tener un refugio de paz en el campo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si estuviera lista para entrar a vivir sin obras complejas"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero alquilar para no tener ataduras ni gastos fijos"
+          },
+          {
+            "letra": "D",
+            "texto": "No me interesa tener casa en un pueblo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué actividades disfrutas más en un entorno rural?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Senderismo suave por el bosque y respirar aire puro"
+          },
+          {
+            "letra": "B",
+            "texto": "Comer en mesones tradicionales guisos y carnes asadas"
+          },
+          {
+            "letra": "C",
+            "texto": "Hacer sobremesa larga junto a la chimenea jugando a juegos"
+          },
+          {
+            "letra": "D",
+            "texto": "Comprar productos artesanos locales (miel, embutidos, quesos)"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuánto tiempo puedes estar en un pueblo sin aburrirte?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Podría vivir allí permanentemente sin problemas"
+          },
+          {
+            "letra": "B",
+            "texto": "Un fin de semana largo de 3 o 4 días es perfecto"
+          },
+          {
+            "letra": "C",
+            "texto": "A los 2 días ya echo de menos la actividad de la ciudad"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo paso el día y vuelvo a dormir a mi casa"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_088",
+    "numero": 88,
+    "titulo": "Fotografía de Viajes y Creación de Recuerdos",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Cámaras réflex, fotos con smartphone, álbumes y Reels.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué cámara utilizas para hacer fotos durante tus viajes?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "La cámara de mi smartphone de gama alta"
+          },
+          {
+            "letra": "B",
+            "texto": "Cámara réflex o sin espejo (Mirrorless) con objetivos dedicados"
+          },
+          {
+            "letra": "C",
+            "texto": "Cámara de acción deportiva (GoPro) para actividades"
+          },
+          {
+            "letra": "D",
+            "texto": "Cámara analógica clásica con carrete de película"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Sueles imprimir álbumes de fotos físicos después de un gran viaje?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, diseño e imprimo un fotolibro de cada gran viaje"
+          },
+          {
+            "letra": "B",
+            "texto": "Imprimo un par de fotos destacadas para enmarcar en casa"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo las guardo en carpetas en la nube o disco duro"
+          },
+          {
+            "letra": "D",
+            "texto": "Las subo a redes sociales y no las imprimo en papel"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Dedicas mucho tiempo a posar para la foto perfecta en lugares turísticos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Hago un par de fotos rápidas del paisaje y sigo disfrutando"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gusta buscar buenos ángulos y luz para tener fotos bonitas"
+          },
+          {
+            "letra": "C",
+            "texto": "Me agobia la gente que hace colas de 1 hora solo para un selfie"
+          },
+          {
+            "letra": "D",
+            "texto": "Rara vez salgo en las fotos, solo fotografío el entorno"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Compras recuerdos típicos (souvenirs) en cada ciudad que visitas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, imanes para la nevera de cada lugar son tradición sagrada"
+          },
+          {
+            "letra": "B",
+            "texto": "Compro camisetas, tazas o artesanía local auténtica"
+          },
+          {
+            "letra": "C",
+            "texto": "Compro productos gastronómicos típicos para comer en casa"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo comprar souvenirs porque acumulan polvo"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Llevas un diario de viaje escrito con notas de tus experiencias?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, apunto anécdotas, restaurantes y gastos de cada día"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo notas en el móvil con recomendaciones"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo confío en mi memoria y en las fotos tomadas"
+          },
+          {
+            "letra": "D",
+            "texto": "No llevo registro escrito"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_089",
+    "numero": 89,
+    "titulo": "Viajes de Mochilero (Backpacking) y Hostales",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Mochila a la espalda, habitaciones compartidas y bajo presupuesto.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has viajado alguna vez de mochilero por varios países seguidos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, he hecho viajes largos de mochila por el sudeste asiático o Europa"
+          },
+          {
+            "letra": "B",
+            "texto": "He hecho rutas cortas de mochila de 1 o 2 semanas"
+          },
+          {
+            "letra": "C",
+            "texto": "Me gustaría vivir la experiencia al menos una vez en la vida"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero viajar con maleta de ruedas y hoteles cómodos"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Dormirías en una habitación compartida con literas en un hostal juvenil?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es genial para ahorrar y conocer a otros viajeros de todo el mundo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si viajo solo o con presupuesto muy ajustado"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero habitación privada aunque sea dentro del hostal"
+          },
+          {
+            "letra": "D",
+            "texto": "No comparto habitación con desconocidos bajo ningún concepto"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué es lo más importante en la mochila de un viajero?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Un buen calzado cómodo todoterreno que no haga rozaduras"
+          },
+          {
+            "letra": "B",
+            "texto": "Cargador portátil (Powerbank) potente para no quedarse sin batería"
+          },
+          {
+            "letra": "C",
+            "texto": "Neceser compacto con toalla de secado rápido y tapones"
+          },
+          {
+            "letra": "D",
+            "texto": "Chubasquero ligero plegable cortavientos"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Utilizas trenes nocturnos o autobuses largos para ahorrar noche de hotel?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, duermes mientras avanzas y ahorras tiempo y dinero"
+          },
+          {
+            "letra": "B",
+            "texto": "Lo he hecho pero se duerme con dificultad"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero viajar de día y dormir en una cama fija de noche"
+          },
+          {
+            "letra": "D",
+            "texto": "Solo tomo vuelos rápidos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué cualidad consideras más necesaria para viajar de mochilero?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Capacidad de adaptación y flexibilidad ante imprevistos"
+          },
+          {
+            "letra": "B",
+            "texto": "Sociabilidad para pedir ayuda y hacer amigos fácilmente"
+          },
+          {
+            "letra": "C",
+            "texto": "Organización para estirar el presupuesto al máximo"
+          },
+          {
+            "letra": "D",
+            "texto": "Paciencia infinita"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_090",
+    "numero": 90,
+    "titulo": "Turismo Temático: Parques de Atracciones y Eventos",
+    "categoria": "Viajes, Destinos & Turismo",
+    "categoria_icono": "✈️",
+    "descripcion": "Disneyland, Universal Studios, PortAventura y montañas rusas.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Te gustan los parques de atracciones temáticos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me fascinan, viajo específicamente para visitar grandes parques"
+          },
+          {
+            "letra": "B",
+            "texto": "Me encantan las montañas rusas fuertes con caídas y loopings"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero atracciones oscuras inmersivas y espectáculos familiares"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gustan las atracciones fuertes porque me mareo"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué parque temático consideras el mejor al que has ido o sueñas ir?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Universal Studios (Orlando / Osaka) por las zonas de Harry Potter / Nintendo"
+          },
+          {
+            "letra": "B",
+            "texto": "Disneyland / Disney World por la magia y ambientación perfecta"
+          },
+          {
+            "letra": "C",
+            "texto": "PortAventura / Europa-Park por sus montañas rusas de récord"
+          },
+          {
+            "letra": "D",
+            "texto": "Parques acuáticos gigantescos con toboganes extremos"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Pagarías por pases rápidos (Fast Pass / Express) para evitar colas?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sin duda, mi tiempo de vacaciones vale más que esperar 2 horas por atracción"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en días de máxima afluencia en atracciones estrella"
+          },
+          {
+            "letra": "C",
+            "texto": "Me niego a pagar suplementos extra abusivos"
+          },
+          {
+            "letra": "D",
+            "texto": "Aprovecho las colas de Single Rider (viajero individual) para avanzar rápido"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué atracción te produce más adrenalina?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Montaña rusa de aceleración magnética que alcanza +130 km/h en segundos"
+          },
+          {
+            "letra": "B",
+            "texto": "Torre de caída libre de más de 80 metros de altura"
+          },
+          {
+            "letra": "C",
+            "texto": "Atracciones con caídas verticales de más de 90 grados"
+          },
+          {
+            "letra": "D",
+            "texto": "Simuladores inmersivos con pantallas envolventes 4D"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Comes en los restaurantes temáticos dentro del parque?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, para sumergirme al 100% en la experiencia temática"
+          },
+          {
+            "letra": "B",
+            "texto": "Pido comida rápida básica dentro del parque para no perder tiempo"
+          },
+          {
+            "letra": "C",
+            "texto": "Llevo mis propios bocadillos y snacks si el parque lo permite"
+          },
+          {
+            "letra": "D",
+            "texto": "Salgo a comer fuera del parque"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_091",
+    "numero": 91,
+    "titulo": "Coches de Combustión vs Híbridos y Eléctricos",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Motores gasolina, diésel, híbridos autorecargables y enchufables.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué tipo de motor tiene tu coche actual o el de tu familia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Motor de gasolina tradicional"
+          },
+          {
+            "letra": "B",
+            "texto": "Motor diésel de bajo consumo para trayectos largos"
+          },
+          {
+            "letra": "C",
+            "texto": "Motor híbrido autorrecargable (HEV) o enchufable (PHEV)"
+          },
+          {
+            "letra": "D",
+            "texto": "Vehículo 100% eléctrico a batería (EV)"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Si compraras un coche nuevo hoy, qué motorización elegirías?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Híbrido no enchufable por etiqueta ECO y practicidad sin cables"
+          },
+          {
+            "letra": "B",
+            "texto": "Gasolina potente o deportivo con cambio manual"
+          },
+          {
+            "letra": "C",
+            "texto": "100% Eléctrico para cargar en casa y ahorrar costes"
+          },
+          {
+            "letra": "D",
+            "texto": "Híbrido enchufable para tener lo mejor de ambos mundos"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué opinas sobre la desaparición progresiva del motor diésel?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Una lástima, para hacer muchos kilómetros en autopista sigue siendo imbatible"
+          },
+          {
+            "letra": "B",
+            "texto": "Lógica por las emisiones contaminantes en ciudades"
+          },
+          {
+            "letra": "C",
+            "texto": "Injusta porque los motores diésel modernos son muy limpios"
+          },
+          {
+            "letra": "D",
+            "texto": "Me es indiferente"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Tienes punto de carga en tu garaje o plaza de aparcamiento?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo cargador instalado en mi vivienda unifamiliar o garaje"
+          },
+          {
+            "letra": "B",
+            "texto": "Tengo plaza comunitaria pero aún no he instalado cargador"
+          },
+          {
+            "letra": "C",
+            "texto": "Aparco en la calle y dependería de cargadores públicos"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo coche"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cuál es el factor más determinante al comprar un coche?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Fiabilidad mecánica contrastada y coste de mantenimiento bajo"
+          },
+          {
+            "letra": "B",
+            "texto": "Diseño exterior, potencia y sensaciones al volante"
+          },
+          {
+            "letra": "C",
+            "texto": "Seguridad activa y espacio para familia y equipaje"
+          },
+          {
+            "letra": "D",
+            "texto": "Precio de adquisición y condiciones de financiación"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_092",
+    "numero": 92,
+    "titulo": "Cambio Manual vs Cambio Automático",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Palanca de cambios, doble embrague, levas y comodidad en atascos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Prefieres conducir con cambio manual o cambio automático?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Automático siempre, la comodidad en ciudad y atascos no tiene precio"
+          },
+          {
+            "letra": "B",
+            "texto": "Manual por el control total de las marchas y el placer de conducir"
+          },
+          {
+            "letra": "C",
+            "texto": "Automático con levas en el volante para poder cambiar cuando quiera"
+          },
+          {
+            "letra": "D",
+            "texto": "Me es indiferente, me adapto a cualquier coche"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Aprendiste a conducir en un coche con cambio manual?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, como la inmensa mayoría de conductores en mi país"
+          },
+          {
+            "letra": "B",
+            "texto": "Aprendí directamente en un coche automático"
+          },
+          {
+            "letra": "C",
+            "texto": "Tuve clases en manual pero en cuanto pude pasé a automático"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo carnet de conducir"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Consideras que el cambio automático es más seguro?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, permite mantener las dos manos en el volante y menos distracciones"
+          },
+          {
+            "letra": "B",
+            "texto": "Es igual de seguro, depende de la atención del conductor"
+          },
+          {
+            "letra": "C",
+            "texto": "El manual da mejor retención con freno motor en bajadas pronunciadas"
+          },
+          {
+            "letra": "D",
+            "texto": "No noto diferencia en seguridad"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Has conducido coches con levas de cambio detrás del volante?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es divertidísimo para reducir marchas en carreteras de curvas"
+          },
+          {
+            "letra": "B",
+            "texto": "Las he probado pero casi siempre dejo el modo D automático"
+          },
+          {
+            "letra": "C",
+            "texto": "Mi coche no tiene levas pero me gustaría probarlas"
+          },
+          {
+            "letra": "D",
+            "texto": "No he conducido coches con levas"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Pagarías el sobrecoste habitual de $1,500-$2,000 por la caja automática?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sin dudarlo, es el extra más rentable de cualquier coche moderno"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo si voy a usar el coche mucho en ciudad"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero ahorrarme ese dinero o gastarlo en otro equipamiento"
+          },
+          {
+            "letra": "D",
+            "texto": "No pagaría por cambio automático"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_093",
+    "numero": 93,
+    "titulo": "Motos, Scooters y Libertad sobre Dos Ruedas",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Motos de gran cilindrada, scooters urbanos 125cc y cascos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Conduces motocicleta o scooter habitualmente?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, moto de gran cilindrada para rutas y viajes de fin de semana"
+          },
+          {
+            "letra": "B",
+            "texto": "Scooter de 125cc o eléctrico para moverme ágil por la ciudad"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo moto pero la uso de forma ocasional con buen tiempo"
+          },
+          {
+            "letra": "D",
+            "texto": "No conduzco motocicletas"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué ventaja consideras inigualable en una moto urbana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Aparcar en la puerta de cualquier sitio sin dar vueltas"
+          },
+          {
+            "letra": "B",
+            "texto": "Ahorro enorme de tiempo al evitar atascos de tráfico"
+          },
+          {
+            "letra": "C",
+            "texto": "Bajo consumo de combustible y mantenimiento económico"
+          },
+          {
+            "letra": "D",
+            "texto": "La sensación de libertad y viento"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué tipo de casco utilizas para montar en moto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Casco integral cerrado de fibra de carbono para máxima protección"
+          },
+          {
+            "letra": "B",
+            "texto": "Casco modular abatible por comodidad al parar"
+          },
+          {
+            "letra": "C",
+            "texto": "Casco jet abierto para ciudad"
+          },
+          {
+            "letra": "D",
+            "texto": "No conduzco moto"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Llevas siempre chaqueta con protecciones y guantes homologados?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre, la equipación completa es el único chasis en una moto"
+          },
+          {
+            "letra": "B",
+            "texto": "Guantes y chaqueta siempre, aunque haga calor en verano"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo casco en trayectos urbanos cortos"
+          },
+          {
+            "letra": "D",
+            "texto": "No conduzco moto"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Has soñado alguna vez con hacer un gran viaje en moto?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, recorrer la Ruta 66 o los pasos alpinos en una moto Trail / Touring"
+          },
+          {
+            "letra": "B",
+            "texto": "Una ruta por la costa con una moto clásica / Café Racer"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero la comodidad y seguridad de las 4 ruedas de un coche"
+          },
+          {
+            "letra": "D",
+            "texto": "No me llaman la atención las motos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_094",
+    "numero": 94,
+    "titulo": "Mantenimiento del Coche, ITV y Mecánica",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Cambios de aceite, neumáticos, revisiones periódicas y talleres.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Llevas el mantenimiento de tu coche al día según el libro oficial?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Rigurosamente cada año o kilometraje indicado"
+          },
+          {
+            "letra": "B",
+            "texto": "Suelo pasar la revisión cuando se enciende el aviso en el cuadro"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo cambio aceite y filtros cuando me acuerdo"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo coche propio"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Dónde prefieres llevar tu coche a reparar o mantener?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A mi taller mecánico de confianza de barrio"
+          },
+          {
+            "letra": "B",
+            "texto": "Al concesionario oficial de la marca aunque sea más caro"
+          },
+          {
+            "letra": "C",
+            "texto": "Hago yo mismo tareas sencillas (bombillas, filtros, batería)"
+          },
+          {
+            "letra": "D",
+            "texto": "A grandes cadenas de mecánica rápida"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Con qué frecuencia revisas la presión de los neumáticos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Al menos una vez al mes o antes de cada viaje largo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo cuando paso la revisión anual en el taller"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo si veo un neumático visiblemente bajo de aire"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca reviso la presión"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Te genera nerviosismo pasar la Inspección Técnica de Vehículos (ITV)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Ninguno, llevo el coche impecable y pasa a la primera"
+          },
+          {
+            "letra": "B",
+            "texto": "Un poco de incertidumbre por si encuentran algún defecto menor"
+          },
+          {
+            "letra": "C",
+            "texto": "Bastante, temo que me pongan falta grave y tener que volver"
+          },
+          {
+            "letra": "D",
+            "texto": "No me ha tocado pasarla todavía"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Sabrías cambiar una rueda pinchada por la de repuesto en carretera?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, sé colocar el gato y aflojar los tornillos con soltura"
+          },
+          {
+            "letra": "B",
+            "texto": "Conozco la teoría pero prefiero llamar a la grúa del seguro"
+          },
+          {
+            "letra": "C",
+            "texto": "Nunca lo he hecho y me daría miedo hacerlo en carretera"
+          },
+          {
+            "letra": "D",
+            "texto": "Mi coche lleva kit antipinchazos con compresor en vez de rueda"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_095",
+    "numero": 95,
+    "titulo": "Fórmula 1 y Automovilismo Deportivo",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Grandes Premios, Ferrari, Red Bull, Fernando Alonso y adelantamientos.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Sigues las carreras de Fórmula 1 los fines de semana?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, veo clasificación el sábado y carrera el domingo religiosamente"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo las carreras más espectaculares (Mónaco, Silverstone, Spa)"
+          },
+          {
+            "letra": "C",
+            "texto": "Miro los resúmenes de adelantamientos y polémicas en YouTube"
+          },
+          {
+            "letra": "D",
+            "texto": "No sigo la Fórmula 1"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Cuál es tu piloto o escudería favorita en la parrilla?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Fernando Alonso / Aston Martin"
+          },
+          {
+            "letra": "B",
+            "texto": "Ferrari (Scuderia Ferrari)"
+          },
+          {
+            "letra": "C",
+            "texto": "Max Verstappen / Red Bull Racing"
+          },
+          {
+            "letra": "D",
+            "texto": "Lewis Hamilton / Mercedes"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Has asistido a un circuito a ver un Gran Premio de F1 o MotoGP en directo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, el sonido de los motores en vivo y el ambiente es sobrecogedor"
+          },
+          {
+            "letra": "B",
+            "texto": "Me encantaría ir al menos una vez en la vida"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero verlo por televisión con comentarios técnicos y repeticiones"
+          },
+          {
+            "letra": "D",
+            "texto": "No me interesa el automovilismo"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué circuito del calendario de F1 te parece el más legendario?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Spa-Francorchamps en Bélgica con la subida de Eau Rouge"
+          },
+          {
+            "letra": "B",
+            "texto": "Monza en Italia por la velocidad pura del Templo de la Velocidad"
+          },
+          {
+            "letra": "C",
+            "texto": "Mónaco por el glamour y la precisión milimétrica entre muros"
+          },
+          {
+            "letra": "D",
+            "texto": "Suzuka en Japón por sus curvas enlazadas en S"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te gustan los simuladores de conducción con volante y pedales (Simracing)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, tengo volante Force Feedback y juego a Assetto Corsa / iRacing / F1"
+          },
+          {
+            "letra": "B",
+            "texto": "He probado volantes de amigos y me parece súper inmersivo"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero jugar a juegos de carreras con mando tradicional"
+          },
+          {
+            "letra": "D",
+            "texto": "No juego a títulos de carreras"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_096",
+    "numero": 96,
+    "titulo": "Carsharing, Alquiler de Vehículos y Viajes Compartidos",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "BlaBlaCar, alquiler vacacional, Zity y no tener coche propio.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Has utilizado plataformas de viajes compartidos como BlaBlaCar?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, como conductor o pasajero con frecuencia para ahorrar en viajes"
+          },
+          {
+            "letra": "B",
+            "texto": "Lo he usado en alguna ocasión puntual de urgencia"
+          },
+          {
+            "letra": "C",
+            "texto": "Conozco el servicio pero prefiero viajar en tren, bus o coche propio"
+          },
+          {
+            "letra": "D",
+            "texto": "Nunca he compartido coche con desconocidos"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Utilizas servicios de carsharing por minutos en tu ciudad?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es comodísimo para trayectos urbanos sin preocuparse de aparcar"
+          },
+          {
+            "letra": "B",
+            "texto": "Ocasionalmente si necesito mover bultos grandes"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero transporte público o mi propio vehículo"
+          },
+          {
+            "letra": "D",
+            "texto": "En mi ciudad no hay servicios de carsharing"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Crees que en el futuro las nuevas generaciones dejarán de comprar coche propio?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, en grandes ciudades saldrá más a cuenta pagar por uso"
+          },
+          {
+            "letra": "B",
+            "texto": "En ciudades sí, pero en zonas rurales o pueblos el coche es imprescindible"
+          },
+          {
+            "letra": "C",
+            "texto": "La gente siempre querrá tener su propio coche por independencia"
+          },
+          {
+            "letra": "D",
+            "texto": "Dependerá de los costes de adquisición y combustible"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué seguro contratas al alquilar un coche de vacaciones?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre seguro a todo riesgo sin franquicia para viajar con tranquilidad total"
+          },
+          {
+            "letra": "B",
+            "texto": "El seguro básico que viene incluido para pagar lo mínimo"
+          },
+          {
+            "letra": "C",
+            "texto": "Uso el seguro de cobertura que ofrece mi tarjeta de crédito"
+          },
+          {
+            "letra": "D",
+            "texto": "Rara vez alquilo coches"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Te gustaría que existieran taxis y transportes 100% autónomos sin conductor?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, el futuro de la conducción autónoma será más seguro y barato"
+          },
+          {
+            "letra": "B",
+            "texto": "Me daría cierta desconfianza subirme a un coche sin volante ni chófer"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero la conducción humana"
+          },
+          {
+            "letra": "D",
+            "texto": "Creo que aún faltan muchos años para que sea una realidad común"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_097",
+    "numero": 97,
+    "titulo": "Estética del Coche, Detailing y Limpieza",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Lavado a mano, ceras cerámicas, túneles de lavado y ambientadores.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Cómo lavas habitualmente tu coche por fuera?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "A mano con dos cubos, champú especial y toallas de microfibra (Detailing)"
+          },
+          {
+            "letra": "B",
+            "texto": "En cabinas de lavado a presión con lanza de agua caliente"
+          },
+          {
+            "letra": "C",
+            "texto": "En túneles de lavado automáticos de rodillos por rapidez"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca lavo el coche por fuera, espero a que llueva"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Con qué frecuencia limpias el interior del habitáculo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Cada semana aspiro alfombrillas y limpio salpicadero a fondo"
+          },
+          {
+            "letra": "B",
+            "texto": "Una vez al mes o cada mes y medio"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo cuando está visiblemente sucio o voy a llevar invitados"
+          },
+          {
+            "letra": "D",
+            "texto": "Casi nunca limpio el interior"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Utilizas ambientador dentro del vehículo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, ambientadores de clip de rejilla o botellita con fragancia agradable"
+          },
+          {
+            "letra": "B",
+            "texto": "Prefiero el olor a limpio natural sin ambientadores químicos"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo pongo ambientador de pino clásico de vez en cuando"
+          },
+          {
+            "letra": "D",
+            "texto": "No me gustan los olores artificiales en el coche"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Permites que se coma o se fume dentro de tu coche?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Prohibido comer o fumar categricamente, el coche se mantiene impoluto"
+          },
+          {
+            "letra": "B",
+            "texto": "Comer snacks sencillos sí, pero nada que manche o huela fuerte"
+          },
+          {
+            "letra": "C",
+            "texto": "Se permite comer pero no fumar"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo reglas estrictas dentro del vehículo"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Aplicas tratamientos de cera o sellado cerámico a la pintura?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, aplico cera o recubrimiento cerámico para proteger el brillo"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo la cera que echa la lanza del lavadero"
+          },
+          {
+            "letra": "C",
+            "texto": "No le aplico productos de protección a la chapa"
+          },
+          {
+            "letra": "D",
+            "texto": "No me fijo en el estado del brillo de la pintura"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_098",
+    "numero": 98,
+    "titulo": "Seguridad Vial, Radares y Asistentes de Conducción (ADAS)",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Control de crucero adaptativo, frenada de emergencia y límites.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Qué asistente de conducción consideras más útil en autopista?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Control de crucero adaptativo que mantiene la distancia automáticamente"
+          },
+          {
+            "letra": "B",
+            "texto": "Asistente de mantenimiento en el centro del carril"
+          },
+          {
+            "letra": "C",
+            "texto": "Detector de ángulo muerto en los espejos retrovisores"
+          },
+          {
+            "letra": "D",
+            "texto": "Cámara de visión 360 grados y sensores para aparcar"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Utilizas aplicaciones que avisan de la presencia de radares (Waze, Coyote)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Siempre activada en segundo plano para evitar multas por despiste"
+          },
+          {
+            "letra": "B",
+            "texto": "Solo en viajes largos por carreteras que no conozco"
+          },
+          {
+            "letra": "C",
+            "texto": "No, suelo respetar estrictamente las señales de velocidad"
+          },
+          {
+            "letra": "D",
+            "texto": "No utilizo avisadores de radar"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué te parecen los sistemas que frenan automáticamente ante un peatón u obstáculo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Una bendición tecnológica que salva miles de vidas al año"
+          },
+          {
+            "letra": "B",
+            "texto": "Muy útiles aunque a veces dan falsas alarmas que asustan"
+          },
+          {
+            "letra": "C",
+            "texto": "Prefiero mantener el control manual de los pedales"
+          },
+          {
+            "letra": "D",
+            "texto": "No he probado coches con frenada de emergencia autónoma"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Alguna vez te ha saltado un radar de velocidad en carretera?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, alguna multa por despiste de 5 o 10 km/h por encima del límite"
+          },
+          {
+            "letra": "B",
+            "texto": "Afortunadamente nunca me han multado por velocidad"
+          },
+          {
+            "letra": "C",
+            "texto": "Hace muchos años"
+          },
+          {
+            "letra": "D",
+            "texto": "No tengo carnet de conducir"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué opinas sobre reducir los límites de velocidad en ciudades a 30 km/h?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Adecuado para proteger a peatones, ciclistas y reducir atropellos"
+          },
+          {
+            "letra": "B",
+            "texto": "Excesivamente lento en avenidas anchas donde genera congestión"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo debería aplicarse en calles residenciales y entornos escolares"
+          },
+          {
+            "letra": "D",
+            "texto": "Me parece una medida recaudatoria"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_099",
+    "numero": 99,
+    "titulo": "Sonido y Conectividad en el Coche: CarPlay y Android Auto",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Pantallas táctiles, Bluetooth, navegación por satélite y altavoces.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Utilizas Apple CarPlay o Android Auto en tu vehículo?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, inalámbrico o por cable, es imprescindible para mapas y música"
+          },
+          {
+            "letra": "B",
+            "texto": "Uso solo conexión Bluetooth básica para reproducir audio"
+          },
+          {
+            "letra": "C",
+            "texto": "Tengo soporte para el móvil en la rejilla y miro la pantalla del teléfono"
+          },
+          {
+            "letra": "D",
+            "texto": "La radio clásica FM/AM de toda la vida"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Qué prefieres: mandos físicos tradicionales o pantallas táctiles para el climatizador?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Botones y ruletas físicas para cambiar la temperatura sin apartar la vista"
+          },
+          {
+            "letra": "B",
+            "texto": "Pantalla táctil moderna de gran formato con diseño minimalista"
+          },
+          {
+            "letra": "C",
+            "texto": "Combinación equilibrada de ambos"
+          },
+          {
+            "letra": "D",
+            "texto": "Control por voz del asistente"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Qué sueles escuchar habitualmente mientras conduces?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Playlists de música energética en Spotify / Apple Music"
+          },
+          {
+            "letra": "B",
+            "texto": "Podcasts de entrevistas o tertulias para aprender"
+          },
+          {
+            "letra": "C",
+            "texto": "Programas de radio generalista o deportiva"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero el silencio del motor para pensar"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué importancia le das a la calidad del equipo de sonido de un coche?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Mucha, si puedo elijo equipos firmados de calidad (Bose, Harman Kardon, etc.)"
+          },
+          {
+            "letra": "B",
+            "texto": "Con que suene nítido a volumen medio me basta"
+          },
+          {
+            "letra": "C",
+            "texto": "Casi no noto la diferencia con altavoces de serie básicos"
+          },
+          {
+            "letra": "D",
+            "texto": "No escucho música a menudo en el coche"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Cargas el móvil en el coche por cable o con base de carga inalámbrica?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Por cable rápido USB-C directo a la toma de corriente"
+          },
+          {
+            "letra": "B",
+            "texto": "En la bandeja de carga inalámbrica integrada por inducción"
+          },
+          {
+            "letra": "C",
+            "texto": "Con un adaptador de mechero de 12V"
+          },
+          {
+            "letra": "D",
+            "texto": "No suelo cargarlo en el coche"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "enc_100",
+    "numero": 100,
+    "titulo": "Coches Clásicos, Concentraciones y Cultura del Motor",
+    "categoria": "Automoción, Motores & Conducción",
+    "categoria_icono": "🚗",
+    "descripcion": "Youngtimers de los 90, coches vintage, ferias y restauración.",
+    "recompensa_diamantes": 50,
+    "duracion_estimada": "2 min",
+    "total_preguntas": 5,
+    "preguntas": [
+      {
+        "id": "p1",
+        "numero": 1,
+        "pregunta": "¿Te atraen los coches clásicos o deportivos de los años 80 y 90 (Youngtimers)?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Me apasionan, tenían mucha más personalidad mecánica y alma que los actuales"
+          },
+          {
+            "letra": "B",
+            "texto": "Me gusta verlos en exhibiciones aunque prefiero la seguridad moderna"
+          },
+          {
+            "letra": "C",
+            "texto": "Solo los superdeportivos clásicos legendarios (Ferrari F40, Porsche 911)"
+          },
+          {
+            "letra": "D",
+            "texto": "Prefiero los coches modernos tecnológicos"
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "numero": 2,
+        "pregunta": "¿Has asistido a concentraciones de coches o quedadas del motor?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, asisto a quedadas (Cars & Coffee, etc.) con frecuencia"
+          },
+          {
+            "letra": "B",
+            "texto": "He ido a salones del automóvil o ferias de clásicos"
+          },
+          {
+            "letra": "C",
+            "texto": "Miro vídeos en YouTube de eventos del motor"
+          },
+          {
+            "letra": "D",
+            "texto": "No me interesan las concentraciones de coches"
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "numero": 3,
+        "pregunta": "¿Te gustaría tener un coche histórico guardado en el garaje para pasear los domingos?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Sí, es uno de mis sueños dorados como aficionado al motor"
+          },
+          {
+            "letra": "B",
+            "texto": "Si tuviera presupuesto de sobra y espacio propio sí"
+          },
+          {
+            "letra": "C",
+            "texto": "Me daría pereza el mantenimiento y encontrar piezas de recambio"
+          },
+          {
+            "letra": "D",
+            "texto": "No me llama la atención tener vehículos antiguos"
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "numero": 4,
+        "pregunta": "¿Qué sonido de motor te parece el más emocionante?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "El aullido agudo de un motor V10 o V12 atmosférico a altas revoluciones"
+          },
+          {
+            "letra": "B",
+            "texto": "El rugido bronco y grave de un motor V8 americano clásico"
+          },
+          {
+            "letra": "C",
+            "texto": "El petardeo deportivo y turbo de un 4 cilindros rabioso (GTI, etc.)"
+          },
+          {
+            "letra": "D",
+            "texto": "El silencio absoluto y aceleración instantánea de los motores eléctricos"
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "numero": 5,
+        "pregunta": "¿Qué modelo de coche consideras el más icónico de la historia?",
+        "opciones": [
+          {
+            "letra": "A",
+            "texto": "Porsche 911 con su silueta inconfundible durante 60 años"
+          },
+          {
+            "letra": "B",
+            "texto": "Ford Mustang clásico de 1967"
+          },
+          {
+            "letra": "C",
+            "texto": "Volkswagen Escarabajo / Golf GTI Mk1"
+          },
+          {
+            "letra": "D",
+            "texto": "Ferrari 250 GTO"
+          }
+        ]
+      }
+    ]
+  }
+];

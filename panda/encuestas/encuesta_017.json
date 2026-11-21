@@ -1,0 +1,128 @@
+{
+  "id": "enc_017",
+  "numero": 17,
+  "titulo": "Smartwatches y Pulseras de Actividad",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Monitoreo de salud, pasos, pulsaciones y notificaciones.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Llevas a diario algún reloj inteligente o pulsera smart?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Apple Watch"
+        },
+        {
+          "letra": "B",
+          "texto": "Galaxy Watch / WearOS"
+        },
+        {
+          "letra": "C",
+          "texto": "Pulsera fitness básica (Xiaomi Band, etc.)"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero relojes clásicos o no llevar nada"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué función utilizas más en tu smartwatch?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Contador de pasos y actividad física diaria"
+        },
+        {
+          "letra": "B",
+          "texto": "Lectura de notificaciones de WhatsApp / llamadas"
+        },
+        {
+          "letra": "C",
+          "texto": "Monitoreo de calidad de sueño"
+        },
+        {
+          "letra": "D",
+          "texto": "Control de música y alarmas silenciosas"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cuántos días suele durar la batería de tu reloj?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 día (debo cargarlo cada noche)"
+        },
+        {
+          "letra": "B",
+          "texto": "De 2 a 3 días"
+        },
+        {
+          "letra": "C",
+          "texto": "De 1 a 2 semanas"
+        },
+        {
+          "letra": "D",
+          "texto": "No utilizo reloj inteligente"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Te ayuda el smartwatch a mantenerte más activo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, cumplo metas diarias de pasos y calorías"
+        },
+        {
+          "letra": "B",
+          "texto": "Al principio sí, luego me acostumbré"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo me sirve para mirar la hora y avisos"
+        },
+        {
+          "letra": "D",
+          "texto": "No me motiva para hacer más ejercicio"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Pagarías con tu reloj mediante NFC en comercios?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Pago casi todo con el reloj por comodidad"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando olvido la cartera o teléfono"
+        },
+        {
+          "letra": "C",
+          "texto": "No tengo configurado el pago por NFC"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero pagar con tarjeta física o efectivo"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_023",
+  "numero": 23,
+  "titulo": "Bitcoin y Criptomonedas Principales",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Perspectivas sobre BTC, Ethereum y el mercado cripto.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuál es tu criptomoneda de mayor confianza a largo plazo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Bitcoin (BTC) como oro digital"
+        },
+        {
+          "letra": "B",
+          "texto": "Ethereum (ETH) por su ecosistema de contratos"
+        },
+        {
+          "letra": "C",
+          "texto": "Solana (SOL) por su velocidad y bajo coste"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero mantener stablecoins (USDT/USDC)"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es tu estrategia habitual en el mercado cripto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "HODL (comprar y guardar a largo plazo)"
+        },
+        {
+          "letra": "B",
+          "texto": "Trading a corto y medio plazo"
+        },
+        {
+          "letra": "C",
+          "texto": "Generar rendimiento en juegos y promociones"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo entro al mercado en momentos de euforia"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cómo conociste el ecosistema de las criptomonedas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Por amigos o familiares que ya invertían"
+        },
+        {
+          "letra": "B",
+          "texto": "Por creadores de contenido en YouTube / TikTok"
+        },
+        {
+          "letra": "C",
+          "texto": "Por noticias en medios de comunicación"
+        },
+        {
+          "letra": "D",
+          "texto": "A través de juegos y plataformas de recompensas"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Crees que Bitcoin alcanzará nuevos máximos históricos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, con total certeza en los próximos años"
+        },
+        {
+          "letra": "B",
+          "texto": "Probablemente sí, con periodos de corrección"
+        },
+        {
+          "letra": "C",
+          "texto": "Creo que se mantendrá en un rango lateral"
+        },
+        {
+          "letra": "D",
+          "texto": "Tengo dudas sobre su crecimiento futuro"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué aplicación utilizas para seguir los precios de cripto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "CoinMarketCap"
+        },
+        {
+          "letra": "B",
+          "texto": "CoinGecko"
+        },
+        {
+          "letra": "C",
+          "texto": "TradingView con gráficos avanzados"
+        },
+        {
+          "letra": "D",
+          "texto": "Directamente desde mi aplicación de exchange"
+        }
+      ]
+    }
+  ]
+}

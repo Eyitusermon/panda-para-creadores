@@ -1,0 +1,128 @@
+{
+  "id": "enc_063",
+  "numero": 63,
+  "titulo": "Gestión del Tiempo y Productividad Personal",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Método Pomodoro, listas de tareas, agendas y Notion.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Utilizas alguna aplicación para gestionar tus tareas y notas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Notion / Obsidian para organizar toda mi vida"
+        },
+        {
+          "letra": "B",
+          "texto": "Google Calendar / Apple Calendar principalmente"
+        },
+        {
+          "letra": "C",
+          "texto": "App sencilla de listas (Todoist, Recordatorios, Keep)"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero libreta y bolígrafo de papel"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Has utilizado la técnica Pomodoro (25 min de foco y 5 de descanso)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es mi método favorito para sesiones de estudio o trabajo"
+        },
+        {
+          "letra": "B",
+          "texto": "La he probado pero a veces interrumpe mi estado de flujo"
+        },
+        {
+          "letra": "C",
+          "texto": "La conozco pero me cuesta ser constante"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he probado esa técnica"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Tiendes a procrastinar tareas importantes y dejarlas para el final?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A menudo lo dejo todo para la fecha límite"
+        },
+        {
+          "letra": "B",
+          "texto": "A veces procrastino tareas tediosas pero cumplo"
+        },
+        {
+          "letra": "C",
+          "texto": "Rara vez, soy muy organizado y me anticipo"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo cuando estoy muy cansado o desmotivado"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Silencias las notificaciones del móvil durante tus horas de trabajo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, modo No Molestar o Enfoque activado siempre"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo silencio llamadas y dejo mensajes importantes"
+        },
+        {
+          "letra": "C",
+          "texto": "No silencio el móvil, miro cada aviso que llega"
+        },
+        {
+          "letra": "D",
+          "texto": "Tengo el móvil en silencio permanente las 24 horas"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sientes que tienes suficiente tiempo libre para tus aficiones?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, consigo equilibrar obligaciones y ocio"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gustaría tener un par de horas más libres al día"
+        },
+        {
+          "letra": "C",
+          "texto": "Apenas me queda tiempo libre entre semana"
+        },
+        {
+          "letra": "D",
+          "texto": "Tengo bastante tiempo libre actualmente"
+        }
+      ]
+    }
+  ]
+}

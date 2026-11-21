@@ -1,0 +1,128 @@
+{
+  "id": "enc_064",
+  "numero": 64,
+  "titulo": "Viajes, Escapadas y Vacaciones",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Destinos de playa o montaña, vuelos baratos y hoteles.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué tipo de viaje prefieres para tus vacaciones principales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Viaje internacional a un país con cultura muy distinta"
+        },
+        {
+          "letra": "B",
+          "texto": "Escapada de sol, playa y relax sin prisas"
+        },
+        {
+          "letra": "C",
+          "texto": "Ruta de turismo cultural por ciudades históricas"
+        },
+        {
+          "letra": "D",
+          "texto": "Aventura en la naturaleza y paisajes salvajes"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Con qué antelación sueles planificar tus viajes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Con varios meses de antelación para conseguir buenos precios"
+        },
+        {
+          "letra": "B",
+          "texto": "Con 3 o 4 semanas de margen"
+        },
+        {
+          "letra": "C",
+          "texto": "Suelo decidir y reservar a última hora en ofertas"
+        },
+        {
+          "letra": "D",
+          "texto": "Soy muy espontáneo, viajo casi sin plan"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres alojarte en hoteles o en apartamentos vacacionales (Airbnb)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Hoteles por el servicio, limpieza y desayuno incluido"
+        },
+        {
+          "letra": "B",
+          "texto": "Apartamentos completos por tener cocina y más espacio"
+        },
+        {
+          "letra": "C",
+          "texto": "Hostales juveniles para conocer a otros viajeros"
+        },
+        {
+          "letra": "D",
+          "texto": "Casas rurales tranquilas"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué herramienta utilizas para buscar vuelos y alojamientos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Skyscanner / Google Flights para vuelos baratos"
+        },
+        {
+          "letra": "B",
+          "texto": "Booking.com para hoteles y alojamientos"
+        },
+        {
+          "letra": "C",
+          "texto": "Airbnb para estancias largas"
+        },
+        {
+          "letra": "D",
+          "texto": "Directamente en las webs de las aerolíneas"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sueles viajar solo, en pareja o con grupo de amigos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En pareja"
+        },
+        {
+          "letra": "B",
+          "texto": "Con amigos para pasarlo bien"
+        },
+        {
+          "letra": "C",
+          "texto": "Con mi familia"
+        },
+        {
+          "letra": "D",
+          "texto": "He viajado solo y me parece una experiencia fantástica"
+        }
+      ]
+    }
+  ]
+}

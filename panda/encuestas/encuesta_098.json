@@ -1,0 +1,128 @@
+{
+  "id": "enc_098",
+  "numero": 98,
+  "titulo": "Seguridad Vial, Radares y Asistentes de Conducción (ADAS)",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Control de crucero adaptativo, frenada de emergencia y límites.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué asistente de conducción consideras más útil en autopista?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Control de crucero adaptativo que mantiene la distancia automáticamente"
+        },
+        {
+          "letra": "B",
+          "texto": "Asistente de mantenimiento en el centro del carril"
+        },
+        {
+          "letra": "C",
+          "texto": "Detector de ángulo muerto en los espejos retrovisores"
+        },
+        {
+          "letra": "D",
+          "texto": "Cámara de visión 360 grados y sensores para aparcar"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Utilizas aplicaciones que avisan de la presencia de radares (Waze, Coyote)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre activada en segundo plano para evitar multas por despiste"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en viajes largos por carreteras que no conozco"
+        },
+        {
+          "letra": "C",
+          "texto": "No, suelo respetar estrictamente las señales de velocidad"
+        },
+        {
+          "letra": "D",
+          "texto": "No utilizo avisadores de radar"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué te parecen los sistemas que frenan automáticamente ante un peatón u obstáculo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Una bendición tecnológica que salva miles de vidas al año"
+        },
+        {
+          "letra": "B",
+          "texto": "Muy útiles aunque a veces dan falsas alarmas que asustan"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero mantener el control manual de los pedales"
+        },
+        {
+          "letra": "D",
+          "texto": "No he probado coches con frenada de emergencia autónoma"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Alguna vez te ha saltado un radar de velocidad en carretera?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, alguna multa por despiste de 5 o 10 km/h por encima del límite"
+        },
+        {
+          "letra": "B",
+          "texto": "Afortunadamente nunca me han multado por velocidad"
+        },
+        {
+          "letra": "C",
+          "texto": "Hace muchos años"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo carnet de conducir"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué opinas sobre reducir los límites de velocidad en ciudades a 30 km/h?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Adecuado para proteger a peatones, ciclistas y reducir atropellos"
+        },
+        {
+          "letra": "B",
+          "texto": "Excesivamente lento en avenidas anchas donde genera congestión"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo debería aplicarse en calles residenciales y entornos escolares"
+        },
+        {
+          "letra": "D",
+          "texto": "Me parece una medida recaudatoria"
+        }
+      ]
+    }
+  ]
+}

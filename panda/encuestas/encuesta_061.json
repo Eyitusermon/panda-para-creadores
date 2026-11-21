@@ -1,0 +1,128 @@
+{
+  "id": "enc_061",
+  "numero": 61,
+  "titulo": "Calidad del Sueño y Descanso Nocturno",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Horas de sueño, colchón, insomnio y rutinas nocturnas.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuántas horas duermes de media cada noche?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Menos de 6 horas (suelo dormir poco)"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 6 y 7 horas"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 7 y 8 horas (lo recomendado)"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de 8 horas plácidamente"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Miras la pantalla del móvil en la cama antes de dormir?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre, me duermo con el móvil en la mano"
+        },
+        {
+          "letra": "B",
+          "texto": "Miro 10 o 15 minutos y lo dejo en la mesita"
+        },
+        {
+          "letra": "C",
+          "texto": "Intento evitar pantallas al menos 30 minutos antes"
+        },
+        {
+          "letra": "D",
+          "texto": "Dejo el móvil fuera del dormitorio"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Te despiertas con sensación de energía y descanso?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Casi siempre me levanto renovado y listo"
+        },
+        {
+          "letra": "B",
+          "texto": "Me cuesta arrancar los primeros 20 minutos"
+        },
+        {
+          "letra": "C",
+          "texto": "Suelo levantarme cansado y con sueño"
+        },
+        {
+          "letra": "D",
+          "texto": "Depende de los días de la semana"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Utilizas antifaz para dormir o tapones para los oídos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, antifaz o tapones son indispensables para mi descanso"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando viajo o duermo en hoteles"
+        },
+        {
+          "letra": "C",
+          "texto": "Oscuridad total con persianas bajadas sin accesorios"
+        },
+        {
+          "letra": "D",
+          "texto": "No necesito nada especial para dormir"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Invertirías en un colchón o almohada de gama alta ergonómica?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Es la mejor inversión para la salud de la espalda"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo un buen colchón que compré hace pocos años"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso un colchón estándar que venía con el piso"
+        },
+        {
+          "letra": "D",
+          "texto": "No le presto tanta atención al colchón"
+        }
+      ]
+    }
+  ]
+}

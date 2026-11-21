@@ -1,0 +1,128 @@
+{
+  "id": "enc_009",
+  "numero": 9,
+  "titulo": "Narrativa y Doblaje en Videojuegos",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "Historias conmovedoras, cinemáticas y localización.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué importancia le das a la historia de un juego?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fundamental, busco tramas cinematográficas"
+        },
+        {
+          "letra": "B",
+          "texto": "Importante, pero la jugabilidad manda"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo si no corta el ritmo de juego"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nula, suelo saltarme los diálogos"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿En qué idioma prefieres jugar títulos narrativos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Doblaje en Español Latino"
+        },
+        {
+          "letra": "B",
+          "texto": "Doblaje en Español de España"
+        },
+        {
+          "letra": "C",
+          "texto": "Audio original en inglés con subtítulos"
+        },
+        {
+          "letra": "D",
+          "texto": "Me da igual mientras esté subtitulado"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Te gustan los juegos con finales múltiples según decisiones?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me fascinan, los rejuego para ver todos"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gustan para una sola partida única"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero un final canónico bien cerrado"
+        },
+        {
+          "letra": "D",
+          "texto": "Me da pereza repetir decisiones"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Has llegado a emocionarte o llorar con el final de un juego?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, con historias muy emotivas"
+        },
+        {
+          "letra": "B",
+          "texto": "Alguna vez se me ha puesto la piel de gallina"
+        },
+        {
+          "letra": "C",
+          "texto": "No tanto como llorar, pero me ha impactado"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca me ha ocurrido"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Prefieres cinemáticas largas o narrativa en tiempo real?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Narrativa integrada en la jugabilidad"
+        },
+        {
+          "letra": "B",
+          "texto": "Cinemáticas espectaculares estilo película"
+        },
+        {
+          "letra": "C",
+          "texto": "Mezcla equilibrada de ambas"
+        },
+        {
+          "letra": "D",
+          "texto": "Pocas cinemáticas y mucha acción"
+        }
+      ]
+    }
+  ]
+}

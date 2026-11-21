@@ -1,0 +1,128 @@
+{
+  "id": "enc_028",
+  "numero": 28,
+  "titulo": "Microinversiones y Recompensas Digitales",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Cashback, programas de lealtad y puntos canjeables.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Participas en programas de recompensas o cashback semanal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, busco siempre plataformas con buen retorno"
+        },
+        {
+          "letra": "B",
+          "texto": "Aprovecho los programas que ya vienen incluidos"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo si no requieren pasos complicados"
+        },
+        {
+          "letra": "D",
+          "texto": "No le presto atención al cashback"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué tipo de premio prefieres recibir en promociones?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Diamantes o saldo real retirable"
+        },
+        {
+          "letra": "B",
+          "texto": "Giros gratis en slots de alta volatilidad"
+        },
+        {
+          "letra": "C",
+          "texto": "Puntos de experiencia para subir rango VIP"
+        },
+        {
+          "letra": "D",
+          "texto": "Cofres sorpresa con premios aleatorios"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Completas encuestas o tareas remuneradas con frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me parece una excelente forma de sumar saldo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando las encuestas son cortas y bien pagadas"
+        },
+        {
+          "letra": "C",
+          "texto": "Ocasionalmente si tengo tiempo libre"
+        },
+        {
+          "letra": "D",
+          "texto": "Esta es una de mis primeras veces"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué opinas de recibir recompensas en Diamantes canjeables por USDT?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Excelente, da flexibilidad de jugar o retirar"
+        },
+        {
+          "letra": "B",
+          "texto": "Muy bueno, la tasa 1:10 es fácil de calcular"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero saldo directo en USDT en mi billetera"
+        },
+        {
+          "letra": "D",
+          "texto": "Me resulta indiferente el formato"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Recomendarías una plataforma a tus amigos por un bono de referido?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, si el servicio es de calidad y ambos ganamos"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo a amigos muy cercanos que ya juegan"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero no compartir enlaces de referido"
+        },
+        {
+          "letra": "D",
+          "texto": "Depende del monto del bono de recompensa"
+        }
+      ]
+    }
+  ]
+}

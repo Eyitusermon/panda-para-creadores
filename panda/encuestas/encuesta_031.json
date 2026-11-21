@@ -1,0 +1,128 @@
+{
+  "id": "enc_031",
+  "numero": 31,
+  "titulo": "Plataformas de Películas y Series en Streaming",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Netflix, Prime Video, HBO Max, Disney+ y catálogos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿A cuántas plataformas de vídeo estás suscrito actualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A 1 sola plataforma principal"
+        },
+        {
+          "letra": "B",
+          "texto": "A 2 o 3 plataformas combinadas"
+        },
+        {
+          "letra": "C",
+          "texto": "A más de 3 plataformas (o cuentas familiares)"
+        },
+        {
+          "letra": "D",
+          "texto": "No pago ninguna, uso cuentas compartidas o gratuitas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es tu plataforma de series favorita?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Netflix por variedad de catálogo y novedades"
+        },
+        {
+          "letra": "B",
+          "texto": "Max (HBO) por calidad de producciones"
+        },
+        {
+          "letra": "C",
+          "texto": "Prime Video por precio y envíos incluidos"
+        },
+        {
+          "letra": "D",
+          "texto": "Disney+ por franquicias (Marvel, Star Wars)"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué opinas de los planes con anuncios publicitarios?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "No los tolero, pago extra para no ver anuncios"
+        },
+        {
+          "letra": "B",
+          "texto": "Me parece bien si la suscripción es más económica"
+        },
+        {
+          "letra": "C",
+          "texto": "Tolerables si son anuncios muy cortos"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero plataformas 100% gratuitas con anuncios"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Con qué frecuencia ves películas o series?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Todos los días por la noche"
+        },
+        {
+          "letra": "B",
+          "texto": "Los fines de semana principalmente"
+        },
+        {
+          "letra": "C",
+          "texto": "Un par de veces por semana"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca tengo tiempo para ver series"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sueles ver temporadas completas en maratón (binge-watching)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me termino una temporada en un fin de semana"
+        },
+        {
+          "letra": "B",
+          "texto": "Prefiero ver 1 o 2 capítulos al día con calma"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero cuando estrenan un capítulo por semana"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca termino series largas"
+        }
+      ]
+    }
+  ]
+}

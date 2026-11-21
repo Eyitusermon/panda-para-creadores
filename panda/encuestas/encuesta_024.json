@@ -1,0 +1,128 @@
+{
+  "id": "enc_024",
+  "numero": 24,
+  "titulo": "Tarjetas Cripto y Pagos en Comercios",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Tarjetas de débito Visa/Mastercard vinculadas a saldo cripto.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Tienes alguna tarjeta que gaste saldo de criptomonedas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tarjeta de Binance / Bybit"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, tarjeta de otro proveedor Fintech"
+        },
+        {
+          "letra": "C",
+          "texto": "He solicitado una pero aún no la tengo"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo tarjeta vinculada a cripto"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué incentivo te atrae más de las tarjetas de débito cripto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cashback directo en cada compra"
+        },
+        {
+          "letra": "B",
+          "texto": "Facilidad de gastar ganancias sin pasar por banco"
+        },
+        {
+          "letra": "C",
+          "texto": "Conversión automática de USDT a moneda local"
+        },
+        {
+          "letra": "D",
+          "texto": "Sin comisiones por compras internacionales"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres pagar con tarjeta física o añadirla a Apple/Google Pay?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre con el móvil (Apple Pay / Google Wallet)"
+        },
+        {
+          "letra": "B",
+          "texto": "Prefiero llevar la tarjeta física en la cartera"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso tarjeta virtual exclusivamente online"
+        },
+        {
+          "letra": "D",
+          "texto": "Indiferente según la situación"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿En qué tipo de comercios gastarías más con tarjeta cripto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Supermercados y compras cotidianas"
+        },
+        {
+          "letra": "B",
+          "texto": "Viajes, vuelos y reservas de hotel"
+        },
+        {
+          "letra": "C",
+          "texto": "Electrónica y compras por Internet"
+        },
+        {
+          "letra": "D",
+          "texto": "Salidas a restaurantes y ocio nocturno"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te preocupa la fiscalidad al convertir criptomonedas a moneda fiat?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, llevo control estricto de todas las operaciones"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo nociones básicas pero busco asesoría"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gustaría que fuera más sencillo y transparente"
+        },
+        {
+          "letra": "D",
+          "texto": "No opero con volúmenes que requieran declaración"
+        }
+      ]
+    }
+  ]
+}

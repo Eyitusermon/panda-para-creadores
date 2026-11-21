@@ -1,0 +1,128 @@
+{
+  "id": "enc_068",
+  "numero": 68,
+  "titulo": "Idiomas y Aprendizaje Continuo",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Duolingo, inglés profesional, cursos online y fluidez.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuántos idiomas hablas o estudias actualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Español nativo e Inglés fluido (bilingüe)"
+        },
+        {
+          "letra": "B",
+          "texto": "Español nativo e Inglés intermedio en mejora"
+        },
+        {
+          "letra": "C",
+          "texto": "Tres o más idiomas distintos"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo mi lengua materna"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Has utilizado aplicaciones como Duolingo para aprender idiomas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, mantengo mi racha activa a diario"
+        },
+        {
+          "letra": "B",
+          "texto": "La he probado durante un tiempo"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero academias presenciales o profesores particulares"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero aprender viendo series y leyendo en versión original"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué habilidad de un nuevo idioma te cuesta más dominar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Hablar con fluidez y soltura en una conversación real"
+        },
+        {
+          "letra": "B",
+          "texto": "Entender el acento nativo rápido en audios"
+        },
+        {
+          "letra": "C",
+          "texto": "La gramática y conjugaciones complejas"
+        },
+        {
+          "letra": "D",
+          "texto": "Aprender y retener vocabulario nuevo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Haces cursos online para mejorar tus conocimientos profesionales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, con frecuencia en plataformas como Udemy, Coursera, etc."
+        },
+        {
+          "letra": "B",
+          "texto": "He completado algún curso puntual para mi currículum"
+        },
+        {
+          "letra": "C",
+          "texto": "Aprendo de forma autodidacta con tutoriales de YouTube"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca hago cursos por internet"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué idioma te gustaría aprender si tuvieras tiempo libre garantizado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Japonés por su cultura, anime y caligrafía"
+        },
+        {
+          "letra": "B",
+          "texto": "Alemán o Francés por oportunidades laborales en Europa"
+        },
+        {
+          "letra": "C",
+          "texto": "Chino mandarín por su peso global en el comercio"
+        },
+        {
+          "letra": "D",
+          "texto": "Italiano o Portugués por su belleza y cercanía"
+        }
+      ]
+    }
+  ]
+}

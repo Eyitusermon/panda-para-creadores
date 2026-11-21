@@ -1,0 +1,128 @@
+{
+  "id": "enc_034",
+  "numero": 34,
+  "titulo": "Vídeo en Formato Corto: TikTok, Reels y Shorts",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Consumo rápido de entretenimiento en vídeo vertical.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué plataforma de vídeo corto utilizas con más frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "TikTok"
+        },
+        {
+          "letra": "B",
+          "texto": "Instagram Reels"
+        },
+        {
+          "letra": "C",
+          "texto": "YouTube Shorts"
+        },
+        {
+          "letra": "D",
+          "texto": "No consumo vídeos en formato vertical"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuánto tiempo al día estimas que pasas viendo vídeos cortos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Más de 2 horas al día"
+        },
+        {
+          "letra": "B",
+          "texto": "Entre 1 y 2 horas al día"
+        },
+        {
+          "letra": "C",
+          "texto": "Entre 20 y 45 minutos al día"
+        },
+        {
+          "letra": "D",
+          "texto": "Menos de 15 minutos de forma muy esporádica"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué temática de vídeos cortos te aparece más en el feed?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Humor, memes y situaciones cómicas"
+        },
+        {
+          "letra": "B",
+          "texto": "Videojuegos, jugadas épicas y trucos"
+        },
+        {
+          "letra": "C",
+          "texto": "Cocina, recetas fáciles y restaurantes"
+        },
+        {
+          "letra": "D",
+          "texto": "Tecnología, noticias y divulgación"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Creas y publicas tus propios vídeos o solo eres espectador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo consumo contenido como espectador pasivo"
+        },
+        {
+          "letra": "B",
+          "texto": "He subido algún vídeo muy puntual para amigos"
+        },
+        {
+          "letra": "C",
+          "texto": "Publico con regularidad contenido propio"
+        },
+        {
+          "letra": "D",
+          "texto": "Tengo una cuenta con seguidores activa"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sientes que el formato corto afecta tu capacidad de concentración?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, a veces me cuesta ver películas largas sin mirar el móvil"
+        },
+        {
+          "letra": "B",
+          "texto": "Un poco, pero intento limitar el tiempo de uso"
+        },
+        {
+          "letra": "C",
+          "texto": "No he notado cambios en mi atención"
+        },
+        {
+          "letra": "D",
+          "texto": "No consumo suficiente para que me afecte"
+        }
+      ]
+    }
+  ]
+}

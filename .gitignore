@@ -1,0 +1,27 @@
+# Archivos de entorno y credenciales sensibles (¡NUNCA subir a GitHub!)
+.env
+*.env
+.env.*
+!.env.example
+
+# Binarios compilados de Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+panda/backend/pandabet-api.exe
+server
+
+# Dependencias de Node
+node_modules/
+package-lock.json
+
+# Builds y carpetas temporales
+dist/
+build/
+scratch/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

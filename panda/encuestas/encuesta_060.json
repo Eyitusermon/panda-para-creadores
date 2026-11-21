@@ -1,0 +1,128 @@
+{
+  "id": "enc_060",
+  "numero": 60,
+  "titulo": "Deportes de Invierno y Actividades de Aventura",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Esquí, snowboard, senderismo de montaña y escalada.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has practicado esquí o snowboard en estaciones de nieve?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, subo a la nieve todos los inviernos sin falta"
+        },
+        {
+          "letra": "B",
+          "texto": "He ido en 2 o 3 ocasiones a probar"
+        },
+        {
+          "letra": "C",
+          "texto": "Nunca he probado pero tengo muchas ganas de ir"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gustan el frío ni los deportes de nieve"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Prefieres el esquí tradicional o la tabla de snowboard?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Esquí tradicional de dos tablas"
+        },
+        {
+          "letra": "B",
+          "texto": "Tabla de snowboard por la sensación de surf en nieve"
+        },
+        {
+          "letra": "C",
+          "texto": "Me defiendo bien en ambas disciplinas"
+        },
+        {
+          "letra": "D",
+          "texto": "No he practicado ninguna"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Haces senderismo o rutas de montaña en la naturaleza?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me encanta desconectar haciendo trekkings los fines de semana"
+        },
+        {
+          "letra": "B",
+          "texto": "Hago rutas sencillas de vez en cuando en primavera u otoño"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero el mar y la playa antes que la montaña"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gusta caminar por la montaña"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Has probado la escalada en rocódromo o roca natural?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, voy a rocódromos de bloque (boulder) con frecuencia"
+        },
+        {
+          "letra": "B",
+          "texto": "He probado la escalada con arnés alguna vez"
+        },
+        {
+          "letra": "C",
+          "texto": "Me da respeto o vértigo la altura"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he escalado"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te atreverías a saltar en paracaídas o hacer puenting?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sin dudarlo, me apasiona la adrenalina extrema"
+        },
+        {
+          "letra": "B",
+          "texto": "En paracaídas sí con instructor, pero puenting no"
+        },
+        {
+          "letra": "C",
+          "texto": "Me lo pensaría mucho, me da bastante miedo"
+        },
+        {
+          "letra": "D",
+          "texto": "Bajo ningún concepto lo haría"
+        }
+      ]
+    }
+  ]
+}

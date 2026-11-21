@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PANDA CASH - Casino & Arcade VIP | Regístrate y Gana Diamantes</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐼</text></svg>">
+  <script src="./config.js"></script>
+  <style>
+    :root {
+      --bg-main: #0a0f1d;
+      --bg-card: #111a2e;
+      --bg-card-hover: #17233d;
+      --bg-header: #0d1527;
+      --primary-green: #00b801;
+      --primary-green-hover: #00d402;
+      --accent-gold: #ffb700;
+      --accent-cyan: #00f0ff;
+      --accent-red: #ff3366;
+      --text-white: #ffffff;
+      --text-muted: #8e9bb0;
+      --text-dim: #5c687d;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(255, 183, 0, 0.35);
+      --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: #263859 #080d18;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #080d18;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #1e2f4d 0%, #16233b 100%);
+      border: 1px solid rgba(255, 183, 0, 0.28);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffb700;
+      border-color: #ffb700;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: #080d18;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-main);
+      color: var(--text-white);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       BARRA SUPERIOR DE LANDING (LIMPIA, SIN CONTROLES DE SESIÓN INTERNA)
+       ========================================================================== */
+    .main-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 21, 39, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: #152238;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .brand-text h1 {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 0.04rem;
+      color: var(--text-white);
+      line-height: 1.05;
+    }
+
+    .brand-text span {
+      color: var(--accent-gold);
+    }
+
+    .brand-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.12rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+    }
+
+    .nav-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .nav-item a:hover {
+      color: var(--text-white);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-auth-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Botones con paleta Triunfobet (Dorado, Verde Sólido, Slate) */
+    .btn {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 800;
+      border-radius: 6px;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.85rem;
+      transition: background-color 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .btn-login-top {
+      background: transparent;
+      color: var(--accent-gold);
+      border: 1.5px solid var(--accent-gold);
+    }
+
+    .btn-login-top:hover {
+      background: rgba(255, 183, 0, 0.12);
+    }
+
+    .btn-cta {
+      background: var(--accent-gold);
+      color: #0d1527;
+      font-weight: 900;
+    }
+
+    .btn-cta:hover {
+      background: #ffc629;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #1c273e;
+      color: var(--text-white);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-secondary:hover {
+      background: #273757;
+    }
+
+    /* ==========================================================================
+       SECCIÓN HERO & WIDGET DE REGISTRO
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      background: radial-gradient(circle at 75% 30%, #162647, #0c1426 60%, #0a0f1d);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 3.2rem 2rem;
+      overflow: hidden;
+    }
+
+    .hero-container {
+      max-width: 1260px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-offer {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .hot-badge {
+      align-self: flex-start;
+      background: rgba(255, 183, 0, 0.15);
+      border: 1px solid var(--border-gold);
+      color: var(--accent-gold);
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06rem;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02rem;
+    }
+
+    .hero-title .highlight-gold {
+      color: var(--accent-gold);
+    }
+
+    .hero-title .highlight-green {
+      color: #00e701;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.4rem;
+      background: rgba(17, 26, 46, 0.85);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      width: fit-content;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--accent-gold);
+      font-family: 'Courier New', monospace;
+    }
+
+    .stat-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* Tarjeta de Registro en el Hero */
+    .reg-widget-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 1.75rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.55);
+      position: relative;
+    }
+
+    .reg-widget-badge {
+      position: absolute;
+      top: -12px;
+      right: 22px;
+      background: var(--accent-gold);
+      color: #0d1527;
+      font-weight: 900;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    .reg-widget-header h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-white);
+    }
+
+    .reg-widget-header p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 1.15rem;
+    }
+
+    .reg-tabs {
+      display: flex;
+      background: #09101d;
+      border-radius: 8px;
+      padding: 3px;
+      margin-bottom: 1.15rem;
+      gap: 4px;
+    }
+
+    .reg-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.55rem 0.2rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .reg-tab-btn.active {
+      background: #1a2744;
+      color: var(--accent-gold);
+    }
+
+    .reg-form-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.28rem;
+    }
+
+    .form-field label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .form-field input,
+    .form-field select {
+      background: #0a1222;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 0.65rem 0.85rem;
+      color: var(--text-white);
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .promo-input-wrap {
+      position: relative;
+    }
+
+    .promo-tag-badge {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 183, 0, 0.15);
+      color: var(--accent-gold);
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .legal-notice {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       TICKER DE PREMIOS EN VIVO
+       ========================================================================== */
+    .ticker-section {
+      background: #0d1629;
+      border-bottom: 1px solid var(--border-subtle);
+      height: 42px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 1.5rem;
+    }
+
+    .ticker-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      white-space: nowrap;
+      padding-right: 1.2rem;
+      border-right: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+      z-index: 10;
+      background: #0d1629;
+      height: 100%;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e701;
+    }
+
+    .ticker-track-container {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 1.5rem;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: scroll-ticker 32s linear infinite;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .ticker-user {
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .ticker-win {
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+
+    .ticker-game {
+      color: #8e9bb0;
+      font-size: 0.75rem;
+    }
+
+    @keyframes scroll-ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================================
+       CATÁLOGO DE JUEGOS EN LA LANDING
+       ========================================================================== */
+    .lobby-section {
+      max-width: 1260px;
+      margin: 2.8rem auto;
+      padding: 0 2rem;
+    }
+
+    .lobby-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.65rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .lobby-filters {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: #142037;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.48rem 1rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      background: #1c2d4d;
+      color: #fff;
+    }
+
+    .filter-btn.active {
+      background: var(--accent-gold);
+      color: #0d1527;
+      border-color: var(--accent-gold);
+      font-weight: 800;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.35rem;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 183, 0, 0.4);
+    }
+
+    .game-card-thumb {
+      height: 160px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .game-badge-top {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(13, 21, 39, 0.88);
+      border: 1px solid var(--border-gold);
+      color: var(--accent-gold);
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .game-rtp {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .game-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 15, 29, 0.86);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .game-card:hover .game-card-overlay {
+      opacity: 1;
+    }
+
+    .game-card-body {
+      padding: 0.95rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .game-card-info h4 {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .game-card-info span {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       SECCIÓN DE BENEFICIOS Y ECONOMÍA DE DIAMANTES
+       ========================================================================== */
+    .promo-strip {
+      background: #0d1527;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 2.8rem 2rem;
+    }
+
+    .promo-container {
+      max-width: 1260px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .promo-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      padding: 1.35rem;
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .promo-icon {
+      font-size: 2.2rem;
+    }
+
+    .promo-info h4 {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .promo-info p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       MODALES (AUTENTICACIÓN Y DEMO DE JUEGO)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-window {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 183, 0, 0.35);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 460px;
+      padding: 1.85rem;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close-btn:hover {
+      color: #fff;
+    }
+
+    .game-modal-window {
+      max-width: 720px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .game-modal-frame {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      background: #030712;
+      border: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 900px) {
+      .hero-section {
+        padding: 2rem 1.25rem;
+      }
+      .hero-container,
+      .promo-container {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .hero-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .main-navbar {
+        padding: 0.65rem 1rem;
+      }
+      .brand-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1.25rem;
+      }
+      .brand-text h1 {
+        font-size: 1.15rem;
+      }
+      .brand-tag {
+        display: none;
+      }
+      .btn {
+        padding: 0.5rem 0.85rem;
+        font-size: 0.78rem;
+      }
+      .hero-title {
+        font-size: 1.75rem;
+      }
+      .hero-subtitle {
+        font-size: 0.9rem;
+      }
+      .hero-stats {
+        gap: 0.75rem;
+        padding: 0.75rem;
+      }
+      .stat-num {
+        font-size: 1.15rem;
+      }
+      .stat-label {
+        font-size: 0.7rem;
+      }
+      .form-card {
+        padding: 1.25rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE LANDING: Solo marca, enlaces informativos y botones de acceso -->
+  <header class="main-navbar">
+    <a class="nav-brand" href="#home">
+      <div class="brand-icon">🐼</div>
+      <div class="brand-text">
+        <h1>PANDA<span> CASH</span></h1>
+        <div class="brand-tag">Casino & Arcade VIP</div>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="#lobby">🎮 Juegos</a></li>
+      <li class="nav-item"><a href="#promos">💎 Cómo Funciona</a></li>
+      <li class="nav-item"><a href="#seguridad">🛡️ Seguridad TRC-20</a></li>
+    </ul>
+
+    <div class="nav-auth-actions">
+      <button class="btn btn-login-top" id="btnOpenLogin">
+        🔑 Iniciar Sesión
+      </button>
+      <button class="btn btn-cta" id="btnOpenRegister">
+        🎁 Regístrate
+      </button>
+    </div>
+  </header>
+
+  <!-- SECCIÓN HERO CON REGISTRO EN 3 MÉTODOS -->
+  <section class="hero-section" id="home">
+    <div class="hero-container">
+      <!-- Columna Izquierda: Propuesta de Valor -->
+      <div class="hero-offer">
+        <div class="hot-badge">🔥 PLATAFORMA OFICIAL PANDA CASH</div>
+        <h2 class="hero-title">
+          BONO DE BIENVENIDA <br />
+          <span class="highlight-gold">+200% EN DIAMANTES</span> + <span class="highlight-green">150 GIROS</span>
+        </h2>
+        <p class="hero-subtitle">
+          Juega con <strong>💎 Diamantes</strong> (1 USDT = 10 💎) en nuestros juegos exclusivos. Depósitos y retiros rápidos a través de la red <strong>USDT (TRC-20)</strong>.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num" id="heroJackpot">2,948,310 💎</span>
+            <span class="stat-desc">Pozo Acumulado</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" style="color: #00e701;">1 USDT = 10 💎</span>
+            <span class="stat-desc">Tasa Fija Garantizada</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">TRC-20</span>
+            <span class="stat-desc">Pagos en Red Tron</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Formulario de Registro Rápido -->
+      <div class="reg-widget-card">
+        <div class="reg-widget-badge">⚡ Registro Rápido</div>
+        <div class="reg-widget-header">
+          <h3>Crea tu cuenta en segundos</h3>
+          <p>Elige tu método preferido y recibe tu bono de bienvenida</p>
+        </div>
+
+        <div class="reg-tabs" id="heroRegTabs">
+          <button type="button" class="reg-tab-btn active" data-tab="1click">⚡ 1-Clic</button>
+          <button type="button" class="reg-tab-btn" data-tab="phone">📱 Teléfono</button>
+          <button type="button" class="reg-tab-btn" data-tab="email">✉️ Email</button>
+        </div>
+
+        <!-- VISTA 1: 1-CLIC -->
+        <form id="form1Click" class="reg-form-fields">
+          <div class="form-field">
+            <label>País / Región</label>
+            <select id="reg1ClickCountry">
+              <option value="ES" selected>🇪🇸 España</option>
+              <option value="MX">🇲🇽 México</option>
+              <option value="CO">🇨🇴 Colombia</option>
+              <option value="AR">🇦🇷 Argentina</option>
+              <option value="CL">🇨🇱 Chile</option>
+              <option value="PE">🇵🇪 Perú</option>
+              <option value="US">🇺🇸 Estados Unidos</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Código Promocional</label>
+            <div class="promo-input-wrap">
+              <input type="text" id="reg1ClickPromo" value="PANDAMAX" placeholder="Ingresa código" />
+              <span class="promo-tag-badge">✓ +200% APLICADO</span>
+            </div>
+          </div>
+
+          <div class="terms-checkbox-wrap" style="display: flex; align-items: flex-start; gap: 0.55rem; margin: 0.4rem 0 0.55rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">
+            <input type="checkbox" id="hero1ClickTerms" required style="margin-top: 2px; accent-color: #00e701; width: 16px; height: 16px; cursor: pointer; flex-shrink: 0;" />
+            <label for="hero1ClickTerms" style="cursor: pointer; user-select: none;">
+              Acepto los <a href="terminos.html" target="_blank" style="color: #ffb700; text-decoration: underline; font-weight: 700;">Términos y Condiciones</a> (+18).
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-cta" style="width: 100%; padding: 0.85rem; font-size: 0.92rem; margin-top: 0.25rem;">
+            ⚡ ¡REGISTRARME EN 1-CLIC!
+          </button>
+
+          <p class="legal-notice">
+            Tu cuenta se creará al instante para entrar al panel de jugador (+18 años).
+          </p>
+        </form>
+
+        <!-- VISTA 2: POR TELÉFONO -->
+        <form id="formPhone" class="reg-form-fields" style="display: none;">
+          <div class="form-field">
+            <label>Número de Teléfono</label>
+            <div style="display: grid; grid-template-columns: 105px 1fr; gap: 0.5rem;">
+              <select id="regPhonePrefix">
+                <option value="+34" selected>🇪🇸 +34</option>
+                <option value="+52">🇲🇽 +52</option>
+                <option value="+57">🇨🇴 +57</option>
+                <option value="+54">🇦🇷 +54</option>
+                <option value="+56">🇨🇱 +56</option>
+                <option value="+51">🇵🇪 +51</option>
+                <option value="+1">🇺🇸 +1</option>
+              </select>
+              <input type="tel" id="regPhoneNumber" placeholder="612 345678" required />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Contraseña</label>
+            <input type="password" id="regPhonePass" placeholder="••••••••" required />
+          </div>
+
+          <div class="form-field">
+            <label>Código Promocional</label>
+            <div class="promo-input-wrap">
+              <input type="text" id="regPhonePromo" value="PANDAMAX" placeholder="Ingresa código" />
+              <span class="promo-tag-badge">✓ +200% APLICADO</span>
+            </div>
+          </div>
+
+          <div class="terms-checkbox-wrap" style="display: flex; align-items: flex-start; gap: 0.55rem; margin: 0.4rem 0 0.55rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">
+            <input type="checkbox" id="heroPhoneTerms" required style="margin-top: 2px; accent-color: #00e701; width: 16px; height: 16px; cursor: pointer; flex-shrink: 0;" />
+            <label for="heroPhoneTerms" style="cursor: pointer; user-select: none;">
+              Acepto los <a href="terminos.html" target="_blank" style="color: #ffb700; text-decoration: underline; font-weight: 700;">Términos y Condiciones</a> (+18).
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-cta" style="width: 100%; padding: 0.85rem; font-size: 0.92rem; margin-top: 0.25rem;">
+            📱 ¡REGISTRARME POR TELÉFONO!
+          </button>
+        </form>
+
+        <!-- VISTA 3: POR EMAIL -->
+        <form id="formEmail" class="reg-form-fields" style="display: none;">
+          <div class="form-field">
+            <label>Correo Electrónico</label>
+            <input type="email" id="regEmailAddress" placeholder="tucorreo@ejemplo.com" required />
+          </div>
+
+          <div class="input-row">
+            <div class="form-field">
+              <label>Usuario / Alias</label>
+              <input type="text" id="regEmailUser" placeholder="Tu alias" required />
+            </div>
+            <div class="form-field">
+              <label>Contraseña</label>
+              <input type="password" id="regEmailPass" placeholder="••••••••" required />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Código Promocional</label>
+            <div class="promo-input-wrap">
+              <input type="text" id="regEmailPromo" value="PANDAMAX" placeholder="Ingresa código" />
+              <span class="promo-tag-badge">✓ +200% APLICADO</span>
+            </div>
+          </div>
+
+          <div class="terms-checkbox-wrap" style="display: flex; align-items: flex-start; gap: 0.55rem; margin: 0.4rem 0 0.55rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">
+            <input type="checkbox" id="heroEmailTerms" required style="margin-top: 2px; accent-color: #00e701; width: 16px; height: 16px; cursor: pointer; flex-shrink: 0;" />
+            <label for="heroEmailTerms" style="cursor: pointer; user-select: none;">
+              Acepto los <a href="terminos.html" target="_blank" style="color: #ffb700; text-decoration: underline; font-weight: 700;">Términos y Condiciones</a> (+18).
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-cta" style="width: 100%; padding: 0.85rem; font-size: 0.92rem; margin-top: 0.25rem;">
+            ✉️ ¡REGISTRARME POR EMAIL!
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER DE GANADORES EN VIVO (EN DIAMANTES) -->
+  <section class="ticker-section">
+    <div class="ticker-label">
+      <div class="pulse-dot"></div>
+      <span>PREMIOS RECIENTES</span>
+    </div>
+    <div class="ticker-track-container">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO DE JUEGOS -->
+  <section class="lobby-section" id="lobby">
+    <div class="lobby-header">
+      <div class="section-title">
+        <h2>JUEGOS DESTACADOS PANDA</h2>
+        <p>Explora nuestra selección oficial o regístrate para jugar por premios reales en Diamantes</p>
+      </div>
+      <div class="lobby-filters">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="arcade">Arcade Panda</button>
+        <button class="filter-btn" data-filter="crash">Crash Games</button>
+        <button class="filter-btn" data-filter="slots">Slots</button>
+      </div>
+    </div>
+
+    <div class="games-grid" id="gamesGrid"></div>
+  </section>
+
+  <!-- SECCIÓN EXPLICATIVA: CÓMO FUNCIONA -->
+  <section class="promo-strip" id="promos">
+    <div class="promo-container" id="seguridad">
+      <div class="promo-card">
+        <div class="promo-icon">💎</div>
+        <div class="promo-info">
+          <h4>Economía en Diamantes</h4>
+          <p>Juega de forma clara: cada <strong>1 USDT equivale a 10 💎 Diamantes</strong> dentro de la plataforma.</p>
+        </div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-icon">⚡</div>
+        <div class="promo-info">
+          <h4>Red Exclusiva TRC-20</h4>
+          <p>Recargas y retiros procesados en USDT mediante la red Tron (TRC-20) con comisiones mínimas.</p>
+        </div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-icon">🛡️</div>
+        <div class="promo-info">
+          <h4>Verificación Antifraude</h4>
+          <p>Juega y recarga al instante. Verifica tu cuenta en un paso cuando desees retirar tus ganancias.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background: #080d18; border-top: 1px solid var(--border-subtle); padding: 2.5rem 2rem; color: var(--text-muted); font-size: 0.8rem;">
+    <div style="max-width: 1260px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <strong style="color: #fff; font-size: 1rem;">🐼 PANDA<span style="color: var(--accent-gold);"> CASH</span></strong> &bull; © 2026 Todos los derechos reservados.
+      </div>
+      <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
+        <a href="terminos.html" style="color: var(--text-muted); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#8e9bb0'">Términos y Condiciones</a>
+        <span style="border: 1px solid var(--accent-gold); padding: 2px 6px; border-radius: 4px; font-weight: 800; color: var(--accent-gold);">+18</span>
+        <span>Juega con responsabilidad</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE INICIO DE SESIÓN / REGISTRO -->
+  <div class="modal-backdrop" id="authModalBackdrop">
+    <div class="modal-window">
+      <button class="modal-close-btn" id="btnCloseAuthModal">&times;</button>
+
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <div style="font-size: 2rem;">🐼</div>
+        <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff;" id="modalAuthTitle">ACCESO A TU CUENTA</h3>
+      </div>
+
+      <div class="reg-tabs">
+        <button type="button" class="reg-tab-btn active" id="tabModalLogin">🔑 Iniciar Sesión</button>
+        <button type="button" class="reg-tab-btn" id="tabModalRegister">🎁 Crear Cuenta</button>
+      </div>
+
+      <!-- Formulario Login -->
+      <form id="formModalLogin" class="reg-form-fields">
+        <div class="form-field">
+          <label>Usuario o Correo</label>
+          <input type="text" id="loginUser" placeholder="Ej. PandaMaster_99" required />
+        </div>
+        <div class="form-field">
+          <label>Contraseña</label>
+          <input type="password" id="loginPass" placeholder="••••••••" required />
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: -0.25rem; margin-bottom: 0.65rem;">
+          <a href="javascript:void(0)" id="linkForgotPassword" style="color: var(--accent-gold); font-size: 0.78rem; text-decoration: none; font-weight: 700; cursor: pointer;">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+        <button type="submit" class="btn btn-cta" style="width: 100%; margin-top: 0.2rem; padding: 0.85rem;">
+          🔑 ENTRAR AL PANEL
+        </button>
+      </form>
+
+      <!-- Formulario Registro en Modal -->
+      <form id="formModalRegister" class="reg-form-fields" style="display: none;">
+        <div class="form-field">
+          <label>Nombre de Usuario</label>
+          <input type="text" id="regUsername" placeholder="Ej. PandaPlayer" required />
+        </div>
+        <div class="form-field">
+          <label>Correo Electrónico</label>
+          <input type="email" id="regEmail" placeholder="tucorreo@ejemplo.com" required />
+        </div>
+        <div class="form-field">
+          <label>Contraseña</label>
+          <input type="password" id="regPassword" placeholder="••••••••" required />
+        </div>
+        <div class="form-field">
+          <label>Pregunta de Seguridad (Para recuperar contraseña)</label>
+          <select id="regSecurityQuestion" style="width: 100%; background: #0f182c; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px; color: #fff; padding: 0.65rem 0.85rem; font-size: 0.84rem; font-family: inherit; cursor: pointer;">
+            <option value="¿Cuál fue el nombre de tu primera mascota?">🐶 ¿Cuál fue el nombre de tu primera mascota?</option>
+            <option value="¿En qué ciudad naciste?">🏙️ ¿En qué ciudad naciste?</option>
+            <option value="¿Cuál es tu comida o plato favorito?">🍕 ¿Cuál es tu comida o plato favorito?</option>
+            <option value="¿Cómo se llamaba tu primera escuela primaria?">🏫 ¿Cómo se llamaba tu primera escuela primaria?</option>
+            <option value="¿Cuál es el segundo nombre de tu madre?">👩 ¿Cuál es el segundo nombre de tu madre?</option>
+            <option value="¿Cuál fue el modelo de tu primer auto o moto?">🚗 ¿Cuál fue el modelo de tu primer auto o moto?</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Respuesta Secreta</label>
+          <input type="text" id="regSecurityAnswer" placeholder="Ej. Pelusa (no distingue mayúsculas)" required autocomplete="off" />
+        </div>
+        <div class="form-field">
+          <label>Código Promocional</label>
+          <div class="promo-input-wrap">
+            <input type="text" id="regPromo" value="PANDAMAX" />
+            <span class="promo-tag-badge">+200% ACTIVO</span>
+          </div>
+        </div>
+        <div class="terms-checkbox-wrap" style="display: flex; align-items: flex-start; gap: 0.55rem; margin: 0.4rem 0 0.65rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">
+          <input type="checkbox" id="modalRegTerms" required style="margin-top: 2px; accent-color: #00e701; width: 16px; height: 16px; cursor: pointer; flex-shrink: 0;" />
+          <label for="modalRegTerms" style="cursor: pointer; user-select: none;">
+            He leído y acepto los <a href="terminos.html" target="_blank" style="color: #ffb700; text-decoration: underline; font-weight: 700;">Términos y Condiciones</a> y confirmo que soy mayor de 18 años (+18).
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-cta" style="width: 100%; margin-top: 0.2rem; padding: 0.85rem;">
+          🎁 CREAR CUENTA E IR AL PANEL
+        </button>
+      </form>
+
+      <!-- Formulario Recuperación por Pregunta de Seguridad -->
+      <form id="formModalRecover" class="reg-form-fields" style="display: none;">
+        <div style="background: rgba(255, 183, 0, 0.08); border: 1px solid rgba(255, 183, 0, 0.3); border-radius: 8px; padding: 0.75rem; margin-bottom: 0.75rem; font-size: 0.8rem; color: #d1d5db; line-height: 1.4;">
+          🛡️ <strong>Recuperación de Contraseña:</strong> Ingresa tu nombre de usuario para responder a tu pregunta de seguridad.
+        </div>
+
+        <div class="form-field">
+          <label>Nombre de Usuario</label>
+          <div style="display: flex; gap: 0.45rem;">
+            <input type="text" id="recoverUsername" placeholder="Ej. PandaMaster_99" style="flex: 1;" required />
+            <button type="button" class="btn btn-secondary" id="btnFindQuestion" style="padding: 0.6rem 0.85rem; font-size: 0.8rem; white-space: nowrap; font-weight: 700; cursor: pointer;">
+              🔍 Buscar
+            </button>
+          </div>
+        </div>
+
+        <div id="recoverQuestionContainer" style="display: none;">
+          <div class="form-field">
+            <label>Pregunta de Seguridad</label>
+            <div id="recoverQuestionDisplay" style="background: #0f182c; border: 1px solid rgba(255, 255, 255, 0.14); padding: 0.7rem 0.85rem; border-radius: 6px; font-weight: 800; color: #ffb700; font-size: 0.86rem;">
+              ¿Cuál fue el nombre de tu primera mascota?
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Tu Respuesta Secreta</label>
+            <input type="text" id="recoverAnswer" placeholder="Escribe tu respuesta..." required autocomplete="off" />
+            <small style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; display: block;">
+              No distingue mayúsculas, minúsculas ni tildes.
+            </small>
+          </div>
+
+          <div class="form-field">
+            <label>Nueva Contraseña</label>
+            <input type="password" id="recoverNewPass" placeholder="Mínimo 6 caracteres" required />
+          </div>
+
+          <div class="form-field">
+            <label>Confirmar Nueva Contraseña</label>
+            <input type="password" id="recoverConfirmPass" placeholder="Repite la nueva contraseña" required />
+          </div>
+
+          <button type="submit" id="btnSubmitRecover" class="btn btn-cta" style="width: 100%; margin-top: 0.4rem; padding: 0.85rem; font-weight: 900; cursor: pointer;">
+            🔒 RESTABLECER CONTRASEÑA
+          </button>
+        </div>
+
+        <div style="text-align: center; margin-top: 0.85rem;">
+          <a href="javascript:void(0)" id="linkBackToLogin" style="color: var(--text-muted); font-size: 0.8rem; text-decoration: underline; cursor: pointer;">
+            ◀ Volver a Iniciar Sesión
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE MODO PRÁCTICA (DEMO ARCADE) -->
+  <div class="modal-backdrop" id="gameModalBackdrop">
+    <div class="modal-window game-modal-window">
+      <button class="modal-close-btn" id="btnCloseGameModal">&times;</button>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 0.75rem;">
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--accent-gold);">NEON BOUNCE ARCADE (DEMO)</h3>
+          <p style="font-size: 0.78rem; color: var(--text-muted);">Modo Práctica Gratuito &bull; Regístrate para ganar Diamantes reales</p>
+        </div>
+        <span style="background: rgba(255, 183, 0, 0.15); border: 1px solid var(--accent-gold); padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.75rem; font-weight: 800; color: var(--accent-gold);">
+          MODO DEMO
+        </span>
+      </div>
+
+      <div class="game-modal-frame">
+        <canvas id="portalGameCanvas" width="600" height="360" style="background: #030712; display: block; cursor: none;"></canvas>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-muted);">
+        <span>Mueve la paleta con el <strong>Ratón</strong></span>
+        <button class="btn btn-cta" id="btnDemoToRegister" style="padding: 0.4rem 0.9rem; font-size: 0.75rem;">
+          🎁 Jugar por Premios Reales
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'panda_user_session';
+    const API_BASE = (window.PANDA_CONFIG && window.PANDA_CONFIG.API_BASE) ||
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:'
+        ? 'http://localhost:8085/api/v1'
+        : '/api/v1');
+
+    // -------------------------------------------------------------------------
+    // SISTEMA DE TOAST NOTIFICATIONS
+    // -------------------------------------------------------------------------
+    const toastContainer = document.createElement('div');
+    toastContainer.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none;';
+    document.body.appendChild(toastContainer);
+
+    function showToast(title, message, type = 'success') {
+      const color = type === 'error' ? '#ff3366' : '#ffb700';
+      const el = document.createElement('div');
+      el.style.cssText = `
+        background:#111a2e;border:1px solid ${color};border-left:4px solid ${color};
+        color:#fff;padding:12px 16px;border-radius:8px;box-shadow:0 10px 25px rgba(0,0,0,0.65);
+        min-width:270px;max-width:360px;font-size:0.84rem;pointer-events:auto;
+      `;
+      el.innerHTML = `<div style="font-weight:800;color:${color};margin-bottom:2px;">${title}</div><div style="color:#8e9bb0;font-size:0.78rem;">${message}</div>`;
+      toastContainer.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }
+
+    // -------------------------------------------------------------------------
+    // CREACIÓN DE SESIÓN Y REDIRECCIÓN AL DASHBOARD
+    // -------------------------------------------------------------------------
+    async function createAccountAndRedirect({ username, email, phone, country, password, promoCode, method, security_question, security_answer }) {
+      const idNum = Math.floor(100000 + Math.random() * 900000);
+      const cleanUser = (username || `Panda_${idNum}`).trim();
+      const bonusDiamonds = (promoCode || '').toUpperCase() === 'PANDAMAX' ? 30000 : 15000;
+
+      // Toda cuenta nueva inicia con cuenta_verificada = false y profileCompleted = false
+      const sessionData = {
+        id: `usr_${idNum}`,
+        isLoggedIn: true,
+        username: cleanUser,
+        fullName: '',
+        email: email ? email.trim() : '',
+        phone: phone ? phone.trim() : '',
+        country: country || '',
+        birthDate: '',
+        defaultTronAddress: '',
+        registrationMethod: method || 'email',
+        profileCompleted: false,
+        balance: 0, // Cuenta nueva inicia estrictamente en 0 diamantes
+        bonusBalance: 0,
+        freeSpins: 0,
+        vipLevel: 'Panda Bronce',
+        xp: 0,
+        xpTarget: 1000,
+        favorites: ['keys-and-doors', 'panda-crash'],
+        securityQuestion: security_question || '¿Cuál fue el nombre de tu primera mascota?',
+        securityAnswer: security_answer || 'Pelusa',
+        cuenta_verificada: false,
+        is_verified: false
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: sessionData.username,
+            email: sessionData.email,
+            phone: sessionData.phone,
+            password: password || '123456',
+            promo_code: promoCode || 'PANDAMAX',
+            security_question: sessionData.securityQuestion,
+            security_answer: sessionData.securityAnswer
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.user) {
+            sessionData.cuenta_verificada = Boolean(data.user.cuenta_verificada);
+            sessionData.is_verified = Boolean(data.user.cuenta_verificada);
+          }
+        }
+      } catch (_) {
+        // Fallback local limpio si el servidor Go no está corriendo
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionData));
+      showToast('¡Cuenta Creada con Éxito!', `Bienvenido ${sessionData.username}. Ingresando a tu panel...`);
+      setTimeout(() => {
+        window.location.href = './dashboard_directo.html';
+      }, 900);
+    }
+
+    async function loginAndRedirect(username, password) {
+      const cleanUser = username.trim();
+      if (!cleanUser) return;
+
+      let sessionData = {
+        isLoggedIn: true,
+        username: cleanUser,
+        email: `${cleanUser.toLowerCase()}@pandabet.com`,
+        balance: 0,
+        bonusBalance: 0,
+        freeSpins: 0,
+        vipLevel: 'Panda Bronce',
+        xp: 650,
+        xpTarget: 1000,
+        favorites: ['keys-and-doors', 'panda-crash'],
+        cuenta_verificada: false,
+        is_verified: false
+      };
+
+      // Conservar datos previos si es el mismo usuario en localStorage
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.username && parsed.username.toLowerCase() === cleanUser.toLowerCase()) {
+            sessionData = { ...sessionData, ...parsed, isLoggedIn: true };
+          }
+        }
+      } catch (_) {}
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: cleanUser, password: password || '123456' })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.user) {
+            sessionData.username = data.user.username || cleanUser;
+            sessionData.balance = typeof data.user.balance_diamantes === 'number' ? data.user.balance_diamantes : sessionData.balance;
+            sessionData.cuenta_verificada = Boolean(data.user.cuenta_verificada);
+            sessionData.is_verified = Boolean(data.user.cuenta_verificada);
+          }
+        }
+      } catch (_) {}
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionData));
+      showToast('¡Sesión Iniciada!', `Hola de nuevo, ${sessionData.username}. Redirigiendo a tu panel...`);
+      setTimeout(() => {
+        window.location.href = './dashboard_directo.html';
+      }, 800);
+    }
+
+    // -------------------------------------------------------------------------
+    // PESTAÑAS DEL FORMULARIO DEL HERO (1-CLIC, TELÉFONO, EMAIL)
+    // -------------------------------------------------------------------------
+    const heroTabBtns = document.querySelectorAll('#heroRegTabs .reg-tab-btn');
+    const form1Click = document.getElementById('form1Click');
+    const formPhone = document.getElementById('formPhone');
+    const formEmail = document.getElementById('formEmail');
+
+    heroTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        heroTabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab = btn.getAttribute('data-tab');
+        form1Click.style.display = tab === '1click' ? 'flex' : 'none';
+        formPhone.style.display = tab === 'phone' ? 'flex' : 'none';
+        formEmail.style.display = tab === 'email' ? 'flex' : 'none';
+      });
+    });
+
+    form1Click.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!document.getElementById('hero1ClickTerms')?.checked) {
+        showToast('Términos Requeridos', 'Debes aceptar los Términos y Condiciones para registrarte.', 'error');
+        return;
+      }
+      const promo = document.getElementById('reg1ClickPromo').value;
+      const country = document.getElementById('reg1ClickCountry').value;
+      const rnd = Math.floor(10000 + Math.random() * 90000);
+      createAccountAndRedirect({
+        username: `Panda_${rnd}`,
+        country: country,
+        promoCode: promo,
+        method: '1click'
+      });
+    });
+
+    formPhone.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!document.getElementById('heroPhoneTerms')?.checked) {
+        showToast('Términos Requeridos', 'Debes aceptar los Términos y Condiciones para registrarte.', 'error');
+        return;
+      }
+      const prefix = document.getElementById('regPhonePrefix').value;
+      const num = document.getElementById('regPhoneNumber').value.replace(/\D/g, '');
+      const pass = document.getElementById('regPhonePass').value;
+      const promo = document.getElementById('regPhonePromo').value;
+      createAccountAndRedirect({
+        username: `Panda_${num.slice(-4) || Math.floor(1000 + Math.random() * 9000)}`,
+        phone: `${prefix} ${num}`,
+        password: pass,
+        promoCode: promo,
+        method: 'phone'
+      });
+    });
+
+    formEmail.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!document.getElementById('heroEmailTerms')?.checked) {
+        showToast('Términos Requeridos', 'Debes aceptar los Términos y Condiciones para registrarte.', 'error');
+        return;
+      }
+      createAccountAndRedirect({
+        username: document.getElementById('regEmailUser').value,
+        email: document.getElementById('regEmailAddress').value,
+        password: document.getElementById('regEmailPass').value,
+        promoCode: document.getElementById('regEmailPromo').value,
+        method: 'email'
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // MODAL DE LOGIN Y REGISTRO (DESDE LA BARRA SUPERIOR)
+    // -------------------------------------------------------------------------
+    const authModal = document.getElementById('authModalBackdrop');
+    const tabModalLogin = document.getElementById('tabModalLogin');
+    const tabModalRegister = document.getElementById('tabModalRegister');
+    const formModalLogin = document.getElementById('formModalLogin');
+    const formModalRegister = document.getElementById('formModalRegister');
+    const formModalRecover = document.getElementById('formModalRecover');
+    const modalAuthTitle = document.getElementById('modalAuthTitle');
+
+    function openAuthModal(mode = 'login') {
+      authModal.classList.add('open');
+      const tabsContainer = document.querySelector('.reg-tabs');
+      if (mode === 'login') {
+        if (tabsContainer) tabsContainer.style.display = 'flex';
+        tabModalLogin.classList.add('active');
+        tabModalRegister.classList.remove('active');
+        formModalLogin.style.display = 'flex';
+        formModalRegister.style.display = 'none';
+        if (formModalRecover) formModalRecover.style.display = 'none';
+        modalAuthTitle.textContent = 'ACCESO A TU CUENTA';
+      } else if (mode === 'register') {
+        if (tabsContainer) tabsContainer.style.display = 'flex';
+        tabModalRegister.classList.add('active');
+        tabModalLogin.classList.remove('active');
+        formModalLogin.style.display = 'none';
+        formModalRegister.style.display = 'flex';
+        if (formModalRecover) formModalRecover.style.display = 'none';
+        modalAuthTitle.textContent = 'CREAR CUENTA NUEVA';
+      } else if (mode === 'recover') {
+        if (tabsContainer) tabsContainer.style.display = 'none'; // Oculta pestañas en modo recuperación
+        formModalLogin.style.display = 'none';
+        formModalRegister.style.display = 'none';
+        if (formModalRecover) formModalRecover.style.display = 'flex';
+        modalAuthTitle.textContent = 'RECUPERAR CONTRASEÑA';
+      }
+    }
+
+    document.getElementById('btnOpenLogin').addEventListener('click', () => openAuthModal('login'));
+    document.getElementById('btnOpenRegister').addEventListener('click', () => openAuthModal('register'));
+    document.getElementById('btnCloseAuthModal').addEventListener('click', () => authModal.classList.remove('open'));
+    authModal.addEventListener('click', (e) => { if (e.target === authModal) authModal.classList.remove('open'); });
+
+    tabModalLogin.addEventListener('click', () => openAuthModal('login'));
+    tabModalRegister.addEventListener('click', () => openAuthModal('register'));
+
+    document.getElementById('linkForgotPassword')?.addEventListener('click', () => {
+      openAuthModal('recover');
+      const curUser = document.getElementById('loginUser').value.trim();
+      if (curUser) {
+        document.getElementById('recoverUsername').value = curUser;
+        fetchSecurityQuestionForUser(curUser);
+      }
+    });
+
+    document.getElementById('linkBackToLogin')?.addEventListener('click', () => openAuthModal('login'));
+
+    // Búsqueda y visualización de la pregunta de seguridad
+    async function fetchSecurityQuestionForUser(username) {
+      const qContainer = document.getElementById('recoverQuestionContainer');
+      const qDisplay = document.getElementById('recoverQuestionDisplay');
+      let questionFound = '¿Cuál fue el nombre de tu primera mascota?';
+
+      // 1. Intentar consultar API de Go
+      try {
+        const res = await fetch(`${API_BASE}/auth/security-question`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.question) questionFound = data.question;
+        }
+      } catch (_) {
+        // Fallback local: revisar localStorage
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.username && parsed.username.toLowerCase() === username.toLowerCase() && parsed.securityQuestion) {
+              questionFound = parsed.securityQuestion;
+            }
+          }
+        } catch (_) {}
+      }
+
+      if (qDisplay) qDisplay.textContent = questionFound;
+      if (qContainer) qContainer.style.display = 'block';
+    }
+
+    document.getElementById('btnFindQuestion')?.addEventListener('click', () => {
+      const u = document.getElementById('recoverUsername').value.trim();
+      if (!u) {
+        showToast('Atención', 'Ingresa tu nombre de usuario primero.', 'error');
+        return;
+      }
+      fetchSecurityQuestionForUser(u);
+    });
+
+    document.getElementById('recoverUsername')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const u = document.getElementById('recoverUsername').value.trim();
+        if (u) fetchSecurityQuestionForUser(u);
+      }
+    });
+
+    // Helper para normalizar respuestas de seguridad (sin tildes, minúsculas, sin espacios extras)
+    function normalizeSecurityAnswer(str) {
+      return (str || '')
+        .trim()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    document.getElementById('btnSubmitRecover')?.addEventListener('click', () => {
+      formModalRecover?.requestSubmit();
+    });
+
+    // Submit del formulario de recuperación
+    formModalRecover?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('recoverUsername').value.trim();
+      const answer = document.getElementById('recoverAnswer').value.trim();
+      const newPass = document.getElementById('recoverNewPass').value;
+      const confirmPass = document.getElementById('recoverConfirmPass').value;
+
+      if (!username || !answer) {
+        showToast('Campos Incompletos', 'Completa tu usuario y respuesta secreta.', 'error');
+        return;
+      }
+      if (newPass.length < 6) {
+        showToast('Contraseña Corta', 'La nueva contraseña debe tener al menos 6 caracteres.', 'error');
+        return;
+      }
+      if (newPass !== confirmPass) {
+        showToast('Error de Contraseña', 'Las contraseñas no coinciden.', 'error');
+        return;
+      }
+
+      let success = false;
+
+      // 1. Intentar validar vía Backend Go
+      try {
+        const res = await fetch(`${API_BASE}/auth/reset-by-security`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: username,
+            answer: answer,
+            new_password: newPass
+          })
+        });
+        if (res.ok) {
+          success = true;
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          showToast('Respuesta Incorrecta', errData.error || 'La respuesta secreta no coincide.', 'error');
+          return;
+        }
+      } catch (_) {
+        // Fallback local en localStorage si el backend no está corriendo
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            const expectedAns = parsed.securityAnswer || 'pelusa';
+            if (normalizeSecurityAnswer(answer) === normalizeSecurityAnswer(expectedAns)) {
+              parsed.password = newPass;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+              success = true;
+            } else {
+              showToast('Respuesta Incorrecta', 'La respuesta secreta no coincide con la registrada.', 'error');
+              return;
+            }
+          } else {
+            // Usuario demo si no hay sesión previa
+            if (normalizeSecurityAnswer(answer) === 'pelusa') {
+              success = true;
+            } else {
+              showToast('Respuesta Incorrecta', 'La respuesta secreta no coincide.', 'error');
+              return;
+            }
+          }
+        } catch (_) {}
+      }
+
+      if (success) {
+        showToast('¡Contraseña Restablecida!', 'Tu contraseña ha sido actualizada con éxito. Ya puedes iniciar sesión.');
+        formModalRecover.reset();
+        document.getElementById('recoverQuestionContainer').style.display = 'none';
+        openAuthModal('login');
+        document.getElementById('loginUser').value = username;
+        document.getElementById('loginPass').value = newPass;
+      }
+    });
+
+    formModalLogin.addEventListener('submit', (e) => {
+      e.preventDefault();
+      loginAndRedirect(
+        document.getElementById('loginUser').value,
+        document.getElementById('loginPass').value
+      );
+    });
+
+    formModalRegister.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!document.getElementById('modalRegTerms')?.checked) {
+        showToast('Términos Requeridos', 'Debes aceptar los Términos y Condiciones para registrarte.', 'error');
+        return;
+      }
+      const secQ = document.getElementById('regSecurityQuestion')?.value || '¿Cuál fue el nombre de tu primera mascota?';
+      const secA = document.getElementById('regSecurityAnswer')?.value || 'Pelusa';
+      createAccountAndRedirect({
+        username: document.getElementById('regUsername').value,
+        email: document.getElementById('regEmail').value,
+        password: document.getElementById('regPassword').value,
+        promoCode: document.getElementById('regPromo').value,
+        security_question: secQ,
+        security_answer: secA,
+        method: 'email'
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // TICKER Y CATÁLOGO DE JUEGOS
+    // -------------------------------------------------------------------------
+    let jackpotDiamonds = 2948310;
+    setInterval(() => {
+      jackpotDiamonds += Math.floor(Math.random() * 15) + 5;
+      const el = document.getElementById('heroJackpot');
+      if (el) el.textContent = jackpotDiamonds.toLocaleString('en-US') + ' 💎';
+    }, 2200);
+
+    const winners = [
+      { user: 'Marcos_99', amount: '+3,400 💎', game: 'Llaves y Puertas' },
+      { user: 'CryptoKing', amount: '+18,500 💎', game: 'Panda Crash Rocket' },
+      { user: 'Sofia_ES', amount: '+7,200 💎', game: 'Neon Plinko' },
+      { user: 'Alex_Pro', amount: '+21,000 💎', game: 'Golden Panda Slots' },
+      { user: 'PandaGamer', amount: '+4,950 💎', game: 'Llaves y Puertas' },
+      { user: 'Elena_K', amount: '+34,000 💎', game: 'Cyber Mines 3D' }
+    ];
+    const tickerHtml = winners.map(w => `
+      <div class="ticker-item">
+        <span class="ticker-user">${w.user}</span>
+        <span>ganó</span>
+        <span class="ticker-win">${w.amount}</span>
+        <span class="ticker-game">en ${w.game}</span>
+      </div>
+    `).join('');
+    document.getElementById('tickerTrack').innerHTML = tickerHtml + tickerHtml;
+
+    const games = [
+      { id: 'golden-panda-slots', title: 'Golden Panda Slots', category: 'slots', badge: 'MULTIPLICADOR X1000', rtp: 'Inversión Libre • Hasta x1,000', bg: 'radial-gradient(circle, #123e2a 0%, #09101d 85%)', icon: '🎰' },
+      { id: 'neon-plinko', title: 'Neon Plinko Gravity', category: 'arcade', badge: 'MULTIPLICADOR X250', rtp: 'Inversión Libre • Hasta x250', bg: 'radial-gradient(circle, #2a1b4e 0%, #09101d 85%)', icon: '⚪' },
+      { id: 'panda-crash', title: 'Panda Crash Rocket', category: 'crash', badge: 'MULTIPLICADOR X500', rtp: 'Inversión Libre • Hasta x500', bg: 'radial-gradient(circle, #3d1b4f 0%, #09101d 85%)', icon: '🚀' },
+      { id: 'cyber-mines', title: 'Cyber Mines 3D', category: 'arcade', badge: 'MULTIPLICADOR PROGRESIVO', rtp: 'Inversión Libre • Por Acierto', bg: 'radial-gradient(circle, #4a3510 0%, #09101d 85%)', icon: '💣' },
+      { id: 'keys-and-doors', title: 'Llaves y Puertas: Bóveda Panda', category: 'arcade', badge: 'NUEVO EXCLUSIVO', rtp: 'Inversión Libre • x2 a x100', bg: 'radial-gradient(circle, #1b3b6f 0%, #09101d 85%)', icon: '🗝️' }
+    ];
+
+    const gamesGrid = document.getElementById('gamesGrid');
+    gamesGrid.innerHTML = games.map(g => `
+      <div class="game-card" data-category="${g.category}">
+        <div class="game-card-thumb" style="background: ${g.bg};">
+          <div style="font-size: 3.3rem;">${g.icon}</div>
+          <span class="game-badge-top">${g.badge}</span>
+          <span class="game-rtp">${g.rtp}</span>
+          <div class="game-card-overlay">
+            <button class="btn btn-cta btn-real-play" style="padding: 0.55rem 1.2rem; font-size: 0.8rem;">
+              ▶ Jugar con Diamantes
+            </button>
+            <button class="btn btn-secondary btn-demo-play" style="padding: 0.4rem 1rem; font-size: 0.75rem;">
+              Modo Práctica
+            </button>
+          </div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-card-info">
+            <h4>${g.title}</h4>
+            <span>Panda Originals &bull; ${g.rtp}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Filtros del catálogo
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.game-card').forEach(card => {
+          card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Jugar por premios reales pide iniciar sesión / registrarse
+    document.querySelectorAll('.btn-real-play').forEach(btn => {
+      btn.addEventListener('click', () => openAuthModal('register'));
+    });
+
+    // -------------------------------------------------------------------------
+    // MODO PRÁCTICA EN CANVAS
+    // -------------------------------------------------------------------------
+    const gameModal = document.getElementById('gameModalBackdrop');
+    let isPlayingDemo = false;
+
+    document.querySelectorAll('.btn-demo-play').forEach(btn => {
+      btn.addEventListener('click', () => {
+        gameModal.classList.add('open');
+        startDemoGame();
+      });
+    });
+
+    document.getElementById('btnCloseGameModal').addEventListener('click', () => {
+      gameModal.classList.remove('open');
+      isPlayingDemo = false;
+    });
+
+    document.getElementById('btnDemoToRegister').addEventListener('click', () => {
+      gameModal.classList.remove('open');
+      isPlayingDemo = false;
+      openAuthModal('register');
+    });
+
+    function startDemoGame() {
+      const canvas = document.getElementById('portalGameCanvas');
+      const ctx = canvas.getContext('2d');
+      isPlayingDemo = true;
+
+      let x = 300, y = 100, vx = 4, vy = 4, angle = 0;
+      const size = 20, pw = 100, ph = 12;
+      let px = 250, targetPx = 250, score = 0;
+
+      canvas.onmousemove = (e) => {
+        const r = canvas.getBoundingClientRect();
+        targetPx = e.clientX - r.left - pw / 2;
+      };
+
+      function loop() {
+        if (!isPlayingDemo) return;
+        px += (targetPx - px) * 0.25;
+        px = Math.max(0, Math.min(canvas.width - pw, px));
+
+        x += vx; y += vy; angle += 0.04;
+        if (x - size / 2 <= 0) { x = size / 2; vx = Math.abs(vx); }
+        if (x + size / 2 >= canvas.width) { x = canvas.width - size / 2; vx = -Math.abs(vx); }
+        if (y - size / 2 <= 0) { y = size / 2; vy = Math.abs(vy); }
+
+        const pTop = canvas.height - 28;
+        if (y + size / 2 >= pTop && y - size / 2 <= pTop + ph && x >= px - 5 && x <= px + pw + 5 && vy > 0) {
+          vy = -Math.abs(vy);
+          score += 10;
+        }
+        if (y > canvas.height) {
+          x = canvas.width / 2; y = 100; vy = 4;
+        }
+
+        ctx.fillStyle = 'rgba(3, 7, 18, 0.45)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#ffb700';
+        ctx.beginPath();
+        ctx.roundRect(px, pTop, pw, ph, 5);
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.fillStyle = '#00f0ff';
+        ctx.fillRect(-size / 2, -size / 2, size, size);
+        ctx.restore();
+
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.fillText(`PUNTOS DEMO: ${score}`, 15, 25);
+
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+  </script>
+</body>
+</html>

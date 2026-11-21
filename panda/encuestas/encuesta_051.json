@@ -1,0 +1,128 @@
+{
+  "id": "enc_051",
+  "numero": 51,
+  "titulo": "Fútbol y Competiciones Internacionales",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Champions League, ligas locales, Mundiales y afición.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia ves partidos de fútbol en televisión o estadios?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Todas las semanas veo los partidos de mi equipo favorito"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo partidos grandes (Champions, clásicos, finales)"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo durante el Mundial o competencias de selecciones"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo ver fútbol"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Has acudido a un estadio de fútbol a ver un partido en vivo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, voy al estadio varias veces por temporada"
+        },
+        {
+          "letra": "B",
+          "texto": "He ido en algunas ocasiones especiales"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo a estadios pequeños de categorías locales"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he estado en un estadio de fútbol"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué competición consideras la más emocionante del mundo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La UEFA Champions League"
+        },
+        {
+          "letra": "B",
+          "texto": "La Copa Mundial de la FIFA de selecciones"
+        },
+        {
+          "letra": "C",
+          "texto": "Las ligas locales (LaLiga, Premier League, etc.)"
+        },
+        {
+          "letra": "D",
+          "texto": "La Copa Libertadores"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Juegas al fútbol con amigos o en ligas aficionadas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, juego fútbol 7 o fútbol sala cada semana"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo partidillos ocasionales en verano o fiestas"
+        },
+        {
+          "letra": "C",
+          "texto": "Antes jugaba mucho pero ya no"
+        },
+        {
+          "letra": "D",
+          "texto": "No practico fútbol"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Compras camisetas oficiales de tu equipo de fútbol?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo varias de distintas temporadas"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando mi equipo gana un título histórico"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero camisetas de entrenamiento o réplicas"
+        },
+        {
+          "letra": "D",
+          "texto": "No compro camisetas deportivas"
+        }
+      ]
+    }
+  ]
+}

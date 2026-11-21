@@ -1,0 +1,128 @@
+{
+  "id": "enc_039",
+  "numero": 39,
+  "titulo": "Teatro, Musicales y Espectáculos en Vivo",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Comedias, musicales de Broadway y monólogos de humor.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has asistido a obras de teatro o musicales en los últimos dos años?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, voy varias veces al año al teatro"
+        },
+        {
+          "letra": "B",
+          "texto": "He ido a 1 o 2 espectáculos importantes"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo a monólogos de humoristas (Stand-up)"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo ir a funciones de teatro"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué formato de espectáculo escénico prefieres?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Musicales de gran producción (El Rey León, etc.)"
+        },
+        {
+          "letra": "B",
+          "texto": "Monólogos de comedia y stand-up para reír"
+        },
+        {
+          "letra": "C",
+          "texto": "Obras dramáticas o comedias teatrales de texto"
+        },
+        {
+          "letra": "D",
+          "texto": "Espectáculos de magia, circo o acrobacias"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué valoras más en una función en vivo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El talento vocal y las actuaciones en directo"
+        },
+        {
+          "letra": "B",
+          "texto": "La escenografía, vestuario e iluminación"
+        },
+        {
+          "letra": "C",
+          "texto": "Un guion divertido y con ritmo"
+        },
+        {
+          "letra": "D",
+          "texto": "La conexión y cercanía con el público"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Comprarías entradas con meses de anticipación para un gran musical?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, para asegurar los mejores asientos centrales"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo con un par de semanas de margen"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero decidir a última hora según planes"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo si encuentro ofertas o descuentos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te gustan las salas históricas y teatros clásicos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me fascinan por su arquitectura y ambiente"
+        },
+        {
+          "letra": "B",
+          "texto": "Prefiero recintos modernos con butacas amplias"
+        },
+        {
+          "letra": "C",
+          "texto": "Me da igual el recinto mientras se vea bien"
+        },
+        {
+          "letra": "D",
+          "texto": "No le presto atención a la arquitectura de la sala"
+        }
+      ]
+    }
+  ]
+}

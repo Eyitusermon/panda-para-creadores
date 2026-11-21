@@ -1,0 +1,128 @@
+{
+  "id": "enc_010",
+  "numero": 10,
+  "titulo": "Sonido y Música en el Gaming",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "Efectos sonoros, bandas sonoras y concentración auditiva.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Juegas habitualmente con auriculares o altavoces?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Auriculares cerrados para inmersión total"
+        },
+        {
+          "letra": "B",
+          "texto": "Altavoces o barra de sonido"
+        },
+        {
+          "letra": "C",
+          "texto": "Altavoces del televisor o monitor"
+        },
+        {
+          "letra": "D",
+          "texto": "Altavoz del móvil a volumen bajo"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Escuchas tu propia música mientras juegas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, siempre con Spotify de fondo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en partidas casuales o arcade"
+        },
+        {
+          "letra": "C",
+          "texto": "Nunca, priorizo la música del juego"
+        },
+        {
+          "letra": "D",
+          "texto": "A veces escucho podcasts"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Te ayuda el sonido a anticipar eventos en el juego?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Totalmente, escucho pasos y señales clave"
+        },
+        {
+          "letra": "B",
+          "texto": "Me ayuda pero juego por vista principalmente"
+        },
+        {
+          "letra": "C",
+          "texto": "No suelo prestarle tanta atención técnica"
+        },
+        {
+          "letra": "D",
+          "texto": "A veces juego con volumen silenciado"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué tipo de efectos de sonido te resultan más gratificantes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sonido metálico de monedas o diamantes ganados"
+        },
+        {
+          "letra": "B",
+          "texto": "Explosiones y disparos potentes con bajos"
+        },
+        {
+          "letra": "C",
+          "texto": "Música victoriosa de victoria / nivel superado"
+        },
+        {
+          "letra": "D",
+          "texto": "Efectos retro de campanillas y bonus"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Comprarías o escucharías la banda sonora de un juego en Spotify?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo varias playlists de OST de juegos"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo de temas principales icónicos"
+        },
+        {
+          "letra": "C",
+          "texto": "Rara vez fuera del juego"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca escucho música de videojuegos fuera"
+        }
+      ]
+    }
+  ]
+}

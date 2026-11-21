@@ -1,0 +1,128 @@
+{
+  "id": "enc_083",
+  "numero": 83,
+  "titulo": "Turismo en Grandes Capitales del Mundo",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Nueva York, Tokio, Londres, París y rascacielos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuál es la gran capital mundial que más sueñas con visitar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tokio (Japón) por su fascinante mezcla de tradición y futuro"
+        },
+        {
+          "letra": "B",
+          "texto": "Nueva York (EE.UU.) por su energía de película y rascacielos"
+        },
+        {
+          "letra": "C",
+          "texto": "Londres o París por su historia, museos y elegancia"
+        },
+        {
+          "letra": "D",
+          "texto": "Roma por sus monumentos milenarios en cada esquina"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cómo te desplazas cuando haces turismo en una gran ciudad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En metro y autobús público como un ciudadano local"
+        },
+        {
+          "letra": "B",
+          "texto": "Caminando decenas de kilómetros al día hasta cansarme"
+        },
+        {
+          "letra": "C",
+          "texto": "En Uber o taxis para ir directo a cada punto"
+        },
+        {
+          "letra": "D",
+          "texto": "En autobuses turísticos descapotables (Hop-on Hop-off)"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Visitas museos de arte e historia en tus viajes urbanos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, reservo entradas para los museos más importantes"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo 1 o 2 museos emblemáticos si son imprescindibles"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero pasear por las calles y barrios antes que entrar a museos"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gusta visitar museos"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Subes a miradores de rascacielos para ver la ciudad desde arriba?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, siempre busco el mirador más alto de la ciudad al atardecer"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si no hay que hacer colas desmesuradas"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero miradores naturales gratuitos en colinas"
+        },
+        {
+          "letra": "D",
+          "texto": "Tengo algo de vértigo y evito las alturas extremas"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuánto tiempo consideras ideal para conocer una gran capital?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Entre 4 y 6 días completos para ver lo principal con calma"
+        },
+        {
+          "letra": "B",
+          "texto": "Una escapada rápida de fin de semana (2 a 3 días)"
+        },
+        {
+          "letra": "C",
+          "texto": "Al menos una semana entera o 10 días"
+        },
+        {
+          "letra": "D",
+          "texto": "Más de dos semanas para empaparme de la vida local"
+        }
+      ]
+    }
+  ]
+}

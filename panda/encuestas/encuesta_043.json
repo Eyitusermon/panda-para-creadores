@@ -1,0 +1,128 @@
+{
+  "id": "enc_043",
+  "numero": 43,
+  "titulo": "Servicios de Entrega a Domicilio (Delivery)",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Uber Eats, Glovo, pedidos de comida y rapidez.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Con qué frecuencia pides comida a domicilio por apps?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Varias veces por semana (2 o más)"
+        },
+        {
+          "letra": "B",
+          "texto": "Una vez por semana (típicamente fin de semana)"
+        },
+        {
+          "letra": "C",
+          "texto": "Una o dos veces al mes en ocasiones especiales"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca pido comida a domicilio"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué tipo de comida pides más a domicilio?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Hamburguesas gourmet y patatas fritas"
+        },
+        {
+          "letra": "B",
+          "texto": "Pizza artesanal o de cadena"
+        },
+        {
+          "letra": "C",
+          "texto": "Comida asiática (Sushi, Ramen, Wok)"
+        },
+        {
+          "letra": "D",
+          "texto": "Pollo frito o comida mexicana (Tacos, burritos)"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué valoras más al pedir por una aplicación de delivery?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Puntualidad y comida entregada caliente"
+        },
+        {
+          "letra": "B",
+          "texto": "Promociones 2x1 y gastos de envío gratis"
+        },
+        {
+          "letra": "C",
+          "texto": "Variedad de restaurantes locales en la zona"
+        },
+        {
+          "letra": "D",
+          "texto": "Seguimiento en tiempo real del repartidor en el mapa"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Pagas alguna suscripción de envíos gratis (Glovo Prime, Uber One)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, la amortizo con creces cada mes"
+        },
+        {
+          "letra": "B",
+          "texto": "La he probado en periodo gratuito"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero no pagar cuotas mensuales fijas"
+        },
+        {
+          "letra": "D",
+          "texto": "No pido con suficiente frecuencia"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sueles dejar propina al repartidor a través de la aplicación?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, casi siempre dejo propina digital o en efectivo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando el clima es malo (lluvia, frío) o son muy rápidos"
+        },
+        {
+          "letra": "C",
+          "texto": "Rara vez dejo propina"
+        },
+        {
+          "letra": "D",
+          "texto": "No acostumbro a dejar propina en delivery"
+        }
+      ]
+    }
+  ]
+}

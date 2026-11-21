@@ -1,0 +1,128 @@
+{
+  "id": "enc_005",
+  "numero": 5,
+  "titulo": "Comunidades de Jugadores y Esports",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "Competencias profesionales, creadores de contenido y Discord.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sigues transmisiones de Esports o competencias profesionales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, sigo ligas enteras en vivo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo eventos mundiales destacados"
+        },
+        {
+          "letra": "C",
+          "texto": "Ocasionalmente resúmenes en YouTube"
+        },
+        {
+          "letra": "D",
+          "texto": "No sigo competiciones de Esports"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué plataforma usas para ver transmisiones en directo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Twitch"
+        },
+        {
+          "letra": "B",
+          "texto": "YouTube Live"
+        },
+        {
+          "letra": "C",
+          "texto": "Kick"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo ver streams"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Perteneces a comunidades activas en Discord de juegos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, modero o participo a diario"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, pero solo para leer noticias"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo cuenta pero poco uso"
+        },
+        {
+          "letra": "D",
+          "texto": "No utilizo Discord"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Has participado en competencias comunitarios o amateurs?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, con regularidad con mi equipo"
+        },
+        {
+          "letra": "B",
+          "texto": "En un par de ocasiones"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gustaría pero aún no lo he hecho"
+        },
+        {
+          "letra": "D",
+          "texto": "No me interesa competir"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Te motivan las tablas de clasificación y rankings mundiales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Mucho, juego para estar en el top"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gusta comparar mi nivel con otros"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo compito contra mi récord personal"
+        },
+        {
+          "letra": "D",
+          "texto": "No le presto atención a los rankings"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_040",
+  "numero": 40,
+  "titulo": "Cultura de Memes e Internet",
+  "categoria": "Streaming, Cine & Música",
+  "categoria_icono": "🎬",
+  "descripcion": "Humor digital, viralidad y tendencias en redes.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Compartes memes con amigos o familiares en tu día a día?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, envío memes a diario por WhatsApp o Instagram"
+        },
+        {
+          "letra": "B",
+          "texto": "Varias veces por semana en grupos de amigos"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo cuando veo algo realmente gracioso"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca comparto contenido de humor"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es tu formato de meme favorito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Imágenes estáticas con texto ingenioso"
+        },
+        {
+          "letra": "B",
+          "texto": "Vídeos cortos con audios virales o remezclados"
+        },
+        {
+          "letra": "C",
+          "texto": "Stickers personalizados en chats de mensajería"
+        },
+        {
+          "letra": "D",
+          "texto": "GIFs animados de reacciones"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cuánto tiempo crees que dura una tendencia o meme hoy en día?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Apenas 1 o 2 semanas antes de cansar"
+        },
+        {
+          "letra": "B",
+          "texto": "Unos pocos días debido a la velocidad de TikTok"
+        },
+        {
+          "letra": "C",
+          "texto": "Algunos memes se convierten en clásicos duraderos"
+        },
+        {
+          "letra": "D",
+          "texto": "No me fijo en la vigencia de los memes"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Utilizas stickers personalizados con tus propias fotos o las de amigos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tenemos packs de stickers internos en nuestro grupo"
+        },
+        {
+          "letra": "B",
+          "texto": "Uso stickers descargados de internet"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo los emojis y reacciones estándar"
+        },
+        {
+          "letra": "D",
+          "texto": "No utilizo stickers en mis conversaciones"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Entiendes el humor absurdo / gen-z de internet?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me parece el humor más divertido actualmente"
+        },
+        {
+          "letra": "B",
+          "texto": "La mayoría de veces, aunque algunas cosas me desconciertan"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero el humor tradicional con chistes estructurados"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca le encuentro sentido a los memes modernos"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_057",
+  "numero": 57,
+  "titulo": "Ciclismo, Bicicleta de Carretera y Montaña",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "Rutas en bici, gravel, Tour de Francia y salidas en grupo.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Montas en bicicleta habitualmente los fines de semana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, salgo en rutas largas de carretera o montaña (MTB)"
+        },
+        {
+          "letra": "B",
+          "texto": "Uso la bicicleta como medio de transporte urbano"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en paseos suaves y relajados de vez en cuando"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo bicicleta ni suelo montar"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué modalidad de ciclismo te gusta más?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ciclismo de carretera con bicicleta ligera"
+        },
+        {
+          "letra": "B",
+          "texto": "Bicicleta de montaña (MTB) por caminos y trialeras"
+        },
+        {
+          "letra": "C",
+          "texto": "Gravel por pistas de tierra y caminos mixtos"
+        },
+        {
+          "letra": "D",
+          "texto": "Bicicleta urbana de paseo"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Utilizas ropa técnica ciclista (maillot y culotte con badana)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, vestimenta completa para evitar rozaduras en rutas largas"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo culotte con badana para mayor comodidad en el sillín"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso ropa deportiva normal sin prendas técnicas"
+        },
+        {
+          "letra": "D",
+          "texto": "No practico ciclismo"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Has seguido grandes vueltas ciclistas por televisión (Tour, Vuelta)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, sigo etapas completas de montaña con pasión"
+        },
+        {
+          "letra": "B",
+          "texto": "Pongo las etapas de fondo para las siestas de verano"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo miro los últimos kilómetros al sprint"
+        },
+        {
+          "letra": "D",
+          "texto": "No veo ciclismo por televisión"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Llevas casco obligatoriamente cada vez que subes a una bicicleta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre, la seguridad en la cabeza no es negociable"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo en carretera o cuando salgo a velocidades altas"
+        },
+        {
+          "letra": "C",
+          "texto": "En ciudad a veces no me lo pongo en trayectos cortos"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo montar en bicicleta"
+        }
+      ]
+    }
+  ]
+}

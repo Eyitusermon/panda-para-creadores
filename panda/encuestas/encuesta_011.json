@@ -1,0 +1,128 @@
+{
+  "id": "enc_011",
+  "numero": 11,
+  "titulo": "Smartphones y Renovación de Dispositivos",
+  "categoria": "Tecnología & Dispositivos",
+  "categoria_icono": "📱",
+  "descripcion": "Criterios de compra, cámaras, baterías y pantallas OLED.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué marca de smartphone utilizas actualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Apple iPhone"
+        },
+        {
+          "letra": "B",
+          "texto": "Samsung Galaxy"
+        },
+        {
+          "letra": "C",
+          "texto": "Xiaomi / Poco / Redmi"
+        },
+        {
+          "letra": "D",
+          "texto": "Motorola / Google Pixel / Otra"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Cuál es el factor decisivo al comprar un teléfono nuevo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Duración de batería y carga rápida"
+        },
+        {
+          "letra": "B",
+          "texto": "Calidad de cámaras fotográficas"
+        },
+        {
+          "letra": "C",
+          "texto": "Rendimiento y fluidez del procesador"
+        },
+        {
+          "letra": "D",
+          "texto": "Precio ajustado y relación calidad/precio"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cada cuánto tiempo cambias de teléfono móvil?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cada año o 18 meses"
+        },
+        {
+          "letra": "B",
+          "texto": "Cada 2 a 3 años"
+        },
+        {
+          "letra": "C",
+          "texto": "Cada 4 años o cuando ya no funciona"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo compro de segunda mano o reacondicionado"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Prefieres pantallas grandes (+6.7\") o compactas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Pantallas grandes para vídeos y juegos"
+        },
+        {
+          "letra": "B",
+          "texto": "Tamaño estándar equilibrado (6.1\" a 6.4\")"
+        },
+        {
+          "letra": "C",
+          "texto": "Dispositivos compactos manejables con una mano"
+        },
+        {
+          "letra": "D",
+          "texto": "Pantallas plegables tipo Fold o Flip"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Utilizas fundas protectoras y vidrio templado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, funda robusta y cristal desde el día 1"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo funda delgada transparente"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo cristal templado sin funda"
+        },
+        {
+          "letra": "D",
+          "texto": "Lo uso al descubierto sin protecciones"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_094",
+  "numero": 94,
+  "titulo": "Mantenimiento del Coche, ITV y Mecánica",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Cambios de aceite, neumáticos, revisiones periódicas y talleres.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Llevas el mantenimiento de tu coche al día según el libro oficial?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Rigurosamente cada año o kilometraje indicado"
+        },
+        {
+          "letra": "B",
+          "texto": "Suelo pasar la revisión cuando se enciende el aviso en el cuadro"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo cambio aceite y filtros cuando me acuerdo"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo coche propio"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Dónde prefieres llevar tu coche a reparar o mantener?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A mi taller mecánico de confianza de barrio"
+        },
+        {
+          "letra": "B",
+          "texto": "Al concesionario oficial de la marca aunque sea más caro"
+        },
+        {
+          "letra": "C",
+          "texto": "Hago yo mismo tareas sencillas (bombillas, filtros, batería)"
+        },
+        {
+          "letra": "D",
+          "texto": "A grandes cadenas de mecánica rápida"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Con qué frecuencia revisas la presión de los neumáticos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Al menos una vez al mes o antes de cada viaje largo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando paso la revisión anual en el taller"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo si veo un neumático visiblemente bajo de aire"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca reviso la presión"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Te genera nerviosismo pasar la Inspección Técnica de Vehículos (ITV)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ninguno, llevo el coche impecable y pasa a la primera"
+        },
+        {
+          "letra": "B",
+          "texto": "Un poco de incertidumbre por si encuentran algún defecto menor"
+        },
+        {
+          "letra": "C",
+          "texto": "Bastante, temo que me pongan falta grave y tener que volver"
+        },
+        {
+          "letra": "D",
+          "texto": "No me ha tocado pasarla todavía"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sabrías cambiar una rueda pinchada por la de repuesto en carretera?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, sé colocar el gato y aflojar los tornillos con soltura"
+        },
+        {
+          "letra": "B",
+          "texto": "Conozco la teoría pero prefiero llamar a la grúa del seguro"
+        },
+        {
+          "letra": "C",
+          "texto": "Nunca lo he hecho y me daría miedo hacerlo en carretera"
+        },
+        {
+          "letra": "D",
+          "texto": "Mi coche lleva kit antipinchazos con compresor en vez de rueda"
+        }
+      ]
+    }
+  ]
+}

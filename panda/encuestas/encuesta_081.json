@@ -1,0 +1,128 @@
+{
+  "id": "enc_081",
+  "numero": 81,
+  "titulo": "Aerolíneas de Bajo Coste vs Aerolíneas Tradicionales",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Ryanair, equipaje de mano, embarque prioritario y vuelos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sueles viajar con aerolíneas Low Cost (Ryanair, Vueling, EasyJet)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, casi siempre para encontrar los billetes más baratos"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo para vuelos cortos de menos de 2 horas"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero aerolíneas tradicionales con más servicios incluidos"
+        },
+        {
+          "letra": "D",
+          "texto": "Evito las low cost por la incomodidad y políticas de maletas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Pagas por añadir equipaje de mano en cabina o viajas solo con mochila?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Viajo solo con una mochila bajo el asiento para no pagar extras"
+        },
+        {
+          "letra": "B",
+          "texto": "Pago siempre por la maleta de cabina de 10 kg"
+        },
+        {
+          "letra": "C",
+          "texto": "Facturo maleta grande en bodega para llevar todo cómodo"
+        },
+        {
+          "letra": "D",
+          "texto": "Depende de la duración del viaje"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Pagas por elegir asiento en el avión?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "No, dejo que el sistema me asigne asiento aleatorio gratis"
+        },
+        {
+          "letra": "B",
+          "texto": "Pago para asegurar ventanilla o salida de emergencia"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo si viajo acompañado para ir sentados juntos"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo en vuelos intercontinentales largos"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué es lo que más te molesta en un aeropuerto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Las colas interminables en los controles de seguridad"
+        },
+        {
+          "letra": "B",
+          "texto": "Los retrasos imprevistos y cancelaciones de vuelos"
+        },
+        {
+          "letra": "C",
+          "texto": "Los precios desorbitados del agua y comida en terminales"
+        },
+        {
+          "letra": "D",
+          "texto": "La gente que se agolpa en la puerta antes de su turno de embarque"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Con cuánta antelación llegas al aeropuerto antes del despegue?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Con 2 horas para vuelos nacionales / europeos"
+        },
+        {
+          "letra": "B",
+          "texto": "Con más de 3 horas para vuelos internacionales largos"
+        },
+        {
+          "letra": "C",
+          "texto": "Con el tiempo justo (1 hora o menos si llevo solo mochila)"
+        },
+        {
+          "letra": "D",
+          "texto": "Siempre con margen holgado para no estresarme"
+        }
+      ]
+    }
+  ]
+}

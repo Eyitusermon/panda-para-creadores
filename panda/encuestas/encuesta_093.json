@@ -1,0 +1,128 @@
+{
+  "id": "enc_093",
+  "numero": 93,
+  "titulo": "Motos, Scooters y Libertad sobre Dos Ruedas",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Motos de gran cilindrada, scooters urbanos 125cc y cascos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Conduces motocicleta o scooter habitualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, moto de gran cilindrada para rutas y viajes de fin de semana"
+        },
+        {
+          "letra": "B",
+          "texto": "Scooter de 125cc o eléctrico para moverme ágil por la ciudad"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo moto pero la uso de forma ocasional con buen tiempo"
+        },
+        {
+          "letra": "D",
+          "texto": "No conduzco motocicletas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué ventaja consideras inigualable en una moto urbana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Aparcar en la puerta de cualquier sitio sin dar vueltas"
+        },
+        {
+          "letra": "B",
+          "texto": "Ahorro enorme de tiempo al evitar atascos de tráfico"
+        },
+        {
+          "letra": "C",
+          "texto": "Bajo consumo de combustible y mantenimiento económico"
+        },
+        {
+          "letra": "D",
+          "texto": "La sensación de libertad y viento"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué tipo de casco utilizas para montar en moto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Casco integral cerrado de fibra de carbono para máxima protección"
+        },
+        {
+          "letra": "B",
+          "texto": "Casco modular abatible por comodidad al parar"
+        },
+        {
+          "letra": "C",
+          "texto": "Casco jet abierto para ciudad"
+        },
+        {
+          "letra": "D",
+          "texto": "No conduzco moto"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Llevas siempre chaqueta con protecciones y guantes homologados?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre, la equipación completa es el único chasis en una moto"
+        },
+        {
+          "letra": "B",
+          "texto": "Guantes y chaqueta siempre, aunque haga calor en verano"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo casco en trayectos urbanos cortos"
+        },
+        {
+          "letra": "D",
+          "texto": "No conduzco moto"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Has soñado alguna vez con hacer un gran viaje en moto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, recorrer la Ruta 66 o los pasos alpinos en una moto Trail / Touring"
+        },
+        {
+          "letra": "B",
+          "texto": "Una ruta por la costa con una moto clásica / Café Racer"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero la comodidad y seguridad de las 4 ruedas de un coche"
+        },
+        {
+          "letra": "D",
+          "texto": "No me llaman la atención las motos"
+        }
+      ]
+    }
+  ]
+}

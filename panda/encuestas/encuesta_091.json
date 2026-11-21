@@ -1,0 +1,128 @@
+{
+  "id": "enc_091",
+  "numero": 91,
+  "titulo": "Coches de Combustión vs Híbridos y Eléctricos",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Motores gasolina, diésel, híbridos autorecargables y enchufables.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué tipo de motor tiene tu coche actual o el de tu familia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Motor de gasolina tradicional"
+        },
+        {
+          "letra": "B",
+          "texto": "Motor diésel de bajo consumo para trayectos largos"
+        },
+        {
+          "letra": "C",
+          "texto": "Motor híbrido autorrecargable (HEV) o enchufable (PHEV)"
+        },
+        {
+          "letra": "D",
+          "texto": "Vehículo 100% eléctrico a batería (EV)"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Si compraras un coche nuevo hoy, qué motorización elegirías?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Híbrido no enchufable por etiqueta ECO y practicidad sin cables"
+        },
+        {
+          "letra": "B",
+          "texto": "Gasolina potente o deportivo con cambio manual"
+        },
+        {
+          "letra": "C",
+          "texto": "100% Eléctrico para cargar en casa y ahorrar costes"
+        },
+        {
+          "letra": "D",
+          "texto": "Híbrido enchufable para tener lo mejor de ambos mundos"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué opinas sobre la desaparición progresiva del motor diésel?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Una lástima, para hacer muchos kilómetros en autopista sigue siendo imbatible"
+        },
+        {
+          "letra": "B",
+          "texto": "Lógica por las emisiones contaminantes en ciudades"
+        },
+        {
+          "letra": "C",
+          "texto": "Injusta porque los motores diésel modernos son muy limpios"
+        },
+        {
+          "letra": "D",
+          "texto": "Me es indiferente"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Tienes punto de carga en tu garaje o plaza de aparcamiento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo cargador instalado en mi vivienda unifamiliar o garaje"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo plaza comunitaria pero aún no he instalado cargador"
+        },
+        {
+          "letra": "C",
+          "texto": "Aparco en la calle y dependería de cargadores públicos"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo coche"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuál es el factor más determinante al comprar un coche?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fiabilidad mecánica contrastada y coste de mantenimiento bajo"
+        },
+        {
+          "letra": "B",
+          "texto": "Diseño exterior, potencia y sensaciones al volante"
+        },
+        {
+          "letra": "C",
+          "texto": "Seguridad activa y espacio para familia y equipaje"
+        },
+        {
+          "letra": "D",
+          "texto": "Precio de adquisición y condiciones de financiación"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_097",
+  "numero": 97,
+  "titulo": "Estética del Coche, Detailing y Limpieza",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Lavado a mano, ceras cerámicas, túneles de lavado y ambientadores.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cómo lavas habitualmente tu coche por fuera?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A mano con dos cubos, champú especial y toallas de microfibra (Detailing)"
+        },
+        {
+          "letra": "B",
+          "texto": "En cabinas de lavado a presión con lanza de agua caliente"
+        },
+        {
+          "letra": "C",
+          "texto": "En túneles de lavado automáticos de rodillos por rapidez"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca lavo el coche por fuera, espero a que llueva"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Con qué frecuencia limpias el interior del habitáculo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cada semana aspiro alfombrillas y limpio salpicadero a fondo"
+        },
+        {
+          "letra": "B",
+          "texto": "Una vez al mes o cada mes y medio"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo cuando está visiblemente sucio o voy a llevar invitados"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca limpio el interior"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Utilizas ambientador dentro del vehículo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, ambientadores de clip de rejilla o botellita con fragancia agradable"
+        },
+        {
+          "letra": "B",
+          "texto": "Prefiero el olor a limpio natural sin ambientadores químicos"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo pongo ambientador de pino clásico de vez en cuando"
+        },
+        {
+          "letra": "D",
+          "texto": "No me gustan los olores artificiales en el coche"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Permites que se coma o se fume dentro de tu coche?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Prohibido comer o fumar categricamente, el coche se mantiene impoluto"
+        },
+        {
+          "letra": "B",
+          "texto": "Comer snacks sencillos sí, pero nada que manche o huela fuerte"
+        },
+        {
+          "letra": "C",
+          "texto": "Se permite comer pero no fumar"
+        },
+        {
+          "letra": "D",
+          "texto": "No tengo reglas estrictas dentro del vehículo"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Aplicas tratamientos de cera o sellado cerámico a la pintura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, aplico cera o recubrimiento cerámico para proteger el brillo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo la cera que echa la lanza del lavadero"
+        },
+        {
+          "letra": "C",
+          "texto": "No le aplico productos de protección a la chapa"
+        },
+        {
+          "letra": "D",
+          "texto": "No me fijo en el estado del brillo de la pintura"
+        }
+      ]
+    }
+  ]
+}

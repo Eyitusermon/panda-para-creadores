@@ -1,0 +1,128 @@
+{
+  "id": "enc_041",
+  "numero": 41,
+  "titulo": "Marcas de Ropa y Moda Urbana",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Sneakers, streetwear, marcas deportivas y compras online.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Qué marca de zapatillas deportivas (sneakers) prefieres?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Nike / Jordan"
+        },
+        {
+          "letra": "B",
+          "texto": "Adidas / Yeezy"
+        },
+        {
+          "letra": "C",
+          "texto": "New Balance / Asics"
+        },
+        {
+          "letra": "D",
+          "texto": "Puma / Vans / Converse"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Con qué frecuencia compras prendas de vestir o calzado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Al menos una vez al mes"
+        },
+        {
+          "letra": "B",
+          "texto": "Cada temporada o cambio de estación"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo cuando necesito reemplazar prendas viejas"
+        },
+        {
+          "letra": "D",
+          "texto": "En rebajas y periodos de descuentos"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Compras ropa por internet o prefieres probarte en tienda física?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Compro casi todo online por variedad y comodidad"
+        },
+        {
+          "letra": "B",
+          "texto": "Miro online pero me pruebo en tienda antes de comprar"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero tiendas físicas para comprobar tallas y tela"
+        },
+        {
+          "letra": "D",
+          "texto": "Indiferente según la prenda"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Te interesan las zapatillas de edición limitada o coleccionismo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, participo en sorteos (SNKRS) y lanzamientos"
+        },
+        {
+          "letra": "B",
+          "texto": "Me gustan los modelos bonitos sin obsesión por reventa"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo busco comodidad para el día a día"
+        },
+        {
+          "letra": "D",
+          "texto": "No entiendo el fenómeno del coleccionismo de zapatillas"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cuál es tu prioridad al elegir una prenda de ropa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Comodidad y tejido agradable"
+        },
+        {
+          "letra": "B",
+          "texto": "Estilo, diseño y que favorezca mi figura"
+        },
+        {
+          "letra": "C",
+          "texto": "Precio accesible y durabilidad"
+        },
+        {
+          "letra": "D",
+          "texto": "Reconocimiento de marca o tendencia actual"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "enc_058",
+  "numero": 58,
+  "titulo": "Deportes de Combate y Artes Marciales",
+  "categoria": "Deportes & Vida Saludable",
+  "categoria_icono": "⚽",
+  "descripcion": "UFC, boxeo profesional, jiu-jitsu y veladas de contacto.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Sigues veladas de la UFC o combates de boxeo profesional?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, veo los eventos numerados de la UFC completos"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo combates mediáticos destacados (Topuria, Canelo, etc.)"
+        },
+        {
+          "letra": "C",
+          "texto": "Miro clips de nocauts impresionantes al día siguiente"
+        },
+        {
+          "letra": "D",
+          "texto": "No sigo los deportes de contacto"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Has practicado alguna vez artes marciales o deportes de lucha?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, entreno boxeo, kickboxing o muay thai"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, entreno artes marciales de agarre (BJJ, judo, lucha)"
+        },
+        {
+          "letra": "C",
+          "texto": "Hice kárate o taekwondo de niño"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he practicado deportes de contacto"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué te parece la disciplina física y mental que exigen estos deportes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Admirable, requiere un nivel de sacrificio y respeto absoluto"
+        },
+        {
+          "letra": "B",
+          "texto": "Muy exigente físicamente, excelente para la defensa personal"
+        },
+        {
+          "letra": "C",
+          "texto": "Me parece demasiado lesivo o violento para mi gusto"
+        },
+        {
+          "letra": "D",
+          "texto": "No me llama la atención"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué finalización te parece más impresionante en un combate?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un nocaut fulminante limpio con un solo golpe"
+        },
+        {
+          "letra": "B",
+          "texto": "Una sumisión técnica compleja con palanca o estrangulación"
+        },
+        {
+          "letra": "C",
+          "texto": "Una guerra épica a los 5 asaltos que se decide a los puntos"
+        },
+        {
+          "letra": "D",
+          "texto": "Cualquiera que demuestre técnica superior"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Comprarías un paquete Pay-Per-View (PPV) para ver una gran pelea?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, si el cartel de peleas es de altísimo nivel"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si nos juntamos varios amigos en casa para pagar entre todos"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero verlo en diferido al día siguiente"
+        },
+        {
+          "letra": "D",
+          "texto": "No pagaría por eventos deportivos individuales"
+        }
+      ]
+    }
+  ]
+}

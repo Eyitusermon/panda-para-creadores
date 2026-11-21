@@ -1,0 +1,128 @@
+{
+  "id": "enc_065",
+  "numero": 65,
+  "titulo": "Redes Sociales y Tiempo de Pantalla",
+  "categoria": "Estilo de Vida & Hábitos Diarios",
+  "categoria_icono": "☕",
+  "descripcion": "Instagram, X (Twitter), desconexión digital y salud mental.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuál es la red social en la que pasas más tiempo al día?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Instagram"
+        },
+        {
+          "letra": "B",
+          "texto": "TikTok"
+        },
+        {
+          "letra": "C",
+          "texto": "X (Twitter)"
+        },
+        {
+          "letra": "D",
+          "texto": "Reddit / YouTube"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Revisas el tiempo de pantalla diario en los ajustes de tu teléfono?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, lo miro todas las semanas y me sorprende la cifra"
+        },
+        {
+          "letra": "B",
+          "texto": "Ocasionalmente por curiosidad"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero no mirarlo para no asustarme"
+        },
+        {
+          "letra": "D",
+          "texto": "No sé dónde se consulta esa métrica"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Has hecho alguna vez un detox digital (días sin redes sociales)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, y la sensación de paz mental fue increíble"
+        },
+        {
+          "letra": "B",
+          "texto": "He borrado apps durante un fin de semana"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gustaría hacerlo pero dependo del móvil para trabajar"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he intentado desconectarme"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Te genera ansiedad o FOMO (miedo a perderse algo) no mirar el móvil?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A veces siento la necesidad compulsiva de refrescar el feed"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si estoy esperando un mensaje importante"
+        },
+        {
+          "letra": "C",
+          "texto": "Para nada, puedo pasar horas sin tocar el teléfono"
+        },
+        {
+          "letra": "D",
+          "texto": "Rara vez me genera inquietud"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Sueles publicar historias o publicaciones de tu vida privada?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Publico historias de mis viajes y planes con frecuencia"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo subo contenido muy seleccionado en ocasiones especiales"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo cuenta pero casi nunca publico fotos mías"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo consumo contenido ajeno de forma anónima"
+        }
+      ]
+    }
+  ]
+}

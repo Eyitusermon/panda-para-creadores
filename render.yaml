@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: panda-cash-backend
+    env: go
+    plan: free
+    rootDir: panda/backend
+    buildCommand: go build -o server main.go
+    startCommand: ./server
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false

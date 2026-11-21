@@ -1,0 +1,128 @@
+{
+  "id": "enc_048",
+  "numero": 48,
+  "titulo": "Hogar, Bricolaje y Decoración",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "IKEA, muebles modulares, plantas y organización.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Compras muebles o artículos de decoración en IKEA?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, gran parte de mi hogar tiene muebles de IKEA"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo accesorios, velas y artículos de organización"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero tiendas de muebles clásicas o a medida"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca visito esas tiendas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Te consideras manitas para montar muebles y hacer arreglos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Me encanta montar muebles y hacer bricolaje en casa"
+        },
+        {
+          "letra": "B",
+          "texto": "Me defiendo bien siguiendo las instrucciones paso a paso"
+        },
+        {
+          "letra": "C",
+          "texto": "Lo intento pero suelo frustrarme con los tornillos"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero pagar para que me monten e instalen todo"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Tienes plantas vivas dentro de tu casa o terraza?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo bastantes plantas y las cuido con mimo"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo 1 o 2 plantas fáciles que resisten bien"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero plantas artificiales decorativas"
+        },
+        {
+          "letra": "D",
+          "texto": "Se me mueren todas las plantas vivas que intento tener"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué estilo de decoración prefieres para tu vivienda?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Estilo minimalista nórdico con tonos claros y madera"
+        },
+        {
+          "letra": "B",
+          "texto": "Estilo industrial con metal negro y ladrillo"
+        },
+        {
+          "letra": "C",
+          "texto": "Estilo moderno con iluminación LED indirecta"
+        },
+        {
+          "letra": "D",
+          "texto": "Estilo acogedor tradicional y rústico"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué estancia de la casa consideras más importante que esté ordenada?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El dormitorio para descansar con paz mental"
+        },
+        {
+          "letra": "B",
+          "texto": "El salón para recibir visitas y desconectar"
+        },
+        {
+          "letra": "C",
+          "texto": "La cocina y la zona de trabajo / escritorio"
+        },
+        {
+          "letra": "D",
+          "texto": "El baño"
+        }
+      ]
+    }
+  ]
+}

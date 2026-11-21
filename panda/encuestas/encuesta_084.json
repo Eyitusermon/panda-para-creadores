@@ -1,0 +1,128 @@
+{
+  "id": "enc_084",
+  "numero": 84,
+  "titulo": "Viajes en Furgoneta Camper y Caravaning",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Libertad sobre ruedas, acampada libre, rutas y naturaleza.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has viajado alguna vez en furgoneta camperizada o autocaravana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, tengo mi propia camper o he hecho viajes inolvidables"
+        },
+        {
+          "letra": "B",
+          "texto": "He alquilado una camper un fin de semana para probar"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo muchas ganas de hacer un viaje así con amigos o pareja"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero la comodidad de un hotel con cama y baño privado"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué es lo que más te atrae del estilo de vida camper?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Despertarte cada día frente a un paisaje natural diferente"
+        },
+        {
+          "letra": "B",
+          "texto": "La libertad de cambiar de ruta sobre la marcha sin reservas previas"
+        },
+        {
+          "letra": "C",
+          "texto": "Viajar con tu mascota y todo tu equipaje deportivo a cuestas"
+        },
+        {
+          "letra": "D",
+          "texto": "El contacto directo con la naturaleza y las estrellas"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué te parece el aspecto más complicado de viajar en camper?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El espacio reducido y la gestión del agua y WC químico"
+        },
+        {
+          "letra": "B",
+          "texto": "Encontrar sitios legales y seguros para pernoctar"
+        },
+        {
+          "letra": "C",
+          "texto": "El consumo de combustible de un vehículo voluminoso"
+        },
+        {
+          "letra": "D",
+          "texto": "Tener que cocinar y fregar en un espacio pequeño"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué ruta camper te gustaría recorrer más?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La costa de Portugal y Algarve recorriendo playas salvajes"
+        },
+        {
+          "letra": "B",
+          "texto": "La Ruta 66 en Estados Unidos o los fiordos de Noruega"
+        },
+        {
+          "letra": "C",
+          "texto": "El norte de España (Asturias, Cantabria y País Vasco)"
+        },
+        {
+          "letra": "D",
+          "texto": "Los Alpes suizos y puertos de montaña alpinos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Comprarías una camper para viajar todos los fines de semana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es mi sueño de ocio a medio plazo"
+        },
+        {
+          "letra": "B",
+          "texto": "Prefiero alquilar puntualmente para no tener gastos de mantenimiento"
+        },
+        {
+          "letra": "C",
+          "texto": "No me compensa económicamente"
+        },
+        {
+          "letra": "D",
+          "texto": "No es mi estilo de viaje"
+        }
+      ]
+    }
+  ]
+}

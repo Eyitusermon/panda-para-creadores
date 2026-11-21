@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panda Cash - Casino & Arcade VIP</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐼</text></svg>">
+  <script>
+    // Enrutamiento inteligente Panda Cash:
+    // Si el usuario ya inició sesión, enviarlo directo al Dashboard / Lobby de juegos
+    // Si es un visitante nuevo, enviarlo al Portal de Registro y Bienvenida
+    try {
+      const saved = localStorage.getItem('panda_user_session');
+      if (saved) {
+        const u = JSON.parse(saved);
+        if (u && u.isLoggedIn && u.username) {
+          window.location.replace('./dashboard_directo.html');
+        } else {
+          window.location.replace('./portal_directo.html');
+        }
+      } else {
+        window.location.replace('./portal_directo.html');
+      }
+    } catch (_) {
+      window.location.replace('./portal_directo.html');
+    }
+  </script>
+</head>
+<body style="background: #0a0f1d; color: #fff; font-family: system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+  <div style="text-align: center;">
+    <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">🐼</div>
+    <div style="font-size: 1.35rem; font-weight: 800; color: #ffb700; letter-spacing: 0.5px;">Cargando Panda Cash...</div>
+    <p style="color: #8e9bb0; font-size: 0.85rem; margin-top: 0.5rem;">
+      Si no eres redirigido automáticamente, <a href="./portal_directo.html" style="color: #00e701; font-weight: 700; text-decoration: none;">haz clic aquí para entrar</a>.
+    </p>
+  </div>
+</body>
+</html>

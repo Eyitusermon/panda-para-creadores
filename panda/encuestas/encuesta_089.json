@@ -1,0 +1,128 @@
+{
+  "id": "enc_089",
+  "numero": 89,
+  "titulo": "Viajes de Mochilero (Backpacking) y Hostales",
+  "categoria": "Viajes, Destinos & Turismo",
+  "categoria_icono": "✈️",
+  "descripcion": "Mochila a la espalda, habitaciones compartidas y bajo presupuesto.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has viajado alguna vez de mochilero por varios países seguidos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, he hecho viajes largos de mochila por el sudeste asiático o Europa"
+        },
+        {
+          "letra": "B",
+          "texto": "He hecho rutas cortas de mochila de 1 o 2 semanas"
+        },
+        {
+          "letra": "C",
+          "texto": "Me gustaría vivir la experiencia al menos una vez en la vida"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero viajar con maleta de ruedas y hoteles cómodos"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Dormirías en una habitación compartida con literas en un hostal juvenil?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, es genial para ahorrar y conocer a otros viajeros de todo el mundo"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si viajo solo o con presupuesto muy ajustado"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero habitación privada aunque sea dentro del hostal"
+        },
+        {
+          "letra": "D",
+          "texto": "No comparto habitación con desconocidos bajo ningún concepto"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué es lo más importante en la mochila de un viajero?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un buen calzado cómodo todoterreno que no haga rozaduras"
+        },
+        {
+          "letra": "B",
+          "texto": "Cargador portátil (Powerbank) potente para no quedarse sin batería"
+        },
+        {
+          "letra": "C",
+          "texto": "Neceser compacto con toalla de secado rápido y tapones"
+        },
+        {
+          "letra": "D",
+          "texto": "Chubasquero ligero plegable cortavientos"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Utilizas trenes nocturnos o autobuses largos para ahorrar noche de hotel?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, duermes mientras avanzas y ahorras tiempo y dinero"
+        },
+        {
+          "letra": "B",
+          "texto": "Lo he hecho pero se duerme con dificultad"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero viajar de día y dormir en una cama fija de noche"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo tomo vuelos rápidos"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué cualidad consideras más necesaria para viajar de mochilero?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Capacidad de adaptación y flexibilidad ante imprevistos"
+        },
+        {
+          "letra": "B",
+          "texto": "Sociabilidad para pedir ayuda y hacer amigos fácilmente"
+        },
+        {
+          "letra": "C",
+          "texto": "Organización para estirar el presupuesto al máximo"
+        },
+        {
+          "letra": "D",
+          "texto": "Paciencia infinita"
+        }
+      ]
+    }
+  ]
+}

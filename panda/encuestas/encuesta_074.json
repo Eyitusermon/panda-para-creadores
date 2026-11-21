@@ -1,0 +1,128 @@
+{
+  "id": "enc_074",
+  "numero": 74,
+  "titulo": "Tacos, Comida Mexicana y Especias",
+  "categoria": "Gastronomía & Restaurantes",
+  "categoria_icono": "🍕",
+  "descripcion": "Tacos al pastor, birria, guacamole casero y salsas picantes.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Cuál es tu platillo mexicano favorito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tacos al pastor con piña y cilantro"
+        },
+        {
+          "letra": "B",
+          "texto": "Tacos de birria con queso y consomé para dipear"
+        },
+        {
+          "letra": "C",
+          "texto": "Burritos grandes y quesadillas"
+        },
+        {
+          "letra": "D",
+          "texto": "Nachos con guacamole, queso fundido y frijoles"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué tolerancia tienes al picante en las comidas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Alta, me encantan las salsas muy picantes (Habanero, Jalapeño)"
+        },
+        {
+          "letra": "B",
+          "texto": "Media, disfruto el picante suave que realce el sabor"
+        },
+        {
+          "letra": "C",
+          "texto": "Baja, el picante fuerte me arruina la comida"
+        },
+        {
+          "letra": "D",
+          "texto": "Cero, no tolero el picante en absoluto"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres tortillas de maíz o tortillas de trigo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Tortillas de maíz nixtamalizado tradicionales"
+        },
+        {
+          "letra": "B",
+          "texto": "Tortillas de harina de trigo suaves"
+        },
+        {
+          "letra": "C",
+          "texto": "Totopos crujientes de maíz"
+        },
+        {
+          "letra": "D",
+          "texto": "Me gustan ambas por igual"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cómo prefieres el guacamole?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Casero en molcajete con trozos de aguacate, tomate, cebolla y lima"
+        },
+        {
+          "letra": "B",
+          "texto": "Totalmente triturado y cremoso sin grumos"
+        },
+        {
+          "letra": "C",
+          "texto": "Con toque de cilantro y chile jalapeño picado"
+        },
+        {
+          "letra": "D",
+          "texto": "Comprado ya preparado en tarrina por rapidez"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué bebida acompaña mejor a una buena comida mexicana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cerveza mexicana bien fría con lima (Corona, Modelo)"
+        },
+        {
+          "letra": "B",
+          "texto": "Margarita con sal en el borde"
+        },
+        {
+          "letra": "C",
+          "texto": "Aguas frescas naturales (Horchata, Jamaica)"
+        },
+        {
+          "letra": "D",
+          "texto": "Refrescos clásicos de cola"
+        }
+      ]
+    }
+  ]
+}

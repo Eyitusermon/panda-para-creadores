@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panda Cash - Panel de Administración</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐼</text></svg>">
+  <script src="./config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-base: #06080e;
+      --bg-surface: #0c101a;
+      --bg-card: #121826;
+      --bg-card-hover: #172033;
+      --border-color: #1e293b;
+      --border-focus: #3b82f6;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-gold: #f59e0b;
+      --accent-gold-glow: rgba(245, 158, 11, 0.2);
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-green-glow: rgba(16, 185, 129, 0.2);
+      --accent-red: #ef4444;
+      --accent-purple: #8b5cf6;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* TOPBAR */
+    .admin-header {
+      background: rgba(12, 16, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      font-size: 1.5rem;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title span {
+      color: var(--accent-gold);
+    }
+
+    .badge-admin {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--accent-gold);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .db-status-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-green);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+    }
+
+    .db-status-pill.offline {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--accent-red);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .status-dot.offline {
+      background: var(--accent-red);
+      box-shadow: 0 0 8px var(--accent-red);
+    }
+
+    .btn-public-link {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-public-link:hover {
+      background: var(--bg-card-hover);
+      color: #fff;
+      border-color: var(--text-muted);
+    }
+
+    /* MAIN LAYOUT */
+    .admin-container {
+      max-width: 1360px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex: 1;
+    }
+
+    /* STATS STRIP */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .kpi-title {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .kpi-value {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+
+    .kpi-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* TABS NAVIGATION */
+    .tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.75rem 1.3rem;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tab-btn.active {
+      color: var(--accent-gold);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--bg-card);
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent-gold);
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* TAB CONTENTS */
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CARDS & PANELS */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.7rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* BANNER DIRECCIÓN ACTIVA */
+    .active-address-banner {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(6, 182, 212, 0.04));
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .addr-info-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .addr-label-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .active-addr-display {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      word-break: break-all;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-copy-addr {
+      background: var(--accent-gold);
+      color: #06080e;
+      border: none;
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-copy-addr:hover {
+      background: #fbbf24;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px var(--accent-gold-glow);
+    }
+
+    /* FORMS */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      background: #090d16;
+      border: 1px solid var(--border-color);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+    }
+
+    .form-control.mono {
+      font-family: var(--font-mono);
+    }
+
+    .checkbox-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+      cursor: pointer;
+    }
+
+    .checkbox-wrap input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-gold);
+      cursor: pointer;
+    }
+
+    .btn-action-primary {
+      background: var(--accent-gold);
+      color: #06080e;
+      border: none;
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-action-primary:hover {
+      background: #fbbf24;
+      box-shadow: 0 4px 15px var(--accent-gold-glow);
+    }
+
+    .btn-action-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid var(--border-color);
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-action-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-muted);
+    }
+
+    /* TABLES */
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.84rem;
+    }
+
+    .admin-table th {
+      background: #090d16;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    .admin-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      color: #cbd5e1;
+    }
+
+    .admin-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .admin-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-badge.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-badge.inactive {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .status-badge.pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .status-badge.rejected {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--accent-red);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .btn-sm-action {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-sm-action:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--text-muted);
+    }
+
+    .btn-sm-action.success {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--accent-green);
+    }
+
+    .btn-sm-action.success:hover {
+      background: var(--accent-green);
+      color: #06080e;
+    }
+
+    .btn-sm-action.danger {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: var(--accent-red);
+    }
+
+    .btn-sm-action.danger:hover {
+      background: var(--accent-red);
+      color: #fff;
+    }
+
+    /* MODAL */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(6, 8, 14, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      max-width: 520px;
+      width: 100%;
+      padding: 1.8rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      animation: modalPop 0.2s ease-out;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .btn-modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .btn-modal-close:hover {
+      color: #fff;
+    }
+
+    /* TOAST */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .toast-msg {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-gold);
+      color: #fff;
+      padding: 0.9rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      animation: slideIn 0.25s ease-out;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .toast-msg.success {
+      border-left-color: var(--accent-green);
+    }
+
+    .toast-msg.error {
+      border-left-color: var(--accent-red);
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE ADMINISTRACIÓN -->
+  <header class="admin-header">
+    <div class="brand-wrap">
+      <span class="brand-logo">🐼</span>
+      <div>
+        <div class="brand-title">PANDA<span> CASH</span></div>
+      </div>
+      <span class="badge-admin">Admin Control Panel</span>
+    </div>
+
+    <div class="header-status">
+      <div class="db-status-pill" id="dbStatusBadge">
+        <span class="status-dot" id="dbStatusDot"></span>
+        <span id="dbStatusText">Neon PostgreSQL Conectado</span>
+      </div>
+      <a href="../frontend/dashboard_directo.html" target="_blank" class="btn-public-link">
+        🌐 Abrir Frontend Jugador &rarr;
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="admin-container">
+
+    <!-- RESUMEN DE MÉTRICAS (KPIs) -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">👥 Usuarios Registrados</div>
+        <div class="kpi-value" id="kpiTotalUsers">-</div>
+        <div class="kpi-sub">Total en tabla users</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">💎 Diamantes en Billeteras</div>
+        <div class="kpi-value" id="kpiTotalDiamonds" style="color: var(--accent-gold);">-</div>
+        <div class="kpi-sub">Total en tabla wallets</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">📥 Recargas Pendientes</div>
+        <div class="kpi-value" id="kpiPendingDeposits" style="color: var(--accent-cyan);">-</div>
+        <div class="kpi-sub">Esperando aprobación</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">📤 Retiros Pendientes</div>
+        <div class="kpi-value" id="kpiPendingWithdrawals" style="color: var(--accent-purple);">-</div>
+        <div class="kpi-sub">Por procesar</div>
+      </div>
+    </div>
+
+    <!-- PESTAÑAS DE NAVEGACIÓN -->
+    <nav class="tabs-nav">
+      <button type="button" class="tab-btn active" data-tab="tabDirecciones">
+        <span>💎</span> Dirección de Recarga (TRC-20)
+      </button>
+      <button type="button" class="tab-btn" data-tab="tabUsuarios">
+        <span>👥</span> Usuarios y Billeteras
+      </button>
+      <button type="button" class="tab-btn" data-tab="tabDepositos">
+        <span>📥</span> Depósitos y Recargas
+      </button>
+      <button type="button" class="tab-btn" data-tab="tabRetiros">
+        <span>📤</span> Retiros
+      </button>
+    </nav>
+
+    <!-- PESTAÑA 1: DIRECCIONES DE RECARGA -->
+    <div class="tab-pane active" id="tabDirecciones">
+      
+      <!-- BANNER DE DIRECCIÓN ACTIVA ACTUAL -->
+      <div class="active-address-banner">
+        <div class="addr-info-left">
+          <div class="addr-label-pill">
+            <span>●</span> Dirección Pública Oficial Activa (Vista por los usuarios)
+          </div>
+          <div class="active-addr-display" id="bannerActiveAddress">
+            Cargando dirección de Neon...
+          </div>
+          <div style="font-size: 0.78rem; color: var(--text-muted);" id="bannerActiveMeta">
+            Red: TRON (TRC-20) &bull; Moneda: USDT
+          </div>
+        </div>
+        <button type="button" class="btn-copy-addr" id="btnCopyActiveAddr">
+          <span>📋</span> Copiar Dirección
+        </button>
+      </div>
+
+      <!-- FORMULARIO: MODIFICAR / AGREGAR DIRECCIÓN -->
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title">
+              <span>✏️</span> <span id="formAddressTitle">Modificar Dirección de Recarga</span>
+            </div>
+            <div class="section-desc">
+              Cambia la dirección pública donde los usuarios envían sus USDT para recibir diamantes.
+            </div>
+          </div>
+          <button type="button" class="btn-action-secondary" id="btnNewAddress">
+            + Nueva Dirección
+          </button>
+        </div>
+
+        <form id="formSaveAddress">
+          <input type="hidden" id="editAddrId" value="" />
+          <div class="form-grid">
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label">Dirección Pública TRON (TRC-20) *</label>
+              <input type="text" id="editAddrString" class="form-control mono" placeholder="Ej: TYDnyP8p2nQoD9jA5kU8v9L9w5b3x7K2zM" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Red Blockchain</label>
+              <input type="text" id="editAddrRed" class="form-control" value="TRON (TRC-20)" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Moneda</label>
+              <input type="text" id="editAddrMoneda" class="form-control" value="USDT" />
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label">Descripción o Nota Interna</label>
+              <input type="text" id="editAddrDesc" class="form-control" placeholder="Ej: Billetera fría oficial de recargas" />
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="editAddrActiva" checked />
+              <span style="font-size: 0.86rem; font-weight: 700; color: #fff;">
+                Marcar como la dirección ACTIVA oficial (los usuarios verán esta dirección inmediatamente)
+              </span>
+            </label>
+
+            <button type="submit" class="btn-action-primary" id="btnSaveAddress">
+              <span>💾</span> Guardar en Base de Datos Neon
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TABLA: HISTORIAL DE DIRECCIONES EN BD -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>📋</span> Todas las Direcciones en la Tabla <code>direcciones_recarga</code>
+          </div>
+          <button type="button" class="btn-sm-action" onclick="loadDirecciones()">🔄 Recargar</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Estado</th>
+                <th>Red / Moneda</th>
+                <th>Dirección Pública</th>
+                <th>Descripción</th>
+                <th>Última Actualización</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tableDireccionesBody">
+              <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">Cargando direcciones...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PESTAÑA 2: USUARIOS Y BILLETERAS -->
+    <div class="tab-pane" id="tabUsuarios">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title"><span>👥</span> Gestión de Usuarios y Billeteras</div>
+            <div class="section-desc">Edita saldos en diamantes, estados de verificación y niveles VIP directamente en Neon.</div>
+          </div>
+          <div style="display: flex; gap: 0.6rem;">
+            <input type="text" id="searchUserInput" class="form-control" placeholder="Buscar por usuario o email..." style="width: 250px;" />
+            <button type="button" class="btn-sm-action" onclick="loadUsuarios()">🔄 Recargar</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Saldo Diamantes 💎</th>
+                <th>Saldo Bono</th>
+                <th>Nivel VIP</th>
+                <th>Verificación</th>
+                <th>Fecha Registro</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tableUsuariosBody">
+              <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">Cargando usuarios...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 3: DEPÓSITOS Y RECARGAS -->
+    <div class="tab-pane" id="tabDepositos">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title"><span>📥</span> Depósitos Realizados (Tabla <code>depositos</code>)</div>
+            <div class="section-desc">Revisa transacciones y aprueba recargas manualmente si el script de monitoreo automático no ha corrido.</div>
+          </div>
+          <button type="button" class="btn-sm-action" onclick="loadDepositos()">🔄 Recargar</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID / Fecha</th>
+                <th>Usuario</th>
+                <th>Monto USDT</th>
+                <th>Diamantes (+💎)</th>
+                <th>TxID / Hash Tron</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tableDepositosBody">
+              <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">Cargando depósitos...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 4: RETIROS -->
+    <div class="tab-pane" id="tabRetiros">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title"><span>📤</span> Solicitudes de Retiro (Tabla <code>retiros</code>)</div>
+            <div class="section-desc">Aprueba o rechaza retiros solicitados por usuarios con cuentas verificadas.</div>
+          </div>
+          <button type="button" class="btn-sm-action" onclick="loadRetiros()">🔄 Recargar</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID / Fecha</th>
+                <th>Usuario</th>
+                <th>Diamantes Retirados</th>
+                <th>Monto USDT</th>
+                <th>Dirección Destino</th>
+                <th>Cola / Tiempo Estimado</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tableRetirosBody">
+              <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">Cargando retiros...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL EDITAR USUARIO -->
+  <div class="modal-backdrop" id="modalEditUser">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">✏️ Editar Usuario y Billetera</div>
+        <button type="button" class="btn-modal-close" onclick="closeUserModal()">&times;</button>
+      </div>
+      <form id="formEditUser">
+        <input type="hidden" id="modalUserId" />
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Nombre de Usuario</label>
+          <input type="text" id="modalUsername" class="form-control" readonly style="opacity: 0.7;" />
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Saldo Principal Diamantes (💎) *</label>
+          <input type="number" id="modalBalanceDiamantes" class="form-control mono" min="0" required />
+          <small style="color: var(--text-muted); font-size: 0.72rem;">10 💎 = 1 USDT</small>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Saldo Bono Diamantes (💎)</label>
+          <input type="number" id="modalBalanceBono" class="form-control mono" min="0" required />
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Nivel VIP</label>
+          <select id="modalVipLevel" class="form-control">
+            <option value="Panda Bronce">Panda Bronce</option>
+            <option value="Panda Plata">Panda Plata</option>
+            <option value="Panda Oro">Panda Oro</option>
+            <option value="Panda Platino">Panda Platino</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="checkbox-wrap">
+            <input type="checkbox" id="modalCuentaVerificada" />
+            <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">
+              Cuenta Verificada (Habilita retiros a este usuario)
+            </span>
+          </label>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 0.8rem;">
+          <button type="button" class="btn-action-secondary" onclick="closeUserModal()">Cancelar</button>
+          <button type="submit" class="btn-action-primary">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICACIONES -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    const API_BASE = (window.PANDA_CONFIG && window.PANDA_CONFIG.API_BASE) ||
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:'
+        ? 'http://localhost:8085/api/v1'
+        : window.location.origin + '/api/v1');
+
+    let globalDirecciones = [];
+    let globalUsuarios = [];
+
+    // TOAST NOTIFICATIONS
+    function showToast(title, desc = '', type = 'success') {
+      const c = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast-msg ${type}`;
+      toast.innerHTML = `
+        <div>
+          <div style="font-weight: 800;">${title}</div>
+          ${desc ? `<div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">${desc}</div>` : ''}
+        </div>
+      `;
+      c.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // TABS SWITCHER
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-tab');
+        document.getElementById(target)?.classList.add('active');
+      });
+    });
+
+    // 1. CARGAR KPIs
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/stats`);
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('kpiTotalUsers').textContent = Number(data.total_users || 0).toLocaleString();
+          document.getElementById('kpiTotalDiamonds').textContent = Number(data.total_diamantes || 0).toLocaleString() + ' 💎';
+          document.getElementById('kpiPendingDeposits').textContent = Number(data.pending_depositos || 0).toLocaleString();
+          document.getElementById('kpiPendingWithdrawals').textContent = Number(data.pending_retiros || 0).toLocaleString();
+
+          if (data.active_address) {
+            document.getElementById('bannerActiveAddress').textContent = data.active_address;
+          }
+        }
+      } catch (err) {
+        document.getElementById('dbStatusBadge').classList.add('offline');
+        document.getElementById('dbStatusDot').classList.add('offline');
+        document.getElementById('dbStatusText').textContent = 'Backend Offline';
+      }
+    }
+
+    // 2. CARGAR Y GESTIONAR DIRECCIONES
+    async function loadDirecciones() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/direcciones`);
+        if (!res.ok) return;
+        const list = await res.json();
+        globalDirecciones = list;
+
+        const tbody = document.getElementById('tableDireccionesBody');
+        tbody.innerHTML = '';
+
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">No hay direcciones registradas.</td></tr>';
+          return;
+        }
+
+        let activeFound = false;
+
+        list.forEach(item => {
+          if (item.activa && !activeFound) {
+            document.getElementById('bannerActiveAddress').textContent = item.direccion;
+            document.getElementById('bannerActiveMeta').textContent = `Red: ${item.red || 'TRON (TRC-20)'} • Moneda: ${item.moneda || 'USDT'}`;
+            activeFound = true;
+          }
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-family: var(--font-mono); font-weight: 700;">#${item.id}</td>
+            <td>
+              <span class="status-badge ${item.activa ? 'active' : 'inactive'}">
+                ${item.activa ? '● ACTIVA' : 'INACTIVA'}
+              </span>
+            </td>
+            <td><strong>${item.red}</strong> <small style="color:var(--text-muted);">(${item.moneda})</small></td>
+            <td style="font-family: var(--font-mono); word-break: break-all; color: #fff;">${item.direccion}</td>
+            <td style="color: var(--text-muted); font-size: 0.78rem;">${item.descripcion || '-'}</td>
+            <td style="color: var(--text-muted); font-size: 0.75rem;">${item.updated_at ? new Date(item.updated_at).toLocaleString() : '-'}</td>
+            <td>
+              <div class="table-actions">
+                ${!item.activa ? `<button type="button" class="btn-sm-action success" onclick="activarDireccion(${item.id})">Activar</button>` : ''}
+                <button type="button" class="btn-sm-action" onclick="editarDireccion(${item.id})">Editar</button>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } catch (err) {
+        showToast('Error de conexión', 'No se pudieron cargar las direcciones.', 'error');
+      }
+    }
+
+    function editarDireccion(id) {
+      const item = globalDirecciones.find(d => d.id === id);
+      if (!item) return;
+      document.getElementById('formAddressTitle').textContent = `Editar Dirección #${item.id}`;
+      document.getElementById('editAddrId').value = item.id;
+      document.getElementById('editAddrString').value = item.direccion;
+      document.getElementById('editAddrRed').value = item.red;
+      document.getElementById('editAddrMoneda').value = item.moneda;
+      document.getElementById('editAddrDesc').value = item.descripcion || '';
+      document.getElementById('editAddrActiva').checked = Boolean(item.activa);
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+
+    document.getElementById('btnNewAddress').addEventListener('click', () => {
+      document.getElementById('formAddressTitle').textContent = 'Crear Nueva Dirección de Recarga';
+      document.getElementById('editAddrId').value = '';
+      document.getElementById('editAddrString').value = '';
+      document.getElementById('editAddrDesc').value = '';
+      document.getElementById('editAddrActiva').checked = true;
+    });
+
+    document.getElementById('formSaveAddress').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const idVal = parseInt(document.getElementById('editAddrId').value) || 0;
+      const payload = {
+        id: idVal,
+        direccion: document.getElementById('editAddrString').value.trim(),
+        red: document.getElementById('editAddrRed').value.trim(),
+        moneda: document.getElementById('editAddrMoneda').value.trim(),
+        descripcion: document.getElementById('editAddrDesc').value.trim(),
+        activa: document.getElementById('editAddrActiva').checked
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/direcciones/guardar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showToast('¡Dirección Guardada!', 'Los cambios se aplicaron exitosamente en Neon.');
+          loadDirecciones();
+          loadStats();
+        } else {
+          showToast('Error al guardar', data.error || 'Ocurrió un error', 'error');
+        }
+      } catch (err) {
+        showToast('Error de red', err.message, 'error');
+      }
+    });
+
+    async function activarDireccion(id) {
+      try {
+        const res = await fetch(`${API_BASE}/admin/direcciones/activar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        if (res.ok) {
+          showToast('Dirección Activada', 'Ahora los usuarios recibirán esta dirección en la pantalla de recarga.');
+          loadDirecciones();
+          loadStats();
+        }
+      } catch (err) {
+        showToast('Error', err.message, 'error');
+      }
+    }
+
+    document.getElementById('btnCopyActiveAddr').addEventListener('click', () => {
+      const addr = document.getElementById('bannerActiveAddress').textContent.trim();
+      navigator.clipboard.writeText(addr).then(() => {
+        showToast('Copiada al Portapapeles', addr);
+      });
+    });
+
+    // 3. CARGAR Y GESTIONAR USUARIOS
+    async function loadUsuarios() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/users`);
+        if (!res.ok) return;
+        const list = await res.json();
+        globalUsuarios = list;
+        renderUsuarios(list);
+      } catch (err) {
+        showToast('Error', 'No se pudieron cargar los usuarios.', 'error');
+      }
+    }
+
+    function renderUsuarios(list) {
+      const tbody = document.getElementById('tableUsuariosBody');
+      tbody.innerHTML = '';
+      if (!list || list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:1.5rem;">No se encontraron usuarios.</td></tr>';
+        return;
+      }
+      list.forEach(u => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${u.username}</strong></td>
+          <td style="color:var(--text-muted); font-size:0.78rem;">${u.email || '-'}</td>
+          <td style="font-family:var(--font-mono); font-weight:800; color:var(--accent-gold);">${Number(u.balance_diamantes || 0).toLocaleString()} 💎</td>
+          <td style="font-family:var(--font-mono); color:var(--text-muted);">${Number(u.balance_bono_diamantes || 0).toLocaleString()} 💎</td>
+          <td><span class="status-badge" style="background:rgba(245,158,11,0.1); color:var(--accent-gold);">${u.vip_level || 'Panda Bronce'}</span></td>
+          <td>
+            <span class="status-badge ${u.cuenta_verificada ? 'active' : 'inactive'}">
+              ${u.cuenta_verificada ? '✓ VERIFICADA' : 'NO VERIFICADA'}
+            </span>
+          </td>
+          <td style="color:var(--text-muted); font-size:0.75rem;">${u.created_at ? new Date(u.created_at).toLocaleDateString() : '-'}</td>
+          <td>
+            <button type="button" class="btn-sm-action" onclick="abrirEditarUsuario('${u.id}')">Editar Saldo / VIP</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('searchUserInput')?.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      const filtered = globalUsuarios.filter(u => 
+        (u.username && u.username.toLowerCase().includes(q)) || 
+        (u.email && u.email.toLowerCase().includes(q))
+      );
+      renderUsuarios(filtered);
+    });
+
+    function abrirEditarUsuario(userId) {
+      const u = globalUsuarios.find(x => x.id === userId);
+      if (!u) return;
+      document.getElementById('modalUserId').value = u.id;
+      document.getElementById('modalUsername').value = u.username;
+      document.getElementById('modalBalanceDiamantes').value = u.balance_diamantes || 0;
+      document.getElementById('modalBalanceBono').value = u.balance_bono_diamantes || 0;
+      document.getElementById('modalVipLevel').value = u.vip_level || 'Panda Bronce';
+      document.getElementById('modalCuentaVerificada').checked = Boolean(u.cuenta_verificada);
+      document.getElementById('modalEditUser').classList.add('open');
+    }
+
+    function closeUserModal() {
+      document.getElementById('modalEditUser').classList.remove('open');
+    }
+
+    document.getElementById('formEditUser').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        user_id: document.getElementById('modalUserId').value,
+        balance_diamantes: parseInt(document.getElementById('modalBalanceDiamantes').value) || 0,
+        balance_bono_diamantes: parseInt(document.getElementById('modalBalanceBono').value) || 0,
+        vip_level: document.getElementById('modalVipLevel').value,
+        cuenta_verificada: document.getElementById('modalCuentaVerificada').checked
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/users/editar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showToast('Usuario Actualizado', 'Los cambios en la billetera se guardaron en Neon.');
+          closeUserModal();
+          loadUsuarios();
+          loadStats();
+        } else {
+          showToast('Error', data.error || 'Error al actualizar', 'error');
+        }
+      } catch (err) {
+        showToast('Error', err.message, 'error');
+      }
+    });
+
+    // 4. CARGAR Y GESTIONAR DEPÓSITOS
+    async function loadDepositos() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/depositos`);
+        if (!res.ok) return;
+        const list = await res.json();
+        const tbody = document.getElementById('tableDepositosBody');
+        tbody.innerHTML = '';
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:1.5rem;">No hay depósitos registrados.</td></tr>';
+          return;
+        }
+
+        list.forEach(d => {
+          const isPend = d.estado === 'PENDIENTE';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-size:0.75rem; color:var(--text-muted);">
+              <div>#${d.id.slice(0, 8)}...</div>
+              <div>${d.created_at ? new Date(d.created_at).toLocaleString() : '-'}</div>
+            </td>
+            <td><strong>${d.username}</strong></td>
+            <td style="font-family:var(--font-mono); font-weight:700;">${Number(d.monto_usdt).toFixed(2)} USDT</td>
+            <td style="font-family:var(--font-mono); font-weight:800; color:var(--accent-gold);">+${Number(d.monto_diamantes).toLocaleString()} 💎</td>
+            <td style="font-family:var(--font-mono); font-size:0.75rem; word-break:break-all;">${d.tx_hash_tron || '-'}</td>
+            <td>
+              <span class="status-badge ${isPend ? 'pending' : 'active'}">
+                ${d.estado}
+              </span>
+            </td>
+            <td>
+              ${isPend ? `<button type="button" class="btn-sm-action success" onclick="aprobarDeposito('${d.tx_hash_tron || d.id}')">Aprobar Recarga</button>` : '<span style="color:var(--accent-green); font-size:0.75rem;">✓ Acreditado</span>'}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        showToast('Error', 'No se pudieron cargar los depósitos.', 'error');
+      }
+    }
+
+    async function aprobarDeposito(txHash) {
+      if (!confirm(`¿Deseas aprobar la recarga con TxID/ID ${txHash} y acreditar los diamantes al usuario?`)) return;
+      try {
+        const res = await fetch(`${API_BASE}/wallet/aprobar-recarga`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tx_hash: txHash, deposito_id: txHash })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showToast('¡Recarga Aprobada!', 'Se acreditaron los diamantes a la billetera del usuario.');
+          loadDepositos();
+          loadUsuarios();
+          loadStats();
+        } else {
+          showToast('Error', data.error || 'No se pudo aprobar', 'error');
+        }
+      } catch (err) {
+        showToast('Error', err.message, 'error');
+      }
+    }
+
+    // 5. CARGAR Y GESTIONAR RETIROS
+    async function loadRetiros() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/retiros`);
+        if (!res.ok) return;
+        const list = await res.json();
+        const tbody = document.getElementById('tableRetirosBody');
+        tbody.innerHTML = '';
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:1.5rem;">No hay retiros registrados.</td></tr>';
+          return;
+        }
+
+        list.forEach(r => {
+          const isPendingQueue = (r.estado === 'EN_ESPERA' || r.estado === 'SOLICITADO' || r.estado === 'PROCESANDO' || r.estado === 'PENDIENTE');
+          const isApproved = (r.estado === 'DESPACHADO' || r.estado === 'APROBADO');
+          const isRejected = (r.estado === 'RECHAZADO');
+
+          let badgeClass = 'pending';
+          let badgeText = r.estado;
+          if (r.estado === 'EN_ESPERA') {
+            badgeClass = 'pending';
+            badgeText = '⏳ EN ESPERA';
+          } else if (isApproved) {
+            badgeClass = 'active';
+            badgeText = '✓ DESPACHADO';
+          } else if (isRejected) {
+            badgeClass = 'rejected';
+            badgeText = '✗ RECHAZADO';
+          }
+
+          let fechaEst = '-';
+          if (r.fecha_estimada_liberacion) {
+            const dt = new Date(r.fecha_estimada_liberacion);
+            fechaEst = dt.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+          }
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-size:0.75rem; color:var(--text-muted);">
+              <div>#${r.id.slice(0, 8)}...</div>
+              <div>${r.created_at ? new Date(r.created_at).toLocaleString() : '-'}</div>
+            </td>
+            <td><strong>${r.username}</strong></td>
+            <td style="font-family:var(--font-mono); font-weight:800; color:var(--accent-purple);">${Number(r.monto_diamantes).toLocaleString()} 💎</td>
+            <td style="font-family:var(--font-mono); font-weight:700;">≈ ${Number(r.monto_usdt).toFixed(2)} USDT</td>
+            <td style="font-family:var(--font-mono); font-size:0.75rem; word-break:break-all;">${r.tron_wallet_receptora || r.tron_wallet_destino || '-'}</td>
+            <td style="font-size:0.78rem;">
+              <div style="font-weight:700; color:var(--accent-cyan);">⏳ ${r.tiempo_estimado_dias || 5} días</div>
+              <div style="font-size:0.72rem; color:var(--text-muted);">Est: ${fechaEst}</div>
+            </td>
+            <td>
+              <span class="status-badge ${badgeClass}">
+                ${badgeText}
+              </span>
+            </td>
+            <td>
+              ${isPendingQueue ? `
+                <div class="table-actions">
+                  <button type="button" class="btn-sm-action success" onclick="procesarRetiro('${r.id}', 'DESPACHADO')">Aprobar</button>
+                  <button type="button" class="btn-sm-action danger" onclick="procesarRetiro('${r.id}', 'RECHAZADO')">Rechazar</button>
+                </div>
+              ` : `<span style="font-size:0.75rem; color:var(--text-muted);">${badgeText}</span>`}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        showToast('Error', 'No se pudieron cargar los retiros.', 'error');
+      }
+    }
+
+    async function procesarRetiro(retiroId, estado) {
+      if (!confirm(`¿Confirmas cambiar el retiro a estado ${estado}?`)) return;
+      try {
+        const res = await fetch(`${API_BASE}/admin/retiros/procesar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ retiro_id: retiroId, estado })
+        });
+        if (res.ok) {
+          showToast(`Retiro ${estado}`, `La solicitud fue marcada como ${estado}.`);
+          loadRetiros();
+          loadStats();
+        }
+      } catch (err) {
+        showToast('Error', err.message, 'error');
+      }
+    }
+
+    // INICIALIZACIÓN
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStats();
+      loadDirecciones();
+      loadUsuarios();
+      loadDepositos();
+      loadRetiros();
+    });
+  </script>
+</body>
+</html>

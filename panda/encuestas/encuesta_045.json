@@ -1,0 +1,128 @@
+{
+  "id": "enc_045",
+  "numero": 45,
+  "titulo": "Sostenibilidad y Hábitos Ecológicos",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Reciclaje, envases reutilizables y segunda mano.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Separas los residuos y basuras en casa para reciclar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, rigurosamente plástico, papel, vidrio y orgánico"
+        },
+        {
+          "letra": "B",
+          "texto": "Separo papel y plástico principalmente"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo cuando tengo contenedores cerca de casa"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo separar la basura en casa"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Compras o vendes artículos de segunda mano (Vinted, Wallapop)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, compro y vendo ropa o tecnología activamente"
+        },
+        {
+          "letra": "B",
+          "texto": "He vendido cosas que no uso para sacar dinero extra"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo he comprado en alguna ocasión puntual"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo utilizar plataformas de segunda mano"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Llevas tus propias bolsas reutilizables al supermercado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre llevo bolsas de tela en el coche o mochila"
+        },
+        {
+          "letra": "B",
+          "texto": "Casi siempre, aunque a veces se me olvidan"
+        },
+        {
+          "letra": "C",
+          "texto": "Compro bolsas de plástico en la caja cuando voy"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo acordarme de llevarlas"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Pagarías más por un producto si su envase es 100% biodegradable?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, apoyo a las marcas con compromiso ecológico real"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si la diferencia de precio es mínima"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero el producto más económico independientemente del envase"
+        },
+        {
+          "letra": "D",
+          "texto": "Desconfío de las etiquetas ecológicas (greenwashing)"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Utilizas botellas de agua o termos reutilizables de acero?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, llevo mi botella térmica a todas partes"
+        },
+        {
+          "letra": "B",
+          "texto": "Tengo una en casa o en el trabajo"
+        },
+        {
+          "letra": "C",
+          "texto": "Suelo comprar botellas de agua desechables"
+        },
+        {
+          "letra": "D",
+          "texto": "Uso vasos normales"
+        }
+      ]
+    }
+  ]
+}

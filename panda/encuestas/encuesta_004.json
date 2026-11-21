@@ -1,0 +1,128 @@
+{
+  "id": "enc_004",
+  "numero": 4,
+  "titulo": "Juegos Móviles y Hábitos en Smartphones",
+  "categoria": "Videojuegos & Gaming",
+  "categoria_icono": "🎮",
+  "descripcion": "El auge del gaming en dispositivos iOS y Android.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Juegas en tu teléfono móvil habitualmente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Todos los días en ratos libres"
+        },
+        {
+          "letra": "B",
+          "texto": "Varios días a la semana"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en viajes o traslados"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca juego en el móvil"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué sistema operativo tiene tu dispositivo principal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Android (Samsung, Xiaomi, etc.)"
+        },
+        {
+          "letra": "B",
+          "texto": "iOS (iPhone / iPad)"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso ambos activamente"
+        },
+        {
+          "letra": "D",
+          "texto": "Otro sistema operativo"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Te molestan los anuncios publicitarios en juegos móviles?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, arruinan la experiencia"
+        },
+        {
+          "letra": "B",
+          "texto": "Los tolero si dan recompensas"
+        },
+        {
+          "letra": "C",
+          "texto": "Pago para eliminarlos siempre"
+        },
+        {
+          "letra": "D",
+          "texto": "No me molestan en absoluto"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Utilizas controles táctiles o mandos Bluetooth externos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Controles táctiles en pantalla"
+        },
+        {
+          "letra": "B",
+          "texto": "Mando gamepad por Bluetooth"
+        },
+        {
+          "letra": "C",
+          "texto": "Gatillos mecánicos para móvil"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo juegos de un solo toque"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Descargas juegos por recomendaciones de amigos o redes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Recomendaciones de amigos"
+        },
+        {
+          "letra": "B",
+          "texto": "Publicidad en TikTok / YouTube"
+        },
+        {
+          "letra": "C",
+          "texto": "Explorando la tienda de apps"
+        },
+        {
+          "letra": "D",
+          "texto": "Reseñas de creadores especializados"
+        }
+      ]
+    }
+  ]
+}

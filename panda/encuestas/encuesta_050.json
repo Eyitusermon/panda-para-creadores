@@ -1,0 +1,128 @@
+{
+  "id": "enc_050",
+  "numero": 50,
+  "titulo": "Bebidas Energéticas y Refrescos",
+  "categoria": "Hábitos de Consumo & Compras",
+  "categoria_icono": "🛍️",
+  "descripcion": "Red Bull, Monster Energy, refrescos sin azúcar y té frío.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Consumes bebidas energéticas (Red Bull, Monster, etc.)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, varias veces por semana para concentrarme o jugar"
+        },
+        {
+          "letra": "B",
+          "texto": "Ocasionalmente cuando tengo que estudiar o trabajar tarde"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo los fines de semana o en fiestas"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca o nunca tomo bebidas energéticas"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué marca de bebida energética prefieres?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Monster Energy (especialmente las variedades Ultra sin azúcar)"
+        },
+        {
+          "letra": "B",
+          "texto": "Red Bull clásico o ediciones de sabores"
+        },
+        {
+          "letra": "C",
+          "texto": "Marcas para gamers (Ghost, G Fuel, Reign)"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo consumir estas marcas"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Prefieres refrescos normales con azúcar o versiones Zero / Light?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre versiones Zero azúcar / Sin calorías"
+        },
+        {
+          "letra": "B",
+          "texto": "Versiones clásicas con azúcar de toda la vida"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero agua con gas o tés fríos naturales"
+        },
+        {
+          "letra": "D",
+          "texto": "No consumo refrescos carbonatados"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Cuál es tu refresco favorito de todos los tiempos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Coca-Cola (clásica o Zero)"
+        },
+        {
+          "letra": "B",
+          "texto": "Pepsi"
+        },
+        {
+          "letra": "C",
+          "texto": "Sprite / 7Up / Fanta de sabores frutales"
+        },
+        {
+          "letra": "D",
+          "texto": "Bebidas de té helado (Nestea, Lipton, Fuze)"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Consideras que las bebidas energéticas cumplen lo que prometen?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, me dan un impulso de energía y concentración notable"
+        },
+        {
+          "letra": "B",
+          "texto": "Me despejan un rato pero luego siento bajón"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo me gusta el sabor refrescante"
+        },
+        {
+          "letra": "D",
+          "texto": "No noto que me den energía"
+        }
+      ]
+    }
+  ]
+}

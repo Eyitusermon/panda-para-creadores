@@ -1,0 +1,128 @@
+{
+  "id": "enc_025",
+  "numero": 25,
+  "titulo": "Bancos Digitales (Neobancos) vs Banca Tradicional",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Revolut, N26, Wise y la transformación bancaria móvil.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Tienes cuenta en algún banco 100% digital (neobanco)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, Revolut / Wise / N26"
+        },
+        {
+          "letra": "B",
+          "texto": "Sí, fintech local de mi país (Mercado Pago, Nubank, etc.)"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo cuenta en más de dos neobancos"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo utilizo bancos tradicionales con sucursales"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué ventaja aprecias más de los bancos exclusivamente digitales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Apertura de cuenta en 3 minutos sin papeles"
+        },
+        {
+          "letra": "B",
+          "texto": "Notificaciones al milisegundo de cada gasto"
+        },
+        {
+          "letra": "C",
+          "texto": "Cambio de divisas con bajas comisiones"
+        },
+        {
+          "letra": "D",
+          "texto": "Herramientas de ahorro en huchas automáticas"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Pisarías una sucursal bancaria física hoy en día?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Evito las sucursales a toda costa, todo por app"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo si no queda más remedio para un trámite mayor"
+        },
+        {
+          "letra": "C",
+          "texto": "No me molesta ir si la atención es buena"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero el trato personal en ventanilla"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Confías en tener tus ahorros principales en un neobanco?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Totalmente, cuentan con licencia bancaria oficial"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo mantengo saldo para gastos del mes"
+        },
+        {
+          "letra": "C",
+          "texto": "Prefiero tener la mayor parte en banco tradicional"
+        },
+        {
+          "letra": "D",
+          "texto": "Divido mis fondos en 3 entidades distintas"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Utilizas transferencias inmediatas (Bizum, Pix, transferencias SEPA instant)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A diario para compartir gastos con amigos"
+        },
+        {
+          "letra": "B",
+          "texto": "Varias veces por semana"
+        },
+        {
+          "letra": "C",
+          "texto": "Solo para pagos puntuales"
+        },
+        {
+          "letra": "D",
+          "texto": "Casi nunca utilizo pagos instantáneos"
+        }
+      ]
+    }
+  ]
+}

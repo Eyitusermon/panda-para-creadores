@@ -1,0 +1,607 @@
+:root {
+  --bg-dark: #070914;
+  --bg-card: #0d1224;
+  --bg-card-inner: #131b33;
+  --accent-gold: #ffb700;
+  --accent-neon-purple: #bd00ff;
+  --accent-neon-cyan: #00f0ff;
+  --accent-neon-green: #00e701;
+  --accent-neon-pink: #ff007f;
+  --text-main: #ffffff;
+  --text-muted: #8e9bb0;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-neon: rgba(189, 0, 255, 0.4);
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #263859 #070d18;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070914;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1e2f4d 0%, #16233b 100%);
+  border: 1px solid rgba(189, 0, 255, 0.3);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-neon-purple);
+  border-color: var(--accent-neon-cyan);
+}
+
+html, body {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden; /* Cero scroll en escritorio */
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(189, 0, 255, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(0, 240, 255, 0.06) 0%, transparent 45%);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+/* TOPBAR */
+.topbar {
+  background: rgba(10, 14, 26, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.35rem 1.25rem;
+  height: 48px;
+  min-height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.15rem;
+}
+
+.brand-logo span.gold {
+  color: var(--accent-gold);
+}
+
+.game-tag-pill {
+  background: rgba(189, 0, 255, 0.15);
+  border: 1px solid var(--border-neon);
+  color: #d866ff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.wallet-box {
+  background: #10162a;
+  border: 1px solid var(--border-neon);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-diamonds {
+  color: var(--accent-gold);
+  font-weight: 900;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+}
+
+.wallet-usdt {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.btn-top-action {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-top-action:hover {
+  background: rgba(189, 0, 255, 0.15);
+  border-color: var(--accent-neon-purple);
+}
+
+/* LAYOUT PRINCIPAL DE 3 COLUMNAS */
+.plinko-layout {
+  max-width: 1400px;
+  height: calc(100vh - 48px);
+  max-height: calc(100vh - 48px);
+  margin: 0 auto;
+  padding: 0.5rem 0.85rem 0.6rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 0.75rem;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* PANELES LATERALES */
+.panel-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(189, 0, 255, 0.25);
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel-header {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.35rem;
+  flex-shrink: 0;
+}
+
+.panel-header h3 {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: #d866ff;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.panel-header p {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* CONTROLES DE APUESTA (COLUMNA IZQUIERDA) */
+.controls-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.control-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.bet-input-wrap {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.bet-input {
+  flex: 1;
+  background: #080d1a;
+  border: 1px solid rgba(189, 0, 255, 0.35);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  color: var(--accent-gold);
+  font-size: 0.95rem;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  outline: none;
+  width: 100%;
+}
+
+.btn-mod {
+  background: #141c33;
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.45rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-mod:hover {
+  background: #202d54;
+  border-color: var(--accent-neon-purple);
+}
+
+.quick-bets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+}
+
+.btn-qbet {
+  background: #0e162b;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.28rem 0.25rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.btn-qbet:hover,
+.btn-qbet.active {
+  background: #24163d;
+  color: #d866ff;
+  border-color: var(--accent-neon-purple);
+}
+
+/* SELECTOR DE RIESGO */
+.toggle-options-row {
+  display: flex;
+  background: #080d1a;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.15rem;
+  gap: 0.15rem;
+}
+
+.btn-opt {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.35rem 0.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-opt.active[data-risk="low"] {
+  background: rgba(0, 231, 1, 0.18);
+  color: #00e701;
+  border: 1px solid #00e701;
+}
+
+.btn-opt.active[data-risk="medium"] {
+  background: rgba(255, 183, 0, 0.18);
+  color: #ffb700;
+  border: 1px solid #ffb700;
+}
+
+.btn-opt.active[data-risk="high"] {
+  background: rgba(255, 0, 127, 0.2);
+  color: #ff3399;
+  border: 1px solid #ff007f;
+}
+
+.btn-opt.active[data-rows] {
+  background: rgba(0, 240, 255, 0.18);
+  color: #00f0ff;
+  border: 1px solid #00f0ff;
+}
+
+/* BOTONES DE LANZAMIENTO */
+.actions-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.btn-drop-main {
+  background: linear-gradient(135deg, #bd00ff 0%, #7b00ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 18px rgba(189, 0, 255, 0.4);
+  transition: transform 0.12s, box-shadow 0.15s;
+}
+
+.btn-drop-main:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(189, 0, 255, 0.55);
+}
+
+.btn-drop-main:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-drop-auto {
+  background: #0f1830;
+  border: 1px solid var(--border-neon);
+  color: #cbd5e1;
+  border-radius: 6px;
+  padding: 0.4rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-drop-auto.active {
+  background: rgba(0, 231, 1, 0.15);
+  border-color: var(--accent-neon-green);
+  color: var(--accent-neon-green);
+}
+
+/* ESTADÍSTICAS RÁPIDAS EN PANEL IZQUIERDO */
+.stats-box {
+  background: #090e1d;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.4rem 0.55rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+}
+
+/* CENTRO: TABLERO NEON PLINKO EN CANVAS */
+.board-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-neon);
+  border-radius: 12px;
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.45rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(189, 0, 255, 0.05);
+}
+
+/* HISTORIAL HORIZONTAL RECIENTE (CHIPS MULTIPLICADORES) */
+.recent-chips-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding: 0.25rem 0;
+  min-height: 28px;
+  flex-shrink: 0;
+}
+
+.chip-mult {
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.18rem 0.45rem;
+  border-radius: 99px;
+  white-space: nowrap;
+  animation: popChip 0.25s ease-out;
+}
+
+@keyframes popChip {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.chip-low { background: rgba(0, 231, 1, 0.15); color: #00e701; border: 1px solid #00e701; }
+.chip-mid { background: rgba(255, 183, 0, 0.15); color: #ffb700; border: 1px solid #ffb700; }
+.chip-high { background: rgba(255, 0, 127, 0.18); color: #ff3399; border: 1px solid #ff007f; }
+.chip-epic { background: rgba(189, 0, 255, 0.25); color: #e18cff; border: 1px solid #bd00ff; box-shadow: 0 0 8px #bd00ff; }
+
+/* CANVAS VIEWPORT */
+.canvas-viewport {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  background: radial-gradient(circle at 50% 30%, #0d142d 0%, #060914 90%);
+  border: 1px solid rgba(189, 0, 255, 0.35);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.95);
+}
+
+#plinkoCanvas {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* BANNER DE RESULTADO INFERIOR */
+.plinko-ticker-bar {
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  min-height: 32px;
+  flex-shrink: 0;
+}
+
+.plinko-ticker-bar.winner {
+  border-color: var(--accent-neon-green);
+  background: linear-gradient(90deg, rgba(0, 231, 1, 0.15), rgba(19, 27, 51, 0.95));
+}
+
+/* COLUMNA DERECHA: TABLA DE MULTIPLICADORES E HISTORIAL */
+.side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.multipliers-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(189, 0, 255, 0.25);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  flex-shrink: 0;
+}
+
+.mult-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+}
+
+.mult-row-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  padding: 0.22rem 0.45rem;
+  background: var(--bg-card-inner);
+  border-radius: 4px;
+}
+
+.history-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(189, 0, 255, 0.25);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin-top: 0.35rem;
+}
+
+.history-item {
+  background: var(--bg-card-inner);
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+/* RESPONSIVE: EN MÓVILES SE HABILITA EL SCROLL */
+@media (max-width: 900px), (max-height: 580px) {
+  html, body {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+  }
+
+  .topbar {
+    position: static;
+    height: auto;
+    padding: 0.65rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .plinko-layout {
+    height: auto !important;
+    max-height: none !important;
+    grid-template-columns: 1fr;
+    padding: 0.75rem 0.75rem 2.5rem;
+    overflow: visible !important;
+  }
+
+  .panel-card,
+  .board-card,
+  .side-column,
+  .history-card {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .canvas-viewport {
+    height: 480px;
+  }
+
+  #plinkoCanvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .history-list {
+    max-height: 200px;
+  }
+}

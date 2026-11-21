@@ -1,0 +1,128 @@
+{
+  "id": "enc_030",
+  "numero": 30,
+  "titulo": "Préstamos, Crédito y Servicios Buy Now Pay Later (BNPL)",
+  "categoria": "Criptomonedas & Finanzas Digitales",
+  "categoria_icono": "💎",
+  "descripcion": "Klarna, tarjetas de crédito y aplazamiento de pagos.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Has utilizado servicios de pago a plazos sin intereses (BNPL)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, uso Klarna / Afterpay con frecuencia"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo para compras grandes puntuales"
+        },
+        {
+          "letra": "C",
+          "texto": "Lo conozco pero prefiero pagar de una vez"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca he utilizado servicios de pago aplazado"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Utilizas tarjeta de crédito o prefieres siempre tarjeta de débito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Siempre tarjeta de débito con dinero propio"
+        },
+        {
+          "letra": "B",
+          "texto": "Tarjeta de crédito pagando a fin de mes (sin intereses)"
+        },
+        {
+          "letra": "C",
+          "texto": "Tarjeta de crédito a plazos financiados"
+        },
+        {
+          "letra": "D",
+          "texto": "Solo uso efectivo o monederos digitales"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Cuál es tu política frente a las deudas de consumo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cero deudas, no compro nada que no pueda pagar ya"
+        },
+        {
+          "letra": "B",
+          "texto": "Deuda razonable solo para bienes duraderos"
+        },
+        {
+          "letra": "C",
+          "texto": "Uso crédito para aprovechar promociones y liquidez"
+        },
+        {
+          "letra": "D",
+          "texto": "He tenido que financiar compras imprevistas"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Revisas tu historial crediticio con regularidad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, consulto mi reporte de crédito al menos una vez al año"
+        },
+        {
+          "letra": "B",
+          "texto": "Solo cuando voy a solicitar un préstamo o hipoteca"
+        },
+        {
+          "letra": "C",
+          "texto": "Sé que existe pero nunca lo he solicitado"
+        },
+        {
+          "letra": "D",
+          "texto": "En mi país no es habitual revisarlo personalmente"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Qué opinas de las comisiones por descubierto o mora bancaria?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Abusivas, cambio de banco si me cobran una"
+        },
+        {
+          "letra": "B",
+          "texto": "Entiendo que cobren pero los montos son excesivos"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo alertas activadas para evitar caer en descubiertos"
+        },
+        {
+          "letra": "D",
+          "texto": "Nunca me han cobrado comisiones de ese tipo"
+        }
+      ]
+    }
+  ]
+}

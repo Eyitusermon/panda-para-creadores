@@ -1,0 +1,128 @@
+{
+  "id": "enc_099",
+  "numero": 99,
+  "titulo": "Sonido y Conectividad en el Coche: CarPlay y Android Auto",
+  "categoria": "Automoción, Motores & Conducción",
+  "categoria_icono": "🚗",
+  "descripcion": "Pantallas táctiles, Bluetooth, navegación por satélite y altavoces.",
+  "recompensa_diamantes": 50,
+  "duracion_estimada": "2 min",
+  "total_preguntas": 5,
+  "preguntas": [
+    {
+      "id": "p1",
+      "numero": 1,
+      "pregunta": "¿Utilizas Apple CarPlay o Android Auto en tu vehículo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Sí, inalámbrico o por cable, es imprescindible para mapas y música"
+        },
+        {
+          "letra": "B",
+          "texto": "Uso solo conexión Bluetooth básica para reproducir audio"
+        },
+        {
+          "letra": "C",
+          "texto": "Tengo soporte para el móvil en la rejilla y miro la pantalla del teléfono"
+        },
+        {
+          "letra": "D",
+          "texto": "La radio clásica FM/AM de toda la vida"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "numero": 2,
+      "pregunta": "¿Qué prefieres: mandos físicos tradicionales o pantallas táctiles para el climatizador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Botones y ruletas físicas para cambiar la temperatura sin apartar la vista"
+        },
+        {
+          "letra": "B",
+          "texto": "Pantalla táctil moderna de gran formato con diseño minimalista"
+        },
+        {
+          "letra": "C",
+          "texto": "Combinación equilibrada de ambos"
+        },
+        {
+          "letra": "D",
+          "texto": "Control por voz del asistente"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "numero": 3,
+      "pregunta": "¿Qué sueles escuchar habitualmente mientras conduces?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Playlists de música energética en Spotify / Apple Music"
+        },
+        {
+          "letra": "B",
+          "texto": "Podcasts de entrevistas o tertulias para aprender"
+        },
+        {
+          "letra": "C",
+          "texto": "Programas de radio generalista o deportiva"
+        },
+        {
+          "letra": "D",
+          "texto": "Prefiero el silencio del motor para pensar"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "numero": 4,
+      "pregunta": "¿Qué importancia le das a la calidad del equipo de sonido de un coche?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Mucha, si puedo elijo equipos firmados de calidad (Bose, Harman Kardon, etc.)"
+        },
+        {
+          "letra": "B",
+          "texto": "Con que suene nítido a volumen medio me basta"
+        },
+        {
+          "letra": "C",
+          "texto": "Casi no noto la diferencia con altavoces de serie básicos"
+        },
+        {
+          "letra": "D",
+          "texto": "No escucho música a menudo en el coche"
+        }
+      ]
+    },
+    {
+      "id": "p5",
+      "numero": 5,
+      "pregunta": "¿Cargas el móvil en el coche por cable o con base de carga inalámbrica?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Por cable rápido USB-C directo a la toma de corriente"
+        },
+        {
+          "letra": "B",
+          "texto": "En la bandeja de carga inalámbrica integrada por inducción"
+        },
+        {
+          "letra": "C",
+          "texto": "Con un adaptador de mechero de 12V"
+        },
+        {
+          "letra": "D",
+          "texto": "No suelo cargarlo en el coche"
+        }
+      ]
+    }
+  ]
+}
