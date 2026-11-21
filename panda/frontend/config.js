@@ -17,7 +17,7 @@
   const savedBackend = localStorage.getItem('PANDA_BACKEND_URL');
 
   // URL de tu servicio en Render (cámbiala si no usas Vercel rewrites)
-  const DEFAULT_RENDER_URL = 'https://pandabet-backend.onrender.com';
+  const DEFAULT_RENDER_URL = 'https://pandacash-api.onrender.com';
 
   let backendUrl = 'http://localhost:8085';
   let apiBase = 'http://localhost:8085/api/v1';

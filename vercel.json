@@ -17,6 +17,6 @@
     { "source": "/juegos/rocket", "destination": "/panda/frontend/juegos/rocket/jugar_rocket.html" },
     { "source": "/juegos/minas", "destination": "/panda/frontend/juegos/minas/jugar_minas.html" },
     { "source": "/juegos/llaves", "destination": "/panda/frontend/juegos/llaves/jugar_llaves.html" },
-    { "source": "/api/(.*)", "destination": "https://pandabet-backend.onrender.com/api/$1" }
+    { "source": "/api/(.*)", "destination": "https://pandacash-api.onrender.com/api/$1" }
   ]
 }
