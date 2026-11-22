@@ -628,7 +628,7 @@
       </div>
       <div class="balance-badge">
         <span style="font-size: 0.78rem; color: var(--text-muted);">Saldo:</span>
-        <span class="balance-badge-val" id="topNavDiamonds">15,000 💎</span>
+        <span class="balance-badge-val" id="topNavDiamonds">0 💎</span>
       </div>
     </div>
   </header>
@@ -697,13 +697,13 @@
         <div class="wallet-mini-grid">
           <div class="wallet-mini-item">
             <div class="wallet-mini-label">Saldo Real</div>
-            <div class="wallet-mini-val" id="sidebarRealBalance">15,000 💎</div>
-            <div style="font-size: 0.7rem; color: var(--text-muted);" id="sidebarUsdtEquiv">≈ 1,500.00 USDT</div>
+            <div class="wallet-mini-val" id="sidebarRealBalance">0 💎</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);" id="sidebarUsdtEquiv">≈ 0.00 USDT</div>
           </div>
           <div class="wallet-mini-item">
             <div class="wallet-mini-label">Bono Semanal (10%)</div>
-            <div class="wallet-mini-val" style="color: #ffb700;" id="sidebarBonusBalance">350 💎</div>
-            <div style="font-size: 0.7rem; color: #8e9bb0;" id="sidebarWeeklySpentInfo">Gasto: 3,500 💎</div>
+            <div class="wallet-mini-val" style="color: #ffb700;" id="sidebarBonusBalance">0 💎</div>
+            <div style="font-size: 0.7rem; color: #8e9bb0;" id="sidebarWeeklySpentInfo">Gasto: 0 💎</div>
           </div>
         </div>
       </aside>
@@ -974,13 +974,14 @@
       avatarIcon: '🐼',
       defaultTronAddress: '',
       exchangeName: 'Binance',
-      balance: 15000,
-      bonusBalance: 30000,
-      freeSpins: 150,
+      balance: 0,
+      bonusBalance: 0,
+      freeSpins: 0,
       vipLevel: 'Panda Bronce',
-      xp: 650,
+      xp: 0,
       xpTarget: 1000,
-      favorites: ['neon-bounce'],
+      favorites: ['keys-and-doors', 'panda-crash'],
+      weeklySpent: 0,
       cuenta_verificada: false,
       is_verified: false
     };
@@ -1037,7 +1038,7 @@
 
       document.getElementById('sidebarRealBalance').textContent = diamondsStr;
       document.getElementById('sidebarUsdtEquiv').textContent = `≈ ${usdtEquiv} USDT`;
-      const weeklySpent = typeof userState.weeklySpent === 'number' ? userState.weeklySpent : 3500;
+      const weeklySpent = typeof userState.weeklySpent === 'number' ? userState.weeklySpent : 0;
       const weeklyBonus = Math.floor(weeklySpent * 0.10);
       document.getElementById('sidebarBonusBalance').textContent = `${weeklyBonus.toLocaleString('en-US')} 💎`;
       const spentInfoEl = document.getElementById('sidebarWeeklySpentInfo');
