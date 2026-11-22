@@ -132,6 +132,8 @@ type User struct {
 	FechaVerificacion      *time.Time `json:"fecha_verificacion,omitempty"`
 	TxHashVerificacion     string     `json:"tx_hash_verificacion,omitempty"`
 	MetodoPagoVerificacion string     `json:"metodo_pago_verificacion,omitempty"`
+	PrimerDepositoRealizado bool       `json:"primer_deposito_realizado"`
+	TieneRecargaAprobada    bool       `json:"tiene_recarga_aprobada"`
 
 	VIPLevel               string     `json:"vip_level"`
 	VIPXP                  int        `json:"vip_xp"`
@@ -511,18 +513,30 @@ func parseUserFromRow(row map[string]any) *User {
 		isVerified = v
 	}
 
+	primerDep := false
+	if v, ok := row["primer_deposito_realizado"].(bool); ok {
+		primerDep = v
+	}
+
+	tieneRecarga := false
+	if v, ok := row["tiene_recarga_aprobada"].(bool); ok {
+		tieneRecarga = v
+	}
+
 	return &User{
-		ID:                   fmt.Sprintf("%v", row["id"]),
-		Username:             fmt.Sprintf("%v", row["username"]),
-		Email:                fmt.Sprintf("%v", row["email"]),
-		Phone:                fmt.Sprintf("%v", row["phone"]),
-		CuentaVerificada:     isVerified,
-		VIPLevel:             fmt.Sprintf("%v", row["vip_level"]),
-		VIPXP:                xp,
-		BalanceDiamantes:     balance,
-		BalanceBonoDiamantes: bonus,
-		GirosGratis:          spins,
-		CreatedAt:            time.Now(),
+		ID:                      fmt.Sprintf("%v", row["id"]),
+		Username:                fmt.Sprintf("%v", row["username"]),
+		Email:                   fmt.Sprintf("%v", row["email"]),
+		Phone:                   fmt.Sprintf("%v", row["phone"]),
+		CuentaVerificada:        isVerified,
+		PrimerDepositoRealizado: primerDep,
+		TieneRecargaAprobada:    tieneRecarga,
+		VIPLevel:                fmt.Sprintf("%v", row["vip_level"]),
+		VIPXP:                   xp,
+		BalanceDiamantes:        balance,
+		BalanceBonoDiamantes:    bonus,
+		GirosGratis:             spins,
+		CreatedAt:               time.Now(),
 	}
 }
 
@@ -550,7 +564,14 @@ func handleProfile(w http.ResponseWriter, r *http.Request) {
 			       COALESCE(u.metodo_pago_verificacion, '') as metodo_pago_verificacion,
 			       u.vip_level, u.vip_xp, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes,
 			       COALESCE(w.balance_bono_diamantes, 0)::bigint as balance_bono_diamantes,
-			       COALESCE(w.giros_gratis, 0)::int as giros_gratis, u.ultimo_cofre_abierto_at, u.created_at
+			       COALESCE(w.giros_gratis, 0)::int as giros_gratis, u.ultimo_cofre_abierto_at, u.created_at,
+			       COALESCE(u.primer_deposito_realizado, false) as primer_deposito_realizado,
+			       EXISTS (
+			           SELECT 1 FROM depositos d 
+			           WHERE (d.user_id = u.id OR LOWER(d.username) = LOWER(u.username))
+			             AND d.estado IN ('APROBADA', 'APROBADO', 'COMPLETADO')
+			             AND COALESCE(d.tipo, 'RECARGA') = 'RECARGA'
+			       ) as tiene_recarga_aprobada
 			FROM users u
 			LEFT JOIN wallets w ON u.id = w.user_id
 			WHERE LOWER(u.username) = $1
@@ -608,6 +629,45 @@ func handlePayVerification(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		userID := fmt.Sprintf("%v", userRow["id"])
+
+		if req.Metodo == "usdt_trc20" {
+			req.TxHash = strings.TrimSpace(req.TxHash)
+			if len(req.TxHash) < 15 {
+				writeJSON(w, http.StatusBadRequest, map[string]string{
+					"error": "Por favor ingresa un TXID / Hash de transacción de TRON válido.",
+				})
+				return
+			}
+
+			// Obtener dirección oficial activa de recargas
+			activeWallet := "TXjR9sK7pLm2N8vW4qZ1yB5xT3cV6hJ9kL"
+			dirRow, err := neon.QueryRow(`SELECT direccion_tron FROM direcciones_recarga WHERE activa = TRUE LIMIT 1`)
+			if err == nil && dirRow != nil && dirRow["direccion_tron"] != nil {
+				activeWallet = fmt.Sprintf("%v", dirRow["direccion_tron"])
+			}
+
+			// Insertar en tabla 'depositos' con tipo 'VERIFICACION' y estado 'PENDIENTE'
+			// para que el script externo del usuario lo detecte, verifique y apruebe
+			err = neon.Exec(`
+				INSERT INTO depositos (user_id, username, monto_usdt, monto_diamantes, red_blockchain, tron_wallet_destino, tx_hash_tron, estado, tipo)
+				VALUES ($1::uuid, $2, 10.00, 0, 'TRC-20', $3, $4, 'PENDIENTE', 'VERIFICACION')
+			`, userID, req.Username, activeWallet, req.TxHash)
+
+			if err != nil {
+				writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error registrando pago de verificación: " + err.Error()})
+				return
+			}
+
+			writeJSON(w, http.StatusOK, map[string]any{
+				"success":           true,
+				"message":           "Tu pago de verificación de 10 USDT se ha registrado como PENDIENTE. Tu cuenta se verificará automáticamente al confirmarse en la red TRON.",
+				"estado":            "PENDIENTE",
+				"tipo":              "VERIFICACION",
+				"tx_hash":           req.TxHash,
+				"cuenta_verificada": false,
+			})
+			return
+		}
 
 		resRow, err := neon.QueryRow(`SELECT pagar_y_activar_verificacion($1::uuid, $2, $3) as res`, userID, req.Metodo, req.TxHash)
 		if err != nil {
@@ -1100,6 +1160,29 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// Regla de Seguridad Antifraude: Verificar que el usuario tenga al menos 1 recarga real aprobada (tipo = 'RECARGA')
+		depRow, err := neon.QueryRow(`
+			SELECT count(*)::int as count 
+			FROM depositos 
+			WHERE (user_id = $1::uuid OR LOWER(username) = $2) 
+			  AND estado IN ('APROBADA', 'APROBADO', 'COMPLETADO')
+			  AND COALESCE(tipo, 'RECARGA') = 'RECARGA'
+		`, userID, key)
+
+		depCount := 0
+		if err == nil && depRow != nil {
+			depCount = int(parseNumber(depRow["count"]))
+		}
+
+		if depCount == 0 {
+			writeJSON(w, http.StatusForbidden, map[string]any{
+				"error":            "REGLA_BLOQUEO: Requiere recarga previa",
+				"message":          "Para poder solicitar retiros de ganancias, es obligatorio haber realizado al menos una recarga de saldo en tu cuenta (el pago de verificación no cuenta como recarga).",
+				"requiere_recarga": true,
+			})
+			return
+		}
+
 		if balance < req.Diamantes {
 			writeJSON(w, http.StatusBadRequest, map[string]string{
 				"error": fmt.Sprintf("Saldo insuficiente. Tu saldo es de %d 💎 e intentas retirar %d 💎.", balance, req.Diamantes),
@@ -1174,6 +1257,15 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 			"error":              "REGLA_BLOQUEO: Cuenta no verificada",
 			"message":            "Tu cuenta no se encuentra verificada. Debes pagar la tasa de verificación (10 USDT / 100 💎) antes de poder retirar.",
 			"cuenta_verificada": false,
+		})
+		return
+	}
+
+	if !user.PrimerDepositoRealizado {
+		writeJSON(w, http.StatusForbidden, map[string]any{
+			"error":            "REGLA_BLOQUEO: Requiere recarga previa",
+			"message":          "Para poder solicitar retiros de ganancias, es obligatorio haber realizado al menos una recarga de saldo en tu cuenta (el pago de verificación no cuenta como recarga).",
+			"requiere_recarga": true,
 		})
 		return
 	}

