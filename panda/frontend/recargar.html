@@ -1436,6 +1436,7 @@
       userState.primer_deposito_realizado = true;
       userState.tiene_recarga_aprobada = true;
       localStorage.setItem(storageKey, JSON.stringify(userState));
+      try { await syncBackendProfile(); } catch (_) {}
 
       // Actualizar tabla local de depósitos
       try {
