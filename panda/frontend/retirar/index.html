@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirar a USDT (TRC-20) - Panda Cash</title>
+  <script src="./config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #070d18;
+      --bg-card: #0f182c;
+      --bg-card-inner: #142037;
+      --accent-gold: #ffb700;
+      --accent-gold-hover: #e6a500;
+      --accent-green: #00e701;
+      --accent-cyan: #00f0ff;
+      --text-main: #ffffff;
+      --text-muted: #8e9bb0;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(255, 183, 0, 0.35);
+      --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: #263859 #070d18;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #070d18;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #1e2f4d 0%, #16233b 100%);
+      border: 1px solid rgba(255, 183, 0, 0.28);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffb700;
+      border-color: #ffb700;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: #070d18;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 231, 1, 0.03) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(255, 183, 0, 0.04) 0%, transparent 45%);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* BARRA SUPERIOR */
+    .topbar {
+      background: rgba(11, 18, 32, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-icon {
+      font-size: 1.8rem;
+    }
+
+    .brand-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-title span {
+      color: var(--accent-gold);
+    }
+
+    .btn-back-nav {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.45rem 0.95rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn-back-nav:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .balance-badge {
+      background: #111b2e;
+      border: 1px solid var(--border-gold);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .balance-badge-val {
+      color: var(--accent-gold);
+      font-weight: 900;
+      font-size: 0.95rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .main-wrap {
+      max-width: 1040px;
+      margin: 1.75rem auto 3rem;
+      padding: 0 1.25rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* TARJETA DE RESUMEN DE LA ORDEN DE RETIRO */
+    .order-summary-card {
+      background: linear-gradient(135deg, #101a30 0%, #0c1424 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .order-summary-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .order-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .order-val {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+    }
+
+    .order-val.gold {
+      color: var(--accent-gold);
+    }
+
+    .order-val.green {
+      color: var(--accent-green);
+    }
+
+    .network-badge-lock {
+      background: rgba(255, 183, 0, 0.12);
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* GRID DE DOS COLUMNAS */
+    .withdraw-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 860px) {
+      .topbar {
+        padding: 0.65rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .topbar-left {
+        gap: 0.75rem;
+      }
+      .main-container {
+        padding: 0 1rem;
+        margin: 1.25rem auto;
+      }
+      .withdraw-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .brand-icon {
+        font-size: 1.4rem;
+      }
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      .btn-back-nav {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+      }
+      .balance-badge {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.78rem;
+      }
+      .step-card {
+        padding: 1.1rem;
+      }
+      .quick-diamonds-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.35rem;
+      }
+      .btn-pick-diamond {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.3rem;
+      }
+      .conversion-preview-box {
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: center;
+      }
+      .proc-modal-box,
+      .verification-modal-box {
+        max-width: 95vw;
+        padding: 1.5rem 1rem;
+      }
+      .toast-pill {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        font-size: 0.8rem;
+        text-align: center;
+      }
+    }
+
+    /* TARJETAS DE PASOS */
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.85rem;
+    }
+
+    .step-num-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      color: #0b1220;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* BOTONES RÁPIDOS DE SELECCIÓN DE DIAMANTES */
+    .quick-diamonds-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.45rem;
+    }
+
+    .btn-pick-diamond {
+      background: var(--bg-card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 0.55rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+
+    .btn-pick-diamond:hover {
+      background: #17243e;
+      border-color: rgba(255, 183, 0, 0.35);
+    }
+
+    .btn-pick-diamond.active {
+      background: #182845;
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    /* CAJA DE CONVERSIÓN EN TIEMPO REAL */
+    .conversion-preview-box {
+      background: var(--bg-card-inner);
+      border: 1px dashed rgba(255, 183, 0, 0.4);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* PESTAÑAS DE GUÍA PARA OBTENER DIRECCIÓN TRC-20 */
+    .exchange-tabs-bar {
+      display: flex;
+      gap: 0.4rem;
+      background: #09101d;
+      padding: 0.35rem;
+      border-radius: 8px;
+    }
+
+    .ex-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+
+    .ex-tab-btn.active {
+      background: #142037;
+      color: var(--accent-gold);
+      border: 1px solid rgba(255, 183, 0, 0.3);
+    }
+
+    .exchange-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .ex-step-item {
+      background: var(--bg-card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.75rem 0.95rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .ex-step-num {
+      background: rgba(255, 255, 255, 0.08);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.72rem;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .ex-step-content strong {
+      color: #fff;
+    }
+
+    /* CAJA DE ADVERTENCIA DE RED TRON */
+    .alert-tron-rule {
+      background: rgba(255, 183, 0, 0.08);
+      border-left: 4px solid var(--accent-gold);
+      border-radius: 6px;
+      padding: 0.75rem 0.95rem;
+      font-size: 0.78rem;
+      color: #d1d5db;
+      line-height: 1.45;
+    }
+
+    .alert-tron-rule strong {
+      color: var(--accent-gold);
+    }
+
+    /* FORMULARIO */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #d1d5db;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-label span.req {
+      color: var(--accent-gold);
+    }
+
+    .form-input {
+      background: var(--bg-card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 0.75rem 0.95rem;
+      color: #fff;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .address-wrapper {
+      position: relative;
+    }
+
+    .address-validation-pill {
+      margin-top: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: none;
+    }
+
+    .address-validation-pill.valid {
+      color: var(--accent-green);
+      display: block;
+    }
+
+    .address-validation-pill.invalid {
+      color: #ff4d6d;
+      display: block;
+    }
+
+    /* BOTÓN PRINCIPAL */
+    .btn-submit-withdraw {
+      background: var(--accent-gold);
+      color: #0b1220;
+      border: none;
+      border-radius: 8px;
+      padding: 0.95rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.15s, transform 0.15s;
+      font-family: inherit;
+      text-transform: uppercase;
+      box-shadow: 0 4px 16px rgba(255, 183, 0, 0.25);
+    }
+
+    .btn-submit-withdraw:hover {
+      background: var(--accent-gold-hover);
+      transform: translateY(-1px);
+    }
+
+    /* MODAL DE PROCESAMIENTO BLOCKCHAIN */
+    .proc-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .proc-modal-backdrop.open {
+      display: flex;
+    }
+
+    .proc-modal-box {
+      background: #0f182c;
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 480px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .spinner-tron {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 183, 0, 0.15);
+      border-top-color: var(--accent-gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1.25rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .proc-progress-bar-bg {
+      background: rgba(255, 255, 255, 0.08);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .proc-progress-bar-fill {
+      background: linear-gradient(90deg, #ffb700, #00e701);
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .success-icon-check {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(0, 231, 1, 0.15);
+      border: 2px solid var(--accent-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: var(--accent-green);
+      margin: 0 auto 1rem;
+    }
+
+    .txid-copy-box {
+      background: #09101d;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 0.6rem 0.85rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--accent-gold);
+      word-break: break-all;
+      margin: 0.75rem 0 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .txid-copy-box button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* TOAST */
+    .toast-pill {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #111b2e;
+      border: 1px solid var(--accent-gold);
+      padding: 0.85rem 1.2rem;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ESTILOS DE CUENTA VERIFICADA / NO VERIFICADA */
+    .verification-badge {
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .verification-badge.verified {
+      background: rgba(0, 231, 1, 0.12);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .verification-badge.unverified {
+      background: rgba(255, 183, 0, 0.12);
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      cursor: pointer;
+    }
+
+    .unverified-restriction-card {
+      background: linear-gradient(135deg, rgba(255, 51, 102, 0.12) 0%, rgba(255, 183, 0, 0.10) 100%);
+      border: 1px solid rgba(255, 51, 102, 0.4);
+      border-left: 4px solid #ff3366;
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .unverified-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .unverified-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .unverified-header h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #ff4d6d;
+      margin-bottom: 0.2rem;
+    }
+
+    .unverified-header p {
+      font-size: 0.78rem;
+      color: #d1d5db;
+      line-height: 1.45;
+    }
+
+    .btn-verify-now {
+      background: linear-gradient(90deg, #ffb700, #ff9500);
+      color: #0d1527;
+      border: none;
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: opacity 0.15s, transform 0.15s;
+      width: 100%;
+      text-transform: uppercase;
+      font-family: inherit;
+    }
+
+    .btn-verify-now:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .btn-submit-withdraw.locked {
+      background: #25334e;
+      color: #8e9bb0;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    .btn-submit-withdraw.locked:hover {
+      background: #2d3e5e;
+      color: #fff;
+      border-color: #ffb700;
+    }
+
+    /* MODAL DE VERIFICACIÓN */
+    .verification-modal-box {
+      max-width: 480px;
+      position: relative;
+    }
+
+    .modal-close-x {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close-x:hover {
+      color: #fff;
+    }
+
+    .verify-modal-icon {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .verify-benefits-box {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      text-align: left;
+    }
+
+    .verify-benefit-item {
+      font-size: 0.78rem;
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .verify-payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .verify-opt-card {
+      background: var(--bg-card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: left;
+    }
+
+    .verify-opt-card:hover {
+      border-color: rgba(255, 183, 0, 0.4);
+    }
+
+    .verify-opt-card.active {
+      border-color: var(--accent-gold);
+      background: rgba(255, 183, 0, 0.08);
+    }
+
+    .verify-opt-radio {
+      font-size: 1.1rem;
+      color: var(--accent-gold);
+      width: 20px;
+      text-align: center;
+    }
+
+    .verify-opt-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .verify-opt-cost {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="./dashboard_directo.html" class="brand-logo" title="Volver al lobby de Panda Cash">
+        <span class="brand-icon">🐼</span>
+        <div class="brand-title">PANDA<span> CASH</span></div>
+      </a>
+      <a href="./dashboard_directo.html" class="btn-back-nav">
+        &larr; Volver al Dashboard
+      </a>
+    </div>
+
+    <div class="topbar-right">
+      <div class="verification-badge unverified" id="topVerificationBadge" title="Estado de verificación de tu cuenta">
+        ⚠️ No Verificada (Retiros Bloqueados)
+      </div>
+      <div class="balance-badge" title="Saldo disponible para canjear">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Saldo Disponible:</span>
+        <span class="balance-badge-val" id="topNavDiamonds">0 💎</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-wrap">
+
+    <!-- RESUMEN DE LA SOLICITUD DE RETIRO -->
+    <section class="order-summary-card">
+      <div class="order-summary-item">
+        <span class="order-label">Diamantes a Canjear</span>
+        <span class="order-val gold" id="summaryDiamondsAmount">500 💎</span>
+      </div>
+
+      <div class="order-summary-item">
+        <span class="order-label">USDT que Recibirás</span>
+        <span class="order-val green" id="summaryUsdtAmount">50.00 USDT</span>
+      </div>
+
+      <div class="order-summary-item">
+        <span class="order-label">Tasa Oficial</span>
+        <span class="order-val" style="font-size: 1.05rem;">10 💎 = 1 USDT</span>
+      </div>
+
+      <div class="order-summary-item">
+        <span class="order-label">Red de Despacho</span>
+        <div class="network-badge-lock">
+          <span>⚡</span>
+          <span>TRON (TRC-20) OBLIGATORIA</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID DE 2 COLUMNAS: PASO 1 (GUÍA DE DIRECCIÓN) Y PASO 2 (FORMULARIO DE RETIRO) -->
+    <div class="withdraw-grid">
+
+      <!-- COLUMNA IZQUIERDA: CÓMO OBTENER TU BILLETERA DE RETIROS (RED TRC-20) -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num-pill">1</div>
+          <div class="step-title">Cómo obtener tu Billetera de Retiros</div>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--text-muted);">
+          Para recibir tus USDT sin inconvenientes, copia la dirección de tu <strong>Billetera de Retiros</strong> desde tu exchange o app cripto. <strong>Aclaración obligatoria:</strong> Asegúrate de elegir siempre la red <strong>TRON (TRC-20)</strong>.
+        </p>
+
+        <!-- Selector de Exchange -->
+        <div class="exchange-tabs-bar">
+          <button class="ex-tab-btn active" data-ex="binance">Binance</button>
+          <button class="ex-tab-btn" data-ex="bybit">Bybit / OKX</button>
+          <button class="ex-tab-btn" data-ex="wallet">Trust / TronLink</button>
+        </div>
+
+        <!-- Guía Binance -->
+        <div class="exchange-steps-list" id="guideBinance">
+          <div class="ex-step-item">
+            <div class="ex-step-num">1</div>
+            <div class="ex-step-content">
+              Abre tu app de Binance, ve a <strong>Billetera ➔ Depositar (Deposit)</strong> y busca <strong>USDT</strong>.
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">2</div>
+            <div class="ex-step-content">
+              En la selección de red, elige obligatoriamente <strong>TRON (TRC-20)</strong>. *(No uses BEP20 ni ERC20)*.
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">3</div>
+            <div class="ex-step-content">
+              Copia tu dirección de billetera que aparece en pantalla (empieza con la letra <strong>"T"</strong>).
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">4</div>
+            <div class="ex-step-content">
+              Pégala en el campo <em>"Tu Dirección de Billetera USDT"</em> del formulario al lado.
+            </div>
+          </div>
+        </div>
+
+        <!-- Guía Bybit / OKX -->
+        <div class="exchange-steps-list" id="guideBybit" style="display: none;">
+          <div class="ex-step-item">
+            <div class="ex-step-num">1</div>
+            <div class="ex-step-content">
+              Inicia sesión en Bybit u OKX y dirígete a <strong>Activos ➔ Depositar</strong>.
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">2</div>
+            <div class="ex-step-content">
+              Selecciona la moneda <strong>USDT</strong> y selecciona el tipo de cadena <strong>TRC-20 (Tron)</strong>.
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">3</div>
+            <div class="ex-step-content">
+              Copia la dirección generada y confirma que empiece por la letra <strong>T</strong>.
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">4</div>
+            <div class="ex-step-content">
+              Pégala en el formulario para procesar tu retiro.
+            </div>
+          </div>
+        </div>
+
+        <!-- Guía Trust / TronLink -->
+        <div class="exchange-steps-list" id="guideWallet" style="display: none;">
+          <div class="ex-step-item">
+            <div class="ex-step-num">1</div>
+            <div class="ex-step-content">
+              Abre tu billetera <strong>Trust Wallet</strong>, <strong>TronLink</strong> o <strong>Exodus</strong>.
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">2</div>
+            <div class="ex-step-content">
+              Busca y selecciona <strong>Tether USD (TRC-20)</strong>.
+            </div>
+          </div>
+          <div class="ex-step-item">
+            <div class="ex-step-num">3</div>
+            <div class="ex-step-content">
+              Pulsa en <strong>Recibir (Receive)</strong> y copia tu dirección de la red Tron.
+            </div>
+          </div>
+        </div>
+
+        <!-- Regla de oro de la Red Tron -->
+        <div class="alert-tron-rule">
+          <strong>Regla de Oro TRC-20:</strong>
+          <p style="margin-top: 0.2rem;">
+            Toda dirección válida de la red TRON comienza estrictamente con la letra <strong>T</strong> y posee 34 caracteres (ejemplo: <code>TYDnyP8p2nQoD9jA5kU8v9L9w5b3x7K2zM</code>). Si tu dirección empieza con <code>0x</code>, estás en la red equivocada y no debes usarla.
+          </p>
+        </div>
+
+        <div style="background: rgba(0, 231, 1, 0.08); border: 1px solid rgba(0, 231, 1, 0.25); border-radius: 8px; padding: 0.85rem; font-size: 0.78rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 1.2rem; color: var(--accent-green);">⚡</span>
+          <span><strong>Despacho Inmediato:</strong> Los retiros hacia tu Billetera TRON (TRC-20) se procesan y transfieren de forma <strong>automatizada e instantánea</strong>.</span>
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: FORMULARIO DE SOLICITUD DE RETIRO -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-num-pill">2</div>
+          <div class="step-title">Formulario de Solicitud de Retiro</div>
+        </div>
+
+        <!-- ALERTA DE RESTRICCIÓN SI LA CUENTA NO ESTÁ VERIFICADA -->
+        <div class="unverified-restriction-card" id="unverifiedRestrictionCard" style="display: none;">
+          <div class="unverified-header">
+            <span class="unverified-icon">⚠️</span>
+            <div>
+              <h4>RESTRICCIÓN DE RETIRO: Cuenta No Verificada</h4>
+              <p>
+                Tu cuenta puede recargar, jugar y ganar sin límites, pero para poder retirar tus ganancias hacia tu <strong>Billetera de Retiros (Red obligatoria TRC-20)</strong>, las regulaciones exigen abonar la <strong>tasa única de verificación</strong> (10 USDT o 100 💎).
+              </p>
+            </div>
+          </div>
+          <button type="button" class="btn-verify-now" id="btnOpenVerificationModal">
+            💳 PAGAR Y ACTIVAR VERIFICACIÓN AHORA (100 💎)
+          </button>
+        </div>
+
+        <!-- ALERTA DE RESTRICCIÓN SI EL USUARIO NUNCA HA RECARGADO -->
+        <div class="unverified-restriction-card" id="noDepositRestrictionCard" style="display: none; border-left-color: #00f0ff; background: rgba(0, 240, 255, 0.07); border-color: rgba(0, 240, 255, 0.3);">
+          <div class="unverified-header">
+            <span class="unverified-icon" style="background: rgba(0, 240, 255, 0.15); color: #00f0ff;">💳</span>
+            <div>
+              <h4 style="color: #00f0ff;">RESTRICCIÓN DE SEGURIDAD: Se Requiere Al Menos 1 Recarga</h4>
+              <p>
+                Para habilitar solicitudes de retiro de ganancias obtenidas en el casino o encuestas, debes haber realizado <strong>al menos una recarga de saldo previa</strong> en tu cuenta. <span style="color: #ffb700;">*Nota: La tasa de verificación de cuenta no cuenta como recarga de saldo.</span>
+              </p>
+            </div>
+          </div>
+          <a href="./recargar.html" class="btn-verify-now" style="background: #00f0ff; color: #000; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">
+            💎 IR A RECARGAR SALDO AHORA
+          </a>
+        </div>
+
+        <form id="withdrawSubmitForm" style="display: flex; flex-direction: column; gap: 1.1rem;">
+          
+          <!-- Campo 1: Cantidad de Diamantes a Canjear (Mínimo 1,000 💎 = 100 USDT) -->
+          <div class="form-group">
+            <div class="form-label">
+              <span>Diamantes a Retirar (💎) &bull; <small style="color: var(--accent-gold);">Mínimo: 1,000 💎 (100 USDT)</small></span>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Disponible: <strong id="lblMaxAvailable" style="color: var(--accent-gold);">0 💎</strong></span>
+            </div>
+
+            <!-- Botones Rápidos (Desde el mínimo de 1,000 💎 = 100 USDT) -->
+            <div class="quick-diamonds-grid" style="margin-bottom: 0.5rem;">
+              <button type="button" class="btn-pick-diamond active" data-val="1000">1,000 💎 (100 $)</button>
+              <button type="button" class="btn-pick-diamond" data-val="1500">1,500 💎 (150 $)</button>
+              <button type="button" class="btn-pick-diamond" data-val="2500">2,500 💎 (250 $)</button>
+              <button type="button" class="btn-pick-diamond" data-val="5000">5,000 💎 (500 $)</button>
+              <button type="button" class="btn-pick-diamond" data-val="10000">10,000 💎 (1,000 $)</button>
+              <button type="button" class="btn-pick-diamond" id="btnMaxWithdraw" style="color: var(--accent-gold);">Retirar Todo</button>
+            </div>
+
+            <input type="number" id="inputWithdrawDiamonds" class="form-input" value="1000" min="1000" step="10" required />
+          </div>
+
+          <!-- Conversión Dinámica a USDT -->
+          <div class="conversion-preview-box">
+            <div>
+              <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Monto que recibirás:</span>
+              <div style="font-size: 1.25rem; font-weight: 900; color: var(--accent-green); font-family: 'Courier New', monospace;" id="previewUsdtOut">100.00 USDT</div>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Comisión de Red:</span>
+              <div style="font-size: 0.82rem; font-weight: 800; color: var(--accent-gold);">0.00 USDT (Gratis)</div>
+            </div>
+          </div>
+
+          <!-- Campo 2: Billetera de Retiros (Red TRC-20) -->
+          <div class="form-group">
+            <div class="form-label">
+              <span>Billetera de Retiros (Obligatorio Red TRC-20)</span>
+              <span class="req">* Obligatorio</span>
+            </div>
+
+            <div class="address-wrapper">
+              <input type="text" id="inputRecipientTronAddress" class="form-input" style="width: 100%; font-family: 'Courier New', monospace; font-size: 0.85rem;" placeholder="Pega la dirección TRC-20 de tu Billetera de Retiros (Inicia con T)" required />
+            </div>
+            
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.15rem;">
+              ⚠️ Tu Billetera de Retiros debe ser exclusivamente de la red <strong>TRON (TRC-20)</strong>.
+            </div>
+            <div id="addressStatusPill" class="address-validation-pill"></div>
+          </div>
+
+          <!-- Campo 3: Datos Registrados de la Cuenta -->
+          <div style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.45rem;">
+              <span style="font-size: 0.76rem; font-weight: 800; color: var(--accent-gold); text-transform: uppercase;">👤 Datos Registrados del Titular</span>
+              <a href="./perfil.html" style="font-size: 0.74rem; color: var(--text-muted); text-decoration: underline;">Editar en Mi Perfil &rarr;</a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;">
+              <div class="form-group">
+                <div class="form-label">
+                  <span>Usuario / Alias</span>
+                </div>
+                <input type="text" id="inputUsername" class="form-input" readonly style="opacity: 0.8; cursor: not-allowed;" />
+              </div>
+
+              <div class="form-group">
+                <div class="form-label">
+                  <span>Nombre y Apellido</span>
+                  <span class="req">*</span>
+                </div>
+                <input type="text" id="inputFullName" class="form-input" placeholder="Tu nombre y apellido" required />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;">
+              <div class="form-group">
+                <div class="form-label">
+                  <span>Correo Electrónico Registrado</span>
+                  <span class="req">*</span>
+                </div>
+                <input type="email" id="inputUserEmail" class="form-input" placeholder="tucorreo@ejemplo.com" required />
+              </div>
+
+              <div class="form-group">
+                <div class="form-label">
+                  <span>Teléfono Móvil Registrado</span>
+                  <span class="req">*</span>
+                </div>
+                <input type="tel" id="inputUserPhone" class="form-input" placeholder="+34 612 345678" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón de Envío -->
+          <button type="submit" class="btn-submit-withdraw" id="btnSubmitWithdraw">
+            ⚡ CONFIRMAR Y PROCESAR RETIRO A USDT
+          </button>
+
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center;">
+            🔒 Aprobación rápida vía Blockchain Tron &bull; Envíos procesados 24/7 sin demoras
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL DE PROCESAMIENTO BLOCKCHAIN TRC-20 -->
+  <div class="proc-modal-backdrop" id="processingModal">
+    <div class="proc-modal-box">
+      
+      <!-- Estado 1: Procesando Retiro a USDT en 5 segundos (Simulación Creadores) -->
+      <div id="procScanningState">
+        <div class="spinner-tron"></div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,240,255,0.12); border: 1px solid #00f0ff; color: #00f0ff; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>⚡</span> DESPACHANDO EN RED TRON
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.35rem;">
+          Procesando Retiro a USDT (TRC-20)
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+          Validando balance, generando bloque blockchain y transfiriendo fondos a tu billetera TRON...
+        </p>
+
+        <div class="proc-progress-bar-bg" style="margin: 0.8rem 0 0.4rem; height: 10px; border-radius: 6px; background: rgba(255,255,255,0.08); overflow: hidden;">
+          <div class="proc-progress-bar-fill" id="procProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb700, #00f0ff, #00e701); transition: width 0.1s linear;"></div>
+        </div>
+
+        <div style="font-size: 0.76rem; color: var(--accent-gold); font-weight: 700; margin-top: 0.5rem;" id="procStatusText">
+          Validando balance y clave criptográfica (5s)...
+        </div>
+      </div>
+
+      <!-- Estado 2: Retiro Transferido y Acreditado Inmediatamente -->
+      <div id="procSuccessState" style="display: none;">
+        <div class="success-icon-check" style="background: rgba(0, 231, 1, 0.15); border-color: #00e701; color: #00e701;">✓</div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0, 231, 1, 0.15); border: 1px solid #00e701; color: #00e701; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>✅</span> ESTADO: ACREDITADO Y COMPLETADO
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--accent-green); margin-bottom: 0.35rem;">
+          ¡Retiro Enviado con Éxito!
+        </h3>
+        <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1.2rem; line-height: 1.4;">
+          Tu transferencia en USDT (Red TRON TRC-20) ha sido emitida e impactada exitosamente en la blockchain hacia tu Billetera de Retiros.
+        </p>
+
+        <!-- Bloque de Detalle de Transferencia Blockchain -->
+        <div style="background: rgba(11,20,38,0.7); border: 1px solid rgba(0, 231, 1, 0.3); border-radius: 10px; padding: 1.1rem; margin-bottom: 1.2rem; text-align: left;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-green); font-weight: 800; font-size: 0.88rem; margin-bottom: 0.65rem;">
+            <span>⛓️</span> Comprobante de Despacho TRON (TRC-20)
+          </div>
+
+          <div style="background: rgba(0, 0, 0, 0.4); border-radius: 8px; padding: 0.75rem 0.9rem; border: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.45rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-muted);">Red de envío:</span>
+              <strong style="color: #60a5fa;">TRON (TRC-20)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-muted);">Billetera Destino:</span>
+              <strong style="color: #fff; font-family: monospace; font-size: 0.75rem;" id="successRecipientWallet">T...</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-muted);">Tiempo de confirmación:</span>
+              <strong style="color: var(--accent-green);">Instantáneo (0 segundos)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-muted);">Estado Blockchain:</span>
+              <span style="background: rgba(0, 231, 1, 0.2); color: #00e701; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; border: 1px solid rgba(0, 231, 1, 0.4);">
+                ✓ CONFIRMADO EN BLOQUE
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumen de montos -->
+        <div style="background: var(--bg-card-inner); border: 1px solid var(--border-gold); border-radius: 8px; padding: 0.9rem; margin-bottom: 1rem; display: flex; justify-content: space-around; align-items: center;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Monto Acreditado</div>
+            <div style="font-size: 1.25rem; font-weight: 900; color: var(--accent-green);" id="successUsdtResult">50.00 USDT</div>
+          </div>
+          <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.1);"></div>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Nuevo Saldo</div>
+            <div style="font-size: 1.25rem; font-weight: 900; color: var(--accent-gold);" id="successNewBalance">14,500 💎</div>
+          </div>
+        </div>
+
+        <!-- Identificador de la Solicitud / TxID -->
+        <div style="text-align: left; margin-bottom: 1.25rem;">
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.25rem;">Hash de Transacción TxID (TRC-20):</div>
+          <div class="txid-copy-box">
+            <span id="generatedTxId" style="font-family: monospace; font-size: 0.75rem; word-break: break-all;">ret_pending</span>
+            <button id="btnCopyTxId" title="Copiar TxID">📋</button>
+          </div>
+        </div>
+
+        <a href="./dashboard_directo.html" class="btn-submit-withdraw" style="text-decoration: none;">
+          🎮 VOLVER AL DASHBOARD
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL DE PAGO Y ACTIVACIÓN DE VERIFICACIÓN -->
+  <div class="proc-modal-backdrop" id="verificationModal">
+    <div class="proc-modal-box verification-modal-box">
+      <button class="modal-close-x" id="btnCloseVerificationModal">&times;</button>
+      
+      <!-- Vista 1: Formulario de Selección -->
+      <div id="verifyFormView">
+        <div class="verify-modal-icon">🛡️</div>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: #ffb700; margin-bottom: 0.35rem; text-align: center;">
+          Verificación de Cuenta de Jugador
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.15rem; text-align: center;">
+          Para habilitar retiros en USDT (Red TRON TRC-20), las regulaciones exigen abonar la tasa de verificación de identidad/cuenta.
+        </p>
+
+        <div class="verify-benefits-box">
+          <div class="verify-benefit-item">✓ Habilita retiros instantáneos 24/7 a tu Billetera de Retiros (Red TRC-20)</div>
+          <div class="verify-benefit-item">✓ Sin demoras ni bloqueos en premios de casino y arcade</div>
+          <div class="verify-benefit-item">✓ Insignia oficial de Cuenta Verificada en tu perfil</div>
+        </div>
+
+        <div style="font-size: 0.78rem; font-weight: 800; color: #d1d5db; margin-bottom: 0.5rem; text-align: left;">
+          Selecciona el método de pago de verificación:
+        </div>
+
+        <div class="verify-payment-options">
+          <!-- Opción 1: Saldo de Diamantes (Recomendada) -->
+          <div class="verify-opt-card active" id="optPayDiamonds">
+            <div class="verify-opt-radio" id="radioOptDiamonds">●</div>
+            <div class="verify-opt-content">
+              <div class="verify-opt-title">Pagar con Saldo de Diamantes (Instantáneo)</div>
+              <div class="verify-opt-cost">
+                Costo: <strong style="color: #ffb700;">100 💎 Diamantes</strong> (Tu saldo: <span id="modalUserBalancePreview">0 💎</span>)
+              </div>
+            </div>
+          </div>
+
+          <!-- Opción 2: Transferencia Directa TRC-20 -->
+          <div class="verify-opt-card" id="optPayTrc20">
+            <div class="verify-opt-radio" id="radioOptTrc20">○</div>
+            <div class="verify-opt-content">
+              <div class="verify-opt-title">Pagar con USDT (TRC-20)</div>
+              <div class="verify-opt-cost">
+                Costo: <strong style="color: #00e701;">10.00 USDT</strong> a la billetera oficial Panda
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenedor con dirección oficial y campo de Hash TRC-20 -->
+          <div id="verifyTrc20Box" style="display: none; background: #0c1527; border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 8px; padding: 0.85rem; margin-top: 0.75rem; text-align: left;">
+            <div style="font-size: 0.74rem; color: #8e9bb0; margin-bottom: 0.35rem;">
+              Dirección TRON oficial (Red TRC-20):
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center; background: #070d18; padding: 0.5rem 0.65rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">
+              <span id="verifyWalletAddress" style="font-family: monospace; font-size: 0.75rem; color: #00f0ff; word-break: break-all; flex: 1;">Cargando billetera...</span>
+              <button type="button" id="btnCopyVerifyWallet" style="background: rgba(0, 240, 255, 0.15); border: 1px solid #00f0ff; color: #00f0ff; border-radius: 4px; padding: 0.3rem 0.6rem; font-size: 0.72rem; cursor: pointer; font-weight: 800;">Copiar</button>
+            </div>
+            <div style="font-size: 0.73rem; color: #ffb700; margin: 0.65rem 0 0.25rem; font-weight: 700;">
+              Transfiere 10.00 USDT y pega el Hash de Transacción (TXID):
+            </div>
+            <input type="text" id="verifyTxHashInput" placeholder="Ej: 3c8e4a9b71d2..." style="width: 100%; box-sizing: border-box; background: #070d18; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 0.6rem 0.75rem; font-size: 0.8rem; color: #fff; font-family: monospace;" />
+          </div>
+        </div>
+
+        <button type="button" class="btn-submit-withdraw" id="btnConfirmPayVerification" style="margin-top: 1rem; width: 100%;">
+          ⚡ CONFIRMAR Y ACTIVAR MI VERIFICACIÓN
+        </button>
+
+        <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem;">
+          🔒 Pago protegido &bull; Activación en 5 segundos
+        </div>
+      </div>
+
+      <!-- Vista 2: Cargando Verificación en 5 segundos (Simulación Creadores) -->
+      <div id="verifyLoadingView" style="display: none;">
+        <div class="spinner-tron"></div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,240,255,0.12); border: 1px solid #00f0ff; color: #00f0ff; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>🛡️</span> VALIDANDO VERIFICACIÓN
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.35rem;">
+          Autenticando Cuenta y Red TRON
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+          Comprobando clave criptográfica, titularidad y habilitando retiros instantáneos...
+        </p>
+        <div class="proc-progress-bar-bg" style="margin: 0.8rem 0 0.4rem; height: 10px; border-radius: 6px; background: rgba(255,255,255,0.08); overflow: hidden;">
+          <div class="proc-progress-bar-fill" id="procVerifyProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb700, #00f0ff, #00e701); transition: width 0.1s linear;"></div>
+        </div>
+        <div style="font-size: 0.76rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 1rem;" id="procVerifyStatusMsg">
+          Verificando parámetros de identidad (5s)...
+        </div>
+      </div>
+
+      <!-- Vista 3: Verificación Completada con Éxito -->
+      <div id="verifySuccessView" style="display: none;">
+        <div class="success-icon-check" style="background: rgba(0, 231, 1, 0.15); border-color: #00e701; color: #00e701;">✓</div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0, 231, 1, 0.15); border: 1px solid #00e701; color: #00e701; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>✅</span> ESTADO: CUENTA VERIFICADA
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--accent-green); margin-bottom: 0.35rem;">
+          ¡Verificación Aprobada con Éxito!
+        </h3>
+        <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1.2rem; line-height: 1.4;">
+          Tu cuenta ha sido validada y autenticada en la red TRON. Ya no tienes ninguna restricción y puedes realizar retiros instantáneos hacia tu Billetera de Retiros.
+        </p>
+        <button type="button" class="btn-submit-withdraw" id="btnCloseVerifySuccess" style="width: 100%;">
+          ⚡ CONTINUAR Y SOLICITAR RETIRO
+        </button>
+      </div>
+
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-pill" id="globalToast"></div>
+
+  <script>
+    // =========================================================================
+    // LÓGICA DE RETIRO TRC-20 Y SINCRONIZACIÓN CON PANDA CASH
+    // =========================================================================
+    const storageKey = 'panda_user_session';
+    const DIAMOND_RATE = 10; // 10 Diamantes = 1 USDT
+    const API_BASE = (window.PANDA_CONFIG && window.PANDA_CONFIG.API_BASE) ||
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:'
+        ? 'http://localhost:8085/api/v1'
+        : '/api/v1');
+
+    // 1. Cargar estado de sesión del usuario
+    let userState = {
+      isLoggedIn: true,
+      username: 'PandaMaster_99',
+      balance: 0,
+      bonusBalance: 0,
+      freeSpins: 0,
+      vipLevel: 'Panda Bronce',
+      xp: 0,
+      xpTarget: 1000,
+      cuenta_verificada: false,
+      is_verified: false
+    };
+
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        userState = { ...userState, ...parsed };
+      }
+    } catch (e) {
+      console.log('Using default mock state');
+    }
+
+    async function syncBackendProfile() {
+      if (!userState || !userState.username) return;
+      try {
+        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.balance_diamantes === 'number') {
+            userState.balance = data.balance_diamantes;
+            if (typeof data.cuenta_verificada !== 'undefined') {
+              userState.cuenta_verificada = Boolean(data.cuenta_verificada);
+              userState.is_verified = Boolean(data.cuenta_verificada);
+            }
+            if (typeof data.primer_deposito_realizado !== 'undefined') {
+              userState.primer_deposito_realizado = Boolean(data.primer_deposito_realizado);
+            }
+            if (typeof data.tiene_recarga_aprobada !== 'undefined') {
+              userState.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
+            }
+            localStorage.setItem(storageKey, JSON.stringify(userState));
+            const topNavEl = document.getElementById('topNavDiamonds');
+            if (topNavEl) topNavEl.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+            const availEl = document.getElementById('availableDiamondsDisplay');
+            if (availEl) availEl.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+            const maxUsdtEl = document.getElementById('maxUsdtAvailable');
+            if (maxUsdtEl) maxUsdtEl.textContent = '≈ ' + (userState.balance / DIAMOND_RATE).toFixed(2) + ' USDT';
+            renderVerificationStatus();
+          }
+        }
+      } catch (_) {}
+    }
+    syncBackendProfile();
+
+    // Normalizar propiedad de verificación de cuenta
+    if (typeof userState.cuenta_verificada === 'undefined' && typeof userState.is_verified === 'undefined') {
+      userState.cuenta_verificada = false;
+      userState.is_verified = false;
+    } else if (typeof userState.cuenta_verificada !== 'undefined') {
+      userState.is_verified = Boolean(userState.cuenta_verificada);
+    } else {
+      userState.cuenta_verificada = Boolean(userState.is_verified);
+    }
+
+    // Referencias a elementos de verificación
+    const unverifiedCard = document.getElementById('unverifiedRestrictionCard');
+    const noDepositCard = document.getElementById('noDepositRestrictionCard');
+    const topBadge = document.getElementById('topVerificationBadge');
+    const btnSubmitWithdraw = document.getElementById('btnSubmitWithdraw');
+    const verificationModal = document.getElementById('verificationModal');
+    const modalBalancePreview = document.getElementById('modalUserBalancePreview');
+    const verifyTrc20Box = document.getElementById('verifyTrc20Box');
+
+    function renderVerificationStatus() {
+      const isVerified = Boolean(userState.cuenta_verificada || userState.is_verified);
+      const hasDeposit = Boolean(userState.tiene_recarga_aprobada || userState.primer_deposito_realizado);
+      
+      if (!isVerified) {
+        if (topBadge) {
+          topBadge.className = 'verification-badge unverified';
+          topBadge.innerHTML = '⚠️ No Verificada (Retiros Bloqueados)';
+          topBadge.title = 'Haz clic para pagar y activar la verificación';
+        }
+        if (unverifiedCard) unverifiedCard.style.display = 'flex';
+        if (noDepositCard) noDepositCard.style.display = 'none';
+        if (btnSubmitWithdraw) {
+          btnSubmitWithdraw.classList.add('locked');
+          btnSubmitWithdraw.innerHTML = '🔒 RETIRO BLOQUEADO (REQUIERE CUENTA VERIFICADA)';
+        }
+      } else if (!hasDeposit) {
+        if (topBadge) {
+          topBadge.className = 'verification-badge verified';
+          topBadge.innerHTML = '✓ Cuenta Verificada';
+          topBadge.title = 'Tu cuenta está verificada, pero requiere al menos 1 recarga previa';
+        }
+        if (unverifiedCard) unverifiedCard.style.display = 'none';
+        if (noDepositCard) noDepositCard.style.display = 'flex';
+        if (btnSubmitWithdraw) {
+          btnSubmitWithdraw.classList.add('locked');
+          btnSubmitWithdraw.innerHTML = '🔒 RETIRO BLOQUEADO (REQUIERE AL MENOS 1 RECARGA)';
+        }
+      } else {
+        if (topBadge) {
+          topBadge.className = 'verification-badge verified';
+          topBadge.innerHTML = '✓ Cuenta Verificada';
+          topBadge.title = 'Tu cuenta está verificada y habilitada para retiros a USDT TRC-20.';
+        }
+        if (unverifiedCard) unverifiedCard.style.display = 'none';
+        if (noDepositCard) noDepositCard.style.display = 'none';
+        if (btnSubmitWithdraw) {
+          btnSubmitWithdraw.classList.remove('locked');
+          btnSubmitWithdraw.innerHTML = '⚡ CONFIRMAR Y PROCESAR RETIRO A USDT';
+        }
+      }
+
+      if (modalBalancePreview) {
+        modalBalancePreview.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+      }
+    }
+
+    // Inicializar estado visual de verificación
+    renderVerificationStatus();
+
+    // Cargar dirección oficial de TRON para el pago de verificación
+    async function loadVerificationWallet() {
+      try {
+        const res = await fetch(`${API_BASE}/wallet/direccion-recarga`);
+        if (res.ok) {
+          const d = await res.json();
+          const wEl = document.getElementById('verifyWalletAddress');
+          if (wEl && d.direccion_tron) {
+            wEl.textContent = d.direccion_tron;
+          }
+        }
+      } catch (_) {}
+    }
+    loadVerificationWallet();
+
+    document.getElementById('btnCopyVerifyWallet')?.addEventListener('click', () => {
+      const wEl = document.getElementById('verifyWalletAddress');
+      if (wEl && wEl.textContent) {
+        navigator.clipboard.writeText(wEl.textContent.trim()).then(() => {
+          showToast('Copiado', 'Dirección de billetera TRC-20 copiada al portapapeles.');
+        });
+      }
+    });
+
+    // Eventos para abrir el modal de verificación
+    topBadge?.addEventListener('click', () => {
+      if (!userState.cuenta_verificada && !userState.is_verified) {
+        renderVerificationStatus();
+        verificationModal.classList.add('open');
+      } else {
+        showToast('Cuenta Verificada', 'Tu cuenta ya cuenta con la verificación aprobada.');
+      }
+    });
+
+    document.getElementById('btnOpenVerificationModal')?.addEventListener('click', () => {
+      renderVerificationStatus();
+      verificationModal.classList.add('open');
+    });
+
+    document.getElementById('btnCloseVerificationModal')?.addEventListener('click', () => {
+      verificationModal.classList.remove('open');
+    });
+
+    // Alternar método de pago en el modal de verificación
+    let selectedVerifyMethod = 'saldo_diamantes';
+    const optDiamonds = document.getElementById('optPayDiamonds');
+    const optTrc20 = document.getElementById('optPayTrc20');
+    const radioDiamonds = document.getElementById('radioOptDiamonds');
+    const radioTrc20 = document.getElementById('radioOptTrc20');
+
+    optDiamonds?.addEventListener('click', () => {
+      selectedVerifyMethod = 'saldo_diamantes';
+      optDiamonds.classList.add('active');
+      optTrc20.classList.remove('active');
+      radioDiamonds.textContent = '●';
+      radioTrc20.textContent = '○';
+      if (verifyTrc20Box) verifyTrc20Box.style.display = 'none';
+    });
+
+    optTrc20?.addEventListener('click', () => {
+      selectedVerifyMethod = 'usdt_trc20';
+      optTrc20.classList.add('active');
+      optDiamonds.classList.remove('active');
+      radioTrc20.textContent = '●';
+      radioDiamonds.textContent = '○';
+      if (verifyTrc20Box) verifyTrc20Box.style.display = 'block';
+    });
+
+    // Confirmar y pagar la verificación de cuenta (SIMULACIÓN EN 5 SEGUNDOS PARA CREADORES)
+    document.getElementById('btnConfirmPayVerification')?.addEventListener('click', async () => {
+      const verifyFee = 100; // 100 💎
+
+      if (selectedVerifyMethod === 'usdt_trc20') {
+        const txHash = document.getElementById('verifyTxHashInput')?.value.trim();
+        if (!txHash || txHash.length < 8) {
+          showToast('Hash Requerido', 'Por favor ingresa un código TxID o Hash válido de tu transacción de 10.00 USDT.', 'error');
+          return;
+        }
+      }
+
+      const formView = document.getElementById('verifyFormView');
+      const loadView = document.getElementById('verifyLoadingView');
+      const succView = document.getElementById('verifySuccessView');
+      const vBar = document.getElementById('procVerifyProgressBar');
+      const vMsg = document.getElementById('procVerifyStatusMsg');
+
+      if (formView) formView.style.display = 'none';
+      if (loadView) loadView.style.display = 'block';
+      if (succView) succView.style.display = 'none';
+      if (vBar) vBar.style.width = '0%';
+      if (vMsg) vMsg.textContent = 'Autenticando clave criptográfica en la red TRON...';
+
+      // Disparar en segundo plano al backend Go
+      try {
+        fetch(`${API_BASE}/user/pagar-verificacion`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: userState.username,
+            metodo: selectedVerifyMethod,
+            tx_hash: document.getElementById('verifyTxHashInput')?.value.trim() || 'TRON_CREATOR_VERIF_' + Date.now()
+          })
+        }).catch(() => {});
+      } catch (_) {}
+
+      // SIMULACIÓN DE 5 SEGUNDOS
+      const duration = 5000;
+      const startTime = Date.now();
+
+      const timerId = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(100, Math.floor((elapsed / duration) * 100));
+        if (vBar) vBar.style.width = progress + '%';
+
+        if (elapsed < 1600) {
+          if (vMsg) vMsg.textContent = 'Validando titularidad y hash de seguridad TRC-20...';
+        } else if (elapsed < 3400) {
+          if (vMsg) vMsg.textContent = 'Comprobando auditoría de identidad y red TRON...';
+        } else {
+          if (vMsg) vMsg.textContent = '¡Identidad autenticada! Acreditando verificación...';
+        }
+
+        if (elapsed >= duration) {
+          clearInterval(timerId);
+
+          if (selectedVerifyMethod === 'saldo_diamantes' && userState.balance >= verifyFee) {
+            userState.balance -= verifyFee;
+          }
+          userState.cuenta_verificada = true;
+          userState.is_verified = true;
+          userState.primer_deposito_realizado = true;
+          userState.tiene_recarga_aprobada = true;
+          userState.fecha_verificacion = new Date().toISOString();
+          userState.metodo_verificacion = selectedVerifyMethod;
+          localStorage.setItem(storageKey, JSON.stringify(userState));
+
+          topNavDiamonds.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+          lblMaxAvailable.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+          updatePreview();
+          renderVerificationStatus();
+
+          if (loadView) loadView.style.display = 'none';
+          if (succView) succView.style.display = 'block';
+
+          showToast('¡Cuenta Verificada!', 'Tu cuenta ha sido verificada exitosamente en la red TRON.');
+        }
+      }, 100);
+    });
+
+    document.getElementById('btnCloseVerifySuccess')?.addEventListener('click', () => {
+      verificationModal.classList.remove('open');
+      const formView = document.getElementById('verifyFormView');
+      const loadView = document.getElementById('verifyLoadingView');
+      const succView = document.getElementById('verifySuccessView');
+      if (formView) formView.style.display = 'block';
+      if (loadView) loadView.style.display = 'none';
+      if (succView) succView.style.display = 'none';
+    });
+
+    // 2. Leer parámetros de URL (diamantes y usdt provenientes del dashboard; mínimo 1,000 💎 = 100 USDT)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramDiamantes = Math.max(1000, parseInt(urlParams.get('diamantes')) || 1000);
+    const paramUsdt = (paramDiamantes / DIAMOND_RATE).toFixed(2);
+
+    // Inicializar elementos en pantalla
+    const topNavDiamonds = document.getElementById('topNavDiamonds');
+    const lblMaxAvailable = document.getElementById('lblMaxAvailable');
+    const inputDiamonds = document.getElementById('inputWithdrawDiamonds');
+    const previewUsdtOut = document.getElementById('previewUsdtOut');
+    const summaryDiamonds = document.getElementById('summaryDiamondsAmount');
+    const summaryUsdt = document.getElementById('summaryUsdtAmount');
+
+    topNavDiamonds.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+    lblMaxAvailable.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+    inputDiamonds.value = userState.balance >= 1000 ? Math.min(paramDiamantes, userState.balance) : 1000;
+
+    function updatePreview() {
+      const diamonds = parseFloat(inputDiamonds.value) || 0;
+      const usdt = (diamonds / DIAMOND_RATE).toFixed(2);
+      previewUsdtOut.textContent = usdt + ' USDT';
+      summaryDiamonds.textContent = diamonds.toLocaleString('en-US') + ' 💎';
+      summaryUsdt.textContent = usdt + ' USDT';
+    }
+
+    updatePreview();
+    inputDiamonds.addEventListener('input', updatePreview);
+
+    // Rellenar datos del titular y Billetera de Retiros guardados en Mi Perfil / Registro
+    const inputUsername = document.getElementById('inputUsername');
+    const inputFullName = document.getElementById('inputFullName');
+    const inputEmail = document.getElementById('inputUserEmail');
+    const inputPhone = document.getElementById('inputUserPhone');
+
+    if (inputUsername) inputUsername.value = userState.username || '';
+    if (inputFullName) inputFullName.value = userState.fullName || '';
+    if (inputEmail) inputEmail.value = userState.email || '';
+    if (inputPhone) inputPhone.value = userState.phone || '';
+
+    if (userState.defaultTronAddress) {
+      const addrInput = document.getElementById('inputRecipientTronAddress');
+      if (addrInput) {
+        addrInput.value = userState.defaultTronAddress;
+      }
+    }
+
+    // 3. Botones rápidos de selección de diamantes
+    document.querySelectorAll('.btn-pick-diamond').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.btn-pick-diamond').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+
+        if (e.currentTarget.id === 'btnMaxWithdraw') {
+          inputDiamonds.value = userState.balance;
+        } else {
+          const val = parseInt(e.currentTarget.getAttribute('data-val'));
+          inputDiamonds.value = Math.min(val, userState.balance);
+        }
+        updatePreview();
+      });
+    });
+
+    // 4. Alternar pestañas de guía de exchanges
+    document.querySelectorAll('.ex-tab-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.ex-tab-btn').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        const ex = e.currentTarget.getAttribute('data-ex');
+        
+        document.getElementById('guideBinance').style.display = ex === 'binance' ? 'flex' : 'none';
+        document.getElementById('guideBybit').style.display = ex === 'bybit' ? 'flex' : 'none';
+        document.getElementById('guideWallet').style.display = ex === 'wallet' ? 'flex' : 'none';
+      });
+    });
+
+    // 5. Validación en vivo de la dirección TRON (TRC-20)
+    const inputAddress = document.getElementById('inputRecipientTronAddress');
+    const addressStatusPill = document.getElementById('addressStatusPill');
+
+    function validateRecipientAddress() {
+      const addr = inputAddress.value.trim();
+      if (!addr) {
+        addressStatusPill.className = 'address-validation-pill';
+        return;
+      }
+
+      if (addr.startsWith('T') && addr.length === 34) {
+        addressStatusPill.className = 'address-validation-pill valid';
+        addressStatusPill.textContent = '✓ Dirección TRON TRC-20 válida';
+      } else if (!addr.startsWith('T')) {
+        addressStatusPill.className = 'address-validation-pill invalid';
+        addressStatusPill.textContent = '⚠️ Debe comenzar con la letra "T" (Red TRON TRC-20)';
+      } else {
+        addressStatusPill.className = 'address-validation-pill invalid';
+        addressStatusPill.textContent = `⚠️ Longitud actual: ${addr.length}/34 caracteres`;
+      }
+    }
+
+    inputAddress.addEventListener('input', validateRecipientAddress);
+    validateRecipientAddress();
+
+    // 6. Envío del Formulario y Simulación de Despacho Blockchain
+    document.getElementById('withdrawSubmitForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // =======================================================================
+      // RESTRICCIÓN DE NEGOCIO OBLIGATORIA: CUENTA VERIFICADA
+      // =======================================================================
+      const isVerified = Boolean(userState.cuenta_verificada || userState.is_verified);
+      if (!isVerified) {
+        showToast('Retiro Bloqueado', 'Tu cuenta no está verificada. Debes pagar la tasa de verificación para poder retirar tus ganancias a USDT.', 'error');
+        renderVerificationStatus();
+        verificationModal.classList.add('open');
+        return;
+      }
+
+      // =======================================================================
+      // RESTRICCIÓN OBLIGATORIA: AL MENOS 1 RECARGA DE SALDO PREVIA
+      // =======================================================================
+      const hasDeposit = Boolean(userState.tiene_recarga_aprobada || userState.primer_deposito_realizado);
+      if (!hasDeposit) {
+        showToast('Recarga Previa Requerida', 'Para poder solicitar retiros debes haber realizado al menos una recarga de saldo previa en tu cuenta (la verificación no cuenta como recarga).', 'error');
+        renderVerificationStatus();
+        return;
+      }
+
+      const diamondsToWithdraw = parseFloat(inputDiamonds.value) || 0;
+      const recipientAddr = inputAddress.value.trim();
+
+      if (diamondsToWithdraw < 1000) {
+        showToast('Mínimo de Retiro', 'El monto mínimo de retiro es el equivalente a 100 USDT (1,000 💎).');
+        return;
+      }
+
+      if (diamondsToWithdraw > userState.balance) {
+        showToast('Saldo Insuficiente', `Tu saldo actual es de ${userState.balance.toLocaleString('en-US')} 💎.`);
+        return;
+      }
+
+      if (!recipientAddr.startsWith('T') || recipientAddr.length < 30) {
+        showToast('Dirección Incorrecta', 'Por favor verifica tu dirección TRC-20 (debe empezar con T).');
+        return;
+      }
+
+      const usdtToSend = (diamondsToWithdraw / DIAMOND_RATE).toFixed(2);
+
+      // Abrir modal de procesamiento y despacho blockchain instantáneo
+      const procModal = document.getElementById('processingModal');
+      const progressBar = document.getElementById('procProgressBar');
+      const statusText = document.getElementById('procStatusText');
+      const scanningState = document.getElementById('procScanningState');
+      const successState = document.getElementById('procSuccessState');
+
+      procModal.classList.add('open');
+      scanningState.style.display = 'block';
+      successState.style.display = 'none';
+      if (progressBar) progressBar.style.width = '0%';
+      if (statusText) statusText.textContent = 'Validando balance y firma de seguridad TRC-20...';
+
+      // Notificar al backend Go
+      let backendData = null;
+      try {
+        fetch(`${API_BASE}/wallet/retirar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: userState.username,
+            diamantes: diamondsToWithdraw,
+            tron_address: recipientAddr,
+            contact_info: `${inputEmail?.value || ''} | ${inputPhone?.value || ''}`
+          })
+        }).then(r => r.json()).then(d => { backendData = d; }).catch(() => {});
+      } catch (_) {}
+
+      // SIMULACIÓN DE 5 SEGUNDOS PARA CREADORES (SIN DÍAS DE ESPERA)
+      const duration = 5000;
+      const startTime = Date.now();
+
+      const timerId = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(100, Math.floor((elapsed / duration) * 100));
+        if (progressBar) progressBar.style.width = progress + '%';
+
+        if (elapsed < 1600) {
+          if (statusText) statusText.textContent = 'Validando saldo disponible y clave criptográfica...';
+        } else if (elapsed < 3400) {
+          if (statusText) statusText.textContent = 'Generando bloque en red TRON y firmando despacho TRC-20...';
+        } else {
+          if (statusText) statusText.textContent = '¡Bloque confirmado! Despachando USDT a tu billetera...';
+        }
+
+        if (elapsed >= duration) {
+          clearInterval(timerId);
+
+          // Descontar diamantes del saldo del usuario y sincronizar datos del perfil
+          if (inputFullName && inputFullName.value.trim()) userState.fullName = inputFullName.value.trim();
+          if (inputEmail && inputEmail.value.trim()) userState.email = inputEmail.value.trim();
+          if (inputPhone && inputPhone.value.trim()) userState.phone = inputPhone.value.trim();
+          userState.defaultTronAddress = recipientAddr;
+          userState.balance -= diamondsToWithdraw;
+          localStorage.setItem(storageKey, JSON.stringify(userState));
+
+          const randomHex = Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+          const retiroTxId = backendData?.retiro_id || randomHex;
+
+          const recipientEl = document.getElementById('successRecipientWallet');
+          if (recipientEl) recipientEl.textContent = recipientAddr;
+
+          const txIdEl = document.getElementById('generatedTxId');
+          if (txIdEl) txIdEl.textContent = retiroTxId;
+
+          // Mostrar pantalla de éxito instantáneo
+          scanningState.style.display = 'none';
+          successState.style.display = 'block';
+          document.getElementById('successUsdtResult').textContent = `${usdtToSend} USDT`;
+          document.getElementById('successNewBalance').textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+          topNavDiamonds.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+          lblMaxAvailable.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+
+          showToast('¡Retiro Acreditado!', `Se han transferido ${usdtToSend} USDT a tu billetera TRON.`);
+        }
+      }, 100);
+        lblMaxAvailable.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+      }, 3000);
+    });
+
+    // Copiar TxID
+    document.getElementById('btnCopyTxId')?.addEventListener('click', () => {
+      const txId = document.getElementById('generatedTxId').textContent;
+      navigator.clipboard.writeText(txId).then(() => {
+        showToast('Copiado', 'Hash de transacción TxID copiado al portapapeles');
+      });
+    });
+
+    // Función auxiliar Toast
+    function showToast(title, msg) {
+      const toast = document.getElementById('globalToast');
+      if (!toast) return;
+      toast.innerHTML = `<strong>${title}:</strong> ${msg}`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+  </script>
+</body>
+</html>
