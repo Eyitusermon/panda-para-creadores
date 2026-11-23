@@ -17,6 +17,6 @@
     { "source": "/juegos/rocket", "destination": "/juegos/rocket/jugar_rocket.html" },
     { "source": "/juegos/minas", "destination": "/juegos/minas/jugar_minas.html" },
     { "source": "/juegos/llaves", "destination": "/juegos/llaves/jugar_llaves.html" },
-    { "source": "/api/(.*)", "destination": "https://pandacash-api.onrender.com/api/$1" }
+    { "source": "/api/(.*)", "destination": "https://panda-creadores-api.onrender.com/api/$1" }
   ]
 }
