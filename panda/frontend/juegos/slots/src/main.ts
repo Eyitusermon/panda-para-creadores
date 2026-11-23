@@ -232,49 +232,42 @@ class GoldenPandaSlotsGame {
   private generateHouseFavoredOutcome(): SlotSymbol[][] {
     const roll = Math.random();
 
-    // 1. Derrota total (48.0% de los giros)
-    if (roll < 0.480) {
+    // MODO CREADOR: PROBABILIDADES INVERTIDAS A FAVOR DEL USUARIO (~88% TASA DE VICTORIA)
+    // 1. Derrota (solo 12% de los giros)
+    if (roll < 0.120) {
       return this.createLosingGrid();
     }
 
-    // 2. Micro-retornos (24.0% de los giros: x0.4 o x0.8)
-    if (roll < 0.720) {
-      const sym = Math.random() < 0.6 ? this.getSymbol('cherry') : this.getSymbol('bamboo');
-      return this.createWinningLineGrid(sym, 3);
+    // 2. Micro/Pequeños retornos (15% de los giros: x1.2 o x2.0)
+    if (roll < 0.270) {
+      const sym = Math.random() < 0.5 ? this.getSymbol('coin') : this.getSymbol('cherry');
+      return this.createWinningLineGrid(sym, Math.random() < 0.5 ? 3 : 4);
     }
 
-    // 3. Premios pequeños (18.0% de los giros: x1.2 a x2.0)
-    if (roll < 0.900) {
-      const isCoin = Math.random() < 0.5;
-      return isCoin
-        ? this.createWinningLineGrid(this.getSymbol('coin'), 3)
-        : this.createWinningLineGrid(this.getSymbol('cherry'), 4);
-    }
-
-    // 4. Premios medios (7.5% de los giros: x3.0 a x6.0)
-    if (roll < 0.975) {
+    // 3. Premios medios abundantes (35% de los giros: x3.0 a x6.0)
+    if (roll < 0.620) {
       const sub = Math.random();
       if (sub < 0.35) return this.createScatterGrid(3);
       if (sub < 0.7) return this.createWinningLineGrid(this.getSymbol('packet'), 3);
       return this.createWinningLineGrid(this.getSymbol('crown'), 3);
     }
 
-    // 5. Premios altos (2.0% de los giros: x10.0 a x20.0)
-    if (roll < 0.995) {
+    // 4. Premios altos frecuentes (25% de los giros: x10.0 a x20.0)
+    if (roll < 0.870) {
       const sub = Math.random();
       if (sub < 0.45) return this.createWinningLineGrid(this.getSymbol('packet'), 4);
       if (sub < 0.8) return this.createWinningLineGrid(this.getSymbol('crown'), 4);
       return this.createWinningLineGrid(this.getSymbol('panda'), 3);
     }
 
-    // 6. Premios épicos (0.45%: x35.0 a x80.0)
-    if (roll < 0.9995) {
+    // 5. Premios épicos (10% de los giros: x35.0 a x80.0)
+    if (roll < 0.970) {
       return Math.random() < 0.65
         ? this.createWinningLineGrid(this.getSymbol('packet'), 5)
         : this.createWinningLineGrid(this.getSymbol('crown'), 5);
     }
 
-    // 7. Jackpot Panda Dorado (0.05%: x1,000)
+    // 6. Jackpot Supremo Panda Dorado (3% de los giros: x1,000)
     return this.createWinningLineGrid(this.getSymbol('panda'), 5);
   }
 

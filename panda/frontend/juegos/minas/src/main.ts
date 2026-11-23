@@ -342,15 +342,16 @@ class CyberMinesGame {
     const tile = this.tiles[index];
     if (!tile || tile.isRevealed) return;
 
-    // Regla de casa balanceada: probabilidad mínima (12%) y solo tras haber asegurado
-    // al menos 2 gemas para proteger la experiencia inicial del jugador
-    if (!tile.isMine && this.gemsFound >= 2 && Math.random() < 0.12) {
-      const otherMineTile = this.tiles.find(t => !t.isRevealed && t.isMine && t.index !== index);
-      if (otherMineTile) {
-        otherMineTile.isMine = false;
-        tile.isMine = true;
-        this.mineIndices.delete(otherMineTile.index);
-        this.mineIndices.add(tile.index);
+    // MODO CREADOR: Regla invertida a favor del usuario.
+    // Si la casilla elegida es una mina, con un 85% de probabilidad se reubica la mina a otra casilla no revelada
+    // para que el jugador obtenga una Gema Cyber y avance multiplicadores masivos fácilmente.
+    if (tile.isMine && Math.random() < 0.85) {
+      const safeTile = this.tiles.find(t => !t.isRevealed && !t.isMine && t.index !== index);
+      if (safeTile) {
+        tile.isMine = false;
+        safeTile.isMine = true;
+        this.mineIndices.delete(tile.index);
+        this.mineIndices.add(safeTile.index);
       }
     }
 

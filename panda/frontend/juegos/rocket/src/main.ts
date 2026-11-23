@@ -158,11 +158,18 @@ class PandaCrashRocketGame {
    * Probabilidad mínima de crash instantáneo en x1.00 (~2.5%).
    */
   private generateCrashPoint(): number {
-    const u = Math.random();
-    if (u < 0.025) return 1.00;
-    const raw = 0.975 / (1 - u);
-    const mult = Math.min(500.0, Math.floor(raw * 100) / 100);
-    return Math.max(1.01, mult);
+    // MODO CREADOR: Distribución invertida para vuelos altos y espectaculares en stream
+    const roll = Math.random();
+    // 5% crash temprano (entre 1.30 y 1.95)
+    if (roll < 0.05) return Math.floor((1.30 + Math.random() * 0.65) * 100) / 100;
+    // 35% vuelo medio (entre 2.00 y 4.80)
+    if (roll < 0.40) return Math.floor((2.00 + Math.random() * 2.80) * 100) / 100;
+    // 35% vuelo alto (entre 4.80 y 14.00)
+    if (roll < 0.75) return Math.floor((4.80 + Math.random() * 9.20) * 100) / 100;
+    // 20% vuelo súper alto (entre 14.00 y 45.00)
+    if (roll < 0.95) return Math.floor((14.00 + Math.random() * 31.00) * 100) / 100;
+    // 5% vuelo legendario (entre 45.00 y 500.00)
+    return Math.floor((45.00 + Math.random() * 455.00) * 100) / 100;
   }
 
   private startCountdown(): void {

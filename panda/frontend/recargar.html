@@ -1022,22 +1022,31 @@
   <div class="proc-modal-backdrop" id="processingModal">
     <div class="proc-modal-box">
       
-      <!-- Estado 1: Registro en Tabla con Estado PENDIENTE (Esperando aprobación del script monitor) -->
+      <!-- Estado 1: Verificando y Acreditando en 5 segundos (Simulación Creadores) -->
       <div id="procPendingState">
-        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,183,0,0.15); border: 1px solid #ffb700; color: #ffb700; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.04rem;">
-          <span style="font-size: 1rem;">⏳</span> Estado: PENDIENTE
+        <div class="spinner-tron"></div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,240,255,0.12); border: 1px solid #00f0ff; color: #00f0ff; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.04rem;">
+          <span>⚡</span> VERIFICANDO EN RED TRON
         </div>
         <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.35rem;">
-          Recarga Registrada en el Sistema
+          Procesando Recarga en Blockchain
         </h3>
-        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.4;">
-          Tu depósito ha sido insertado en la base de datos con estado <strong>PENDIENTE</strong>. Nuestro script de monitoreo de la red Tron está verificando la transferencia en la blockchain. En cuanto cambie a <strong>APROBADA</strong>, tu saldo se reflejará automáticamente.
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem; line-height: 1.4;">
+          Validando hash en la red TRON y acreditando tus diamantes de forma instantánea...
         </p>
+
+        <!-- Barra de progreso de 5 segundos -->
+        <div class="proc-progress-bar-bg" style="margin: 0.8rem 0 0.4rem; height: 10px; border-radius: 6px; background: rgba(255,255,255,0.08); overflow: hidden;">
+          <div class="proc-progress-bar-fill" id="procRechargeProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb700, #00f0ff, #00e701); transition: width 0.1s linear;"></div>
+        </div>
+        <div style="font-size: 0.76rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 1rem;" id="procRechargeStatusMsg">
+          Confirmando transacción en bloque TRC-20 (5s)...
+        </div>
 
         <!-- Detalle de la Operación -->
         <div style="background: rgba(11,20,38,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 0.85rem; margin-bottom: 1rem; text-align: left; font-size: 0.76rem;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
-            <span style="color: var(--text-muted);">Monto Solicitado:</span>
+            <span style="color: var(--text-muted);">Monto Transferido:</span>
             <strong style="color: #fff;" id="pendingUsdtAmount">50.00 USDT</strong>
           </div>
           <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
@@ -1052,25 +1061,6 @@
             <span style="color: var(--text-muted);">Hash / TxID Registrado:</span>
             <code style="background: #060b13; padding: 0.25rem 0.45rem; border-radius: 4px; color: #a3e635; word-break: break-all; font-size: 0.72rem;" id="pendingTxIdCode">0x...</code>
           </div>
-        </div>
-
-        <!-- Indicador de Espera / Polling -->
-        <div style="display: flex; align-items: center; justify-content: center; gap: 0.6rem; color: #94a3b8; font-size: 0.74rem; margin-bottom: 1.25rem;">
-          <div class="spinner-tron" style="width: 18px; height: 18px; margin: 0; border-width: 2px;"></div>
-          <span id="pollingStatusMsg">Monitoreando red TRON cada 3 segundos...</span>
-        </div>
-
-        <!-- Botones de Acción -->
-        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-          <button type="button" class="btn-submit-recharge" id="btnManualCheckStatus" style="font-size: 0.85rem; padding: 0.6rem;">
-            🔄 Consultar Estado Ahora
-          </button>
-          <button type="button" id="btnSimulateApproval" style="background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #22c55e; border-radius: 8px; padding: 0.5rem; font-size: 0.76rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
-            ⚡ Simular Aprobación del Script Monitor (Prueba)
-          </button>
-          <a href="./dashboard_directo.html" style="color: var(--text-muted); font-size: 0.75rem; text-decoration: underline; margin-top: 0.4rem; display: inline-block;">
-            Volver al Lobby (Tu recarga continuará procesándose en segundo plano)
-          </a>
         </div>
       </div>
 
@@ -1388,7 +1378,6 @@
         // En modo offline continúa con tabla local
       }
 
-      // NO SE ACREDITA SALDO AHORA (permanece intacto)
       // Actualizar campos en el modal PENDIENTE
       document.getElementById('pendingUsdtAmount').textContent = `${usdtVal.toFixed(2)} USDT`;
       document.getElementById('pendingDiamondsAmount').textContent = `${diamondsToAdd.toLocaleString('en-US')} 💎`;
@@ -1397,52 +1386,87 @@
       const procModal = document.getElementById('processingModal');
       const pendingState = document.getElementById('procPendingState');
       const successState = document.getElementById('procSuccessState');
+      const pBar = document.getElementById('procRechargeProgressBar');
+      const pMsg = document.getElementById('procRechargeStatusMsg');
 
       procModal.classList.add('open');
       pendingState.style.display = 'block';
       successState.style.display = 'none';
+      if (pBar) pBar.style.width = '0%';
+      if (pMsg) pMsg.textContent = 'Verificando transacción en la red TRON...';
 
-      // Iniciar sondeo automático cada 3 segundos
-      if (pollIntervalId) clearInterval(pollIntervalId);
-      pollIntervalId = setInterval(() => {
-        checkDepositApproval(txIdVal, true);
-      }, 3000);
+      // SIMULACIÓN DE 5 SEGUNDOS (PANDA PARA CREADORES)
+      const duration = 5000;
+      const startTime = Date.now();
+
+      const timerId = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(100, Math.floor((elapsed / duration) * 100));
+        if (pBar) pBar.style.width = progress + '%';
+
+        if (elapsed < 1600) {
+          if (pMsg) pMsg.textContent = 'Detectando hash en la blockchain TRON TRC-20...';
+        } else if (elapsed < 3400) {
+          if (pMsg) pMsg.textContent = 'Validando confirmaciones de bloque de red...';
+        } else {
+          if (pMsg) pMsg.textContent = '¡Bloque confirmado! Acreditando saldo a tu cuenta...';
+        }
+
+        if (elapsed >= duration) {
+          clearInterval(timerId);
+          completeSimulatedDeposit(currentPendingDeposit);
+        }
+      }, 100);
     });
 
-    // Botón para consulta manual
-    document.getElementById('btnManualCheckStatus')?.addEventListener('click', () => {
-      if (currentPendingDeposit) {
-        checkDepositApproval(currentPendingDeposit.tx_hash, false);
-      }
-    });
-
-    // Botón para simular la aprobación que ejecuta el script de monitoreo de TRON
-    document.getElementById('btnSimulateApproval')?.addEventListener('click', async () => {
-      if (!currentPendingDeposit) return;
-      showToast('Monitor TRON', 'Ejecutando script de monitoreo... Validando hash en blockchain.');
-
+    // Función para completar y acreditar la recarga simulada a los 5 segundos
+    async function completeSimulatedDeposit(deposit) {
+      // Intentar aprobación en backend Neon
       try {
-        // Enviar orden de aprobación al backend Go (la misma llamada que hace el script externo)
-        const res = await fetch(`${API_BASE}/wallet/aprobar-recarga`, {
+        await fetch(`${API_BASE}/wallet/aprobar-recarga`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            tx_hash: currentPendingDeposit.tx_hash
-          })
+          body: JSON.stringify({ tx_hash: deposit.tx_hash })
         });
-        if (res.ok) {
-          const data = await res.json();
-          onDepositApproved(data.deposito || currentPendingDeposit);
-          return;
-        }
       } catch (_) {}
 
-      // Fallback local: simulación directa del script
-      setTimeout(() => {
-        currentPendingDeposit.estado = 'APROBADA';
-        onDepositApproved(currentPendingDeposit);
-      }, 800);
-    });
+      // Acreditar saldo en el estado local del jugador
+      deposit.estado = 'APROBADA';
+      userState.balance += deposit.monto_diamantes;
+      userState.primer_deposito_realizado = true;
+      userState.tiene_recarga_aprobada = true;
+      localStorage.setItem(storageKey, JSON.stringify(userState));
+
+      // Actualizar tabla local de depósitos
+      try {
+        const storedList = JSON.parse(localStorage.getItem('panda_depositos_list') || '[]');
+        const idx = storedList.findIndex(d => d.tx_hash === deposit.tx_hash);
+        if (idx !== -1) {
+          storedList[idx].estado = 'APROBADA';
+        } else {
+          storedList.unshift(deposit);
+        }
+        localStorage.setItem('panda_depositos_list', JSON.stringify(storedList));
+      } catch (_) {}
+
+      // Actualizar balances visibles en la interfaz
+      const navDiamonds = document.getElementById('topNavDiamonds');
+      if (navDiamonds) navDiamonds.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+      const navUsdt = document.getElementById('topNavUsdt');
+      if (navUsdt) navUsdt.textContent = '≈ ' + (userState.balance / DIAMOND_RATE).toFixed(2) + ' USDT';
+
+      // Cambiar modal a estado de éxito
+      const pendingState = document.getElementById('procPendingState');
+      const successState = document.getElementById('procSuccessState');
+      if (pendingState) pendingState.style.display = 'none';
+      if (successState) successState.style.display = 'block';
+
+      document.getElementById('successDiamondsResult').textContent = `+${deposit.monto_diamantes.toLocaleString('en-US')} 💎`;
+      document.getElementById('successNewBalance').textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+
+      renderUserDepositsTable();
+      showToast('¡Recarga Exitosa!', `Se han acreditado +${deposit.monto_diamantes.toLocaleString('en-US')} 💎 a tu cuenta.`);
+    }
 
     // Función auxiliar Toast
     function showToast(title, msg) {

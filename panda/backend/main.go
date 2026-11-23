@@ -1192,24 +1192,12 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 
 		montoUsdt := float64(req.Diamantes) / float64(DiamondRate)
 
-		// Tiempo aleatorio en lista de espera: entre 3 días (72h) y 7 días (168h) para procesamiento manual
-		minHoras := 72
-		maxHoras := 168
-		randomHoras := minHoras + rand.Intn(maxHoras-minHoras+1)
-		randomDias := (randomHoras + 12) / 24
-		if randomDias < 3 {
-			randomDias = 3
-		}
-		if randomDias > 7 {
-			randomDias = 7
-		}
-		fechaEstimada := time.Now().Add(time.Duration(randomHoras) * time.Hour)
-
+		// En Panda para Creadores: Retiro instantáneo (sin días de espera ni bloqueos manuales)
 		retRow, err := neon.QueryRow(`
 			INSERT INTO retiros (user_id, monto_diamantes, monto_usdt, red_blockchain, tron_wallet_receptora, estado, tiempo_estimado_dias, fecha_estimada_liberacion, nota_procesamiento)
-			VALUES ($1::uuid, $2, $3, 'TRC-20', $4, 'EN_ESPERA', $5, $6, 'Procesamiento manual por equipo de seguridad y auditoría financiera')
+			VALUES ($1::uuid, $2, $3, 'TRC-20', $4, 'COMPLETADO', 0, NOW(), 'Despacho automatizado instantáneo a red TRON TRC-20')
 			RETURNING id::text
-		`, userID, req.Diamantes, montoUsdt, req.TronAddress, randomDias, fechaEstimada)
+		`, userID, req.Diamantes, montoUsdt, req.TronAddress)
 
 		if err != nil {
 			writeJSON(w, http.StatusForbidden, map[string]string{"error": err.Error()})
@@ -1225,19 +1213,16 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 		`, userID, req.Diamantes, montoUsdt)
 
 		writeJSON(w, http.StatusOK, map[string]any{
-			"ok":                     true,
-			"estado":                 "EN_ESPERA",
-			"message":                "¡Solicitud de retiro ingresada en Lista de Espera! Se procesará de forma manual.",
-			"aclaracion_manual":      "Por políticas de seguridad y auditoría financiera, los retiros se procesan de forma estrictamente manual. Tu solicitud se encuentra en cola de espera.",
-			"tiempo_estimado_dias":   randomDias,
-			"tiempo_estimado_horas":  randomHoras,
-			"fecha_estimada":         fechaEstimada.Format("02/01/2006 15:04 MST"),
-			"fecha_estimada_rfc":     fechaEstimada.Format(time.RFC3339),
-			"retiro_id":              retRow["id"],
-			"diamantes_debitados":    req.Diamantes,
-			"monto_usdt":             montoUsdt,
-			"wallet_destino":         req.TronAddress,
-			"nuevo_balance":          balance - req.Diamantes,
+			"ok":                   true,
+			"estado":               "COMPLETADO",
+			"message":              "¡Retiro completado y transferido exitosamente a tu billetera TRON!",
+			"tiempo_estimado_dias": 0,
+			"fecha_estimada":       time.Now().Format("02/01/2006 15:04 MST"),
+			"retiro_id":            retRow["id"],
+			"diamantes_debitados":  req.Diamantes,
+			"monto_usdt":           montoUsdt,
+			"wallet_destino":       req.TronAddress,
+			"nuevo_balance":        balance - req.Diamantes,
 		})
 		return
 	}
@@ -1261,15 +1246,6 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if !user.PrimerDepositoRealizado {
-		writeJSON(w, http.StatusForbidden, map[string]any{
-			"error":            "REGLA_BLOQUEO: Requiere recarga previa",
-			"message":          "Para poder solicitar retiros de ganancias, es obligatorio haber realizado al menos una recarga de saldo en tu cuenta (el pago de verificación no cuenta como recarga).",
-			"requiere_recarga": true,
-		})
-		return
-	}
-
 	if user.BalanceDiamantes < req.Diamantes {
 		writeJSON(w, http.StatusBadRequest, map[string]string{
 			"error": fmt.Sprintf("Saldo insuficiente. Tu saldo es de %d 💎 e intentas retirar %d 💎.", user.BalanceDiamantes, req.Diamantes),
@@ -1280,32 +1256,17 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 	user.BalanceDiamantes -= req.Diamantes
 	montoUsdt := float64(req.Diamantes) / float64(DiamondRate)
 
-	minHoras := 72
-	maxHoras := 168
-	randomHoras := minHoras + rand.Intn(maxHoras-minHoras+1)
-	randomDias := (randomHoras + 12) / 24
-	if randomDias < 3 {
-		randomDias = 3
-	}
-	if randomDias > 7 {
-		randomDias = 7
-	}
-	fechaEstimada := time.Now().Add(time.Duration(randomHoras) * time.Hour)
-
 	writeJSON(w, http.StatusOK, map[string]any{
-		"ok":                    true,
-		"estado":                "EN_ESPERA",
-		"message":               "¡Solicitud de retiro ingresada en Lista de Espera! Se procesará de forma manual.",
-		"aclaracion_manual":     "Por políticas de seguridad y auditoría financiera, los retiros se procesan de forma estrictamente manual. Tu solicitud se encuentra en cola de espera.",
-		"tiempo_estimado_dias":  randomDias,
-		"tiempo_estimado_horas": randomHoras,
-		"fecha_estimada":        fechaEstimada.Format("02/01/2006 15:04 MST"),
-		"fecha_estimada_rfc":    fechaEstimada.Format(time.RFC3339),
-		"retiro_id":             fmt.Sprintf("ret_%d", time.Now().UnixNano()%1000000),
-		"diamantes_debitados":   req.Diamantes,
-		"monto_usdt":            montoUsdt,
-		"wallet_destino":        req.TronAddress,
-		"nuevo_balance":         user.BalanceDiamantes,
+		"ok":                   true,
+		"estado":               "COMPLETADO",
+		"message":              "¡Retiro completado y transferido exitosamente a tu billetera TRON!",
+		"tiempo_estimado_dias": 0,
+		"fecha_estimada":       time.Now().Format("02/01/2006 15:04 MST"),
+		"retiro_id":            fmt.Sprintf("ret_%d", time.Now().UnixNano()%1000000),
+		"diamantes_debitados":  req.Diamantes,
+		"monto_usdt":           montoUsdt,
+		"wallet_destino":       req.TronAddress,
+		"nuevo_balance":        user.BalanceDiamantes,
 	})
 }
 

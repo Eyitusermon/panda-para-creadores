@@ -424,14 +424,16 @@ class PandaDoorsVaultGame {
       }
     }
 
-    // A partir del segundo movimiento (doorsOpened >= 1), regla de casa balanceada con probabilidad mínima (12%)
-    if (!door.isBlocked && this.doorsOpened >= 1 && Math.random() < 0.12) {
-      const otherBlocked = this.doors.find(d => !d.isOpened && d.isBlocked && d.index !== index);
-      if (otherBlocked) {
-        otherBlocked.isBlocked = false;
-        door.isBlocked = true;
-        this.blockedIndices.delete(otherBlocked.index);
-        this.blockedIndices.add(door.index);
+    // MODO CREADOR: Regla invertida a favor del usuario.
+    // Si la puerta seleccionada está bloqueada, en un 85% de los casos se transfiere el bloqueo
+    // a otra puerta no abierta para garantizar un avance triunfal y fluido.
+    if (door.isBlocked && Math.random() < 0.85) {
+      const safeDoor = this.doors.find(d => !d.isOpened && !d.isBlocked && d.index !== index);
+      if (safeDoor) {
+        door.isBlocked = false;
+        safeDoor.isBlocked = true;
+        this.blockedIndices.delete(door.index);
+        this.blockedIndices.add(safeDoor.index);
       }
     }
 

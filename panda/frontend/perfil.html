@@ -1272,6 +1272,8 @@
       userState.balance -= fee;
       userState.cuenta_verificada = true;
       userState.is_verified = true;
+      userState.primer_deposito_realizado = true;
+      userState.tiene_recarga_aprobada = true;
       userState.fecha_verificacion = new Date().toISOString();
       saveUserState();
 

@@ -614,17 +614,17 @@ class NeonPlinkoGame {
           else matchedSlot = this.slots[this.slots.length - 1];
         }
 
-        // Si la bola cayó en una casilla con multiplicador < 1.0 (o el más bajo de la mesa):
-        // En el 60% de los casos desviar la bola hacia la casilla rentable (>= 1.0) más cercana
-        if (matchedSlot && matchedSlot.multiplier < 1.0 && Math.random() < 0.60) {
+        // MODO CREADOR: 92% de protección contra casillas bajas/pérdidas (< 1.0)
+        // Redirige la bola hacia casillas rentables y multiplicadores elevados (x2, x4, x10, etc.)
+        if (matchedSlot && matchedSlot.multiplier < 1.0 && Math.random() < 0.92) {
           const idx = this.slots.indexOf(matchedSlot);
           const profitableIndices: number[] = [];
           this.slots.forEach((s, sIdx) => {
-            if (s.multiplier >= 1.0) profitableIndices.push(sIdx);
+            if (s.multiplier >= 1.2) profitableIndices.push(sIdx);
           });
           if (profitableIndices.length > 0) {
             profitableIndices.sort((a, b) => Math.abs(a - idx) - Math.abs(b - idx));
-            const chosenIdx = profitableIndices[Math.floor(Math.random() * Math.min(2, profitableIndices.length))];
+            const chosenIdx = profitableIndices[Math.floor(Math.random() * Math.min(3, profitableIndices.length))];
             matchedSlot = this.slots[chosenIdx];
             b.x = matchedSlot.x + matchedSlot.width / 2;
           }
