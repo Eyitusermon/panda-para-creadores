@@ -2091,6 +2091,25 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	// Ruta raíz para monitores de actividad (UptimeRobot, ping, etc.)
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			http.NotFound(w, r)
+			return
+		}
+		status := "online_local"
+		if neon != nil {
+			status = "online_neon_api"
+		}
+		writeJSON(w, http.StatusOK, map[string]any{
+			"status":   "online",
+			"database": status,
+			"service":  "Panda Cash iGaming API (Go + Neon)",
+			"health":   "/api/v1/health",
+			"time":     time.Now().Format(time.RFC3339),
+		})
+	})
+
 	mux.HandleFunc("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
 		status := "online_local"
 		if neon != nil {
