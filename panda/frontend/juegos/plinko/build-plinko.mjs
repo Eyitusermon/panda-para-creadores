@@ -87,8 +87,8 @@ ${cssSource}
           <div class="wallet-usdt" id="topBalanceUsdt">≈ 1,500.00 USDT</div>
         </div>
       </div>
-      <a href="../../recargar.html" class="btn-top-action" style="border-color: var(--accent-gold); color: var(--accent-gold);">+ Recargar 💎</a>
-      <a href="../../dashboard_directo.html" class="btn-top-action">&larr; Volver al Lobby</a>
+      <a href="../../recargar.html" class="btn-top-action" style="border-color: var(--accent-gold); color: var(--accent-gold);"><span class="desktop-only">+ Recargar 💎</span><span class="mobile-only">+💎</span></a>
+      <a href="../../dashboard_directo.html" class="btn-top-action"><span class="desktop-only">&larr; Volver al Lobby</span><span class="mobile-only">&larr; Salir</span></a>
     </div>
   </header>
 

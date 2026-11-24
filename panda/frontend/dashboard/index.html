@@ -963,16 +963,36 @@
 
     .modal-close-btn {
       position: absolute;
-      top: 15px;
-      right: 15px;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.5rem;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+      background: rgba(18, 28, 48, 0.88);
+      border: 1.5px solid rgba(255, 183, 0, 0.7);
+      border-radius: 50%;
+      color: #ffb700 !important;
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      z-index: 100;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 183, 0, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    .modal-close-btn:hover { color: #fff; }
+    .modal-close-btn:hover,
+    .modal-close-btn:active {
+      background: rgba(255, 183, 0, 0.25);
+      border-color: #ffb700;
+      color: #ffffff !important;
+      transform: scale(1.08);
+      box-shadow: 0 4px 20px rgba(255, 183, 0, 0.45);
+    }
 
     .modal-field {
       display: flex;
@@ -1375,8 +1395,11 @@
         left: auto !important;
       }
       #navSubmenuDropdown {
-        left: 0 !important;
-        right: auto !important;
+        left: auto !important;
+        right: 0 !important;
+        min-width: 220px !important;
+        max-width: calc(100vw - 20px) !important;
+        box-sizing: border-box !important;
       }
       .nav-tabs {
         order: 3;
@@ -3734,18 +3757,17 @@
     // Auto-ajuste de menú desplegable para que NUNCA se desborde fuera de la pantalla en móviles
     function clampDropdownToScreen(menu) {
       if (!menu) return;
+      menu.style.marginLeft = '';
       menu.style.transform = '';
       requestAnimationFrame(() => {
         const rect = menu.getBoundingClientRect();
-        const pad = 8; // Margen de seguridad de 8px de la pantalla
-        let shiftX = 0;
-        if (rect.left < pad) {
-          shiftX = Math.round(pad - rect.left);
-        } else if (rect.right > window.innerWidth - pad) {
-          shiftX = Math.round((window.innerWidth - pad) - rect.right);
-        }
-        if (shiftX !== 0) {
-          menu.style.transform = `translateX(${shiftX}px)`;
+        const pad = 10; // Margen de seguridad de 10px
+        if (rect.right > window.innerWidth - pad) {
+          const shift = Math.round(rect.right - (window.innerWidth - pad));
+          menu.style.marginLeft = `-${shift}px`;
+        } else if (rect.left < pad) {
+          const shift = Math.round(pad - rect.left);
+          menu.style.marginLeft = `${shift}px`;
         }
       });
     }
