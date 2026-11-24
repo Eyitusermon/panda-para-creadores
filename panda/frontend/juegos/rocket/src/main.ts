@@ -357,6 +357,7 @@ class PandaCrashRocketGame {
         subEl.style.display = 'block';
       } else if (this.hasActiveBet && this.hasCashedOut) {
         btn.disabled = true;
+        btn.classList.add('btn-cashed-out');
         titleEl.textContent = '✅ RETIRADO';
         subEl.textContent = `(+${this.cashoutPayout.toLocaleString('en-US')} 💎)`;
         subEl.style.display = 'block';
@@ -368,9 +369,17 @@ class PandaCrashRocketGame {
       }
     } else if (this.state === 'CRASHED') {
       btn.disabled = true;
-      titleEl.textContent = `💥 ¡EXPLOTÓ EN x${this.targetCrashMultiplier.toFixed(2)}!`;
-      subEl.textContent = '';
-      subEl.style.display = 'none';
+      if (this.hasActiveBet && this.hasCashedOut) {
+        btn.classList.add('btn-cashed-out');
+        titleEl.textContent = '✅ RETIRO EXITOSO';
+        subEl.textContent = `+${this.cashoutPayout.toLocaleString('en-US')} 💎 (x${this.cashoutMultiplier.toFixed(2)})`;
+        subEl.style.display = 'block';
+      } else {
+        btn.classList.add('btn-crashed');
+        titleEl.textContent = `💥 ¡EXPLOTÓ EN x${this.targetCrashMultiplier.toFixed(2)}!`;
+        subEl.textContent = this.hasActiveBet ? `Perdiste ${this.currentBetAmount} 💎` : 'Ronda terminada';
+        subEl.style.display = 'block';
+      }
     }
   }
 

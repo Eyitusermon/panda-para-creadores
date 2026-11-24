@@ -895,24 +895,229 @@ body {
   font-size: 0.7rem;
 }
 
-/* RESPONSIVE MÓVIL */
+/* RESPONSIVE MÓVIL Y TABLET */
+.mobile-only {
+  display: none !important;
+}
+.desktop-only {
+  display: inline !important;
+}
+
 @media (max-width: 980px) {
   html, body {
-    height: auto;
-    max-height: none;
-    overflow-y: auto;
+    height: auto !important;
+    min-height: 100vh;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
+
+  .mobile-only {
+    display: inline !important;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+
   .doors-layout {
-    height: auto;
-    max-height: none;
-    grid-template-columns: 1fr;
-    overflow: visible;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0.5rem 0.5rem 2rem !important;
+    gap: 0.75rem !important;
+    max-width: 100% !important;
+  }
+
+  /* ORDEN CASINO EN MÓVIL: 1) CÁMARA DE BÓVEDA, 2) CONTROLES, 3) HISTORIAL/TABLA */
+  .board-card {
+    order: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 330px !important;
+    overflow: visible !important;
+    padding: 0.6rem 0.5rem !important;
+  }
+
+  .panel-card {
+    order: 2 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0.65rem 0.65rem !important;
+  }
+
+  .controls-body {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  .side-column {
+    order: 3 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    gap: 0.75rem !important;
+  }
+
+  .info-card,
+  .history-card {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .ladder-list {
+    max-height: 160px;
+  }
+
+  .history-list {
+    max-height: 180px;
+  }
+
+  /* CÁMARA Y PUERTAS RESPONSIVAS */
+  .vault-viewport {
+    min-height: 230px !important;
+    height: auto !important;
+    padding: 0.75rem 0.25rem !important;
+    overflow: visible !important;
+  }
+
+  .doors-grid {
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 2px !important;
+  }
+
+  .door-item {
+    width: clamp(56px, 17vw, 78px) !important;
+    height: clamp(88px, 26vw, 126px) !important;
+  }
+
+  .door-frame {
+    padding: 5px 3px !important;
+  }
+
+  .door-top-badge {
+    font-size: 0.55rem !important;
+    padding: 1px 0 !important;
+  }
+
+  .lock-wheel {
+    width: clamp(28px, 8vw, 36px) !important;
+    height: clamp(28px, 8vw, 36px) !important;
+    font-size: 0.85rem !important;
+  }
+
+  .door-handle {
+    width: 16px !important;
+    height: 4px !important;
+  }
+
+  .door-interior {
+    padding: 4px !important;
+    gap: 3px !important;
+  }
+
+  .vault-treasure-icon,
+  .vault-blocked-icon {
+    font-size: 1.4rem !important;
+  }
+
+  .vault-payout-label {
+    font-size: 0.58rem !important;
+  }
+
+  .vault-blocked-label {
+    font-size: 0.55rem !important;
+  }
+
+  .doors-ticker-bar {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 0.2rem !important;
+    padding: 0.4rem 0.5rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 0.25rem 0.5rem !important;
+    gap: 0.35rem !important;
+    height: auto !important;
+    min-height: 44px !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  .topbar-left {
+    gap: 0.4rem !important;
+  }
+
+  .brand-logo {
+    font-size: 0.95rem !important;
+  }
+
+  .game-tag-pill {
+    display: none !important;
+  }
+
+  .topbar-right {
+    gap: 0.3rem !important;
+  }
+
+  #topUsernameLabel {
+    display: none !important;
+  }
+
+  .wallet-usdt {
+    display: none !important;
+  }
+
+  .wallet-box {
+    padding: 0.2rem 0.35rem !important;
+    gap: 0.25rem !important;
+  }
+
+  .wallet-diamonds {
+    font-size: 0.78rem !important;
+  }
+
+  .btn-sound-toggle {
+    padding: 0.25rem 0.35rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .btn-top-action {
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.68rem !important;
+  }
+
+  .vault-header-bar {
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .stat-pill {
+    font-size: 0.68rem !important;
+    gap: 0.2rem !important;
+  }
+
+  .btn-doors-main {
+    padding: 0.75rem 0.75rem !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .door-item {
+    width: clamp(50px, 16vw, 68px) !important;
+    height: clamp(80px, 25vw, 110px) !important;
   }
   .doors-grid {
-    gap: 8px;
-  }
-  .door-item {
-    width: 82px;
-    height: 135px;
+    gap: 5px !important;
   }
 }

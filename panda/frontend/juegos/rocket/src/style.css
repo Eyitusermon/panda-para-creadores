@@ -761,3 +761,49 @@ body {
     max-height: 200px;
   }
 }
+
+/* ALTO CONTRASTE TRAS CASHOUT EXITOSO (BRILLANTE, LEGIBLE Y VICTORIOSO) */
+.btn-rocket-main.btn-cashed-out {
+  background: linear-gradient(135deg, #00e701 0%, #009900 100%) !important;
+  color: #031403 !important;
+  opacity: 1 !important;
+  border: 2px solid #00ff66 !important;
+  box-shadow: 0 0 25px rgba(0, 231, 1, 0.65) !important;
+  cursor: default !important;
+}
+
+.btn-rocket-main.btn-cashed-out #btnRocketMainTitle {
+  color: #031403 !important;
+  font-weight: 900 !important;
+  font-size: 1.12rem !important;
+  letter-spacing: 0.05em !important;
+  text-shadow: none !important;
+}
+
+.btn-rocket-main.btn-cashed-out #btnRocketSubTitle {
+  color: #052a05 !important;
+  font-weight: 900 !important;
+  font-size: 0.96rem !important;
+  font-family: 'Courier New', monospace !important;
+  text-shadow: none !important;
+}
+
+/* ALTO CONTRASTE TRAS CRASH */
+.btn-rocket-main.btn-crashed {
+  background: linear-gradient(135deg, #3d0815 0%, #1a0409 100%) !important;
+  color: #ff3366 !important;
+  opacity: 1 !important;
+  border: 1px solid rgba(255, 51, 102, 0.5) !important;
+  box-shadow: 0 0 15px rgba(255, 51, 102, 0.25) !important;
+  cursor: not-allowed !important;
+}
+
+.btn-rocket-main.btn-crashed #btnRocketMainTitle {
+  color: #ff3366 !important;
+  font-weight: 900 !important;
+}
+
+.btn-rocket-main.btn-crashed #btnRocketSubTitle {
+  color: #ff88a3 !important;
+  font-weight: 800 !important;
+}
