@@ -1443,7 +1443,13 @@
             if (typeof data.tiene_recarga_aprobada !== 'undefined') {
               userState.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
             }
+            if (data.email && !userState.email) userState.email = data.email;
+            if (data.phone && !userState.phone) userState.phone = data.phone;
+            if (data.full_name && !userState.fullName) userState.fullName = data.full_name;
             localStorage.setItem(storageKey, JSON.stringify(userState));
+            if (typeof populateProfileFields === 'function') {
+              populateProfileFields();
+            }
             const topNavEl = document.getElementById('topNavDiamonds');
             if (topNavEl) topNavEl.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
             const availEl = document.getElementById('availableDiamondsDisplay');
@@ -1713,24 +1719,6 @@
     updatePreview();
     inputDiamonds.addEventListener('input', updatePreview);
 
-    // Rellenar datos del titular y Billetera de Retiros guardados en Mi Perfil / Registro
-    const inputUsername = document.getElementById('inputUsername');
-    const inputFullName = document.getElementById('inputFullName');
-    const inputEmail = document.getElementById('inputUserEmail');
-    const inputPhone = document.getElementById('inputUserPhone');
-
-    if (inputUsername) inputUsername.value = userState.username || '';
-    if (inputFullName) inputFullName.value = userState.fullName || '';
-    if (inputEmail) inputEmail.value = userState.email || '';
-    if (inputPhone) inputPhone.value = userState.phone || '';
-
-    if (userState.defaultTronAddress) {
-      const addrInput = document.getElementById('inputRecipientTronAddress');
-      if (addrInput) {
-        addrInput.value = userState.defaultTronAddress;
-      }
-    }
-
     // 3. Botones rápidos de selección de diamantes
     document.querySelectorAll('.btn-pick-diamond').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -1765,15 +1753,25 @@
     const addressStatusPill = document.getElementById('addressStatusPill');
 
     function validateRecipientAddress() {
+      if (!inputAddress || !addressStatusPill) return;
       const addr = inputAddress.value.trim();
       if (!addr) {
         addressStatusPill.className = 'address-validation-pill';
+        addressStatusPill.textContent = '';
         return;
       }
 
+      const isProfileWallet = Boolean(
+        (userState.defaultTronAddress && addr === userState.defaultTronAddress) ||
+        (userState.tronAddress && addr === userState.tronAddress) ||
+        (userState.billetera_usdt && addr === userState.billetera_usdt)
+      );
+
       if (addr.startsWith('T') && addr.length === 34) {
         addressStatusPill.className = 'address-validation-pill valid';
-        addressStatusPill.textContent = '✓ Dirección TRON TRC-20 válida';
+        addressStatusPill.textContent = isProfileWallet
+          ? '✓ Dirección TRON TRC-20 cargada desde Mi Perfil'
+          : '✓ Dirección TRON TRC-20 válida';
       } else if (!addr.startsWith('T')) {
         addressStatusPill.className = 'address-validation-pill invalid';
         addressStatusPill.textContent = '⚠️ Debe comenzar con la letra "T" (Red TRON TRC-20)';
@@ -1783,8 +1781,99 @@
       }
     }
 
-    inputAddress.addEventListener('input', validateRecipientAddress);
-    validateRecipientAddress();
+    inputAddress?.addEventListener('input', validateRecipientAddress);
+
+    // =========================================================================
+    // AUTORRELLENO AUTOMÁTICO DESDE 'MI PERFIL'
+    // =========================================================================
+    function populateProfileFields() {
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          userState = { ...userState, ...parsed };
+        }
+      } catch (_) {}
+
+      const inputUsername = document.getElementById('inputUsername');
+      const inputFullName = document.getElementById('inputFullName');
+      const inputEmail = document.getElementById('inputUserEmail');
+      const inputPhone = document.getElementById('inputUserPhone');
+      const inputAddr = document.getElementById('inputRecipientTronAddress');
+
+      // 1. Alias / Usuario
+      if (inputUsername && userState.username) {
+        inputUsername.value = userState.username;
+      }
+
+      // 2. Nombre y Apellido completo guardado en Mi Perfil
+      const resolvedName = userState.fullName || userState.full_name || userState.nombre || '';
+      if (inputFullName && resolvedName) {
+        inputFullName.value = resolvedName;
+      }
+
+      // 3. Correo Electrónico Registrado
+      const resolvedEmail = userState.email || userState.correo || (userState.username ? `${userState.username.toLowerCase()}@pandabet.com` : '');
+      if (inputEmail && resolvedEmail) {
+        inputEmail.value = resolvedEmail;
+      }
+
+      // 4. Teléfono móvil guardado
+      const resolvedPhone = userState.phone || userState.telefono || '';
+      if (inputPhone && resolvedPhone) {
+        inputPhone.value = resolvedPhone;
+      }
+
+      // 5. Billetera de Retiros (Red TRC-20) guardada en Mi Perfil
+      const resolvedAddress = userState.defaultTronAddress || userState.tronAddress || userState.billetera_usdt || userState.walletAddress || userState.wallet_address || '';
+      if (inputAddr && resolvedAddress) {
+        inputAddr.value = resolvedAddress;
+        validateRecipientAddress();
+      }
+    }
+
+    // Ejecutar inmediatamente al cargar la página
+    populateProfileFields();
+
+    // Sincronizar en tiempo real si el usuario regresa de 'Mi Perfil' o cambia de pestaña
+    window.addEventListener('pageshow', populateProfileFields);
+    window.addEventListener('focus', populateProfileFields);
+    window.addEventListener('storage', (e) => {
+      if (e.key === storageKey) populateProfileFields();
+    });
+
+    // Guardar cambios en Mi Perfil en tiempo real si el usuario los edita en este formulario
+    document.getElementById('inputFullName')?.addEventListener('change', (e) => {
+      const val = e.target.value.trim();
+      if (val) {
+        userState.fullName = val;
+        localStorage.setItem(storageKey, JSON.stringify(userState));
+      }
+    });
+
+    document.getElementById('inputUserEmail')?.addEventListener('change', (e) => {
+      const val = e.target.value.trim();
+      if (val) {
+        userState.email = val;
+        localStorage.setItem(storageKey, JSON.stringify(userState));
+      }
+    });
+
+    document.getElementById('inputUserPhone')?.addEventListener('change', (e) => {
+      const val = e.target.value.trim();
+      if (val) {
+        userState.phone = val;
+        localStorage.setItem(storageKey, JSON.stringify(userState));
+      }
+    });
+
+    document.getElementById('inputRecipientTronAddress')?.addEventListener('change', (e) => {
+      const val = e.target.value.trim();
+      if (val && val.startsWith('T') && val.length === 34) {
+        userState.defaultTronAddress = val;
+        localStorage.setItem(storageKey, JSON.stringify(userState));
+      }
+    });
 
     // 6. Envío del Formulario y Simulación de Despacho Blockchain
     document.getElementById('withdrawSubmitForm')?.addEventListener('submit', async (e) => {
