@@ -4903,6 +4903,7 @@
       }
       drawRouletteWheel(currentWheelAngle);
       rouletteModal?.classList.add('open');
+      try { history.pushState({ modalOpen: 'rouletteModal' }, ''); } catch (_) {}
     });
 
     btnSpinRouletteNow?.addEventListener('click', () => {
@@ -4966,11 +4967,19 @@
       requestAnimationFrame(animateWheel);
     });
 
-    document.getElementById('btnCloseRoulette')?.addEventListener('click', () => {
+    // Protección de navegación móvil (In-App Browser de WhatsApp / Android back gesture):
+    // Cierra modales abiertos al usar el botón o gesto atrás en vez de salir de la web
+    window.addEventListener('popstate', () => {
+      document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+    });
+
+    document.getElementById('btnCloseRoulette')?.addEventListener('click', (e) => {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
       if (!isSpinningRoulette) rouletteModal?.classList.remove('open');
     });
 
-    document.getElementById('btnRouletteAcceptOk')?.addEventListener('click', () => {
+    document.getElementById('btnRouletteAcceptOk')?.addEventListener('click', (e) => {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
       rouletteModal?.classList.remove('open');
     });
 
