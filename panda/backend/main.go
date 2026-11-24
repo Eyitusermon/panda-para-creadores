@@ -2091,12 +2091,8 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	// Ruta raíz para monitores de actividad (UptimeRobot, ping, etc.)
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path != "/" {
-			http.NotFound(w, r)
-			return
-		}
+	// Ruta raíz y endpoints de monitoreo de actividad (UptimeRobot, health checks, cron, etc.)
+	healthResponse := func(w http.ResponseWriter, r *http.Request) {
 		status := "online_local"
 		if neon != nil {
 			status = "online_neon_api"
@@ -2104,24 +2100,26 @@ func main() {
 		writeJSON(w, http.StatusOK, map[string]any{
 			"status":   "online",
 			"database": status,
-			"service":  "Panda Cash iGaming API (Go + Neon)",
+			"service":  "Panda Creadores iGaming API (Go + Neon)",
 			"health":   "/api/v1/health",
 			"time":     time.Now().Format(time.RFC3339),
 		})
+	}
+
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		cleanPath := strings.TrimRight(r.URL.Path, "/")
+		if cleanPath == "" || cleanPath == "/health" || cleanPath == "/healthz" || cleanPath == "/ping" || cleanPath == "/api/health" {
+			healthResponse(w, r)
+			return
+		}
+		http.NotFound(w, r)
 	})
 
-	mux.HandleFunc("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
-		status := "online_local"
-		if neon != nil {
-			status = "online_neon_api"
-		}
-		writeJSON(w, http.StatusOK, map[string]any{
-			"status":   status,
-			"service":  "Panda Cash iGaming API (Go + Neon Serverless HTTP SQL API)",
-			"database": status,
-			"time":     time.Now().Format(time.RFC3339),
-		})
-	})
+	mux.HandleFunc("/health", healthResponse)
+	mux.HandleFunc("/healthz", healthResponse)
+	mux.HandleFunc("/ping", healthResponse)
+	mux.HandleFunc("/api/health", healthResponse)
+	mux.HandleFunc("/api/v1/health", healthResponse)
 
 	mux.HandleFunc("/api/v1/auth/register", handleRegister)
 	mux.HandleFunc("/api/v1/auth/login", handleLogin)
