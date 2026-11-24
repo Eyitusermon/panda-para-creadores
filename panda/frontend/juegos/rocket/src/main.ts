@@ -85,6 +85,12 @@ class PandaCrashRocketGame {
     this.initStars();
     this.bindEvents();
     this.updateWalletUI();
+    try {
+      (window as any).pandaFetchAndSyncProfile?.(this.userState, (updated: any) => {
+        this.userState = { ...this.userState, ...updated };
+        this.updateWalletUI();
+      });
+    } catch (_) {}
 
     // Sincronización de saldo en tiempo real entre pestañas
     window.addEventListener('storage', (e) => {
@@ -122,6 +128,9 @@ class PandaCrashRocketGame {
 
   private saveSession(): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.userState));
+    try {
+      (window as any).pandaSyncBalanceToBackend?.(this.userState);
+    } catch (_) {}
     this.updateWalletUI();
   }
 

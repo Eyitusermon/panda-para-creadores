@@ -96,6 +96,12 @@ class GoldenPandaSlotsGame {
     this.initGrid();
     this.bindUIEvents();
     this.updateWalletUI();
+    try {
+      (window as any).pandaFetchAndSyncProfile?.(this.userState, (updated: any) => {
+        this.userState = { ...this.userState, ...updated };
+        this.updateWalletUI();
+      });
+    } catch (_) {}
     this.renderLoop();
 
     // Sincronización entre pestañas en tiempo real
@@ -133,6 +139,9 @@ class GoldenPandaSlotsGame {
 
   private saveSession(): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.userState));
+    try {
+      (window as any).pandaSyncBalanceToBackend?.(this.userState);
+    } catch (_) {}
     this.updateWalletUI();
   }
 

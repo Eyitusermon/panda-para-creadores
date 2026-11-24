@@ -1289,6 +1289,20 @@
     });
 
     renderProfileUI();
+
+    async function syncBackendProfile() {
+      if (!userState || !userState.username || userState.isLoggedIn === false) return;
+      try {
+        if (typeof window.pandaFetchAndSyncProfile === 'function') {
+          await window.pandaFetchAndSyncProfile(userState, () => {
+            renderProfileUI();
+          });
+        }
+      } catch (_) {}
+    }
+    syncBackendProfile();
+    window.addEventListener('focus', () => syncBackendProfile());
+    window.addEventListener('pageshow', () => syncBackendProfile());
   </script>
 </body>
 </html>

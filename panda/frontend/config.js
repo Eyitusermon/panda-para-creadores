@@ -41,6 +41,202 @@
   window.API_BASE = apiBase;
 
   // ===========================================================================
+  // MOTOR CENTRALIZADO DE SINCRONIZACIÓN DE SALDO CON NEON (BIDIRECCIONAL)
+  // ===========================================================================
+  const SESSION_KEY = 'panda_user_session';
+  const DIRTY_KEY = 'panda_balance_dirty';
+  const rawSetItem = Storage.prototype.setItem;
+  const rawRemoveItem = Storage.prototype.removeItem;
+  window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+
+  function readSessionSafe() {
+    try {
+      return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+    } catch (_) {
+      return null;
+    }
+  }
+
+  let lastTracked = (() => {
+    const s = readSessionSafe();
+    return s && s.username
+      ? { username: String(s.username).toLowerCase(), balance: Number(s.balance || 0), bonusBalance: Number(s.bonusBalance || 0), xp: Number(s.xp || 0) }
+      : null;
+  })();
+
+  let inFlightSync = null;
+  let inFlightSig = null;
+
+  window.pandaSyncBalanceToBackend = async function (stateObj) {
+    const s = stateObj || readSessionSafe();
+    if (!s || !s.username || s.isLoggedIn === false) return null;
+
+    const cleanUser = String(s.username).trim();
+    if (!cleanUser) return null;
+
+    const payload = {
+      username: cleanUser,
+      balance_diamantes: Math.max(0, Math.round(Number(s.balance) || 0)),
+      balance_bono_diamantes: Math.max(0, Math.round(Number(s.bonusBalance) || 0)),
+      vip_xp: Math.max(0, Math.round(Number(s.xp) || 0)),
+      vip_level: s.vipLevel || 'Panda Bronce',
+      email: s.email || '',
+      phone: s.phone || ''
+    };
+
+    const sig = `${cleanUser.toLowerCase()}|${payload.balance_diamantes}|${payload.balance_bono_diamantes}|${payload.vip_xp}|${payload.vip_level}`;
+    if (inFlightSync && inFlightSig === sig) {
+      return await inFlightSync;
+    }
+
+    const syncTs = Date.now();
+    try {
+      rawSetItem.call(localStorage, DIRTY_KEY, JSON.stringify({
+        username: cleanUser,
+        balance: payload.balance_diamantes,
+        bonusBalance: payload.balance_bono_diamantes,
+        xp: payload.vip_xp,
+        vipLevel: payload.vip_level,
+        email: payload.email,
+        phone: payload.phone,
+        ts: syncTs
+      }));
+    } catch (_) {}
+
+    const doPost = async () => {
+      try {
+        const res = await fetch(`${apiBase}/user/sync-balance`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+        if (res.ok) {
+          try {
+            const curDirty = JSON.parse(localStorage.getItem(DIRTY_KEY) || 'null');
+            if (!curDirty || curDirty.ts <= syncTs) {
+              rawRemoveItem.call(localStorage, DIRTY_KEY);
+            }
+          } catch (_) {
+            rawRemoveItem.call(localStorage, DIRTY_KEY);
+          }
+          return await res.json().catch(() => ({ ok: true }));
+        }
+      } catch (_) {}
+      return null;
+    };
+
+    inFlightSig = sig;
+    inFlightSync = doPost();
+    const result = await inFlightSync;
+    if (inFlightSig === sig) {
+      inFlightSync = null;
+      inFlightSig = null;
+    }
+    return result;
+  };
+
+  window.pandaFlushPendingBalanceSync = async function (username) {
+    if (inFlightSync) {
+      try { await inFlightSync; } catch (_) {}
+    }
+    try {
+      const dirty = JSON.parse(localStorage.getItem(DIRTY_KEY) || 'null');
+      if (dirty && dirty.username && (!username || dirty.username.toLowerCase() === String(username).toLowerCase())) {
+        if (Date.now() - (dirty.ts || 0) < 5 * 60 * 1000) {
+          await window.pandaSyncBalanceToBackend(dirty);
+        } else {
+          rawRemoveItem.call(localStorage, DIRTY_KEY);
+        }
+      }
+    } catch (_) {}
+  };
+
+  window.pandaFetchAndSyncProfile = async function (currentUserState, onUpdatedCallback) {
+    const s = currentUserState || readSessionSafe();
+    if (!s || !s.username || s.isLoggedIn === false) return null;
+
+    await window.pandaFlushPendingBalanceSync(s.username);
+
+    try {
+      const res = await fetch(`${apiBase}/user/profile?username=${encodeURIComponent(s.username)}&_t=${Date.now()}`, {
+        cache: 'no-store'
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (data && typeof data.balance_diamantes === 'number') {
+        s.balance = data.balance_diamantes;
+        if (typeof data.balance_bono_diamantes === 'number') {
+          s.bonusBalance = data.balance_bono_diamantes;
+        }
+        if (typeof data.vip_xp === 'number') {
+          s.xp = data.vip_xp;
+        }
+        if (data.vip_level) {
+          s.vipLevel = data.vip_level;
+        }
+        if (typeof data.cuenta_verificada !== 'undefined') {
+          s.cuenta_verificada = Boolean(data.cuenta_verificada);
+          s.is_verified = Boolean(data.cuenta_verificada);
+        }
+        if (typeof data.primer_deposito_realizado !== 'undefined') {
+          s.primer_deposito_realizado = Boolean(data.primer_deposito_realizado);
+        }
+        if (typeof data.tiene_recarga_aprobada !== 'undefined') {
+          s.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
+        }
+        if (data.email && !s.email) s.email = data.email;
+        if (data.phone && !s.phone) s.phone = data.phone;
+
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          rawSetItem.call(localStorage, SESSION_KEY, JSON.stringify(s));
+          lastTracked = {
+            username: String(s.username).toLowerCase(),
+            balance: Number(s.balance || 0),
+            bonusBalance: Number(s.bonusBalance || 0),
+            xp: Number(s.xp || 0)
+          };
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+        }
+
+        if (typeof onUpdatedCallback === 'function') {
+          onUpdatedCallback(s, data);
+        }
+        return data;
+      }
+    } catch (_) {}
+    return null;
+  };
+
+  // Interceptar localStorage.setItem para sincronizar automáticamente cambios de saldo en juegos/dashboard
+  Storage.prototype.setItem = function (key, value) {
+    rawSetItem.call(this, key, value);
+    if (this === localStorage && key === SESSION_KEY && !window.__PANDA_APPLYING_BACKEND_SYNC__) {
+      try {
+        const parsed = JSON.parse(value);
+        if (parsed && parsed.username && parsed.isLoggedIn !== false) {
+          const uname = String(parsed.username).toLowerCase();
+          const newBal = Number(parsed.balance || 0);
+          const newBonus = Number(parsed.bonusBalance || 0);
+          const newXp = Number(parsed.xp || 0);
+          if (lastTracked && lastTracked.username === uname) {
+            if (newBal !== lastTracked.balance || newBonus !== lastTracked.bonusBalance || newXp !== lastTracked.xp) {
+              lastTracked = { username: uname, balance: newBal, bonusBalance: newBonus, xp: newXp };
+              window.pandaSyncBalanceToBackend(parsed);
+            }
+          } else {
+            lastTracked = { username: uname, balance: newBal, bonusBalance: newBonus, xp: newXp };
+          }
+        } else if (parsed && parsed.isLoggedIn === false) {
+          lastTracked = null;
+        }
+      } catch (_) {}
+    }
+  };
+
+  // ===========================================================================
   // RUTAS LIMPIAS PROFESIONALES (Clean URLs / Pretty URLs)
   // ===========================================================================
   // Oculta las extensiones .html y sufijos _directo en la barra de direcciones del navegador

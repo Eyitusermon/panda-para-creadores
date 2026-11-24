@@ -116,6 +116,12 @@ class NeonPlinkoGame {
     this.initBoard();
     this.bindEvents();
     this.updateWalletUI();
+    try {
+      (window as any).pandaFetchAndSyncProfile?.(this.userState, (updated: any) => {
+        this.userState = { ...this.userState, ...updated };
+        this.updateWalletUI();
+      });
+    } catch (_) {}
     this.updateSideTable();
 
     // Sincronización en vivo con dashboard y otros juegos
@@ -153,6 +159,9 @@ class NeonPlinkoGame {
 
   private saveSession(): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.userState));
+    try {
+      (window as any).pandaSyncBalanceToBackend?.(this.userState);
+    } catch (_) {}
     this.updateWalletUI();
   }
 

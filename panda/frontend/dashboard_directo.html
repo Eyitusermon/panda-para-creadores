@@ -3359,9 +3359,15 @@
 
     // Sincronización automática de saldo y perfil con el backend Go / Neon
     async function syncBackendProfile() {
-      if (!userState || !userState.username) return;
+      if (!userState || !userState.username || userState.isLoggedIn === false) return;
       try {
-        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}`);
+        if (typeof window.pandaFetchAndSyncProfile === 'function') {
+          await window.pandaFetchAndSyncProfile(userState, () => {
+            updateUI();
+          });
+          return;
+        }
+        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}&_t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (data && typeof data.balance_diamantes === 'number') {
@@ -3371,12 +3377,25 @@
               userState.is_verified = Boolean(data.cuenta_verificada);
             }
             if (data.vip_level) userState.vipLevel = data.vip_level;
-            saveState();
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+            try {
+              saveState();
+            } finally {
+              window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+            }
           }
         }
       } catch (_) {}
     }
     syncBackendProfile();
+    window.addEventListener('focus', () => syncBackendProfile());
+    window.addEventListener('pageshow', () => syncBackendProfile());
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') syncBackendProfile();
+    });
+    setInterval(() => {
+      if (document.visibilityState === 'visible') syncBackendProfile();
+    }, 12000);
 
     // Comprobar y gestionar subida de nivel VIP
     function checkVipProgression() {
@@ -4335,20 +4354,34 @@
       userState.balance += reward;
       userState.xp = (userState.xp || 0) + 10;
       checkVipProgression();
-      saveState();
+
+      window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+      try {
+        saveState();
+      } finally {
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+      }
 
       document.getElementById('takeSurveyModal')?.classList.remove('open');
       renderDailySurveysUI();
 
       showToast('¡Encuesta Completada!', `🎉 Has completado "${currentSurveyTaking.titulo}". Has recibido +${reward} 💎.`);
 
+      let surveySavedOnline = false;
       try {
-        await fetch(`${API_BASE}/encuestas/responder`, {
+        const encRes = await fetch(`${API_BASE}/encuestas/responder`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newResponseRecord)
         });
+        if (encRes.ok) {
+          surveySavedOnline = true;
+          await syncBackendProfile();
+        }
       } catch (err) {}
+      if (!surveySavedOnline && typeof window.pandaSyncBalanceToBackend === 'function') {
+        await window.pandaSyncBalanceToBackend(userState);
+      }
     });
 
     document.getElementById('btnCloseTakeSurvey')?.addEventListener('click', () => {

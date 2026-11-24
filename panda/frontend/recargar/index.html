@@ -964,7 +964,7 @@
               <span>Monto Enviado (USDT - Red TRC-20)</span>
               <span class="req">* Mínimo: 10 USDT (100 💎)</span>
             </label>
-            <input type="number" id="formSentUsdt" class="form-input" value="50" min="10" step="1" required />
+            <input type="number" id="formSentUsdt" class="form-input" value="50" min="10" step="0.01" required />
           </div>
 
           <!-- Campo 3: TxID / Hash de la Transacción -->
@@ -1156,21 +1156,39 @@
     }
 
     async function syncBackendProfile() {
-      if (!userState || !userState.username) return;
+      if (!userState || !userState.username || userState.isLoggedIn === false) return;
       try {
-        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}`);
+        if (typeof window.pandaFlushPendingBalanceSync === 'function') {
+          await window.pandaFlushPendingBalanceSync(userState.username);
+        }
+        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}&_t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (data && typeof data.balance_diamantes === 'number') {
             userState.balance = data.balance_diamantes;
-            localStorage.setItem(storageKey, JSON.stringify(userState));
+            if (typeof data.primer_deposito_realizado !== 'undefined') {
+              userState.primer_deposito_realizado = Boolean(data.primer_deposito_realizado);
+            }
+            if (typeof data.tiene_recarga_aprobada !== 'undefined') {
+              userState.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
+            }
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+            try {
+              localStorage.setItem(storageKey, JSON.stringify(userState));
+            } finally {
+              window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+            }
             const topNavEl = document.getElementById('topNavDiamonds');
             if (topNavEl) topNavEl.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
+            const navUsdt = document.getElementById('topNavUsdt');
+            if (navUsdt) navUsdt.textContent = '≈ ' + (userState.balance / DIAMOND_RATE).toFixed(2) + ' USDT';
           }
         }
       } catch (_) {}
     }
     syncBackendProfile();
+    window.addEventListener('focus', () => syncBackendProfile());
+    window.addEventListener('pageshow', () => syncBackendProfile());
 
     // 2. Leer parámetros de URL (monto y diamantes provenientes del dashboard; mínimo 10 USDT)
     const urlParams = new URLSearchParams(window.location.search);
@@ -1422,22 +1440,46 @@
 
     // Función para completar y acreditar la recarga simulada a los 5 segundos
     async function completeSimulatedDeposit(deposit) {
+      if (!deposit || deposit.__alreadyProcessed) return;
+      deposit.__alreadyProcessed = true;
+
       // Intentar aprobación en backend Neon
+      let backendCredited = false;
       try {
-        await fetch(`${API_BASE}/wallet/aprobar-recarga`, {
+        const res = await fetch(`${API_BASE}/wallet/aprobar-recarga`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ tx_hash: deposit.tx_hash })
         });
+        if (res.ok) {
+          const data = await res.json().catch(() => null);
+          backendCredited = Boolean(data && (data.success === true || data.status === 'ok' || data.nuevo_estado === 'APROBADA'));
+        }
       } catch (_) {}
 
-      // Acreditar saldo en el estado local del jugador
       deposit.estado = 'APROBADA';
-      userState.balance += deposit.monto_diamantes;
-      userState.primer_deposito_realizado = true;
-      userState.tiene_recarga_aprobada = true;
-      localStorage.setItem(storageKey, JSON.stringify(userState));
-      try { await syncBackendProfile(); } catch (_) {}
+      const addedDiamonds = Math.round(Number(deposit.monto_diamantes) || 0);
+
+      if (backendCredited) {
+        // Neon ya acreditó los diamantes vía trigger; sincronizamos el saldo oficial
+        await syncBackendProfile();
+        userState.primer_deposito_realizado = true;
+        userState.tiene_recarga_aprobada = true;
+      } else {
+        // Si no acreditó el trigger (ej. TxID duplicado o modo offline), acreditamos y empujamos al backend
+        userState.balance = (Number(userState.balance) || 0) + addedDiamonds;
+        userState.primer_deposito_realizado = true;
+        userState.tiene_recarga_aprobada = true;
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(userState));
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+        }
+        if (typeof window.pandaSyncBalanceToBackend === 'function') {
+          await window.pandaSyncBalanceToBackend(userState);
+        }
+      }
 
       // Actualizar tabla local de depósitos
       try {
@@ -1463,11 +1505,11 @@
       if (pendingState) pendingState.style.display = 'none';
       if (successState) successState.style.display = 'block';
 
-      document.getElementById('successDiamondsResult').textContent = `+${deposit.monto_diamantes.toLocaleString('en-US')} 💎`;
+      document.getElementById('successDiamondsResult').textContent = `+${addedDiamonds.toLocaleString('en-US')} 💎`;
       document.getElementById('successNewBalance').textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
 
-      renderUserDepositsTable();
-      showToast('¡Recarga Exitosa!', `Se han acreditado +${deposit.monto_diamantes.toLocaleString('en-US')} 💎 a tu cuenta.`);
+      if (typeof renderUserDepositsTable === 'function') renderUserDepositsTable();
+      showToast('¡Recarga Exitosa!', `Se han acreditado +${addedDiamonds.toLocaleString('en-US')} 💎 a tu cuenta.`);
     }
 
     // Función auxiliar Toast

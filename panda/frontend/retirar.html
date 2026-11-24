@@ -1425,9 +1425,12 @@
     }
 
     async function syncBackendProfile() {
-      if (!userState || !userState.username) return;
+      if (!userState || !userState.username || userState.isLoggedIn === false) return;
       try {
-        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}`);
+        if (typeof window.pandaFlushPendingBalanceSync === 'function') {
+          await window.pandaFlushPendingBalanceSync(userState.username);
+        }
+        const res = await fetch(`${API_BASE}/user/profile?username=${encodeURIComponent(userState.username)}&_t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (data && typeof data.balance_diamantes === 'number') {
@@ -1445,7 +1448,12 @@
             if (data.email && !userState.email) userState.email = data.email;
             if (data.phone && !userState.phone) userState.phone = data.phone;
             if (data.full_name && !userState.fullName) userState.fullName = data.full_name;
-            localStorage.setItem(storageKey, JSON.stringify(userState));
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+            try {
+              localStorage.setItem(storageKey, JSON.stringify(userState));
+            } finally {
+              window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+            }
             if (typeof populateProfileFields === 'function') {
               populateProfileFields();
             }
@@ -1461,6 +1469,8 @@
       } catch (_) {}
     }
     syncBackendProfile();
+    window.addEventListener('focus', () => syncBackendProfile());
+    window.addEventListener('pageshow', () => syncBackendProfile());
 
     // Normalizar propiedad de verificación de cuenta
     if (typeof userState.cuenta_verificada === 'undefined' && typeof userState.is_verified === 'undefined') {
@@ -1995,8 +2005,6 @@
           showToast('¡Retiro Acreditado!', `Se han transferido ${usdtToSend} USDT a tu billetera TRON.`);
         }
       }, 100);
-        lblMaxAvailable.textContent = `${userState.balance.toLocaleString('en-US')} 💎`;
-      }, 3000);
     });
 
     // Copiar TxID

@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"math/rand"
 	"net/http"
 	"net/url"
@@ -220,6 +221,16 @@ func initDatabase() {
 
 	neon = client
 	fmt.Printf("🐘 [NEON HTTP SQL API] ¡Conexión exitosa a la base de datos '%v' en Neon.tech! (Usuarios en Neon: %v)\n", row["db"], row["count"])
+
+	// Auto-migración segura de columnas requeridas
+	migrations := []string{
+		`ALTER TABLE depositos ADD COLUMN IF NOT EXISTS username VARCHAR(100)`,
+		`ALTER TABLE depositos ADD COLUMN IF NOT EXISTS tipo VARCHAR(30) DEFAULT 'RECARGA'`,
+		`ALTER TABLE users ADD COLUMN IF NOT EXISTS primer_deposito_realizado BOOLEAN DEFAULT FALSE`,
+	}
+	for _, m := range migrations {
+		_ = neon.Exec(m)
+	}
 }
 
 func normalizeAnswer(ans string) string {
@@ -494,12 +505,46 @@ func parseNumber(val any) int64 {
 	case int:
 		return int64(v)
 	case string:
-		var n int64
-		fmt.Sscanf(v, "%d", &n)
-		return n
+		var f float64
+		fmt.Sscanf(v, "%f", &f)
+		return int64(math.Round(f))
 	default:
 		return 0
 	}
+}
+
+func ensureNeonUserAndWallet(username, email, phone string) (string, error) {
+	cleanUser := strings.TrimSpace(username)
+	if cleanUser == "" {
+		return "", fmt.Errorf("username requerido")
+	}
+	key := strings.ToLower(cleanUser)
+	row, err := neon.QueryRow(`SELECT id::text FROM users WHERE LOWER(username) = $1`, key)
+	if err == nil && row != nil && row["id"] != nil {
+		uid := fmt.Sprintf("%v", row["id"])
+		_ = neon.Exec(`
+			INSERT INTO wallets (user_id, balance_diamantes, balance_bono_diamantes, giros_gratis)
+			VALUES ($1::uuid, 0, 0, 0)
+			ON CONFLICT (user_id) DO NOTHING
+		`, uid)
+		return uid, nil
+	}
+
+	userRow, err := neon.QueryRow(`
+		INSERT INTO users (username, email, phone, password_hash, security_question, security_answer_hash, cuenta_verificada, vip_level, vip_xp)
+		VALUES ($1, NULLIF(TRIM($2), ''), NULLIF(TRIM($3), ''), $4, '¿Cuál fue el nombre de tu primera mascota?', $5, FALSE, 'Panda Bronce', 0)
+		RETURNING id::text
+	`, cleanUser, email, phone, hashPassword("123456"), hashSecurityAnswer("pelusa"))
+	if err != nil {
+		return "", err
+	}
+	uid := fmt.Sprintf("%v", userRow["id"])
+	_ = neon.Exec(`
+		INSERT INTO wallets (user_id, balance_diamantes, balance_bono_diamantes, giros_gratis)
+		VALUES ($1::uuid, 0, 0, 0)
+		ON CONFLICT (user_id) DO NOTHING
+	`, uid)
+	return uid, nil
 }
 
 func parseUserFromRow(row map[string]any) *User {
@@ -592,6 +637,129 @@ func handleProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	writeJSON(w, http.StatusOK, user)
+}
+
+type SyncBalanceRequest struct {
+	Username             string  `json:"username"`
+	BalanceDiamantes     float64 `json:"balance_diamantes"`
+	BalanceBonoDiamantes float64 `json:"balance_bono_diamantes"`
+	VIPXP                int     `json:"vip_xp"`
+	VIPLevel             string  `json:"vip_level"`
+	Email                string  `json:"email,omitempty"`
+	Phone                string  `json:"phone,omitempty"`
+}
+
+func handleSyncBalance(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		enableCORS(w)
+		return
+	}
+	if r.Method != http.MethodPost {
+		http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req SyncBalanceRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Formato JSON inválido"})
+		return
+	}
+
+	cleanUser := strings.TrimSpace(req.Username)
+	if cleanUser == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Username requerido"})
+		return
+	}
+	key := strings.ToLower(cleanUser)
+
+	balDiamantes := int64(math.Round(req.BalanceDiamantes))
+	if balDiamantes < 0 {
+		balDiamantes = 0
+	}
+	balBono := int64(math.Round(req.BalanceBonoDiamantes))
+	if balBono < 0 {
+		balBono = 0
+	}
+	vipXP := req.VIPXP
+	if vipXP < 0 {
+		vipXP = 0
+	}
+	vipLevel := strings.TrimSpace(req.VIPLevel)
+
+	if neon != nil {
+		userID, err := ensureNeonUserAndWallet(cleanUser, req.Email, req.Phone)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error asegurando usuario en Neon: " + err.Error()})
+			return
+		}
+
+		err = neon.Exec(`
+			INSERT INTO wallets (user_id, balance_diamantes, balance_bono_diamantes, giros_gratis, updated_at)
+			VALUES ($1::uuid, $2, $3, 0, NOW())
+			ON CONFLICT (user_id) DO UPDATE
+			SET balance_diamantes = EXCLUDED.balance_diamantes,
+			    balance_bono_diamantes = CASE WHEN $3 > 0 THEN EXCLUDED.balance_bono_diamantes ELSE wallets.balance_bono_diamantes END,
+			    updated_at = NOW()
+		`, userID, balDiamantes, balBono)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error actualizando billetera en Neon: " + err.Error()})
+			return
+		}
+
+		if vipXP > 0 || vipLevel != "" {
+			_ = neon.Exec(`
+				UPDATE users
+				SET vip_xp = GREATEST(vip_xp, $1),
+				    vip_level = COALESCE(NULLIF($2, ''), vip_level),
+				    updated_at = NOW()
+				WHERE id = $3::uuid
+			`, vipXP, vipLevel, userID)
+		}
+
+		writeJSON(w, http.StatusOK, map[string]any{
+			"ok":                     true,
+			"username":               cleanUser,
+			"balance_diamantes":      balDiamantes,
+			"balance_bono_diamantes": balBono,
+			"vip_xp":                 vipXP,
+			"vip_level":              vipLevel,
+		})
+		return
+	}
+
+	store.mu.Lock()
+	defer store.mu.Unlock()
+	user, exists := store.users[key]
+	if !exists {
+		user = &User{
+			ID:        fmt.Sprintf("usr_%d", time.Now().UnixNano()%1000000),
+			Username:  cleanUser,
+			Email:     req.Email,
+			Phone:     req.Phone,
+			VIPLevel:  "Panda Bronce",
+			CreatedAt: time.Now(),
+		}
+		store.users[key] = user
+	}
+	user.BalanceDiamantes = balDiamantes
+	if balBono > 0 {
+		user.BalanceBonoDiamantes = balBono
+	}
+	if vipXP > user.VIPXP {
+		user.VIPXP = vipXP
+	}
+	if vipLevel != "" {
+		user.VIPLevel = vipLevel
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"ok":                     true,
+		"username":               user.Username,
+		"balance_diamantes":      user.BalanceDiamantes,
+		"balance_bono_diamantes": user.BalanceBonoDiamantes,
+		"vip_xp":                 user.VIPXP,
+		"vip_level":              user.VIPLevel,
+	})
 }
 
 // -----------------------------------------------------------------------------
@@ -813,22 +981,21 @@ func handleDeposit(w http.ResponseWriter, r *http.Request) {
 		walletDestino = "TK9x8YPandaOfficialTRC20ColdWalletV3"
 	}
 
-	addedDiamonds := int64(req.MontoUSDT * float64(DiamondRate))
+	addedDiamonds := int64(math.Round(req.MontoUSDT * float64(DiamondRate)))
 
 	// --- 1. MODO NEON SERVERLESS API ---
 	if neon != nil {
-		userRow, err := neon.QueryRow(`SELECT id::text FROM users WHERE LOWER(username) = $1`, key)
+		userID, err := ensureNeonUserAndWallet(req.Username, "", "")
 		if err != nil {
-			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado en Neon"})
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado en Neon: " + err.Error()})
 			return
 		}
-		userID := fmt.Sprintf("%v", userRow["id"])
 
 		depRow, err := neon.QueryRow(`
-			INSERT INTO depositos (user_id, monto_usdt, monto_diamantes, red_blockchain, tron_wallet_destino, tx_hash_tron, estado)
-			VALUES ($1::uuid, $2, $3, 'TRC-20', $4, $5, 'PENDIENTE')
+			INSERT INTO depositos (user_id, username, monto_usdt, monto_diamantes, red_blockchain, tron_wallet_destino, tx_hash_tron, estado, tipo)
+			VALUES ($1::uuid, $2, $3, $4, 'TRC-20', $5, $6, 'PENDIENTE', 'RECARGA')
 			RETURNING id::text, created_at
-		`, userID, req.MontoUSDT, addedDiamonds, walletDestino, txHash)
+		`, userID, strings.TrimSpace(req.Username), req.MontoUSDT, addedDiamonds, walletDestino, txHash)
 
 		if err != nil {
 			if strings.Contains(err.Error(), "unique") || strings.Contains(err.Error(), "duplicate") {
@@ -1676,9 +1843,10 @@ type SurveyAnswerPayload struct {
 }
 
 type SurveySubmissionRequest struct {
-	Username   string                `json:"username"`
-	EncuestaID string                `json:"encuesta_id"`
-	Respuestas []SurveyAnswerPayload `json:"respuestas"`
+	Username            string                `json:"username"`
+	EncuestaID          string                `json:"encuesta_id"`
+	RecompensaDiamantes int64                 `json:"recompensa_diamantes,omitempty"`
+	Respuestas          []SurveyAnswerPayload `json:"respuestas"`
 }
 
 func handleResponderEncuesta(w http.ResponseWriter, r *http.Request) {
@@ -1702,20 +1870,24 @@ func handleResponderEncuesta(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	reward := req.RecompensaDiamantes
+	if reward <= 0 {
+		reward = 50
+	}
 	key := strings.ToLower(strings.TrimSpace(req.Username))
 
 	if neon != nil {
 		respJSON, _ := json.Marshal(req.Respuestas)
-		userRow, err := neon.QueryRow(`SELECT id::text FROM users WHERE LOWER(username) = $1`, key)
+		userID, uErr := ensureNeonUserAndWallet(req.Username, "", "")
 		var userIDParam any = nil
-		if err == nil {
-			userIDParam = userRow["id"]
+		if uErr == nil && userID != "" {
+			userIDParam = userID
 		}
 
-		err = neon.Exec(`
+		err := neon.Exec(`
 			INSERT INTO respuestas_encuestas (encuesta_id, encuesta_titulo, categoria, user_id, username, respuestas, recompensa_diamantes)
-			VALUES ($1, 'Encuesta de Calidad', 'Comunidad', $2::uuid, $3, $4::jsonb, 50)
-		`, req.EncuestaID, userIDParam, req.Username, string(respJSON))
+			VALUES ($1, 'Encuesta de Calidad', 'Comunidad', $2::uuid, $3, $4::jsonb, $5)
+		`, req.EncuestaID, userIDParam, req.Username, string(respJSON), reward)
 
 		if err != nil {
 			if strings.Contains(err.Error(), "unique") || strings.Contains(err.Error(), "duplicate") {
@@ -1725,12 +1897,19 @@ func handleResponderEncuesta(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if userIDParam != nil {
-			_ = neon.Exec(`UPDATE wallets SET balance_diamantes = balance_diamantes + 50 WHERE user_id = $1::uuid`, userIDParam)
+			_ = neon.Exec(`
+				INSERT INTO wallets (user_id, balance_diamantes, updated_at)
+				VALUES ($1::uuid, $2, NOW())
+				ON CONFLICT (user_id) DO UPDATE
+				SET balance_diamantes = wallets.balance_diamantes + $2,
+				    updated_at = NOW()
+			`, userIDParam, reward)
+			_ = neon.Exec(`UPDATE users SET vip_xp = vip_xp + 10, updated_at = NOW() WHERE id = $1::uuid`, userIDParam)
 		}
 
 		writeJSON(w, http.StatusOK, map[string]any{
-			"message":              "¡Encuesta completada exitosamente! Se han sumado +50 💎 a tu cuenta.",
-			"recompensa_diamantes": 50,
+			"message":              fmt.Sprintf("¡Encuesta completada exitosamente! Se han sumado +%d 💎 a tu cuenta.", reward),
+			"recompensa_diamantes": reward,
 		})
 		return
 	}
@@ -1739,15 +1918,15 @@ func handleResponderEncuesta(w http.ResponseWriter, r *http.Request) {
 	defer store.mu.Unlock()
 
 	user, exists := store.users[key]
-	var newBal int64 = 50
+	var newBal int64 = reward
 	if exists {
-		user.BalanceDiamantes += 50
+		user.BalanceDiamantes += reward
 		newBal = user.BalanceDiamantes
 	}
 
 	writeJSON(w, http.StatusOK, map[string]any{
-		"message":                 "¡Encuesta completada exitosamente! Se han sumado +50 💎 a tu cuenta.",
-		"recompensa_diamantes":    50,
+		"message":                 fmt.Sprintf("¡Encuesta completada exitosamente! Se han sumado +%d 💎 a tu cuenta.", reward),
+		"recompensa_diamantes":    reward,
 		"nuevo_balance_diamantes": newBal,
 	})
 }
@@ -2127,6 +2306,8 @@ func main() {
 	mux.HandleFunc("/api/v1/auth/reset-by-security", handleResetBySecurity)
 	mux.HandleFunc("/api/v1/user/update-security-question", handleUpdateSecurityQuestion)
 	mux.HandleFunc("/api/v1/user/profile", handleProfile)
+	mux.HandleFunc("/api/v1/user/sync-balance", handleSyncBalance)
+	mux.HandleFunc("/api/v1/wallet/sync-balance", handleSyncBalance)
 	mux.HandleFunc("/api/v1/user/pagar-verificacion", handlePayVerification)
 	mux.HandleFunc("/api/v1/user/cofre-diario", handleDailyChest)
 	mux.HandleFunc("/api/v1/wallet/retirar", handleWithdraw)
