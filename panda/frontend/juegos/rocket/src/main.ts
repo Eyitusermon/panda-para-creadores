@@ -163,7 +163,7 @@ class PandaCrashRocketGame {
   }
 
   /**
-   * Generador de punto de colapso balanceado (RTP ~97%)
+   * Generador de punto de colapso balanceado
    * Probabilidad mínima de crash instantáneo en x1.00 (~2.5%).
    */
   private generateCrashPoint(): number {
@@ -435,7 +435,7 @@ class PandaCrashRocketGame {
 
     bar.innerHTML = `
       <span style="font-weight:${isWin ? '900' : '600'}; color:${isWin ? '#00e701' : isCrash ? '#ff0055' : '#cbd5e1'};">${msg}</span>
-      <span style="font-size:0.72rem; color:var(--accent-gold); font-family:'Courier New',monospace;">RTP ~97% &bull; Motor Seguro</span>
+      <span style="font-size:0.72rem; color:var(--accent-gold); font-family:'Courier New',monospace;">Panda Crash</span>
     `;
   }
 

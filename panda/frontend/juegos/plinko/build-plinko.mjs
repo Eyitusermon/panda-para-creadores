@@ -189,7 +189,7 @@ ${cssSource}
       <!-- Ticker de estado inferior -->
       <div class="plinko-ticker-bar" id="plinkoTickerBar">
         <span style="color: #cbd5e1;">Presiona <strong>SOLTAR BOLA</strong> (o espacio) para iniciar la gravedad.</span>
-        <span style="font-size: 0.72rem; color: var(--accent-neon-cyan); font-family: 'Courier New', monospace;">RTP ~96% &bull; Motor Seguro</span>
+        <span style="font-size: 0.72rem; color: var(--accent-neon-cyan); font-family: 'Courier New', monospace;">Neon Gravity</span>
       </div>
     </section>
 

@@ -204,7 +204,7 @@ ${cssSource}
       <!-- Barra Ticker Inferior -->
       <div class="mines-ticker-bar" id="minesTickerBar">
         <span style="color: #cbd5e1;">Configura el monto y número de minas para comenzar.</span>
-        <span style="font-size: 0.72rem; color: var(--accent-gold); font-family: 'Courier New', monospace;">RTP ~97% &bull; Provably Fair</span>
+        <span style="font-size: 0.72rem; color: var(--accent-gold); font-family: 'Courier New', monospace;">Cyber Mines 3D</span>
       </div>
     </section>
 

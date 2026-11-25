@@ -193,7 +193,7 @@ ${cssSource}
       <!-- Ticker de estado inferior -->
       <div class="rocket-ticker-bar" id="rocketTickerBar">
         <span style="color: #cbd5e1;">Esperando al próximo lanzamiento...</span>
-        <span style="font-size: 0.72rem; color: var(--accent-cyan); font-family: 'Courier New', monospace;">RTP ~97% &bull; Motor Seguro</span>
+        <span style="font-size: 0.72rem; color: var(--accent-cyan); font-family: 'Courier New', monospace;">Panda Crash</span>
       </div>
     </section>
 

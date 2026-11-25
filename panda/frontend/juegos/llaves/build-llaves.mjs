@@ -212,7 +212,7 @@ ${cssSource}
       <!-- Barra Ticker Inferior -->
       <div class="doors-ticker-bar" id="doorsTickerBar">
         <span style="color: #cbd5e1;">Ajusta tus puertas y cerraduras y presiona INSERTAR LLAVE.</span>
-        <span style="font-size: 0.72rem; color: var(--accent-cyan); font-family: 'Courier New', monospace;">RTP ~97% &bull; Bóveda Blindada</span>
+        <span style="font-size: 0.72rem; color: var(--accent-cyan); font-family: 'Courier New', monospace;">Bóveda Panda</span>
       </div>
     </section>
 

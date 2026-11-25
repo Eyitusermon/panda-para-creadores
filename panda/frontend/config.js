@@ -342,16 +342,33 @@
 
   // Interceptar clicks de apuesta en fase de captura para todos los juegos
   document.addEventListener('click', function (e) {
-    const playBtn = e.target.closest('#btnSpinSlots, #btnDropBall, #btnRocketAction, #btnMinesAction, #btnDoorsAction, #btnToggleAutoDrop, #btnToggleAuto');
+    const playBtn = e.target.closest('#btnSpinSlots, #btnDropBall, #btnRocketAction, #btnMinesAction, #btnDoorsAction, #btnFlappyAction, #btnToggleAutoDrop, #btnToggleAuto');
     if (!playBtn) return;
+
+    if (
+      playBtn.classList.contains('btn-cashout') ||
+      playBtn.classList.contains('btn-bet-cancel') ||
+      playBtn.classList.contains('cashout') ||
+      playBtn.dataset.mode === 'cashout' ||
+      playBtn.dataset.mode === 'cancel'
+    ) {
+      return;
+    }
 
     const betInput = document.getElementById('betAmountInput');
     const bet = betInput ? parseFloat(betInput.value) || 0 : 0;
 
     let balance = 0;
     try {
-      const sess = JSON.parse(localStorage.getItem('panda_user_session') || '{}');
-      balance = typeof sess.balance === 'number' ? sess.balance : 0;
+      const rawSess = localStorage.getItem('panda_user_session');
+      if (rawSess) {
+        const sess = JSON.parse(rawSess);
+        balance = typeof sess.balance === 'number' ? sess.balance : 0;
+      } else {
+        const balText = document.getElementById('topBalanceDiamonds')?.textContent || '';
+        const parsedBal = parseFloat(balText.replace(/[^0-9.]/g, ''));
+        if (!isNaN(parsedBal)) balance = parsedBal;
+      }
     } catch (_) {}
 
     if (bet > balance) {

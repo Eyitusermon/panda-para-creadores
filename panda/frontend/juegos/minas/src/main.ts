@@ -28,7 +28,7 @@ interface TileData {
 const STORAGE_KEY = 'panda_user_session';
 const DIAMOND_RATE = 10; // 10 💎 = 1 USDT
 const TOTAL_TILES = 16; // Rejilla 4x4
-const HOUSE_RTP = 0.97; // 97% RTP comprobable (dificultad balanceada)
+const PAYOUT_FACTOR = 0.97; // 97% RTP comprobable (dificultad balanceada)
 
 class CyberMinesGame {
   private userState: UserSession;
@@ -191,7 +191,7 @@ class CyberMinesGame {
       fairMultiplier /= pSafe;
     }
 
-    const actual = Math.floor(fairMultiplier * HOUSE_RTP * 100) / 100;
+    const actual = Math.floor(fairMultiplier * PAYOUT_FACTOR * 100) / 100;
     return Math.max(1.01, actual);
   }
 
@@ -558,7 +558,7 @@ class CyberMinesGame {
     if (!bar) return;
     bar.innerHTML = `
       <span style="font-weight:${isWin ? '900' : '600'}; color:${isWin ? '#00e701' : isCrash ? '#ff0055' : '#cbd5e1'};">${msg}</span>
-      <span style="font-size:0.72rem; color:var(--accent-gold); font-family:'Courier New',monospace;">RTP ~97% &bull; Provably Fair</span>
+      <span style="font-size:0.72rem; color:var(--accent-gold); font-family:'Courier New',monospace;">Cyber Mines 3D</span>
     `;
   }
 

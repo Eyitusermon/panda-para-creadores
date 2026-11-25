@@ -29,7 +29,7 @@ const STORAGE_KEY = 'panda_user_session';
 const DIAMOND_RATE = 10; // 10 💎 = 1 USDT
 const MAX_DOORS = 10; // Máximo 10 puertas según especificación
 const MIN_DOORS = 2;
-const HOUSE_RTP = 0.97; // 97% RTP balanceado
+const PAYOUT_FACTOR = 0.97; // 97% RTP balanceado
 
 class PandaDoorsVaultGame {
   private userState: UserSession;
@@ -207,7 +207,7 @@ class PandaDoorsVaultGame {
       fairMult /= pSafe;
     }
 
-    const actual = Math.floor(fairMult * HOUSE_RTP * 100) / 100;
+    const actual = Math.floor(fairMult * PAYOUT_FACTOR * 100) / 100;
     return Math.max(1.02, actual);
   }
 
@@ -662,7 +662,7 @@ class PandaDoorsVaultGame {
     if (!bar) return;
     bar.innerHTML = `
       <span style="font-weight:${isWin ? '900' : '600'}; color:${isWin ? '#00e701' : isCrash ? '#ff0055' : '#cbd5e1'};">${msg}</span>
-      <span style="font-size:0.72rem; color:var(--accent-cyan); font-family:'Courier New',monospace;">RTP ~97% &bull; Bóveda Blindada</span>
+      <span style="font-size:0.72rem; color:var(--accent-cyan); font-family:'Courier New',monospace;">Bóveda Panda</span>
     `;
   }
 
