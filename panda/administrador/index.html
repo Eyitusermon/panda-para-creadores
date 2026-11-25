@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panda Cash - Panel de Administración</title>
+  <title>Panda Creadores - Panel de Administración</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐼</text></svg>">
   <script src="./config.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,7 +98,25 @@
     .header-status {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .env-select {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.4rem 0.65rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .env-select:focus {
+      outline: none;
+      border-color: var(--accent-gold);
     }
 
     .db-status-pill {
@@ -686,7 +704,7 @@
     <div class="brand-wrap">
       <span class="brand-logo">🐼</span>
       <div>
-        <div class="brand-title">PANDA<span> CASH</span></div>
+        <div class="brand-title">PANDA<span> CREADORES</span></div>
       </div>
       <span class="badge-admin">Admin Control Panel</span>
     </div>
@@ -694,8 +712,15 @@
     <div class="header-status">
       <div class="db-status-pill" id="dbStatusBadge">
         <span class="status-dot" id="dbStatusDot"></span>
-        <span id="dbStatusText">Neon PostgreSQL Conectado</span>
+        <span id="dbStatusText">Conectando con Neon...</span>
       </div>
+      <select id="adminEnvSelect" class="env-select" title="Entorno de API">
+        <option value="prod">☁️ Producción (Render)</option>
+        <option value="local">💻 Local (localhost:8085)</option>
+      </select>
+      <button type="button" id="btnRefreshAll" class="btn-public-link" style="cursor: pointer;">
+        🔄 Actualizar
+      </button>
       <a href="../frontend/dashboard_directo.html" target="_blank" class="btn-public-link">
         🌐 Abrir Frontend Jugador &rarr;
       </a>
@@ -1003,13 +1028,78 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <script>
-    const API_BASE = (window.PANDA_CONFIG && window.PANDA_CONFIG.API_BASE) ||
-      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:'
-        ? 'http://localhost:8085/api/v1'
-        : window.location.origin + '/api/v1');
+    const FALLBACK_PROD_API_BASE = 'https://panda-creadores-api.onrender.com/api/v1';
+
+    function getApiBase() {
+      return (window.PANDA_CONFIG && window.PANDA_CONFIG.API_BASE) || window.API_BASE || FALLBACK_PROD_API_BASE;
+    }
 
     let globalDirecciones = [];
     let globalUsuarios = [];
+
+    function sleepMs(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function setConnectionStatus(state, text) {
+      const badge = document.getElementById('dbStatusBadge');
+      const dot = document.getElementById('dbStatusDot');
+      const label = document.getElementById('dbStatusText');
+      if (state === 'offline') {
+        badge?.classList.add('offline');
+        dot?.classList.add('offline');
+      } else {
+        badge?.classList.remove('offline');
+        dot?.classList.remove('offline');
+      }
+      if (label && text) label.textContent = text;
+    }
+
+    function formatAdminDate(val, dateOnly = false) {
+      if (!val) return '-';
+      const normalized = String(val).trim().replace(' ', 'T');
+      const dt = new Date(normalized);
+      if (isNaN(dt.getTime())) return String(val);
+      if (dateOnly) {
+        return dt.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      }
+      return dt.toLocaleString('es-ES');
+    }
+
+    async function fetchAdminJSON(endpoint, options = {}, retries = 1) {
+      const url = `${getApiBase()}${endpoint}`;
+      try {
+        const res = await fetch(url, { cache: 'no-store', ...options });
+        if ((res.status === 502 || res.status === 503 || res.status === 504) && retries > 0) {
+          await sleepMs(2500);
+          return fetchAdminJSON(endpoint, options, retries - 1);
+        }
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          throw new Error((data && data.error) || `HTTP ${res.status}`);
+        }
+        return data;
+      } catch (err) {
+        if (retries > 0 && (!err.message || !/^HTTP 4\d\d$/.test(err.message))) {
+          await sleepMs(2500);
+          return fetchAdminJSON(endpoint, options, retries - 1);
+        }
+        throw err;
+      }
+    }
+
+    function renderTableError(tbodyId, colspan, msg, retryFnName) {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="${colspan}" style="text-align: center; color: #fca5a5; padding: 1.5rem;">
+            <div style="margin-bottom: 0.65rem; font-weight: 700;">⚠️ ${msg}</div>
+            <button type="button" class="btn-sm-action" onclick="${retryFnName}()">🔄 Reintentar</button>
+          </td>
+        </tr>
+      `;
+    }
 
     // TOAST NOTIFICATIONS
     function showToast(title, desc = '', type = 'success') {
@@ -1045,37 +1135,34 @@
     // 1. CARGAR KPIs
     async function loadStats() {
       try {
-        const res = await fetch(`${API_BASE}/admin/stats`);
-        if (res.ok) {
-          const data = await res.json();
-          document.getElementById('kpiTotalUsers').textContent = Number(data.total_users || 0).toLocaleString();
-          document.getElementById('kpiTotalDiamonds').textContent = Number(data.total_diamantes || 0).toLocaleString() + ' 💎';
-          document.getElementById('kpiPendingDeposits').textContent = Number(data.pending_depositos || 0).toLocaleString();
-          document.getElementById('kpiPendingWithdrawals').textContent = Number(data.pending_retiros || 0).toLocaleString();
+        const data = await fetchAdminJSON('/admin/stats');
+        document.getElementById('kpiTotalUsers').textContent = Number(data?.total_users || 0).toLocaleString();
+        document.getElementById('kpiTotalDiamonds').textContent = Number(data?.total_diamantes || 0).toLocaleString() + ' 💎';
+        document.getElementById('kpiPendingDeposits').textContent = Number(data?.pending_depositos || 0).toLocaleString();
+        document.getElementById('kpiPendingWithdrawals').textContent = Number(data?.pending_retiros || 0).toLocaleString();
 
-          if (data.active_address) {
-            document.getElementById('bannerActiveAddress').textContent = data.active_address;
-          }
+        if (data?.active_address) {
+          document.getElementById('bannerActiveAddress').textContent = data.active_address;
         }
+        const mode = (window.PANDA_CONFIG && window.PANDA_CONFIG.MODE) || 'prod';
+        setConnectionStatus('online', `Neon Conectado (${mode === 'local' ? 'Local' : 'Producción'})`);
       } catch (err) {
-        document.getElementById('dbStatusBadge').classList.add('offline');
-        document.getElementById('dbStatusDot').classList.add('offline');
-        document.getElementById('dbStatusText').textContent = 'Backend Offline';
+        const hostLabel = (window.PANDA_CONFIG && window.PANDA_CONFIG.BACKEND_URL) || getApiBase().replace(/\/api\/v1$/, '');
+        setConnectionStatus('offline', `Sin conexión (${hostLabel})`);
       }
     }
 
     // 2. CARGAR Y GESTIONAR DIRECCIONES
     async function loadDirecciones() {
       try {
-        const res = await fetch(`${API_BASE}/admin/direcciones`);
-        if (!res.ok) return;
-        const list = await res.json();
+        const raw = await fetchAdminJSON('/admin/direcciones');
+        const list = Array.isArray(raw) ? raw : [];
         globalDirecciones = list;
 
         const tbody = document.getElementById('tableDireccionesBody');
         tbody.innerHTML = '';
 
-        if (!list || list.length === 0) {
+        if (list.length === 0) {
           tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">No hay direcciones registradas.</td></tr>';
           return;
         }
@@ -1100,7 +1187,7 @@
             <td><strong>${item.red}</strong> <small style="color:var(--text-muted);">(${item.moneda})</small></td>
             <td style="font-family: var(--font-mono); word-break: break-all; color: #fff;">${item.direccion}</td>
             <td style="color: var(--text-muted); font-size: 0.78rem;">${item.descripcion || '-'}</td>
-            <td style="color: var(--text-muted); font-size: 0.75rem;">${item.updated_at ? new Date(item.updated_at).toLocaleString() : '-'}</td>
+            <td style="color: var(--text-muted); font-size: 0.75rem;">${formatAdminDate(item.updated_at)}</td>
             <td>
               <div class="table-actions">
                 ${!item.activa ? `<button type="button" class="btn-sm-action success" onclick="activarDireccion(${item.id})">Activar</button>` : ''}
@@ -1112,7 +1199,8 @@
         });
 
       } catch (err) {
-        showToast('Error de conexión', 'No se pudieron cargar las direcciones.', 'error');
+        renderTableError('tableDireccionesBody', 7, `No se pudieron cargar las direcciones (${err.message})`, 'loadDirecciones');
+        showToast('Error al cargar direcciones', err.message, 'error');
       }
     }
 
@@ -1150,36 +1238,29 @@
       };
 
       try {
-        const res = await fetch(`${API_BASE}/admin/direcciones/guardar`, {
+        await fetchAdminJSON('/admin/direcciones/guardar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (res.ok) {
-          showToast('¡Dirección Guardada!', 'Los cambios se aplicaron exitosamente en Neon.');
-          loadDirecciones();
-          loadStats();
-        } else {
-          showToast('Error al guardar', data.error || 'Ocurrió un error', 'error');
-        }
+        }, 0);
+        showToast('¡Dirección Guardada!', 'Los cambios se aplicaron exitosamente en Neon.');
+        loadDirecciones();
+        loadStats();
       } catch (err) {
-        showToast('Error de red', err.message, 'error');
+        showToast('Error al guardar', err.message, 'error');
       }
     });
 
     async function activarDireccion(id) {
       try {
-        const res = await fetch(`${API_BASE}/admin/direcciones/activar`, {
+        await fetchAdminJSON('/admin/direcciones/activar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id })
-        });
-        if (res.ok) {
-          showToast('Dirección Activada', 'Ahora los usuarios recibirán esta dirección en la pantalla de recarga.');
-          loadDirecciones();
-          loadStats();
-        }
+        }, 0);
+        showToast('Dirección Activada', 'Ahora los usuarios recibirán esta dirección en la pantalla de recarga.');
+        loadDirecciones();
+        loadStats();
       } catch (err) {
         showToast('Error', err.message, 'error');
       }
@@ -1195,13 +1276,13 @@
     // 3. CARGAR Y GESTIONAR USUARIOS
     async function loadUsuarios() {
       try {
-        const res = await fetch(`${API_BASE}/admin/users`);
-        if (!res.ok) return;
-        const list = await res.json();
+        const raw = await fetchAdminJSON('/admin/users');
+        const list = Array.isArray(raw) ? raw : [];
         globalUsuarios = list;
         renderUsuarios(list);
       } catch (err) {
-        showToast('Error', 'No se pudieron cargar los usuarios.', 'error');
+        renderTableError('tableUsuariosBody', 8, `No se pudieron cargar los usuarios (${err.message})`, 'loadUsuarios');
+        showToast('Error al cargar usuarios', err.message, 'error');
       }
     }
 
@@ -1225,7 +1306,7 @@
               ${u.cuenta_verificada ? '✓ VERIFICADA' : 'NO VERIFICADA'}
             </span>
           </td>
-          <td style="color:var(--text-muted); font-size:0.75rem;">${u.created_at ? new Date(u.created_at).toLocaleDateString() : '-'}</td>
+          <td style="color:var(--text-muted); font-size:0.75rem;">${formatAdminDate(u.created_at, true)}</td>
           <td>
             <button type="button" class="btn-sm-action" onclick="abrirEditarUsuario('${u.id}')">Editar Saldo / VIP</button>
           </td>
@@ -1236,8 +1317,8 @@
 
     document.getElementById('searchUserInput')?.addEventListener('input', (e) => {
       const q = e.target.value.toLowerCase().trim();
-      const filtered = globalUsuarios.filter(u => 
-        (u.username && u.username.toLowerCase().includes(q)) || 
+      const filtered = globalUsuarios.filter(u =>
+        (u.username && u.username.toLowerCase().includes(q)) ||
         (u.email && u.email.toLowerCase().includes(q))
       );
       renderUsuarios(filtered);
@@ -1270,49 +1351,45 @@
       };
 
       try {
-        const res = await fetch(`${API_BASE}/admin/users/editar`, {
+        await fetchAdminJSON('/admin/users/editar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (res.ok) {
-          showToast('Usuario Actualizado', 'Los cambios en la billetera se guardaron en Neon.');
-          closeUserModal();
-          loadUsuarios();
-          loadStats();
-        } else {
-          showToast('Error', data.error || 'Error al actualizar', 'error');
-        }
+        }, 0);
+        showToast('Usuario Actualizado', 'Los cambios en la billetera se guardaron en Neon.');
+        closeUserModal();
+        loadUsuarios();
+        loadStats();
       } catch (err) {
-        showToast('Error', err.message, 'error');
+        showToast('Error al actualizar', err.message, 'error');
       }
     });
 
     // 4. CARGAR Y GESTIONAR DEPÓSITOS
     async function loadDepositos() {
       try {
-        const res = await fetch(`${API_BASE}/admin/depositos`);
-        if (!res.ok) return;
-        const list = await res.json();
+        const raw = await fetchAdminJSON('/admin/depositos');
+        const list = Array.isArray(raw) ? raw : [];
         const tbody = document.getElementById('tableDepositosBody');
         tbody.innerHTML = '';
-        if (!list || list.length === 0) {
+        if (list.length === 0) {
           tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:1.5rem;">No hay depósitos registrados.</td></tr>';
           return;
         }
 
         list.forEach(d => {
           const isPend = d.estado === 'PENDIENTE';
+          const shortId = String(d.id || '').slice(0, 8) || '-';
+          const refApprove = String(d.tx_hash_tron || d.id || '').replace(/'/g, "\\'");
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td style="font-size:0.75rem; color:var(--text-muted);">
-              <div>#${d.id.slice(0, 8)}...</div>
-              <div>${d.created_at ? new Date(d.created_at).toLocaleString() : '-'}</div>
+              <div>#${shortId}...</div>
+              <div>${formatAdminDate(d.created_at)}</div>
             </td>
-            <td><strong>${d.username}</strong></td>
-            <td style="font-family:var(--font-mono); font-weight:700;">${Number(d.monto_usdt).toFixed(2)} USDT</td>
-            <td style="font-family:var(--font-mono); font-weight:800; color:var(--accent-gold);">+${Number(d.monto_diamantes).toLocaleString()} 💎</td>
+            <td><strong>${d.username || '-'}</strong></td>
+            <td style="font-family:var(--font-mono); font-weight:700;">${Number(d.monto_usdt || 0).toFixed(2)} USDT</td>
+            <td style="font-family:var(--font-mono); font-weight:800; color:var(--accent-gold);">+${Number(d.monto_diamantes || 0).toLocaleString()} 💎</td>
             <td style="font-family:var(--font-mono); font-size:0.75rem; word-break:break-all;">${d.tx_hash_tron || '-'}</td>
             <td>
               <span class="status-badge ${isPend ? 'pending' : 'active'}">
@@ -1320,47 +1397,42 @@
               </span>
             </td>
             <td>
-              ${isPend ? `<button type="button" class="btn-sm-action success" onclick="aprobarDeposito('${d.tx_hash_tron || d.id}')">Aprobar Recarga</button>` : '<span style="color:var(--accent-green); font-size:0.75rem;">✓ Acreditado</span>'}
+              ${isPend ? `<button type="button" class="btn-sm-action success" onclick="aprobarDeposito('${refApprove}')">Aprobar Recarga</button>` : '<span style="color:var(--accent-green); font-size:0.75rem;">✓ Acreditado</span>'}
             </td>
           `;
           tbody.appendChild(tr);
         });
       } catch (err) {
-        showToast('Error', 'No se pudieron cargar los depósitos.', 'error');
+        renderTableError('tableDepositosBody', 7, `No se pudieron cargar los depósitos (${err.message})`, 'loadDepositos');
+        showToast('Error al cargar depósitos', err.message, 'error');
       }
     }
 
     async function aprobarDeposito(txHash) {
       if (!confirm(`¿Deseas aprobar la recarga con TxID/ID ${txHash} y acreditar los diamantes al usuario?`)) return;
       try {
-        const res = await fetch(`${API_BASE}/wallet/aprobar-recarga`, {
+        await fetchAdminJSON('/wallet/aprobar-recarga', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tx_hash: txHash, deposito_id: txHash })
-        });
-        const data = await res.json();
-        if (res.ok) {
-          showToast('¡Recarga Aprobada!', 'Se acreditaron los diamantes a la billetera del usuario.');
-          loadDepositos();
-          loadUsuarios();
-          loadStats();
-        } else {
-          showToast('Error', data.error || 'No se pudo aprobar', 'error');
-        }
+          body: JSON.stringify({ tx_hash: txHash, deposit_id: txHash })
+        }, 0);
+        showToast('¡Recarga Aprobada!', 'Se acreditaron los diamantes a la billetera del usuario.');
+        loadDepositos();
+        loadUsuarios();
+        loadStats();
       } catch (err) {
-        showToast('Error', err.message, 'error');
+        showToast('Error al aprobar', err.message, 'error');
       }
     }
 
     // 5. CARGAR Y GESTIONAR RETIROS
     async function loadRetiros() {
       try {
-        const res = await fetch(`${API_BASE}/admin/retiros`);
-        if (!res.ok) return;
-        const list = await res.json();
+        const raw = await fetchAdminJSON('/admin/retiros');
+        const list = Array.isArray(raw) ? raw : [];
         const tbody = document.getElementById('tableRetirosBody');
         tbody.innerHTML = '';
-        if (!list || list.length === 0) {
+        if (list.length === 0) {
           tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:1.5rem;">No hay retiros registrados.</td></tr>';
           return;
         }
@@ -1369,6 +1441,7 @@
           const isPendingQueue = (r.estado === 'EN_ESPERA' || r.estado === 'SOLICITADO' || r.estado === 'PROCESANDO' || r.estado === 'PENDIENTE');
           const isApproved = (r.estado === 'DESPACHADO' || r.estado === 'APROBADO');
           const isRejected = (r.estado === 'RECHAZADO');
+          const shortId = String(r.id || '').slice(0, 8) || '-';
 
           let badgeClass = 'pending';
           let badgeText = r.estado;
@@ -1383,21 +1456,17 @@
             badgeText = '✗ RECHAZADO';
           }
 
-          let fechaEst = '-';
-          if (r.fecha_estimada_liberacion) {
-            const dt = new Date(r.fecha_estimada_liberacion);
-            fechaEst = dt.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-          }
+          const fechaEst = formatAdminDate(r.fecha_estimada_liberacion, true);
 
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td style="font-size:0.75rem; color:var(--text-muted);">
-              <div>#${r.id.slice(0, 8)}...</div>
-              <div>${r.created_at ? new Date(r.created_at).toLocaleString() : '-'}</div>
+              <div>#${shortId}...</div>
+              <div>${formatAdminDate(r.created_at)}</div>
             </td>
-            <td><strong>${r.username}</strong></td>
-            <td style="font-family:var(--font-mono); font-weight:800; color:var(--accent-purple);">${Number(r.monto_diamantes).toLocaleString()} 💎</td>
-            <td style="font-family:var(--font-mono); font-weight:700;">≈ ${Number(r.monto_usdt).toFixed(2)} USDT</td>
+            <td><strong>${r.username || '-'}</strong></td>
+            <td style="font-family:var(--font-mono); font-weight:800; color:var(--accent-purple);">${Number(r.monto_diamantes || 0).toLocaleString()} 💎</td>
+            <td style="font-family:var(--font-mono); font-weight:700;">≈ ${Number(r.monto_usdt || 0).toFixed(2)} USDT</td>
             <td style="font-family:var(--font-mono); font-size:0.75rem; word-break:break-all;">${r.tron_wallet_receptora || r.tron_wallet_destino || '-'}</td>
             <td style="font-size:0.78rem;">
               <div style="font-weight:700; color:var(--accent-cyan);">⏳ ${r.tiempo_estimado_dias || 5} días</div>
@@ -1420,35 +1489,54 @@
           tbody.appendChild(tr);
         });
       } catch (err) {
-        showToast('Error', 'No se pudieron cargar los retiros.', 'error');
+        renderTableError('tableRetirosBody', 8, `No se pudieron cargar los retiros (${err.message})`, 'loadRetiros');
+        showToast('Error al cargar retiros', err.message, 'error');
       }
     }
 
     async function procesarRetiro(retiroId, estado) {
       if (!confirm(`¿Confirmas cambiar el retiro a estado ${estado}?`)) return;
       try {
-        const res = await fetch(`${API_BASE}/admin/retiros/procesar`, {
+        await fetchAdminJSON('/admin/retiros/procesar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ retiro_id: retiroId, estado })
-        });
-        if (res.ok) {
-          showToast(`Retiro ${estado}`, `La solicitud fue marcada como ${estado}.`);
-          loadRetiros();
-          loadStats();
-        }
+        }, 0);
+        showToast(`Retiro ${estado}`, `La solicitud fue marcada como ${estado}.`);
+        loadRetiros();
+        loadStats();
       } catch (err) {
-        showToast('Error', err.message, 'error');
+        showToast('Error al procesar', err.message, 'error');
       }
+    }
+
+    async function loadAllAdminData() {
+      setConnectionStatus('loading', 'Conectando con Neon...');
+      await Promise.allSettled([
+        loadStats(),
+        loadDirecciones(),
+        loadUsuarios(),
+        loadDepositos(),
+        loadRetiros()
+      ]);
     }
 
     // INICIALIZACIÓN
     document.addEventListener('DOMContentLoaded', () => {
-      loadStats();
-      loadDirecciones();
-      loadUsuarios();
-      loadDepositos();
-      loadRetiros();
+      const envSelect = document.getElementById('adminEnvSelect');
+      if (envSelect) {
+        envSelect.value = (window.PANDA_CONFIG && window.PANDA_CONFIG.MODE) || 'prod';
+        envSelect.addEventListener('change', (e) => {
+          if (window.PANDA_CONFIG && typeof window.PANDA_CONFIG.setMode === 'function') {
+            window.PANDA_CONFIG.setMode(e.target.value);
+          }
+          loadAllAdminData();
+        });
+      }
+      document.getElementById('btnRefreshAll')?.addEventListener('click', () => {
+        loadAllAdminData();
+      });
+      loadAllAdminData();
     });
   </script>
 </body>
