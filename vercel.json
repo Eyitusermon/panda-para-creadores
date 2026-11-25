@@ -18,6 +18,7 @@
     { "source": "/juegos/minas", "destination": "/panda/frontend/juegos/minas/jugar_minas.html" },
     { "source": "/juegos/llaves", "destination": "/panda/frontend/juegos/llaves/jugar_llaves.html" },
     { "source": "/juegos/flappy", "destination": "/panda/frontend/juegos/flappy/jugar_flappy.html" },
+    { "source": "/juegos/slither", "destination": "/panda/frontend/juegos/slither/jugar_slither.html" },
     { "source": "/api/(.*)", "destination": "https://pandacash-api.onrender.com/api/$1" }
   ]
 }

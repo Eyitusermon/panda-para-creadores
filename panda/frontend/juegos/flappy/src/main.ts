@@ -16,37 +16,33 @@ interface UserSession {
   [key: string]: unknown;
 }
 
-type FlightState = 'IDLE' | 'READY' | 'FLYING' | 'CASHED_OUT' | 'CRASHED';
-type DifficultyKey = 'easy' | 'medium' | 'hard';
+type StepGameState = 'IDLE' | 'MOVING' | 'DECISION' | 'CASHED_OUT' | 'CRASHED';
+type DifficultyKey = 'easy' | 'medium' | 'hard' | 'extreme';
 
 interface DifficultyConfig {
   label: string;
-  gap: number;
-  speed: number;
-  spacing: number;
-  factor: number;
-  oscillateAmp: number;
+  stepPassProb: number;
+  multipliers: number[];
 }
 
-interface Pipe {
-  index: number;
+interface StepPipe {
+  step: number;
   x: number;
   width: number;
   gapY: number;
-  baseGapY: number;
   gapH: number;
-  phase: number;
-  passed: boolean;
-  gemCollected: boolean;
   multiplier: number;
+  status: 'pending' | 'active' | 'passed' | 'crashed';
+  gemCollected: boolean;
+  closeAmount: number;
 }
 
 interface Star {
   x: number;
   y: number;
   size: number;
-  speed: number;
   alpha: number;
+  twinklePhase: number;
 }
 
 interface Particle {
@@ -70,32 +66,34 @@ interface FloatingText {
 
 const STORAGE_KEY = 'panda_user_session';
 const DIAMOND_RATE = 10;
-const GROUND_HEIGHT = 48;
+const TOTAL_STEPS = 10;
+const GROUND_HEIGHT = 50;
+const TILE_SPACING = 230;
+const START_PAD_X = 120;
+const STEP_DURATION_SEC = 0.62;
+const VIEW_W = 760;
+const VIEW_H = 540;
 
 const DIFFICULTIES: Record<DifficultyKey, DifficultyConfig> = {
   easy: {
-    label: 'Clásico',
-    gap: 182,
-    speed: 205,
-    spacing: 295,
-    factor: 1.16,
-    oscillateAmp: 0
+    label: 'Fácil',
+    stepPassProb: 0.82,
+    multipliers: [1.17, 1.42, 1.73, 2.11, 2.58, 3.15, 3.84, 4.68, 5.70, 7.00]
   },
   medium: {
-    label: 'Pro',
-    gap: 154,
-    speed: 248,
-    spacing: 280,
-    factor: 1.30,
-    oscillateAmp: 0
+    label: 'Medio',
+    stepPassProb: 0.72,
+    multipliers: [1.33, 1.85, 2.56, 3.56, 4.95, 6.88, 9.55, 13.25, 18.40, 25.50]
   },
   hard: {
-    label: 'Turbo',
-    gap: 134,
-    speed: 295,
-    spacing: 265,
-    factor: 1.52,
-    oscillateAmp: 22
+    label: 'Difícil',
+    stepPassProb: 0.60,
+    multipliers: [1.60, 2.65, 4.42, 7.35, 12.25, 20.40, 34.00, 56.50, 94.00, 155.00]
+  },
+  extreme: {
+    label: 'Extremo',
+    stepPassProb: 0.50,
+    multipliers: [1.92, 3.84, 7.68, 15.30, 30.50, 61.00, 122.00, 240.00, 380.00, 500.00]
   }
 };
 
@@ -104,37 +102,43 @@ class FlappyPandaGame {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
-  private state: FlightState = 'IDLE';
+  private state: StepGameState = 'IDLE';
   private difficulty: DifficultyKey = 'medium';
 
   private betAmount = 50;
+  private currentStep = 0; // 0 = inicio, 1..10 = casillas completadas
   private currentMultiplier = 1.00;
-  private pipesCleared = 0;
   private cashoutPayout = 0;
 
   private isAutoCashoutEnabled = false;
   private autoCashoutTarget = 2.00;
 
-  // Física del Panda
-  private pandaX = 165;
-  private pandaY = 235;
-  private pandaVy = 0;
-  private pandaRadius = 18;
+  // Coordenadas mundiales y cámara
+  private birdX = START_PAD_X;
+  private birdY = 230;
+  private birdRot = 0;
+  private cameraX = 0;
   private wingPhase = 0;
-  private flapBurstTimer = 0;
 
-  // Entorno
-  private pipes: Pipe[] = [];
-  private nextPipeIndex = 1;
-  private groundOffset = 0;
-  private cityOffset = 0;
+  // Animación de casilla en curso
+  private moveFromX = START_PAD_X;
+  private moveFromY = 230;
+  private moveTargetStep = 1;
+  private moveWillPass = true;
+  private moveCrashTop = true;
+  private moveElapsed = 0;
+  private crashTriggered = false;
+  private crashDropVy = 0;
+
+  // Escenario
+  private pipes: StepPipe[] = [];
   private stars: Star[] = [];
   private particles: Particle[] = [];
   private floatingTexts: FloatingText[] = [];
   private screenShake = 0;
-  private elapsedIdle = 0;
+  private idleTime = 0;
 
-  // Estadísticas
+  // Estadísticas de sesión
   private totalRounds = 0;
   private totalDiamondsWon = 0;
   private bestMultiplier = 0;
@@ -155,7 +159,7 @@ class FlappyPandaGame {
     this.ctx = context;
 
     this.initStars();
-    this.resetWorldForIdle();
+    this.buildCourse();
     this.bindEvents();
     this.updateWalletUI();
     try {
@@ -220,78 +224,67 @@ class FlappyPandaGame {
     if (userEl) userEl.textContent = `${this.userState.username} (${this.userState.vipLevel})`;
   }
 
-  private calcMultiplier(diff: DifficultyKey, pipes: number): number {
-    if (pipes <= 0) return 1.00;
-    const raw = Math.pow(DIFFICULTIES[diff].factor, pipes);
-    return Math.min(500.0, Math.round(raw * 100) / 100);
+  private standX(stepIndex: number): number {
+    return START_PAD_X + stepIndex * TILE_SPACING;
+  }
+
+  private pipeX(stepNumber: number): number {
+    // Cada pareja de tubos k (1..10) se ubica justo delante de la posición de espera k-1
+    return this.standX(stepNumber - 1) + 122;
   }
 
   private initStars(): void {
-    const w = this.canvas.width;
-    const h = this.canvas.height - GROUND_HEIGHT;
     this.stars = [];
     for (let i = 0; i < 65; i++) {
       this.stars.push({
-        x: Math.random() * w,
-        y: Math.random() * h * 0.78,
-        size: 0.8 + Math.random() * 2.0,
-        speed: 14 + Math.random() * 22,
-        alpha: 0.25 + Math.random() * 0.75
+        x: Math.random() * VIEW_W,
+        y: Math.random() * (VIEW_H - GROUND_HEIGHT) * 0.72,
+        size: 0.9 + Math.random() * 1.9,
+        alpha: 0.3 + Math.random() * 0.65,
+        twinklePhase: Math.random() * Math.PI * 2
       });
     }
   }
 
-  private resetWorldForIdle(): void {
-    this.pandaX = 165;
-    this.pandaY = (this.canvas.height - GROUND_HEIGHT) * 0.46;
-    this.pandaVy = 0;
+  private buildCourse(): void {
+    const cfg = DIFFICULTIES[this.difficulty];
+    const playH = VIEW_H - GROUND_HEIGHT;
+    const baseGapH = this.difficulty === 'easy'
+      ? 162
+      : this.difficulty === 'medium'
+        ? 144
+        : this.difficulty === 'hard'
+          ? 126
+          : 112;
+
     this.pipes = [];
-    this.particles = [];
-    this.floatingTexts = [];
-    this.nextPipeIndex = 1;
-    this.pipesCleared = 0;
+    for (let k = 1; k <= TOTAL_STEPS; k++) {
+      const minCenter = 95 + baseGapH / 2;
+      const maxCenter = playH - 95 - baseGapH / 2;
+      const center = minCenter + ((Math.sin(k * 1.37 + 0.4) * 0.5 + 0.5) * (maxCenter - minCenter));
+      this.pipes.push({
+        step: k,
+        x: this.pipeX(k),
+        width: 68,
+        gapY: center,
+        gapH: baseGapH,
+        multiplier: cfg.multipliers[k - 1],
+        status: k === 1 ? 'active' : 'pending',
+        gemCollected: false,
+        closeAmount: 0
+      });
+    }
+
+    this.currentStep = 0;
     this.currentMultiplier = 1.00;
     this.cashoutPayout = 0;
+    this.birdX = this.standX(0);
+    this.birdY = this.pipes[0].gapY;
+    this.birdRot = 0;
+    this.cameraX = this.birdX - 180;
+    this.particles = [];
+    this.floatingTexts = [];
     this.screenShake = 0;
-  }
-
-  private spawnInitialPipes(): void {
-    this.pipes = [];
-    this.nextPipeIndex = 1;
-    const startX = this.canvas.width + 80;
-    const cfg = DIFFICULTIES[this.difficulty];
-    for (let i = 0; i < 4; i++) {
-      this.addPipeAt(startX + i * cfg.spacing);
-    }
-  }
-
-  private addPipeAt(xPos: number): void {
-    const cfg = DIFFICULTIES[this.difficulty];
-    const playH = this.canvas.height - GROUND_HEIGHT;
-    const minY = 58 + cfg.gap / 2;
-    const maxY = playH - 58 - cfg.gap / 2;
-
-    let targetY = minY + Math.random() * (maxY - minY);
-    if (this.pipes.length > 0) {
-      const prevY = this.pipes[this.pipes.length - 1].baseGapY;
-      const clampedMin = Math.max(minY, prevY - 140);
-      const clampedMax = Math.min(maxY, prevY + 140);
-      targetY = clampedMin + Math.random() * (clampedMax - clampedMin);
-    }
-
-    const idx = this.nextPipeIndex++;
-    this.pipes.push({
-      index: idx,
-      x: xPos,
-      width: 68,
-      gapY: targetY,
-      baseGapY: targetY,
-      gapH: cfg.gap,
-      phase: idx * 0.9,
-      passed: false,
-      gemCollected: false,
-      multiplier: this.calcMultiplier(this.difficulty, idx)
-    });
   }
 
   private ensureAudio(): void {
@@ -305,43 +298,31 @@ class FlappyPandaGame {
     }
   }
 
-  private playFlapSound(): void {
+  private playTone(freq: number, endFreq: number, dur: number, type: OscillatorType, vol = 0.05): void {
     if (!this.soundEnabled) return;
     this.ensureAudio();
     if (!this.audioCtx) return;
     const now = this.audioCtx.currentTime;
     const osc = this.audioCtx.createOscillator();
     const gain = this.audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(320, now);
-    osc.frequency.exponentialRampToValueAtTime(540, now + 0.08);
-    gain.gain.setValueAtTime(0.08, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(40, endFreq), now + dur);
+    gain.gain.setValueAtTime(vol, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
     osc.connect(gain);
     gain.connect(this.audioCtx.destination);
     osc.start(now);
-    osc.stop(now + 0.095);
+    osc.stop(now + dur);
   }
 
-  private playPointSound(streak: number): void {
-    if (!this.soundEnabled) return;
-    this.ensureAudio();
-    if (!this.audioCtx) return;
-    const now = this.audioCtx.currentTime;
-    const baseFreq = Math.min(1150, 560 + streak * 32);
-    [baseFreq, baseFreq * 1.25].forEach((freq, i) => {
-      if (!this.audioCtx) return;
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, now + i * 0.045);
-      gain.gain.setValueAtTime(0.1, now + i * 0.045);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.045 + 0.14);
-      osc.connect(gain);
-      gain.connect(this.audioCtx.destination);
-      osc.start(now + i * 0.045);
-      osc.stop(now + i * 0.045 + 0.15);
-    });
+  private playFlapSound(): void {
+    this.playTone(340, 560, 0.11, 'sine', 0.055);
+  }
+
+  private playStepPassSound(step: number): void {
+    const base = 540 + step * 48;
+    this.playTone(base, base * 1.35, 0.16, 'triangle', 0.07);
   }
 
   private playCashoutSound(): void {
@@ -349,747 +330,756 @@ class FlappyPandaGame {
     this.ensureAudio();
     if (!this.audioCtx) return;
     const now = this.audioCtx.currentTime;
-    [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+    [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
       if (!this.audioCtx) return;
       const osc = this.audioCtx.createOscillator();
       const gain = this.audioCtx.createGain();
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, now + idx * 0.06);
-      gain.gain.setValueAtTime(0.11, now + idx * 0.06);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.25);
+      const t0 = now + i * 0.06;
+      osc.frequency.setValueAtTime(freq, t0);
+      gain.gain.setValueAtTime(0.07, t0);
+      gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.24);
       osc.connect(gain);
       gain.connect(this.audioCtx.destination);
-      osc.start(now + idx * 0.06);
-      osc.stop(now + idx * 0.06 + 0.26);
+      osc.start(t0);
+      osc.stop(t0 + 0.24);
     });
   }
 
   private playCrashSound(): void {
-    if (!this.soundEnabled) return;
-    this.ensureAudio();
-    if (!this.audioCtx) return;
-    const now = this.audioCtx.currentTime;
-    const osc = this.audioCtx.createOscillator();
-    const gain = this.audioCtx.createGain();
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(190, now);
-    osc.frequency.exponentialRampToValueAtTime(52, now + 0.26);
-    gain.gain.setValueAtTime(0.14, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-    osc.connect(gain);
-    gain.connect(this.audioCtx.destination);
-    osc.start(now);
-    osc.stop(now + 0.3);
+    this.playTone(210, 48, 0.34, 'sawtooth', 0.09);
   }
 
   private spawnParticles(x: number, y: number, color: string, count: number): void {
     for (let i = 0; i < count; i++) {
       const ang = Math.random() * Math.PI * 2;
-      const spd = 40 + Math.random() * 190;
+      const spd = 45 + Math.random() * 175;
       this.particles.push({
         x,
         y,
         vx: Math.cos(ang) * spd,
-        vy: Math.sin(ang) * spd - 35,
+        vy: Math.sin(ang) * spd,
         alpha: 1,
         color,
-        radius: 1.8 + Math.random() * 3.2
+        radius: 2 + Math.random() * 3.5
       });
     }
   }
 
-  private checkVip(): void {
-    if (this.userState.xp >= this.userState.xpTarget) {
-      if (this.userState.vipLevel === 'Panda Bronce') {
-        this.userState.vipLevel = 'Panda Plata';
-        this.userState.xpTarget = 5000;
-        this.userState.balance += 250;
-      } else if (this.userState.vipLevel === 'Panda Plata') {
-        this.userState.vipLevel = 'Panda Oro';
-        this.userState.xpTarget = 25000;
-        this.userState.balance += 1000;
-      }
-    }
+  private addFloatText(x: number, y: number, text: string, color: string): void {
+    this.floatingTexts.push({
+      x,
+      y,
+      vy: -36,
+      text,
+      color,
+      alpha: 1
+    });
   }
 
-  private startFlightRound(): void {
+  public startRound(): void {
+    if (this.state === 'MOVING' || this.state === 'DECISION') return;
+
     const betInput = document.getElementById('betAmountInput') as HTMLInputElement | null;
-    const bet = betInput ? Math.floor(parseFloat(betInput.value) || 0) : 0;
+    const rawBet = betInput ? parseFloat(betInput.value) : 50;
+    const cleanBet = Math.max(10, Math.round(rawBet || 0));
 
-    if (bet < 10) {
-      this.setTicker('⚠️ La apuesta mínima es de 10 💎 (1 USDT).', false);
+    if (cleanBet > this.userState.balance) {
+      if (typeof (window as any).showInsufficientBalanceAlert === 'function') {
+        (window as any).showInsufficientBalanceAlert(cleanBet, this.userState.balance);
+      } else {
+        this.setTicker(`Saldo insuficiente. Necesitas ${cleanBet} 💎 para iniciar.`, true);
+      }
       return;
     }
-    if (bet > this.userState.balance) {
-      this.setTicker('⚠️ Saldo insuficiente de 💎 Diamantes.', false);
-      (window as any).showInsufficientBalanceAlert?.(bet, this.userState.balance);
-      return;
+
+    const autoInput = document.getElementById('autoCashoutMultInput') as HTMLInputElement | null;
+    if (autoInput) {
+      this.autoCashoutTarget = Math.max(1.10, Math.min(500, parseFloat(autoInput.value) || 2.00));
     }
 
-    this.ensureAudio();
-    this.betAmount = bet;
-    this.userState.balance -= bet;
-    this.userState.xp = (this.userState.xp || 0) + Math.floor(bet / 10);
-    this.checkVip();
+    this.betAmount = cleanBet;
+    this.userState.balance = Math.max(0, this.userState.balance - this.betAmount);
+    this.userState.weeklySpent = (this.userState.weeklySpent || 0) + this.betAmount;
+    this.userState.xp = (this.userState.xp || 0) + Math.max(1, Math.floor(this.betAmount / 10));
     this.saveSession();
 
-    this.resetWorldForIdle();
-    this.spawnInitialPipes();
-    this.state = 'READY';
+    this.buildCourse();
+    this.launchNextStep();
+  }
 
-    this.setTicker(`✈️ Apuesta de ${bet.toLocaleString('en-US')} 💎 lista. Toca la pantalla o pulsa Espacio para despegar.`, false);
+  public advanceStep(): void {
+    if (this.state !== 'DECISION') return;
+    if (this.currentStep >= TOTAL_STEPS) return;
+    this.launchNextStep();
+  }
+
+  private launchNextStep(): void {
+    const cfg = DIFFICULTIES[this.difficulty];
+    const nextStep = this.currentStep + 1;
+    if (nextStep > TOTAL_STEPS) return;
+
+    this.pipes.forEach(p => {
+      if (p.step === nextStep) p.status = 'active';
+    });
+
+    this.moveFromX = this.birdX;
+    this.moveFromY = this.birdY;
+    this.moveTargetStep = nextStep;
+    this.moveWillPass = Math.random() < cfg.stepPassProb;
+    this.moveCrashTop = Math.random() < 0.5;
+    this.moveElapsed = 0;
+    this.crashTriggered = false;
+    this.crashDropVy = 0;
+
+    this.state = 'MOVING';
+    this.playFlapSound();
+    this.spawnParticles(this.birdX - 10, this.birdY + 6, '#00f0ff', 7);
+
+    this.setTicker(`Volando hacia la Casilla ${nextStep}/10 (x${cfg.multipliers[nextStep - 1].toFixed(2)})...`, false);
     this.updateLadderUI();
     this.updateControlsUI();
   }
 
-  private cancelReadyRound(): void {
-    if (this.state !== 'READY') return;
-    this.userState.balance += this.betAmount;
-    this.saveSession();
-    this.state = 'IDLE';
-    this.resetWorldForIdle();
-    this.setTicker('↩️ Vuelo cancelado. Tu apuesta fue devuelta a tu saldo.', false);
-    this.updateLadderUI();
-    this.updateControlsUI();
-  }
-
-  private flap(): void {
-    if (this.state === 'READY') {
-      this.state = 'FLYING';
-      this.pandaVy = -375;
-      this.flapBurstTimer = 0.22;
-      this.playFlapSound();
-      this.spawnParticles(this.pandaX - 14, this.pandaY + 8, '#00f0ff', 7);
-      this.setTicker(`⚡ ¡En el aire! Cruza pilares (${DIFFICULTIES[this.difficulty].label}) y cobra a tiempo.`, false);
-      this.updateControlsUI();
-      return;
-    }
-
-    if (this.state === 'FLYING') {
-      this.pandaVy = -375;
-      this.flapBurstTimer = 0.2;
-      this.playFlapSound();
-      this.spawnParticles(this.pandaX - 14, this.pandaY + 8, '#ffb700', 5);
-    }
-  }
-
-  private cashOut(isAuto = false): void {
-    if (this.state !== 'FLYING' || this.pipesCleared < 1) return;
+  public cashOut(isAuto = false): void {
+    if (this.state !== 'DECISION' || this.currentStep < 1) return;
 
     this.state = 'CASHED_OUT';
-    this.cashoutPayout = Math.floor(this.betAmount * this.currentMultiplier);
+    this.cashoutPayout = Math.max(1, Math.round(this.betAmount * this.currentMultiplier));
     this.userState.balance += this.cashoutPayout;
-    this.totalRounds++;
+    this.saveSession();
+
+    this.totalRounds += 1;
     this.totalDiamondsWon += this.cashoutPayout;
     if (this.currentMultiplier > this.bestMultiplier) {
       this.bestMultiplier = this.currentMultiplier;
     }
-    this.saveSession();
 
     this.playCashoutSound();
-    this.spawnParticles(this.pandaX, this.pandaY, '#00e701', 28);
-    this.spawnParticles(this.pandaX, this.pandaY, '#ffb700', 18);
+    this.spawnParticles(this.birdX, this.birdY, '#00e701', 26);
 
-    const tag = isAuto ? '🎯 ¡AUTO-RETIRO' : '💰 ¡COBRO EXITOSO';
+    const tag = this.currentStep >= TOTAL_STEPS
+      ? '¡JACKPOT 10/10!'
+      : isAuto
+        ? 'Auto-Retiro'
+        : 'Cashout';
     this.setTicker(
-      `${tag} en x${this.currentMultiplier.toFixed(2)}! Ganaste +${this.cashoutPayout.toLocaleString('en-US')} 💎.`,
-      true
-    );
-
-    this.addHistoryRow(this.betAmount, this.pipesCleared, this.currentMultiplier, this.cashoutPayout, true);
-    this.updateStatsUI();
-    this.updateControlsUI();
-  }
-
-  private crash(): void {
-    if (this.state !== 'FLYING') return;
-    this.state = 'CRASHED';
-    this.screenShake = 0.35;
-    this.totalRounds++;
-    this.playCrashSound();
-    this.spawnParticles(this.pandaX, this.pandaY, '#ff0055', 30);
-    this.spawnParticles(this.pandaX, this.pandaY, '#ffb700', 12);
-
-    this.setTicker(
-      `💥 ¡COLISIÓN tras ${this.pipesCleared} pilares! Perdiste ${this.betAmount.toLocaleString('en-US')} 💎.`,
+      `¡${tag} en Casilla ${this.currentStep}/10 (x${this.currentMultiplier.toFixed(2)})! Ganaste +${this.cashoutPayout.toLocaleString('en-US')} 💎`,
       false,
-      true
+      'winner'
     );
-
-    this.addHistoryRow(this.betAmount, this.pipesCleared, this.currentMultiplier, 0, false);
+    this.addHistoryRow(this.betAmount, this.currentStep, this.currentMultiplier, this.cashoutPayout, true);
     this.updateStatsUI();
+    this.updateLadderUI();
     this.updateControlsUI();
   }
 
-  private update(dt: number): void {
-    const w = this.canvas.width;
-    const playH = this.canvas.height - GROUND_HEIGHT;
-    const cfg = DIFFICULTIES[this.difficulty];
+  private finishStepSuccess(pipe: StepPipe): void {
+    this.currentStep = pipe.step;
+    this.currentMultiplier = pipe.multiplier;
+    pipe.status = 'passed';
+    pipe.gemCollected = true;
 
-    // Estrellas ambientales
-    for (const s of this.stars) {
-      s.x -= s.speed * dt;
-      if (s.x < 0) s.x = w;
+    this.birdX = this.standX(this.currentStep);
+    const nextPipe = this.pipes[this.currentStep];
+    this.birdY = nextPipe ? nextPipe.gapY : pipe.gapY;
+    this.birdRot = 0;
+
+    this.playStepPassSound(this.currentStep);
+    this.spawnParticles(pipe.x, pipe.gapY, '#ffb700', 14);
+    this.addFloatText(pipe.x, pipe.gapY - 22, `x${pipe.multiplier.toFixed(2)} ✓`, '#00e701');
+
+    if (this.currentStep >= TOTAL_STEPS) {
+      this.state = 'DECISION';
+      this.cashOut(false);
+      return;
     }
 
-    // Partículas y textos flotantes
+    if (this.isAutoCashoutEnabled && this.currentMultiplier >= this.autoCashoutTarget) {
+      this.state = 'DECISION';
+      this.cashOut(true);
+      return;
+    }
+
+    this.state = 'DECISION';
+    const nextMult = DIFFICULTIES[this.difficulty].multipliers[this.currentStep];
+    const currentWin = Math.round(this.betAmount * this.currentMultiplier);
+    this.setTicker(
+      `¡Casilla ${this.currentStep}/10 superada! Tienes ${currentWin.toLocaleString('en-US')} 💎. ¿Hacer Cashout o ir por x${nextMult.toFixed(2)}?`,
+      false
+    );
+    this.updateLadderUI();
+    this.updateControlsUI();
+  }
+
+  private finishStepCrash(): void {
+    this.state = 'CRASHED';
+    this.totalRounds += 1;
+    this.addHistoryRow(this.betAmount, this.currentStep, this.currentMultiplier, 0, false);
+    this.updateStatsUI();
+    this.updateLadderUI();
+    this.setTicker(
+      `💥 Choque en Casilla ${this.moveTargetStep}/10. Apuesta perdida: ${this.betAmount.toLocaleString('en-US')} 💎.`,
+      true,
+      'crashed'
+    );
+    this.updateControlsUI();
+  }
+
+  private step(dt: number): void {
+    this.idleTime += dt;
+    this.wingPhase += dt * (this.state === 'MOVING' ? 20 : 10);
+
+    if (this.screenShake > 0) {
+      this.screenShake = Math.max(0, this.screenShake - 28 * dt);
+    }
+
+    // Actualizar partículas y textos flotantes
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
       p.x += p.vx * dt;
       p.y += p.vy * dt;
-      p.vy += 320 * dt;
-      p.alpha -= 1.45 * dt;
+      p.vy += 240 * dt;
+      p.alpha -= dt * 1.65;
       if (p.alpha <= 0) this.particles.splice(i, 1);
     }
-
     for (let i = this.floatingTexts.length - 1; i >= 0; i--) {
       const ft = this.floatingTexts[i];
       ft.y += ft.vy * dt;
-      ft.alpha -= 1.15 * dt;
+      ft.alpha -= dt * 1.05;
       if (ft.alpha <= 0) this.floatingTexts.splice(i, 1);
     }
 
-    if (this.screenShake > 0) {
-      this.screenShake = Math.max(0, this.screenShake - dt);
-    }
+    if (this.state === 'IDLE' || this.state === 'DECISION' || this.state === 'CASHED_OUT') {
+      const anchorPipe = this.pipes[Math.min(this.currentStep, TOTAL_STEPS - 1)];
+      const baseHoverY = anchorPipe ? anchorPipe.gapY : 230;
+      this.birdY = baseHoverY + Math.sin(this.idleTime * 4.5) * 6;
+      this.birdRot = Math.sin(this.idleTime * 4.5) * 0.06;
 
-    if (this.flapBurstTimer > 0) {
-      this.flapBurstTimer = Math.max(0, this.flapBurstTimer - dt);
-    }
-
-    if (this.state === 'IDLE' || this.state === 'READY') {
-      this.elapsedIdle += dt;
-      this.wingPhase += dt * 11;
-      this.pandaY = playH * 0.45 + Math.sin(this.elapsedIdle * 3.4) * 11;
-      this.groundOffset = (this.groundOffset + cfg.speed * 0.45 * dt) % 48;
-      this.cityOffset = (this.cityOffset + cfg.speed * 0.14 * dt) % w;
+      const targetCamX = this.birdX - 205;
+      this.cameraX += (targetCamX - this.cameraX) * Math.min(1, dt * 8);
       return;
     }
 
-    if (this.state !== 'FLYING') {
-      return;
-    }
+    if (this.state === 'MOVING') {
+      const targetPipe = this.pipes[this.moveTargetStep - 1];
+      if (!targetPipe) return;
 
-    // Física de vuelo
-    this.wingPhase += dt * (this.flapBurstTimer > 0 ? 22 : 12);
-    this.pandaVy = Math.min(560, this.pandaVy + 1150 * dt);
-    this.pandaY += this.pandaVy * dt;
+      if (this.moveWillPass) {
+        this.moveElapsed += dt;
+        const t = Math.min(1, this.moveElapsed / STEP_DURATION_SEC);
+        const ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 
-    this.groundOffset = (this.groundOffset + cfg.speed * dt) % 48;
-    this.cityOffset = (this.cityOffset + cfg.speed * 0.25 * dt) % w;
+        const destX = this.standX(this.moveTargetStep);
+        const nextPipe = this.pipes[this.moveTargetStep];
+        const destY = nextPipe ? nextPipe.gapY : targetPipe.gapY;
 
-    // Límite superior e inferior
-    if (this.pandaY - this.pandaRadius <= 4) {
-      this.pandaY = 4 + this.pandaRadius;
-      this.pandaVy = 60;
-    }
-    if (this.pandaY + this.pandaRadius >= playH) {
-      this.pandaY = playH - this.pandaRadius;
-      this.crash();
-      return;
-    }
+        this.birdX = this.moveFromX + (destX - this.moveFromX) * ease;
+        // Cruzar suavemente por el hueco del tubo actual en la mitad del trayecto
+        const midPull = Math.sin(t * Math.PI);
+        const linearY = this.moveFromY + (destY - this.moveFromY) * ease;
+        this.birdY = linearY * (1 - 0.55 * midPull) + targetPipe.gapY * (0.55 * midPull) - Math.sin(t * Math.PI) * 14;
+        this.birdRot = Math.sin(t * Math.PI * 2) * 0.14;
 
-    // Mover y verificar tuberías
-    const hitR = this.pandaRadius * 0.78;
-    for (const p of this.pipes) {
-      p.x -= cfg.speed * dt;
-      if (cfg.oscillateAmp > 0 && p.index >= 4) {
-        p.phase += dt * 2.1;
-        p.gapY = p.baseGapY + Math.sin(p.phase) * cfg.oscillateAmp;
-      }
+        if (!targetPipe.gemCollected && this.birdX >= targetPipe.x) {
+          targetPipe.gemCollected = true;
+          this.spawnParticles(targetPipe.x, targetPipe.gapY, '#00e701', 10);
+        }
 
-      const gapTop = p.gapY - p.gapH / 2;
-      const gapBottom = p.gapY + p.gapH / 2;
+        const targetCamX = this.birdX - 205;
+        this.cameraX += (targetCamX - this.cameraX) * Math.min(1, dt * 9);
 
-      // Colisión AABB vs círculo indulgente
-      const closestX = Math.max(p.x, Math.min(this.pandaX, p.x + p.width));
-      const inHoriz = Math.abs(this.pandaX - closestX) < hitR;
-      if (inHoriz) {
-        if (this.pandaY - hitR < gapTop || this.pandaY + hitR > gapBottom) {
-          this.crash();
-          return;
+        if (t >= 1) {
+          this.finishStepSuccess(targetPipe);
+        }
+      } else {
+        // Trayectoria de choque contra los tubos
+        this.moveElapsed += dt;
+        const impactTime = 0.36;
+        if (!this.crashTriggered) {
+          const t = Math.min(1, this.moveElapsed / impactTime);
+          const hitX = targetPipe.x - targetPipe.width * 0.35;
+          const hitY = this.moveCrashTop
+            ? targetPipe.gapY - targetPipe.gapH / 2 + 12
+            : targetPipe.gapY + targetPipe.gapH / 2 - 12;
+
+          this.birdX = this.moveFromX + (hitX - this.moveFromX) * t;
+          this.birdY = this.moveFromY + (hitY - this.moveFromY) * t;
+          this.birdRot = (this.moveCrashTop ? -0.35 : 0.35) * t;
+          targetPipe.closeAmount = t * 18;
+
+          const targetCamX = this.birdX - 205;
+          this.cameraX += (targetCamX - this.cameraX) * Math.min(1, dt * 9);
+
+          if (t >= 1) {
+            this.crashTriggered = true;
+            this.crashDropVy = -90;
+            targetPipe.status = 'crashed';
+            this.screenShake = 12;
+            this.playCrashSound();
+            this.spawnParticles(this.birdX, this.birdY, '#ff0055', 26);
+            this.addFloatText(this.birdX, this.birdY - 14, '💥 ¡CHOQUE!', '#ff4d7a');
+            this.finishStepCrash();
+          }
         }
       }
-
-      // Superar pilar
-      if (!p.passed && p.x + p.width / 2 < this.pandaX) {
-        p.passed = true;
-        p.gemCollected = true;
-        this.pipesCleared++;
-        this.currentMultiplier = p.multiplier;
-
-        this.playPointSound(this.pipesCleared);
-        this.spawnParticles(p.x + p.width / 2, p.gapY, '#ffb700', 14);
-        this.floatingTexts.push({
-          x: this.pandaX + 18,
-          y: this.pandaY - 22,
-          vy: -48,
-          text: `x${this.currentMultiplier.toFixed(2)} 💎`,
-          color: '#00e701',
-          alpha: 1
-        });
-
-        this.updateLadderUI();
-        this.updateControlsUI();
-
-        const payoutNow = Math.floor(this.betAmount * this.currentMultiplier);
-        this.setTicker(
-          `🔥 ¡Pilar #${this.pipesCleared} superado! Cobro disponible: +${payoutNow.toLocaleString('en-US')} 💎 (x${this.currentMultiplier.toFixed(2)})`,
-          false
-        );
-
-        if (this.isAutoCashoutEnabled && this.currentMultiplier >= this.autoCashoutTarget) {
-          this.cashOut(true);
-          return;
-        }
-      }
+      return;
     }
 
-    // Reciclar pilares
-    while (this.pipes.length > 0 && this.pipes[0].x + this.pipes[0].width < -40) {
-      this.pipes.shift();
-      const lastX = this.pipes[this.pipes.length - 1]?.x ?? w;
-      this.addPipeAt(lastX + cfg.spacing);
+    if (this.state === 'CRASHED') {
+      const groundY = VIEW_H - GROUND_HEIGHT - 16;
+      if (this.birdY < groundY) {
+        this.crashDropVy += 920 * dt;
+        this.birdY = Math.min(groundY, this.birdY + this.crashDropVy * dt);
+        this.birdRot = Math.min(Math.PI / 2, this.birdRot + 5.5 * dt);
+      }
     }
   }
 
-  private draw(): void {
+  private render(): void {
     const ctx = this.ctx;
-    const w = this.canvas.width;
-    const h = this.canvas.height;
-    const playH = h - GROUND_HEIGHT;
+    const playH = VIEW_H - GROUND_HEIGHT;
 
     ctx.save();
+    ctx.clearRect(0, 0, VIEW_W, VIEW_H);
+
     if (this.screenShake > 0) {
-      const mag = (this.screenShake / 0.35) * 9;
-      ctx.translate((Math.random() - 0.5) * mag, (Math.random() - 0.5) * mag);
+      ctx.translate((Math.random() - 0.5) * this.screenShake, (Math.random() - 0.5) * this.screenShake);
     }
 
-    // 1. Cielo nocturno neón
-    const skyGrad = ctx.createLinearGradient(0, 0, 0, playH);
-    skyGrad.addColorStop(0, '#050918');
-    skyGrad.addColorStop(0.55, '#0b1630');
-    skyGrad.addColorStop(1, '#10243e');
-    ctx.fillStyle = skyGrad;
-    ctx.fillRect(0, 0, w, playH);
+    // 1. Cielo nocturno
+    const sky = ctx.createLinearGradient(0, 0, 0, playH);
+    sky.addColorStop(0, '#040814');
+    sky.addColorStop(0.6, '#091428');
+    sky.addColorStop(1, '#0c1d35');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, VIEW_W, playH);
 
-    // Estrellas
+    // 2. Estrellas
     for (const s of this.stars) {
-      ctx.fillStyle = `rgba(226, 232, 240, ${s.alpha})`;
+      const twinkle = 0.55 + 0.45 * Math.sin(this.idleTime * 2.5 + s.twinklePhase);
+      ctx.fillStyle = `rgba(220, 240, 255, ${s.alpha * twinkle})`;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Luna / Portal Dorado al fondo
-    const moonGrad = ctx.createRadialGradient(w * 0.78, 92, 10, w * 0.78, 92, 95);
-    moonGrad.addColorStop(0, 'rgba(255, 183, 0, 0.25)');
-    moonGrad.addColorStop(0.5, 'rgba(0, 240, 255, 0.08)');
-    moonGrad.addColorStop(1, 'transparent');
-    ctx.fillStyle = moonGrad;
-    ctx.beginPath();
-    ctx.arc(w * 0.78, 92, 95, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Skyline ciudad cibernética en paralaje
-    this.drawSkyline(ctx, w, playH);
-
-    // 2. Tuberías Neón con Multiplicadores
-    for (const p of this.pipes) {
-      this.drawPipePair(ctx, p, playH);
+    // 3. Silueta ciudad parallax
+    const cityScroll = (this.cameraX * 0.25) % 42;
+    ctx.fillStyle = 'rgba(13, 25, 48, 0.9)';
+    for (let bx = -cityScroll - 42; bx < VIEW_W + 42; bx += 42) {
+      const idx = Math.round((bx + cityScroll) / 42);
+      const bh = 42 + Math.abs(Math.sin(idx * 2.13)) * 88;
+      ctx.fillRect(bx, playH - bh, 36, bh);
     }
 
-    // 3. Suelo deslizante
-    ctx.fillStyle = '#070f1e';
-    ctx.fillRect(0, playH, w, GROUND_HEIGHT);
-    ctx.fillStyle = '#00e701';
-    ctx.fillRect(0, playH, w, 4);
+    // Transformar al mundo horizontal
+    ctx.save();
+    ctx.translate(-this.cameraX, 0);
 
-    ctx.strokeStyle = 'rgba(0, 231, 1, 0.25)';
-    ctx.lineWidth = 2;
-    for (let x = -this.groundOffset; x < w + 48; x += 48) {
+    // 4. Plataformas de espera (casillas 0..10) y línea de meta
+    for (let i = 0; i <= TOTAL_STEPS; i++) {
+      const sx = this.standX(i);
+      if (sx < this.cameraX - 100 || sx > this.cameraX + VIEW_W + 100) continue;
+
+      ctx.save();
+      const isDone = i <= this.currentStep && i > 0;
+      ctx.strokeStyle = isDone ? 'rgba(0, 231, 1, 0.45)' : 'rgba(0, 240, 255, 0.22)';
+      ctx.setLineDash([4, 4]);
       ctx.beginPath();
-      ctx.moveTo(x, playH + 4);
-      ctx.lineTo(x - 24, h);
+      ctx.moveTo(sx, 36);
+      ctx.lineTo(sx, playH);
       ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Etiqueta de plataforma en suelo
+      ctx.fillStyle = i === TOTAL_STEPS ? '#ffb700' : isDone ? '#00e701' : '#8e9bb0';
+      ctx.font = 'bold 11px "Courier New", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(i === 0 ? 'INICIO' : i === TOTAL_STEPS ? '🏆 META 10' : `CASILLA ${i}`, sx, playH - 8);
+      ctx.restore();
     }
 
-    // 4. Partículas
-    for (const p of this.particles) {
-      ctx.globalAlpha = Math.max(0, p.alpha);
-      ctx.fillStyle = p.color;
+    // 5. Los 10 pares de tubos neón
+    for (const p of this.pipes) {
+      if (p.x + p.width < this.cameraX - 80 || p.x - p.width > this.cameraX + VIEW_W + 80) continue;
+      this.drawPipePair(p, playH);
+    }
+
+    // 6. Partículas y textos flotantes
+    for (const pt of this.particles) {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, pt.alpha);
+      ctx.fillStyle = pt.color;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.arc(pt.x, pt.y, pt.radius, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
     }
-    ctx.globalAlpha = 1;
 
-    // 5. Flappy Panda Aviador
-    this.drawPanda(ctx);
-
-    // 6. Textos flotantes
     for (const ft of this.floatingTexts) {
+      ctx.save();
       ctx.globalAlpha = Math.max(0, ft.alpha);
-      ctx.font = '900 20px "Courier New", monospace';
+      ctx.font = '900 15px "Segoe UI", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillStyle = ft.color;
-      ctx.shadowColor = ft.color;
-      ctx.shadowBlur = 10;
       ctx.fillText(ft.text, ft.x, ft.y);
-      ctx.shadowBlur = 0;
+      ctx.restore();
     }
-    ctx.globalAlpha = 1;
 
-    // 7. HUD en vivo sobre el cielo cuando está volando
-    if (this.state === 'FLYING' || this.state === 'CASHED_OUT') {
-      ctx.textAlign = 'center';
-      ctx.font = '900 42px "Courier New", monospace';
-      ctx.fillStyle = this.pipesCleared > 0 ? '#00e701' : '#00f0ff';
-      ctx.shadowColor = this.pipesCleared > 0 ? 'rgba(0,231,1,0.6)' : 'rgba(0,240,255,0.5)';
-      ctx.shadowBlur = 16;
-      ctx.fillText(`x${this.currentMultiplier.toFixed(2)}`, w / 2, 54);
-      ctx.shadowBlur = 0;
+    // 7. Panda-Pájaro
+    this.drawPandaBird();
 
-      if (this.pipesCleared > 0) {
-        const potential = Math.floor(this.betAmount * this.currentMultiplier);
-        ctx.font = '800 15px "Segoe UI", sans-serif';
-        ctx.fillStyle = '#ffb700';
-        ctx.fillText(`Cobro actual: +${potential.toLocaleString('en-US')} 💎 (${this.pipesCleared} pilares)`, w / 2, 78);
-      }
+    ctx.restore(); // fin transformación mundo
+
+    // 8. Suelo fijo con banda neón en movimiento
+    ctx.fillStyle = '#060c1a';
+    ctx.fillRect(0, playH, VIEW_W, GROUND_HEIGHT);
+    ctx.fillStyle = '#00e701';
+    ctx.fillRect(0, playH, VIEW_W, 3);
+    ctx.fillStyle = 'rgba(0, 231, 1, 0.14)';
+    const stripeOff = ((this.cameraX % 32) + 32) % 32;
+    for (let gx = -stripeOff; gx < VIEW_W + 32; gx += 32) {
+      ctx.fillRect(gx, playH + 3, 14, 7);
+    }
+
+    // 9. Marcador superior de casilla / multiplicador en vivo
+    if (this.state === 'MOVING' || this.state === 'DECISION') {
+      const pot = Math.round(this.betAmount * this.currentMultiplier);
+      ctx.save();
+      ctx.fillStyle = 'rgba(6, 11, 24, 0.8)';
+      ctx.strokeStyle = this.currentStep > 0 ? 'rgba(0, 231, 1, 0.55)' : 'rgba(0, 240, 255, 0.45)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(14, 14, 215, 50, 10);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = this.currentStep > 0 ? '#00e701' : '#00f0ff';
+      ctx.font = '900 18px "Courier New", monospace';
+      ctx.fillText(`Casilla ${this.currentStep}/10 • x${this.currentMultiplier.toFixed(2)}`, 24, 36);
+
+      ctx.fillStyle = '#ffb700';
+      ctx.font = 'bold 12px "Segoe UI", sans-serif';
+      ctx.fillText(
+        this.currentStep > 0 ? `Acumulado: ${pot.toLocaleString('en-US')} 💎` : `Apuesta en juego: ${this.betAmount.toLocaleString('en-US')} 💎`,
+        24,
+        55
+      );
+      ctx.restore();
     }
 
     ctx.restore();
   }
 
-  private drawSkyline(ctx: CanvasRenderingContext2D, w: number, playH: number): void {
-    const buildings = [44, 68, 52, 84, 58, 92, 48, 72, 62, 88, 50, 76];
-    const bw = w / buildings.length;
-    ctx.fillStyle = '#0d1b36';
-    for (let rep = 0; rep < 2; rep++) {
-      for (let i = 0; i < buildings.length; i++) {
-        const bh = buildings[i];
-        const bx = i * bw - this.cityOffset + rep * w;
-        if (bx + bw < 0 || bx > w) continue;
-        ctx.fillRect(bx, playH - bh, bw - 3, bh);
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.14)';
-        ctx.fillRect(bx + 6, playH - bh + 8, 6, 6);
-        ctx.fillRect(bx + bw - 16, playH - bh + 16, 6, 6);
-        ctx.fillStyle = '#0d1b36';
-      }
-    }
-  }
+  private drawPipePair(p: StepPipe, playH: number): void {
+    const ctx = this.ctx;
+    const x = p.x - p.width / 2;
+    const halfGap = Math.max(26, p.gapH / 2 - p.closeAmount);
+    const topH = Math.max(24, p.gapY - halfGap);
+    const botY = Math.min(playH - 24, p.gapY + halfGap);
+    const botH = playH - botY;
 
-  private drawPipePair(ctx: CanvasRenderingContext2D, p: Pipe, playH: number): void {
-    const gapTop = p.gapY - p.gapH / 2;
-    const gapBottom = p.gapY + p.gapH / 2;
+    const borderColor = p.status === 'passed'
+      ? '#00e701'
+      : p.status === 'crashed'
+        ? '#ff0055'
+        : p.status === 'active'
+          ? '#ffb700'
+          : '#00c6ff';
 
-    const borderColor = p.passed ? '#00e701' : '#00f0ff';
-    const bodyGrad = ctx.createLinearGradient(p.x, 0, p.x + p.width, 0);
-    if (p.passed) {
-      bodyGrad.addColorStop(0, '#0a3d1c');
-      bodyGrad.addColorStop(0.5, '#136e33');
-      bodyGrad.addColorStop(1, '#082d14');
+    const bodyGrad = ctx.createLinearGradient(x, 0, x + p.width, 0);
+    if (p.status === 'passed') {
+      bodyGrad.addColorStop(0, '#093818');
+      bodyGrad.addColorStop(0.5, '#135c2b');
+      bodyGrad.addColorStop(1, '#072711');
+    } else if (p.status === 'crashed') {
+      bodyGrad.addColorStop(0, '#440919');
+      bodyGrad.addColorStop(0.5, '#6e1029');
+      bodyGrad.addColorStop(1, '#2b0510');
     } else {
-      bodyGrad.addColorStop(0, '#10213d');
-      bodyGrad.addColorStop(0.5, '#1b3560');
-      bodyGrad.addColorStop(1, '#0c182e');
+      bodyGrad.addColorStop(0, '#0d1b36');
+      bodyGrad.addColorStop(0.5, '#1b3563');
+      bodyGrad.addColorStop(1, '#0b152b');
     }
 
-    // Tubería superior
+    // Tubo superior
     ctx.fillStyle = bodyGrad;
-    ctx.fillRect(p.x, 0, p.width, gapTop);
     ctx.strokeStyle = borderColor;
     ctx.lineWidth = 2;
-    ctx.strokeRect(p.x, -2, p.width, gapTop + 2);
+    ctx.fillRect(x, 0, p.width, topH - 18);
+    ctx.strokeRect(x, 0, p.width, topH - 18);
+    ctx.fillRect(x - 5, topH - 18, p.width + 10, 18);
+    ctx.strokeRect(x - 5, topH - 18, p.width + 10, 18);
 
-    // Capuchón superior
-    ctx.fillStyle = bodyGrad;
-    ctx.fillRect(p.x - 5, gapTop - 18, p.width + 10, 18);
-    ctx.strokeRect(p.x - 5, gapTop - 18, p.width + 10, 18);
+    // Tubo inferior
+    ctx.fillRect(x - 5, botY, p.width + 10, 18);
+    ctx.strokeRect(x - 5, botY, p.width + 10, 18);
+    ctx.fillRect(x, botY + 18, p.width, Math.max(0, botH - 18));
+    ctx.strokeRect(x, botY + 18, p.width, Math.max(0, botH - 18));
 
-    // Tubería inferior
-    const botH = playH - gapBottom;
-    ctx.fillStyle = bodyGrad;
-    ctx.fillRect(p.x, gapBottom, p.width, botH);
-    ctx.strokeRect(p.x, gapBottom, p.width, botH + 2);
+    // Placa con el multiplicador sobre la abertura
+    const badgeW = 66;
+    const badgeH = 22;
+    const bx = p.x - badgeW / 2;
+    const by = Math.max(8, topH - 46);
+    ctx.fillStyle = 'rgba(7, 12, 26, 0.92)';
+    ctx.strokeStyle = borderColor;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(bx, by, badgeW, badgeH, 6);
+    ctx.fill();
+    ctx.stroke();
 
-    // Capuchón inferior
-    ctx.fillStyle = bodyGrad;
-    ctx.fillRect(p.x - 5, gapBottom, p.width + 10, 18);
-    ctx.strokeRect(p.x - 5, gapBottom, p.width + 10, 18);
-
-    // Etiqueta del multiplicador en la tubería inferior
-    const labelY = Math.min(playH - 22, gapBottom + 42);
-    ctx.fillStyle = p.passed ? '#00e701' : '#ffb700';
-    ctx.font = '900 13px "Courier New", monospace';
+    ctx.fillStyle = borderColor;
+    ctx.font = '900 11px "Courier New", monospace';
     ctx.textAlign = 'center';
-    ctx.fillText(`x${p.multiplier.toFixed(2)}`, p.x + p.width / 2, labelY);
+    ctx.fillText(`x${p.multiplier.toFixed(2)}`, p.x, by + 15);
 
-    // Diamante flotante dentro del hueco si no ha sido recogido
-    if (!p.gemCollected) {
-      const gx = p.x + p.width / 2;
-      const gy = p.gapY + Math.sin(performance.now() * 0.006 + p.index) * 5;
+    // Gema brillante dentro del hueco si aún no se recoge
+    if (!p.gemCollected && p.status !== 'crashed') {
+      const bob = Math.sin(this.idleTime * 5 + p.step) * 4;
       ctx.save();
-      ctx.translate(gx, gy);
-      ctx.shadowColor = '#00f0ff';
-      ctx.shadowBlur = 12;
-      ctx.fillStyle = '#00f0ff';
+      ctx.translate(p.x, p.gapY + bob);
+      ctx.fillStyle = p.status === 'active' ? '#ffb700' : 'rgba(0, 240, 255, 0.65)';
       ctx.beginPath();
-      ctx.moveTo(0, -11);
-      ctx.lineTo(10, -2);
-      ctx.lineTo(0, 12);
-      ctx.lineTo(-10, -2);
-      ctx.closePath();
-      ctx.fill();
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.moveTo(0, -8);
-      ctx.lineTo(4, -2);
-      ctx.lineTo(0, 4);
-      ctx.lineTo(-4, -2);
+      ctx.moveTo(0, -10);
+      ctx.lineTo(9, 0);
+      ctx.lineTo(0, 10);
+      ctx.lineTo(-9, 0);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
     }
   }
 
-  private drawPanda(ctx: CanvasRenderingContext2D): void {
+  private drawPandaBird(): void {
+    const ctx = this.ctx;
     ctx.save();
-    ctx.translate(this.pandaX, this.pandaY);
+    ctx.translate(this.birdX, this.birdY);
+    ctx.rotate(this.birdRot);
 
-    let rot = 0;
-    if (this.state === 'FLYING') {
-      rot = Math.max(-0.45, Math.min(0.65, this.pandaVy / 520));
-    } else if (this.state === 'CRASHED') {
-      rot = 0.75;
-    }
-    ctx.rotate(rot);
+    const wingLift = Math.sin(this.wingPhase) * 6;
 
-    // Aura de estado
-    if (this.state === 'CASHED_OUT') {
-      ctx.shadowColor = '#00e701';
-      ctx.shadowBlur = 22;
-    } else if (this.state === 'FLYING') {
-      ctx.shadowColor = '#ffb700';
-      ctx.shadowBlur = 12;
-    }
-
-    // Bufanda aviador ondeante detrás
-    const scarfWave = Math.sin(this.wingPhase * 0.9) * 4;
-    ctx.strokeStyle = '#ff0055';
-    ctx.lineWidth = 6;
-    ctx.lineCap = 'round';
+    // Ala
+    ctx.fillStyle = '#00f0ff';
     ctx.beginPath();
-    ctx.moveTo(-10, 4);
-    ctx.quadraticCurveTo(-22, 2 + scarfWave, -32, 6 - scarfWave);
-    ctx.stroke();
-
-    // Orejas negras
-    ctx.fillStyle = '#111827';
-    ctx.beginPath();
-    ctx.arc(-9, -14, 6.5, 0, Math.PI * 2);
-    ctx.arc(9, -14, 6.5, 0, Math.PI * 2);
+    ctx.ellipse(-6, 4 + wingLift * 0.4, 11, 7, -0.35, 0, Math.PI * 2);
     ctx.fill();
 
-    // Cabeza/cuerpo redondo blanco
-    ctx.fillStyle = '#f8fafc';
+    // Cuerpo blanco del Panda-Pájaro
+    ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    ctx.arc(0, 0, this.pandaRadius, 0, Math.PI * 2);
+    ctx.arc(0, 0, 17, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = '#ffb700';
+    ctx.strokeStyle = '#00e701';
     ctx.lineWidth = 2;
     ctx.stroke();
-    ctx.shadowBlur = 0;
 
-    // Parches de panda en ojos
+    // Oreja panda y parche
     ctx.fillStyle = '#0f172a';
     ctx.beginPath();
-    ctx.ellipse(6, -3, 5, 6.2, -0.2, 0, Math.PI * 2);
+    ctx.arc(-7, -14, 5.5, 0, Math.PI * 2);
     ctx.fill();
 
-    // Gafas de aviador doradas + cristal cian
-    ctx.fillStyle = this.state === 'CRASHED' ? '#ff0055' : '#00f0ff';
-    ctx.strokeStyle = '#ffb700';
-    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(7, -3, 4.5, 0, Math.PI * 2);
+    ctx.ellipse(5, -3, 5.5, 6.8, -0.2, 0, Math.PI * 2);
     ctx.fill();
-    ctx.stroke();
 
-    if (this.state !== 'CRASHED') {
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.arc(8.5, -4.5, 1.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // Nariz y sonrisa
-    ctx.fillStyle = '#0f172a';
+    // Ojo brillante
+    ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    ctx.ellipse(14, 3, 2.5, 1.8, 0, 0, Math.PI * 2);
+    ctx.arc(6.5, -3.5, 2.4, 0, Math.PI * 2);
     ctx.fill();
 
-    // Ala animada dorada
-    const wingY = Math.sin(this.wingPhase) * 6;
-    ctx.save();
-    ctx.translate(-3, 4);
-    ctx.rotate(wingY * 0.08);
+    // Pico dorado
     ctx.fillStyle = '#ffb700';
     ctx.beginPath();
-    ctx.ellipse(-2, 2, 10, 6, -0.35, 0, Math.PI * 2);
+    ctx.moveTo(14, -2);
+    ctx.lineTo(24, 3);
+    ctx.lineTo(14, 8);
+    ctx.closePath();
     ctx.fill();
-    ctx.strokeStyle = '#fff3b0';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ctx.restore();
 
     ctx.restore();
   }
 
   private loop(now: number): void {
-    const dt = Math.min(0.04, Math.max(0.001, (now - this.lastFrameTime) / 1000));
+    const dt = Math.min(0.05, Math.max(0.001, (now - this.lastFrameTime) / 1000));
     this.lastFrameTime = now;
 
-    this.update(dt);
-    this.draw();
-    requestAnimationFrame((t) => this.loop(t));
-  }
+    this.step(dt);
+    this.render();
 
-  private setTicker(msg: string, isWin: boolean, isCrash = false): void {
-    const bar = document.getElementById('flappyTickerBar');
-    if (!bar) return;
-    bar.className = 'flappy-ticker-bar';
-    if (isWin) bar.classList.add('winner');
-    if (isCrash) bar.classList.add('crashed');
-    bar.innerHTML = `
-      <span style="font-weight:${isWin || isCrash ? '900' : '600'}; color:${isWin ? '#00e701' : isCrash ? '#ff4d7a' : '#cbd5e1'};">${msg}</span>
-      <span style="font-size:0.72rem; color:var(--accent-gold); font-family:'Courier New',monospace;">Flappy Panda &bull; ${DIFFICULTIES[this.difficulty].label}</span>
-    `;
+    requestAnimationFrame((t) => this.loop(t));
   }
 
   private updateLadderUI(): void {
     const strip = document.getElementById('flappyLadderStrip');
     if (!strip) return;
-    const startIdx = Math.max(1, this.pipesCleared);
+    const cfg = DIFFICULTIES[this.difficulty];
     let html = '';
-    for (let i = startIdx; i < startIdx + 9; i++) {
-      const mult = this.calcMultiplier(this.difficulty, i);
-      const cls = i <= this.pipesCleared ? 'passed' : i === this.pipesCleared + 1 ? 'next' : '';
-      html += `<span class="ladder-pill ${cls}">P${i} &bull; x${mult.toFixed(2)}</span>`;
+    for (let s = 1; s <= TOTAL_STEPS; s++) {
+      const m = cfg.multipliers[s - 1];
+      const cls = s <= this.currentStep
+        ? 'passed'
+        : s === this.currentStep + 1
+          ? 'next'
+          : '';
+      html += `<span class="ladder-pill ${cls}">#${s} x${m.toFixed(2)}</span>`;
     }
     strip.innerHTML = html;
   }
 
+  private setTicker(text: string, isError = false, mood: '' | 'winner' | 'crashed' = ''): void {
+    const bar = document.getElementById('flappyTickerBar');
+    if (!bar) return;
+    bar.className = 'flappy-ticker-bar' + (mood ? ' ' + mood : '');
+    const color = isError ? '#ff4d7a' : mood === 'winner' ? '#00e701' : '#cbd5e1';
+    bar.innerHTML = `
+      <span style="color: ${color};">${text}</span>
+      <span style="font-size: 0.72rem; color: var(--accent-gold); font-family: 'Courier New', monospace;">Flappy Panda &bull; ${DIFFICULTIES[this.difficulty].label}</span>
+    `;
+  }
+
   private updateControlsUI(): void {
+    const busy = this.state === 'MOVING' || this.state === 'DECISION';
+    const betInput = document.getElementById('betAmountInput') as HTMLInputElement | null;
+    if (betInput) betInput.disabled = busy;
+    document.querySelectorAll('.btn-mod, .btn-qbet, .btn-diff').forEach(el => {
+      (el as HTMLButtonElement).disabled = busy;
+    });
+
+    const advQuick = document.getElementById('btnFlappyAdvanceQuick') as HTMLButtonElement | null;
+    const cashQuick = document.getElementById('btnFlappyCashoutQuick') as HTMLButtonElement | null;
+
+    if (advQuick) {
+      advQuick.disabled = this.state !== 'DECISION' || this.currentStep >= TOTAL_STEPS;
+      if (this.state === 'DECISION' && this.currentStep < TOTAL_STEPS) {
+        const nextM = DIFFICULTIES[this.difficulty].multipliers[this.currentStep];
+        advQuick.textContent = `🐥 AVANZAR (${this.currentStep + 1}/10 → x${nextM.toFixed(2)})`;
+      } else if (this.state === 'MOVING') {
+        advQuick.textContent = `🐥 VOLANDO CASILLA ${this.moveTargetStep}...`;
+      } else {
+        advQuick.textContent = '🐥 AVANZAR CASILLA';
+      }
+    }
+
+    if (cashQuick) {
+      cashQuick.classList.remove('btn-cashed-out');
+      if (this.state === 'DECISION' && this.currentStep >= 1) {
+        const winAmt = Math.round(this.betAmount * this.currentMultiplier);
+        cashQuick.disabled = false;
+        cashQuick.textContent = `💰 COBRAR (${winAmt.toLocaleString('en-US')} 💎)`;
+      } else if (this.state === 'CASHED_OUT') {
+        cashQuick.disabled = true;
+        cashQuick.classList.add('btn-cashed-out');
+        cashQuick.textContent = `✓ +${this.cashoutPayout.toLocaleString('en-US')} 💎`;
+      } else {
+        cashQuick.disabled = true;
+        cashQuick.textContent = '💰 COBRAR';
+      }
+    }
+
     const mainBtn = document.getElementById('btnFlappyAction') as HTMLButtonElement | null;
     const mainTitle = document.getElementById('btnFlappyMainTitle');
     const mainSub = document.getElementById('btnFlappySubTitle');
-    const tapBtn = document.getElementById('btnFlappyTap') as HTMLButtonElement | null;
-    const quickCashBtn = document.getElementById('btnFlappyCashoutQuick') as HTMLButtonElement | null;
-    const betInput = document.getElementById('betAmountInput') as HTMLInputElement | null;
-
-    const locked = this.state === 'READY' || this.state === 'FLYING';
-    if (betInput) betInput.disabled = locked;
-    document.querySelectorAll<HTMLButtonElement>('.btn-mod, .btn-qbet, .btn-diff').forEach(b => {
-      b.disabled = locked;
-    });
-
-    if (tapBtn) {
-      tapBtn.disabled = !(this.state === 'READY' || this.state === 'FLYING');
-      tapBtn.textContent = this.state === 'READY' ? '🚀 DESPEGAR' : '🐥 ALETEAR';
-    }
-
-    if (quickCashBtn) {
-      if (this.state === 'FLYING' && this.pipesCleared >= 1) {
-        const pay = Math.floor(this.betAmount * this.currentMultiplier);
-        quickCashBtn.disabled = false;
-        quickCashBtn.textContent = `💰 COBRAR +${pay.toLocaleString('en-US')} 💎`;
-      } else {
-        quickCashBtn.disabled = true;
-        quickCashBtn.textContent = '💰 COBRAR';
-      }
-    }
 
     if (mainBtn && mainTitle && mainSub) {
-      mainBtn.classList.remove('btn-bet', 'btn-bet-cancel', 'btn-cashout', 'btn-cashed-out', 'btn-crashed');
-      mainBtn.disabled = false;
+      mainBtn.classList.remove('btn-bet', 'btn-cashout', 'btn-cashed-out', 'btn-crashed');
+      delete mainBtn.dataset.mode;
 
-      if (this.state === 'READY') {
-        mainBtn.dataset.mode = 'cancel';
-        mainBtn.classList.add('btn-bet-cancel');
-        mainTitle.textContent = '↩️ CANCELAR VUELO';
-        mainSub.style.display = 'block';
-        mainSub.textContent = `Devolver ${this.betAmount.toLocaleString('en-US')} 💎`;
-      } else if (this.state === 'FLYING') {
+      if (this.state === 'MOVING') {
+        mainBtn.disabled = true;
         mainBtn.dataset.mode = 'cashout';
-        if (this.pipesCleared >= 1) {
-          const pay = Math.floor(this.betAmount * this.currentMultiplier);
-          mainBtn.classList.add('btn-cashout');
-          mainTitle.textContent = `💰 COBRAR x${this.currentMultiplier.toFixed(2)}`;
-          mainSub.style.display = 'block';
-          mainSub.textContent = `Recibir +${pay.toLocaleString('en-US')} 💎`;
-        } else {
-          mainBtn.classList.add('btn-bet');
-          mainBtn.disabled = true;
-          mainTitle.textContent = '🐥 CRUZA EL 1er PILAR';
-          mainSub.style.display = 'block';
-          mainSub.textContent = `Meta P1: x${this.calcMultiplier(this.difficulty, 1).toFixed(2)}`;
-        }
-      } else if (this.state === 'CASHED_OUT') {
-        mainBtn.dataset.mode = 'bet';
-        mainBtn.classList.add('btn-bet');
-        mainTitle.textContent = '🐥 JUGAR DE NUEVO';
-        mainSub.style.display = 'block';
-        mainSub.textContent = `Último cobro: +${this.cashoutPayout.toLocaleString('en-US')} 💎`;
-      } else if (this.state === 'CRASHED') {
-        mainBtn.dataset.mode = 'bet';
-        mainBtn.classList.add('btn-bet');
-        mainTitle.textContent = '🐥 VOLVER A VOLAR';
+        mainBtn.classList.add('btn-cashout');
+        mainTitle.textContent = `🐥 VOLANDO A CASILLA ${this.moveTargetStep}/10`;
         mainSub.style.display = 'none';
+      } else if (this.state === 'DECISION') {
+        const winAmt = Math.round(this.betAmount * this.currentMultiplier);
+        mainBtn.disabled = false;
+        mainBtn.dataset.mode = 'cashout';
+        mainBtn.classList.add('btn-cashout');
+        mainTitle.textContent = `💰 HACER CASHOUT (+${winAmt.toLocaleString('en-US')} 💎)`;
+        mainSub.style.display = 'block';
+        mainSub.textContent = `Casilla ${this.currentStep}/10 • x${this.currentMultiplier.toFixed(2)}`;
+      } else if (this.state === 'CASHED_OUT') {
+        mainBtn.disabled = false;
+        mainBtn.classList.add('btn-cashed-out');
+        mainTitle.textContent = '✓ ¡PREMIO COBRADO!';
+        mainSub.style.display = 'block';
+        mainSub.textContent = `+${this.cashoutPayout.toLocaleString('en-US')} 💎 • CLIC PARA OTRA PARTIDA`;
+      } else if (this.state === 'CRASHED') {
+        mainBtn.disabled = false;
+        mainBtn.classList.add('btn-crashed');
+        mainTitle.textContent = '💥 CHOQUE • JUGAR DE NUEVO';
+        mainSub.style.display = 'block';
+        mainSub.textContent = 'Pulsa para intentar otra partida';
       } else {
+        mainBtn.disabled = false;
         mainBtn.dataset.mode = 'bet';
         mainBtn.classList.add('btn-bet');
-        mainTitle.textContent = '🐥 INICIAR VUELO';
+        mainTitle.textContent = '🐥 INICIAR PARTIDA';
         mainSub.style.display = 'none';
       }
     }
 
-    // Overlay visual sobre el canvas
     const overlay = document.getElementById('flappyCanvasOverlay');
     if (overlay) {
-      if (this.state === 'FLYING') {
+      overlay.classList.remove('decision-mode');
+      if (this.state === 'MOVING') {
         overlay.style.display = 'none';
+      } else if (this.state === 'DECISION') {
+        overlay.style.display = 'flex';
+        overlay.classList.add('decision-mode');
+        const currentWin = Math.round(this.betAmount * this.currentMultiplier);
+        const nextStep = this.currentStep + 1;
+        const nextMult = DIFFICULTIES[this.difficulty].multipliers[nextStep - 1];
+        const nextWin = Math.round(this.betAmount * nextMult);
+
+        overlay.innerHTML = `
+          <div class="decision-modal-card" id="flappyDecisionModal">
+            <div class="decision-top-row">
+              <span class="decision-step-badge">✓ Casilla ${this.currentStep}/10 Superada</span>
+              <span class="decision-current-info">Asegurado: <strong>x${this.currentMultiplier.toFixed(2)} (${currentWin.toLocaleString('en-US')} 💎)</strong></span>
+            </div>
+            <div class="decision-actions-grid">
+              <button type="button" class="btn-decision-cashout" id="btnModalCashout">
+                <span>💰 HACER CASHOUT</span>
+                <small>Cobrar +${currentWin.toLocaleString('en-US')} 💎 ahora</small>
+              </button>
+              <button type="button" class="btn-decision-advance" id="btnModalContinue">
+                <span>🐥 SEGUIR AVANZANDO</span>
+                <small>Casilla ${nextStep}/10 • x${nextMult.toFixed(2)} (+${nextWin.toLocaleString('en-US')} 💎)</small>
+              </button>
+            </div>
+          </div>
+        `;
       } else {
         overlay.style.display = 'flex';
-        if (this.state === 'READY') {
-          overlay.innerHTML = `
-            <div class="overlay-card ready">
-              <div class="overlay-title" style="color:#00f0ff;">🚀 ¡PANDA LISTO!</div>
-              <div class="overlay-sub" style="margin-bottom:0;">Toca aquí o pulsa <strong>ESPACIO</strong> para dar el primer salto</div>
-            </div>
-          `;
-        } else if (this.state === 'CASHED_OUT') {
+        if (this.state === 'CASHED_OUT') {
           overlay.innerHTML = `
             <div class="overlay-card win">
               <div class="overlay-title" style="color:#00e701;">🏆 ¡COBRO x${this.currentMultiplier.toFixed(2)}!</div>
-              <div class="overlay-sub">Aseguraste <strong style="color:#ffb700;">+${this.cashoutPayout.toLocaleString('en-US')} 💎</strong> tras ${this.pipesCleared} pilares</div>
+              <div class="overlay-sub">Aseguraste <strong style="color:#ffb700;">+${this.cashoutPayout.toLocaleString('en-US')} 💎</strong> en la Casilla ${this.currentStep}/10</div>
               <button type="button" class="overlay-btn" id="btnOverlayPlayAgain">🐥 JUGAR DE NUEVO</button>
             </div>
           `;
         } else if (this.state === 'CRASHED') {
           overlay.innerHTML = `
             <div class="overlay-card crash">
-              <div class="overlay-title" style="color:#ff4d7a;">💥 ¡COLISIÓN!</div>
-              <div class="overlay-sub">Pilares superados: <strong>${this.pipesCleared}</strong> &bull; Apuesta: ${this.betAmount.toLocaleString('en-US')} 💎</div>
-              <button type="button" class="overlay-btn" id="btnOverlayPlayAgain">🔄 REINTENTAR</button>
+              <div class="overlay-title" style="color:#ff4d7a;">💥 ¡CHOQUE EN TUBOS!</div>
+              <div class="overlay-sub">Fallo al intentar la Casilla <strong>${this.moveTargetStep}/10</strong> &bull; Apuesta: ${this.betAmount.toLocaleString('en-US')} 💎</div>
+              <button type="button" class="overlay-btn" id="btnOverlayPlayAgain">🔄 JUGAR DE NUEVO</button>
             </div>
           `;
         } else {
+          const cfg = DIFFICULTIES[this.difficulty];
           overlay.innerHTML = `
             <div class="overlay-card">
-              <div class="overlay-title">🐥 Flappy Panda Turbo</div>
-              <div class="overlay-sub">Cruza cada pilar para multiplicar hasta <strong>x500</strong> y cobra cuando quieras</div>
-              <button type="button" class="overlay-btn" id="btnOverlayPlayAgain">▶ INICIAR VUELO</button>
+              <div class="overlay-title">🐥 Flappy Panda • 10 Casillas</div>
+              <div class="overlay-sub">Avanza entre 10 parejas de tubos (${cfg.label}: hasta <strong>x${cfg.multipliers[9].toFixed(2)}</strong>) y elige en cada casilla si hacer Cashout o seguir.</div>
+              <button type="button" class="overlay-btn" id="btnOverlayPlayAgain">▶ INICIAR PARTIDA</button>
             </div>
           `;
         }
@@ -1106,7 +1096,7 @@ class FlappyPandaGame {
     if (mEl) mEl.textContent = `x${this.bestMultiplier.toFixed(2)}`;
   }
 
-  private addHistoryRow(bet: number, pipes: number, mult: number, payout: number, isWin: boolean): void {
+  private addHistoryRow(bet: number, stepReached: number, mult: number, payout: number, isWin: boolean): void {
     const list = document.getElementById('flappyHistoryList');
     if (!list) return;
     const empty = list.querySelector('.empty-hist');
@@ -1118,7 +1108,7 @@ class FlappyPandaGame {
     row.innerHTML = `
       <div>
         <span style="color:#fff; font-weight:700;">${bet} 💎</span>
-        <span style="color:#8e9bb0; margin-left:4px;">(${pipes}P &bull; ${isWin ? 'x' + mult.toFixed(2) : 'Crash'})</span>
+        <span style="color:#8e9bb0; margin-left:4px;">(${isWin ? `C${stepReached}/10 • x${mult.toFixed(2)}` : `Choque C${this.moveTargetStep}`})</span>
       </div>
       <span style="color:${isWin ? '#00e701' : '#ff3377'}; font-weight:900; font-family:'Courier New',monospace;">
         ${isWin ? `+${payout} 💎` : '0 💎'}
@@ -1153,7 +1143,7 @@ class FlappyPandaGame {
 
     document.querySelectorAll('.btn-qbet').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        if (this.state === 'READY' || this.state === 'FLYING') return;
+        if (this.state === 'MOVING' || this.state === 'DECISION') return;
         document.querySelectorAll('.btn-qbet').forEach(b => b.classList.remove('active'));
         const el = e.currentTarget as HTMLElement;
         el.classList.add('active');
@@ -1164,15 +1154,20 @@ class FlappyPandaGame {
 
     document.querySelectorAll('.btn-diff').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        if (this.state === 'READY' || this.state === 'FLYING') return;
+        if (this.state === 'MOVING' || this.state === 'DECISION') return;
         document.querySelectorAll('.btn-diff').forEach(b => b.classList.remove('active'));
         const el = e.currentTarget as HTMLElement;
         el.classList.add('active');
         const d = el.getAttribute('data-diff') as DifficultyKey | null;
         if (d && DIFFICULTIES[d]) {
           this.difficulty = d;
+          this.buildCourse();
           this.updateLadderUI();
-          this.setTicker(`Modo ${DIFFICULTIES[d].label} seleccionado (x${DIFFICULTIES[d].factor.toFixed(2)} por pilar).`, false);
+          this.updateControlsUI();
+          this.setTicker(
+            `Dificultad ${DIFFICULTIES[d].label}: 10 casillas (desde x${DIFFICULTIES[d].multipliers[0].toFixed(2)} hasta x${DIFFICULTIES[d].multipliers[9].toFixed(2)}).`,
+            false
+          );
         }
       });
     });
@@ -1228,51 +1223,54 @@ class FlappyPandaGame {
     });
 
     // Botón principal izquierda
-    const mainActionBtn = document.getElementById('btnFlappyAction');
-    mainActionBtn?.addEventListener('click', () => {
-      if (this.state === 'READY') {
-        this.cancelReadyRound();
-      } else if (this.state === 'FLYING') {
+    document.getElementById('btnFlappyAction')?.addEventListener('click', () => {
+      if (this.state === 'DECISION') {
         this.cashOut(false);
-      } else {
-        this.startFlightRound();
+      } else if (this.state !== 'MOVING') {
+        this.startRound();
       }
     });
 
-    // Botón del overlay (Iniciar / Reintentar)
-    const overlay = document.getElementById('flappyCanvasOverlay');
-    overlay?.addEventListener('click', (e) => {
+    // Botones del overlay (Iniciar / Reintentar + Modal de Decisión: Cashout vs Avanzar)
+    document.getElementById('flappyCanvasOverlay')?.addEventListener('click', (e) => {
       const target = e.target as HTMLElement | null;
-      if (target?.closest('#btnOverlayPlayAgain')) {
-        this.startFlightRound();
+      if (!target) return;
+      if (target.closest('#btnOverlayPlayAgain')) {
+        this.startRound();
+      } else if (target.closest('#btnModalCashout')) {
+        this.cashOut(false);
+      } else if (target.closest('#btnModalContinue')) {
+        this.advanceStep();
       }
     });
 
-    // Controles táctiles/ratón para aletear con latencia mínima
-    const handleTap = (e: Event) => {
-      e.preventDefault();
-      this.flap();
-    };
-    this.canvas.addEventListener('pointerdown', handleTap);
-    document.getElementById('btnFlappyTap')?.addEventListener('pointerdown', handleTap);
-
-    // Botón rápido de cobro bajo el canvas
+    // Barra rápida inferior
+    document.getElementById('btnFlappyAdvanceQuick')?.addEventListener('click', () => {
+      if (this.state === 'DECISION') {
+        this.advanceStep();
+      }
+    });
     document.getElementById('btnFlappyCashoutQuick')?.addEventListener('click', () => {
-      this.cashOut(false);
+      if (this.state === 'DECISION') {
+        this.cashOut(false);
+      }
     });
 
-    // Teclado (Espacio / Flecha Arriba / W para aletear; C / Enter para cobrar)
+    // Teclado (Espacio / Enter para avanzar o iniciar; C para hacer cashout)
     window.addEventListener('keydown', (e) => {
       const activeTag = (document.activeElement as HTMLElement | null)?.tagName;
       if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
 
-      if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') {
-        if (this.state === 'READY' || this.state === 'FLYING') {
+      if (e.code === 'Space' || e.code === 'Enter') {
+        if (this.state === 'DECISION') {
           e.preventDefault();
-          this.flap();
+          this.advanceStep();
+        } else if (this.state === 'IDLE' || this.state === 'CASHED_OUT' || this.state === 'CRASHED') {
+          e.preventDefault();
+          this.startRound();
         }
-      } else if (e.code === 'KeyC' || e.code === 'Enter') {
-        if (this.state === 'FLYING' && this.pipesCleared >= 1) {
+      } else if (e.code === 'KeyC') {
+        if (this.state === 'DECISION') {
           e.preventDefault();
           this.cashOut(false);
         }

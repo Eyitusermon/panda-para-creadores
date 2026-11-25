@@ -358,7 +358,7 @@
 
   // Interceptar clicks de apuesta en fase de captura para todos los juegos
   document.addEventListener('click', function (e) {
-    const playBtn = e.target.closest('#btnSpinSlots, #btnDropBall, #btnRocketAction, #btnMinesAction, #btnDoorsAction, #btnFlappyAction, #btnToggleAutoDrop, #btnToggleAuto');
+    const playBtn = e.target.closest('#btnSpinSlots, #btnDropBall, #btnRocketAction, #btnMinesAction, #btnDoorsAction, #btnFlappyAction, #btnSlitherAction, #btnToggleAutoDrop, #btnToggleAuto');
     if (!playBtn) return;
 
     if (

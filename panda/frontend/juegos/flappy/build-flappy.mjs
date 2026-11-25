@@ -63,7 +63,7 @@ const htmlOutput = `<!DOCTYPE html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="../../config.js"></script>
-  <title>Flappy Panda Turbo - PANDA CASH | Multiplicador hasta x500</title>
+  <title>Flappy Panda Turbo - PANDA CASH | 10 Casillas hasta x500</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐥</text></svg>">
   <style>
 ${cssSource}
@@ -101,7 +101,7 @@ ${cssSource}
     <aside class="panel-card">
       <div class="panel-header">
         <h3>🐥 Controles</h3>
-        <p>Cruza pilares &bull; Hasta x500</p>
+        <p>10 casillas de tubos &bull; Hasta x500</p>
       </div>
 
       <div class="controls-body">
@@ -128,21 +128,25 @@ ${cssSource}
 
         <div class="control-group">
           <div class="control-label-row">
-            <span>Dificultad de Vuelo</span>
-            <span style="color: var(--accent-cyan);">Multiplicador por pilar</span>
+            <span>Dificultad</span>
+            <span style="color: var(--accent-cyan);">10 Casillas</span>
           </div>
           <div class="difficulty-grid">
             <button type="button" class="btn-diff" data-diff="easy">
-              <strong>Clásico</strong>
-              <span>x1.16 / P</span>
+              <strong>Fácil</strong>
+              <span>Máx x7</span>
             </button>
             <button type="button" class="btn-diff active" data-diff="medium">
-              <strong>Pro</strong>
-              <span>x1.30 / P</span>
+              <strong>Medio</strong>
+              <span>Máx x25.5</span>
             </button>
             <button type="button" class="btn-diff" data-diff="hard">
-              <strong>Turbo</strong>
-              <span>x1.52 / P</span>
+              <strong>Difícil</strong>
+              <span>Máx x155</span>
+            </button>
+            <button type="button" class="btn-diff" data-diff="extreme">
+              <strong>Extremo</strong>
+              <span>Máx x500</span>
             </button>
           </div>
         </div>
@@ -178,7 +182,7 @@ ${cssSource}
         </div>
 
         <div class="stats-box">
-          <span style="color: var(--text-muted);">Vuelos Jugados:</span>
+          <span style="color: var(--text-muted);">Partidas Jugadas:</span>
           <strong id="statTotalRounds" style="color: #fff;">0</strong>
         </div>
         <div class="stats-box">
@@ -193,13 +197,13 @@ ${cssSource}
 
       <div class="actions-wrap">
         <button type="button" class="btn-flappy-main btn-bet" id="btnFlappyAction">
-          <span id="btnFlappyMainTitle">🐥 INICIAR VUELO</span>
+          <span id="btnFlappyMainTitle">🐥 INICIAR PARTIDA</span>
           <small id="btnFlappySubTitle" style="display: none; font-size: 0.78rem; font-weight: 800;"></small>
         </button>
       </div>
     </aside>
 
-    <!-- COLUMNA CENTRAL: ESCALERA + CANVAS + BOTONERA DE VUELO -->
+    <!-- COLUMNA CENTRAL: ESCALERA DE 10 CASILLAS + CANVAS + BOTONES -->
     <section class="board-card">
       <div class="ladder-strip" id="flappyLadderStrip"></div>
 
@@ -209,13 +213,13 @@ ${cssSource}
       </div>
 
       <div class="flight-controls-bar" id="mobileFlightControls">
-        <button type="button" class="btn-flap-tap" id="btnFlappyTap" disabled>🐥 ALETEAR</button>
+        <button type="button" class="btn-flap-tap" id="btnFlappyAdvanceQuick" disabled>🐥 AVANZAR CASILLA</button>
         <button type="button" class="btn-cashout-quick" id="btnFlappyCashoutQuick" disabled>💰 COBRAR</button>
       </div>
 
       <div class="flappy-ticker-bar" id="flappyTickerBar">
-        <span style="color: #cbd5e1;">Configura tu apuesta y pulsa <strong>INICIAR VUELO</strong> para despegar.</span>
-        <span style="font-size: 0.72rem; color: var(--accent-gold); font-family: 'Courier New', monospace;">Flappy Panda &bull; Pro</span>
+        <span style="color: #cbd5e1;">Elige tu apuesta y dificultad, y pulsa <strong>INICIAR PARTIDA</strong>.</span>
+        <span style="font-size: 0.72rem; color: var(--accent-gold); font-family: 'Courier New', monospace;">Flappy Panda &bull; Medio</span>
       </div>
     </section>
 
@@ -228,20 +232,20 @@ ${cssSource}
         </div>
         <div class="info-bullet-list">
           <div class="info-bullet">
-            <span style="color:#d1d5db;">1. Apuesta:</span>
-            <span style="color:var(--accent-gold); font-weight:800;">Desde 10 💎</span>
+            <span style="color:#d1d5db;">1. Inicia:</span>
+            <span style="color:var(--accent-gold); font-weight:800;">Cruza Casilla 1</span>
           </div>
           <div class="info-bullet">
-            <span style="color:#d1d5db;">2. Despegue:</span>
-            <span style="color:var(--accent-cyan); font-weight:800;">Toca / Espacio</span>
+            <span style="color:#d1d5db;">2. Decide:</span>
+            <span style="color:var(--accent-cyan); font-weight:800;">Cashout o Avanzar</span>
           </div>
           <div class="info-bullet">
-            <span style="color:#d1d5db;">3. Sube Premio:</span>
-            <span style="color:var(--accent-green); font-weight:800;">Cada Pilar +💎</span>
+            <span style="color:#d1d5db;">3. Recorrido:</span>
+            <span style="color:var(--accent-green); font-weight:800;">Hasta 10 Casillas</span>
           </div>
           <div class="info-bullet">
-            <span style="color:#d1d5db;">4. Cobra a Tiempo:</span>
-            <span style="color:#ff3377; font-weight:800;">Hasta x500.00</span>
+            <span style="color:#d1d5db;">4. Premio Máx:</span>
+            <span style="color:#ffb700; font-weight:800;">Hasta x500.00</span>
           </div>
         </div>
       </div>
@@ -249,11 +253,11 @@ ${cssSource}
       <div class="history-card">
         <div class="panel-header">
           <h3>📜 Historial en Vivo</h3>
-          <p>Tus últimos vuelos de sesión</p>
+          <p>Tus últimas partidas de sesión</p>
         </div>
         <div class="history-list" id="flappyHistoryList">
           <div class="empty-hist" style="font-size: 0.72rem; color: var(--text-muted); text-align: center; padding: 1rem 0;">
-            Aún no has completado vuelos en esta sesión.
+            Aún no has completado partidas en esta sesión.
           </div>
         </div>
       </div>
@@ -271,4 +275,4 @@ const jugarPath = path.join(__dirname, 'jugar_flappy.html');
 fs.writeFileSync(jugarPath, htmlOutput, 'utf8');
 const indexOutput = htmlOutput.replace('<head>', '<head>\n  <base href="/">');
 fs.writeFileSync(path.join(__dirname, 'index.html'), indexOutput, 'utf8');
-console.log('✓ Juego Flappy Panda Turbo compilado en:', jugarPath);
+console.log('✓ Flappy Panda Turbo (10 casillas) compilado en:', jugarPath);
