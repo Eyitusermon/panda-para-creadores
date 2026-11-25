@@ -2968,12 +2968,12 @@
       <form id="navbarLoginForm">
         <div class="modal-field">
           <label>Usuario o Correo Electrónico</label>
-          <input type="text" id="loginInputUser" placeholder="Tu usuario o correo" value="PandaMaster_99" required />
+          <input type="text" id="loginInputUser" placeholder="Tu usuario o correo" required />
         </div>
 
         <div class="modal-field">
           <label>Contraseña</label>
-          <input type="password" id="loginInputPass" placeholder="••••••••" value="password123" required />
+          <input type="password" id="loginInputPass" placeholder="••••••••" required />
         </div>
 
         <button type="submit" class="btn btn-deposit" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem; font-size: 0.95rem;">
@@ -3371,11 +3371,33 @@
         if (res.ok) {
           const data = await res.json();
           if (data && typeof data.balance_diamantes === 'number') {
+            if (data.username && String(data.username).trim()) {
+              userState.username = String(data.username).trim();
+            }
             userState.balance = data.balance_diamantes;
+            if (typeof data.balance_bono_diamantes === 'number') {
+              userState.bonusBalance = data.balance_bono_diamantes;
+            }
+            if (typeof data.giros_gratis === 'number') {
+              userState.freeSpins = data.giros_gratis;
+            }
+            if (typeof data.vip_xp === 'number') {
+              userState.xp = data.vip_xp;
+            }
             if (typeof data.cuenta_verificada !== 'undefined') {
               userState.cuenta_verificada = Boolean(data.cuenta_verificada);
               userState.is_verified = Boolean(data.cuenta_verificada);
             }
+            if (typeof data.primer_deposito_realizado !== 'undefined') {
+              userState.primer_deposito_realizado = Boolean(data.primer_deposito_realizado);
+            }
+            if (typeof data.tiene_recarga_aprobada !== 'undefined') {
+              userState.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
+            }
+            if (data.email && (!userState.email || userState.email.endsWith('@pandabet.com') || userState.email.split('@').length > 2)) {
+              userState.email = data.email;
+            }
+            if (data.phone && !userState.phone) userState.phone = data.phone;
             if (data.vip_level) userState.vipLevel = data.vip_level;
             window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
             try {
@@ -4404,8 +4426,23 @@
     document.getElementById('optLogout')?.addEventListener('click', () => {
       userWrapper?.classList.remove('open');
       if (confirm('¿Deseas cerrar tu sesión?')) {
-        userState.isLoggedIn = false;
-        saveState();
+        try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        userState = {
+          ...userState,
+          isLoggedIn: false,
+          balance: 0,
+          bonusBalance: 0,
+          freeSpins: 0,
+          email: '',
+          phone: '',
+          defaultTronAddress: ''
+        };
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          saveState();
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+        }
         showToast('Sesión Cerrada', 'Has cerrado tu sesión con éxito. El botón de Iniciar Sesión ahora está disponible en la barra superior.');
       }
     });
@@ -4446,100 +4483,222 @@
       if (authModalHeaderTitle) authModalHeaderTitle.textContent = 'CREAR CUENTA NUEVA';
     });
 
+    function getDashboardXpTarget(vipLevel) {
+      if (vipLevel === 'Panda Plata') return 5000;
+      if (vipLevel === 'Panda Oro') return 25000;
+      if (vipLevel === 'Panda Platino') return 100000;
+      return 1000;
+    }
+
     // Envío del Formulario de Registro
     navbarRegisterForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const user = document.getElementById('regInputUser')?.value.trim();
-      const email = document.getElementById('regInputEmail')?.value.trim();
-      const pass = document.getElementById('regInputPass')?.value.trim();
+      const email = document.getElementById('regInputEmail')?.value.trim() || '';
+      const pass = document.getElementById('regInputPass')?.value || '';
       const promo = document.getElementById('regInputPromo')?.value.trim() || 'PANDAMAX';
 
-      if (!user) return;
+      if (!user || !pass.trim()) {
+        showToast('Campos Incompletos', 'Ingresa un nombre de usuario y contraseña.', 'error');
+        return;
+      }
+      if (user.includes('@')) {
+        showToast('Usuario Inválido', 'Tu nombre de usuario no puede ser un correo electrónico. Usa un apodo sin "@".', 'error');
+        return;
+      }
 
-      const bono = promo.toUpperCase() === 'PANDAMAX' ? 30000 : 15000;
+      const regBtn = navbarRegisterForm.querySelector('button[type="submit"]');
+      const origRegText = regBtn ? regBtn.innerHTML : '';
+      if (regBtn) {
+        regBtn.disabled = true;
+        regBtn.innerHTML = '⏳ CREANDO CUENTA...';
+      }
 
-      // REGLA CRÍTICA: Cuenta nueva inicia como NO VERIFICADA y con perfil incompleto
-      userState = {
-        isLoggedIn: true,
-        username: user,
-        fullName: '',
-        email: email || '',
-        phone: '',
-        country: '',
-        birthDate: '',
-        defaultTronAddress: '',
-        registrationMethod: 'email',
-        profileCompleted: false,
-        balance: 5000, // Bono inicial de cortesía
-        bonusBalance: bono,
-        freeSpins: 150,
-        vipLevel: 'Panda Bronce',
-        xp: 0,
-        xpTarget: 1000,
-        favorites: ['keys-and-doors', 'panda-crash'],
-        cuenta_verificada: false, // NO VERIFICADA
-        is_verified: false        // NO VERIFICADA
-      };
-
-      saveState();
-
-      // Sincronizar con el backend Go si está activo
       try {
-        await fetch(`${API_BASE}/auth/register`, {
+        const res = await fetch(`${API_BASE}/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             username: user,
             email: email,
             password: pass,
-            promo_code: promo
+            promo_code: promo,
+            method: 'email'
           })
         });
-      } catch (err) {
-        console.log('Backend sync offline, registered in local storage');
-      }
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          showToast('Error al Registrarse', errData.error || 'El usuario o correo ya está registrado.', 'error');
+          return;
+        }
+        const data = await res.json().catch(() => null);
+        if (!data || !data.user || !data.user.username) {
+          showToast('Error al Registrarse', 'Respuesta inválida del servidor. Intenta de nuevo.', 'error');
+          return;
+        }
 
-      loginModal?.classList.remove('open');
-      showToast('¡Registro Exitoso!', `Bienvenido, ${user}. Completa los datos restantes de tu cuenta.`);
-      checkAndOpenCompleteProfileModal();
+        const canonicalUser = String(data.user.username).trim();
+        const vipLvl = data.user.vip_level || 'Panda Bronce';
+
+        userState = {
+          id: data.user.id || '',
+          isLoggedIn: true,
+          username: canonicalUser,
+          fullName: '',
+          email: data.user.email || email,
+          phone: data.user.phone || '',
+          country: '',
+          birthDate: '',
+          defaultTronAddress: '',
+          registrationMethod: 'email',
+          profileCompleted: false,
+          balance: typeof data.user.balance_diamantes === 'number' ? data.user.balance_diamantes : 0,
+          bonusBalance: typeof data.user.balance_bono_diamantes === 'number' ? data.user.balance_bono_diamantes : 0,
+          freeSpins: typeof data.user.giros_gratis === 'number' ? data.user.giros_gratis : 0,
+          weeklySpent: 0,
+          weeklyBonusClaimed: false,
+          lastWeeklyReset: null,
+          vipLevel: vipLvl,
+          xp: typeof data.user.vip_xp === 'number' ? data.user.vip_xp : 0,
+          xpTarget: getDashboardXpTarget(vipLvl),
+          favorites: ['keys-and-doors', 'panda-crash'],
+          cuenta_verificada: Boolean(data.user.cuenta_verificada),
+          is_verified: Boolean(data.user.cuenta_verificada),
+          primer_deposito_realizado: false,
+          tiene_recarga_aprobada: false
+        };
+
+        try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          saveState();
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+        }
+
+        loginModal?.classList.remove('open');
+        showToast('¡Registro Exitoso!', `Bienvenido, ${canonicalUser}. Completa los datos restantes de tu cuenta.`);
+        checkAndOpenCompleteProfileModal();
+      } catch (err) {
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para crear tu cuenta. Intenta de nuevo.', 'error');
+      } finally {
+        if (regBtn) {
+          regBtn.disabled = false;
+          regBtn.innerHTML = origRegText;
+        }
+      }
     });
 
     // Envío del Formulario de Inicio de Sesión
     navbarLoginForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const enteredUser = document.getElementById('loginInputUser')?.value.trim();
-      const enteredPass = document.getElementById('loginInputPass')?.value.trim();
+      const enteredPass = document.getElementById('loginInputPass')?.value || '';
 
-      if (enteredUser) {
-        userState.username = enteredUser;
-        userState.isLoggedIn = true;
+      if (!enteredUser || !enteredPass.trim()) {
+        showToast('Campos Incompletos', 'Ingresa tu usuario o correo y tu contraseña.', 'error');
+        return;
+      }
 
-        // Intentar autenticar contra el backend Go
-        try {
-          const res = await fetch(`${API_BASE}/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              username: enteredUser,
-              password: enteredPass
-            })
-          });
-          if (res.ok) {
-            const data = await res.json();
-            if (data.user) {
-              userState.cuenta_verificada = Boolean(data.user.cuenta_verificada);
-              userState.is_verified = Boolean(data.user.cuenta_verificada);
-              userState.balance = data.user.balance_diamantes || userState.balance;
-              userState.vipLevel = data.user.vip_level || userState.vipLevel;
-            }
-          }
-        } catch (err) {
-          console.log('Backend sync offline, using stored local state');
+      const loginBtn = navbarLoginForm.querySelector('button[type="submit"]');
+      const origLoginText = loginBtn ? loginBtn.innerHTML : '';
+      if (loginBtn) {
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '⏳ VERIFICANDO...';
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: enteredUser,
+            password: enteredPass
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          showToast('Error de Acceso', errData.error || 'Usuario/correo o contraseña incorrectos.', 'error');
+          return;
+        }
+        const data = await res.json().catch(() => null);
+        if (!data || !data.user || !data.user.username) {
+          showToast('Error de Acceso', 'Respuesta inválida del servidor. Intenta de nuevo.', 'error');
+          return;
         }
 
-        saveState();
+        const canonicalUser = String(data.user.username).trim();
+        let prevCosmetic = {};
+        try {
+          const saved = localStorage.getItem(storageKey);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed && parsed.username && parsed.username.toLowerCase() === canonicalUser.toLowerCase()) {
+              prevCosmetic = {
+                fullName: parsed.fullName || '',
+                country: parsed.country || '',
+                birthDate: parsed.birthDate || '',
+                defaultTronAddress: parsed.defaultTronAddress || '',
+                avatarIcon: parsed.avatarIcon,
+                favorites: Array.isArray(parsed.favorites) ? parsed.favorites : undefined,
+                weeklySpent: typeof parsed.weeklySpent === 'number' ? parsed.weeklySpent : 0,
+                weeklyBonusClaimed: Boolean(parsed.weeklyBonusClaimed),
+                lastWeeklyReset: parsed.lastWeeklyReset || null,
+                profileCompleted: Boolean(parsed.profileCompleted)
+              };
+            }
+          }
+        } catch (_) {}
+
+        const vipLvl = data.user.vip_level || 'Panda Bronce';
+        userState = {
+          favorites: ['keys-and-doors', 'panda-crash'],
+          fullName: '',
+          country: '',
+          birthDate: '',
+          defaultTronAddress: '',
+          weeklySpent: 0,
+          weeklyBonusClaimed: false,
+          lastWeeklyReset: null,
+          profileCompleted: false,
+          ...prevCosmetic,
+          id: data.user.id || '',
+          isLoggedIn: true,
+          username: canonicalUser,
+          email: data.user.email || '',
+          phone: data.user.phone || '',
+          balance: typeof data.user.balance_diamantes === 'number' ? data.user.balance_diamantes : 0,
+          bonusBalance: typeof data.user.balance_bono_diamantes === 'number' ? data.user.balance_bono_diamantes : 0,
+          freeSpins: typeof data.user.giros_gratis === 'number' ? data.user.giros_gratis : 0,
+          vipLevel: vipLvl,
+          xp: typeof data.user.vip_xp === 'number' ? data.user.vip_xp : 0,
+          xpTarget: getDashboardXpTarget(vipLvl),
+          cuenta_verificada: Boolean(data.user.cuenta_verificada),
+          is_verified: Boolean(data.user.cuenta_verificada),
+          primer_deposito_realizado: Boolean(data.user.primer_deposito_realizado),
+          tiene_recarga_aprobada: Boolean(data.user.tiene_recarga_aprobada)
+        };
+
+        try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          saveState();
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+        }
+
+        const passEl = document.getElementById('loginInputPass');
+        if (passEl) passEl.value = '';
         loginModal?.classList.remove('open');
-        showToast('¡Sesión Iniciada!', `Has ingresado como ${enteredUser}. Estado de cuenta: ${userState.cuenta_verificada ? 'Verificada ✓' : 'No Verificada ⚠️'}.`);
+        showToast('¡Sesión Iniciada!', `Has ingresado como ${userState.username}. Estado de cuenta: ${userState.cuenta_verificada ? 'Verificada ✓' : 'No Verificada ⚠️'}.`);
+        syncBackendProfile();
+      } catch (err) {
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor. Intenta de nuevo en unos segundos.', 'error');
+      } finally {
+        if (loginBtn) {
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = origLoginText;
+        }
       }
     });
 
@@ -5051,6 +5210,7 @@
     // Cerrar sesión
     document.getElementById('btnLogoutAction')?.addEventListener('click', () => {
       if (confirm('¿Deseas cerrar tu sesión?')) {
+        try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
         localStorage.removeItem(storageKey);
         window.location.href = './portal_directo.html';
       }

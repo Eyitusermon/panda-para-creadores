@@ -319,13 +319,31 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 	}
 
 	req.Username = strings.TrimSpace(req.Username)
+	req.Email = strings.ToLower(strings.TrimSpace(req.Email))
+	req.Phone = strings.TrimSpace(req.Phone)
 	if req.Username == "" {
 		req.Username = fmt.Sprintf("Panda_%d", time.Now().Unix()%100000)
+	}
+	if strings.Contains(req.Username, "@") {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "El nombre de usuario no puede ser un correo electrónico. Usa un apodo sin '@'."})
+		return
 	}
 	key := strings.ToLower(req.Username)
 
 	// --- 1. MODO NEON SERVERLESS API ---
 	if neon != nil {
+		dupRow, dupErr := neon.QueryRow(`
+			SELECT id::text, username, COALESCE(email, '') as email
+			FROM users
+			WHERE LOWER(TRIM(username)) = $1
+			   OR ($2::text != '' AND LOWER(TRIM(COALESCE(email, ''))) = $2::text)
+			LIMIT 1
+		`, key, req.Email)
+		if dupErr == nil && dupRow != nil && dupRow["id"] != nil {
+			writeJSON(w, http.StatusConflict, map[string]string{"error": "El nombre de usuario o correo electrónico ya se encuentra registrado"})
+			return
+		}
+
 		passHash := hashPassword(req.Password)
 		secQ := req.SecurityQuestion
 		if secQ == "" {
@@ -390,6 +408,14 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusConflict, map[string]string{"error": "El nombre de usuario ya se encuentra registrado"})
 		return
 	}
+	if req.Email != "" {
+		for _, existing := range store.users {
+			if strings.ToLower(strings.TrimSpace(existing.Email)) == req.Email {
+				writeJSON(w, http.StatusConflict, map[string]string{"error": "El correo electrónico ya se encuentra registrado"})
+				return
+			}
+		}
+	}
 
 	newUser := &User{
 		ID:                   fmt.Sprintf("usr_%d", time.Now().UnixNano()%1000000),
@@ -438,33 +464,56 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 
 	cleanUser := strings.TrimSpace(req.Username)
 	key := strings.ToLower(cleanUser)
+	if cleanUser == "" || req.Password == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Ingresa tu usuario o correo electrónico y tu contraseña"})
+		return
+	}
 
 	// --- 1. MODO NEON SERVERLESS API ---
 	if neon != nil {
-		row, err := neon.QueryRow(`
+		rows, err := neon.Query(`
 			SELECT u.id::text, u.username, COALESCE(u.email, '') as email, COALESCE(u.phone, '') as phone, u.password_hash,
 			       u.cuenta_verificada, u.fecha_verificacion, COALESCE(u.tx_hash_verificacion, '') as tx_hash_verificacion,
 			       COALESCE(u.metodo_pago_verificacion, '') as metodo_pago_verificacion,
 			       u.vip_level, u.vip_xp, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes,
 			       COALESCE(w.balance_bono_diamantes, 0)::bigint as balance_bono_diamantes,
-			       COALESCE(w.giros_gratis, 0)::int as giros_gratis, u.ultimo_cofre_abierto_at, u.created_at
+			       COALESCE(w.giros_gratis, 0)::int as giros_gratis, u.ultimo_cofre_abierto_at, u.created_at,
+			       COALESCE(u.primer_deposito_realizado, false) as primer_deposito_realizado,
+			       EXISTS (
+			           SELECT 1 FROM depositos d
+			           WHERE (d.user_id = u.id OR LOWER(d.username) = LOWER(u.username))
+			             AND d.estado IN ('APROBADA', 'APROBADO', 'COMPLETADO')
+			             AND COALESCE(d.tipo, 'RECARGA') = 'RECARGA'
+			       ) as tiene_recarga_aprobada
 			FROM users u
 			LEFT JOIN wallets w ON u.id = w.user_id
-			WHERE LOWER(u.username) = $1 OR LOWER(u.email) = $1
+			WHERE LOWER(TRIM(u.username)) = $1 OR LOWER(TRIM(COALESCE(u.email, ''))) = $1
+			ORDER BY (LOWER(TRIM(u.username)) = $1) DESC, COALESCE(w.balance_diamantes, 0) DESC, u.created_at ASC
 		`, key)
 
 		if err != nil {
-			writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "Credenciales inválidas (usuario no encontrado)"})
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error consultando credenciales en el servidor. Intenta de nuevo."})
+			return
+		}
+		if len(rows) == 0 {
+			writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "No encontramos una cuenta con ese usuario o correo electrónico"})
 			return
 		}
 
-		dbPassHash := fmt.Sprintf("%v", row["password_hash"])
-		if hashPassword(req.Password) != dbPassHash {
+		passHash := hashPassword(req.Password)
+		var matchedRow map[string]any
+		for _, r := range rows {
+			if fmt.Sprintf("%v", r["password_hash"]) == passHash {
+				matchedRow = r
+				break
+			}
+		}
+		if matchedRow == nil {
 			writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "Contraseña incorrecta"})
 			return
 		}
 
-		user := parseUserFromRow(row)
+		user := parseUserFromRow(matchedRow)
 
 		writeJSON(w, http.StatusOK, map[string]any{
 			"message": "Inicio de sesión exitoso",
@@ -477,10 +526,19 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	// --- 2. FALLBACK EN MEMORIA ---
 	store.mu.RLock()
 	user, exists := store.users[key]
+	if !exists {
+		for _, candidate := range store.users {
+			if strings.ToLower(strings.TrimSpace(candidate.Email)) == key {
+				user = candidate
+				exists = true
+				break
+			}
+		}
+	}
 	store.mu.RUnlock()
 
 	if !exists {
-		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "Credenciales inválidas (usuario no encontrado)"})
+		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "No encontramos una cuenta con ese usuario o correo electrónico"})
 		return
 	}
 
@@ -519,7 +577,7 @@ func ensureNeonUserAndWallet(username, email, phone string) (string, error) {
 		return "", fmt.Errorf("username requerido")
 	}
 	key := strings.ToLower(cleanUser)
-	row, err := neon.QueryRow(`SELECT id::text FROM users WHERE LOWER(username) = $1`, key)
+	row, err := neon.QueryRow(`SELECT id::text FROM users WHERE LOWER(TRIM(username)) = $1 LIMIT 1`, key)
 	if err == nil && row != nil && row["id"] != nil {
 		uid := fmt.Sprintf("%v", row["id"])
 		_ = neon.Exec(`
@@ -530,11 +588,37 @@ func ensureNeonUserAndWallet(username, email, phone string) (string, error) {
 		return uid, nil
 	}
 
+	if strings.Contains(cleanUser, "@") {
+		emailRow, emailErr := neon.QueryRow(`
+			SELECT id::text
+			FROM users
+			WHERE LOWER(TRIM(COALESCE(email, ''))) = $1
+			ORDER BY created_at ASC
+			LIMIT 1
+		`, key)
+		if emailErr == nil && emailRow != nil && emailRow["id"] != nil {
+			uid := fmt.Sprintf("%v", emailRow["id"])
+			_ = neon.Exec(`
+				INSERT INTO wallets (user_id, balance_diamantes, balance_bono_diamantes, giros_gratis)
+				VALUES ($1::uuid, 0, 0, 0)
+				ON CONFLICT (user_id) DO NOTHING
+			`, uid)
+			return uid, nil
+		}
+		return "", fmt.Errorf("no se permite crear cuenta automática con correo electrónico")
+	}
+
+	cleanEmail := strings.ToLower(strings.TrimSpace(email))
+	if strings.Count(cleanEmail, "@") > 1 {
+		cleanEmail = ""
+	}
+	cleanPhone := strings.TrimSpace(phone)
+
 	userRow, err := neon.QueryRow(`
 		INSERT INTO users (username, email, phone, password_hash, security_question, security_answer_hash, cuenta_verificada, vip_level, vip_xp)
 		VALUES ($1, NULLIF(TRIM($2), ''), NULLIF(TRIM($3), ''), $4, '¿Cuál fue el nombre de tu primera mascota?', $5, FALSE, 'Panda Bronce', 0)
 		RETURNING id::text
-	`, cleanUser, email, phone, hashPassword("123456"), hashSecurityAnswer("pelusa"))
+	`, cleanUser, cleanEmail, cleanPhone, hashPassword("123456"), hashSecurityAnswer("pelusa"))
 	if err != nil {
 		return "", err
 	}
@@ -619,7 +703,9 @@ func handleProfile(w http.ResponseWriter, r *http.Request) {
 			       ) as tiene_recarga_aprobada
 			FROM users u
 			LEFT JOIN wallets w ON u.id = w.user_id
-			WHERE LOWER(u.username) = $1
+			WHERE LOWER(TRIM(u.username)) = $1 OR LOWER(TRIM(COALESCE(u.email, ''))) = $1
+			ORDER BY (LOWER(TRIM(u.username)) = $1) DESC, COALESCE(w.balance_diamantes, 0) DESC, u.created_at ASC
+			LIMIT 1
 		`, key)
 		if err == nil {
 			writeJSON(w, http.StatusOK, parseUserFromRow(row))
@@ -629,6 +715,15 @@ func handleProfile(w http.ResponseWriter, r *http.Request) {
 
 	store.mu.RLock()
 	user, exists := store.users[key]
+	if !exists {
+		for _, candidate := range store.users {
+			if strings.ToLower(strings.TrimSpace(candidate.Email)) == key {
+				user = candidate
+				exists = true
+				break
+			}
+		}
+	}
 	store.mu.RUnlock()
 
 	if !exists {
@@ -668,6 +763,10 @@ func handleSyncBalance(w http.ResponseWriter, r *http.Request) {
 	cleanUser := strings.TrimSpace(req.Username)
 	if cleanUser == "" {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Username requerido"})
+		return
+	}
+	if strings.Contains(cleanUser, "@") {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Usuario inválido para sincronizar saldo. Inicia sesión nuevamente."})
 		return
 	}
 	key := strings.ToLower(cleanUser)
@@ -1588,7 +1687,13 @@ func handleSecurityQuestion(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if neon != nil {
-		row, err := neon.QueryRow(`SELECT username, COALESCE(security_question, '¿Cuál fue el nombre de tu primera mascota?') as question FROM users WHERE LOWER(username) = $1`, strings.ToLower(username))
+		row, err := neon.QueryRow(`
+			SELECT username, COALESCE(security_question, '¿Cuál fue el nombre de tu primera mascota?') as question
+			FROM users
+			WHERE LOWER(TRIM(username)) = $1 OR LOWER(TRIM(COALESCE(email, ''))) = $1
+			ORDER BY (LOWER(TRIM(username)) = $1) DESC, created_at ASC
+			LIMIT 1
+		`, strings.ToLower(username))
 		if err == nil {
 			writeJSON(w, http.StatusOK, map[string]any{
 				"ok":       true,
@@ -1600,7 +1705,17 @@ func handleSecurityQuestion(w http.ResponseWriter, r *http.Request) {
 	}
 
 	store.mu.RLock()
-	user, exists := store.users[strings.ToLower(username)]
+	lookupKey := strings.ToLower(username)
+	user, exists := store.users[lookupKey]
+	if !exists {
+		for _, candidate := range store.users {
+			if strings.ToLower(strings.TrimSpace(candidate.Email)) == lookupKey {
+				user = candidate
+				exists = true
+				break
+			}
+		}
+	}
 	store.mu.RUnlock()
 
 	if !exists {
@@ -1657,7 +1772,13 @@ func handleResetBySecurity(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if neon != nil {
-		row, err := neon.QueryRow(`SELECT COALESCE(security_answer_hash, '') as hash FROM users WHERE LOWER(username) = $1`, strings.ToLower(req.Username))
+		row, err := neon.QueryRow(`
+			SELECT id::text, username, COALESCE(security_answer_hash, '') as hash
+			FROM users
+			WHERE LOWER(TRIM(username)) = $1 OR LOWER(TRIM(COALESCE(email, ''))) = $1
+			ORDER BY (LOWER(TRIM(username)) = $1) DESC, created_at ASC
+			LIMIT 1
+		`, strings.ToLower(req.Username))
 		if err != nil {
 			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
 			return
@@ -1673,11 +1794,12 @@ func handleResetBySecurity(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		_ = neon.Exec(`UPDATE users SET password_hash = $1 WHERE LOWER(username) = $2`, hashPassword(req.NewPassword), strings.ToLower(req.Username))
+		_ = neon.Exec(`UPDATE users SET password_hash = $1 WHERE id = $2::uuid`, hashPassword(req.NewPassword), fmt.Sprintf("%v", row["id"]))
 
 		writeJSON(w, http.StatusOK, map[string]any{
-			"ok":      true,
-			"message": "Contraseña actualizada exitosamente en Neon",
+			"ok":       true,
+			"username": row["username"],
+			"message":  "Contraseña actualizada exitosamente en Neon",
 		})
 		return
 	}
@@ -1685,7 +1807,17 @@ func handleResetBySecurity(w http.ResponseWriter, r *http.Request) {
 	store.mu.Lock()
 	defer store.mu.Unlock()
 
-	user, exists := store.users[strings.ToLower(req.Username)]
+	resetKey := strings.ToLower(req.Username)
+	user, exists := store.users[resetKey]
+	if !exists {
+		for _, candidate := range store.users {
+			if strings.ToLower(strings.TrimSpace(candidate.Email)) == resetKey {
+				user = candidate
+				exists = true
+				break
+			}
+		}
+	}
 	if !exists {
 		writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
 		return
@@ -1704,8 +1836,9 @@ func handleResetBySecurity(w http.ResponseWriter, r *http.Request) {
 	user.PasswordHash = hashPassword(req.NewPassword)
 
 	writeJSON(w, http.StatusOK, map[string]any{
-		"ok":      true,
-		"message": "Contraseña actualizada exitosamente",
+		"ok":       true,
+		"username": user.Username,
+		"message":  "Contraseña actualizada exitosamente",
 	})
 }
 

@@ -73,6 +73,8 @@
 
     const cleanUser = String(s.username).trim();
     if (!cleanUser) return null;
+    // Nunca sincronizar saldo si el username es un correo (esperar a que /user/profile cure el username real)
+    if (cleanUser.includes('@')) return null;
 
     const payload = {
       username: cleanUser,
@@ -142,6 +144,10 @@
     }
     try {
       const dirty = JSON.parse(localStorage.getItem(DIRTY_KEY) || 'null');
+      if (dirty && dirty.username && String(dirty.username).includes('@')) {
+        rawRemoveItem.call(localStorage, DIRTY_KEY);
+        return;
+      }
       if (dirty && dirty.username && (!username || dirty.username.toLowerCase() === String(username).toLowerCase())) {
         if (Date.now() - (dirty.ts || 0) < 5 * 60 * 1000) {
           await window.pandaSyncBalanceToBackend(dirty);
@@ -165,9 +171,15 @@
       if (!res.ok) return null;
       const data = await res.json();
       if (data && typeof data.balance_diamantes === 'number') {
+        if (data.username && String(data.username).trim()) {
+          s.username = String(data.username).trim();
+        }
         s.balance = data.balance_diamantes;
         if (typeof data.balance_bono_diamantes === 'number') {
           s.bonusBalance = data.balance_bono_diamantes;
+        }
+        if (typeof data.giros_gratis === 'number') {
+          s.freeSpins = data.giros_gratis;
         }
         if (typeof data.vip_xp === 'number') {
           s.xp = data.vip_xp;
@@ -185,7 +197,9 @@
         if (typeof data.tiene_recarga_aprobada !== 'undefined') {
           s.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
         }
-        if (data.email && !s.email) s.email = data.email;
+        if (data.email && (!s.email || s.email.endsWith('@pandabet.com') || s.email.split('@').length > 2)) {
+          s.email = data.email;
+        }
         if (data.phone && !s.phone) s.phone = data.phone;
 
         window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
@@ -217,7 +231,9 @@
       try {
         const parsed = JSON.parse(value);
         if (parsed && parsed.username && parsed.isLoggedIn !== false) {
-          const uname = String(parsed.username).toLowerCase();
+          const cleanParsedUser = String(parsed.username).trim();
+          if (cleanParsedUser.includes('@')) return;
+          const uname = cleanParsedUser.toLowerCase();
           const newBal = Number(parsed.balance || 0);
           const newBonus = Number(parsed.bonusBalance || 0);
           const newXp = Number(parsed.xp || 0);
