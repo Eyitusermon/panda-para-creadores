@@ -134,15 +134,15 @@ ${cssSource}
           <div class="difficulty-grid">
             <button type="button" class="btn-diff" data-diff="classic">
               <strong>Clásica</strong>
-              <span>8 Bots • x50</span>
+              <span>7 Bots • x50</span>
             </button>
             <button type="button" class="btn-diff active" data-diff="pro">
               <strong>Pro</strong>
-              <span>12 Bots • x100</span>
+              <span>10 Bots • x100</span>
             </button>
             <button type="button" class="btn-diff" data-diff="vip">
               <strong>VIP</strong>
-              <span>16 Bots • x200</span>
+              <span>13 Bots • x200</span>
             </button>
           </div>
         </div>
@@ -221,7 +221,7 @@ ${cssSource}
 
       <div class="arena-controls-bar" id="mobileArenaControls">
         <button type="button" class="btn-boost-hold" id="btnSlitherBoost" disabled>⚡ TURBO (Mantener)</button>
-        <button type="button" class="btn-cashout-quick" id="btnSlitherCashoutQuick" disabled>💰 COBRAR (2.5s)</button>
+        <button type="button" class="btn-cashout-quick" id="btnSlitherCashoutQuick" disabled>💰 COBRAR (1.6s)</button>
       </div>
 
       <div class="slither-ticker-bar" id="slitherTickerBar">
@@ -252,7 +252,7 @@ ${cssSource}
           </div>
           <div class="info-bullet">
             <span style="color:#d1d5db;">4. Extraer Premio:</span>
-            <span style="color:#ffb700; font-weight:800;">Mantén Q (2.5s)</span>
+            <span style="color:#ffb700; font-weight:800;">Mantén Q (1.6s)</span>
           </div>
         </div>
       </div>

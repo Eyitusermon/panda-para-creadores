@@ -21,7 +21,9 @@ type DifficultyKey = 'easy' | 'medium' | 'hard' | 'extreme';
 
 interface DifficultyConfig {
   label: string;
-  stepPassProb: number;
+  basePassProb: number;
+  stepPenalty: number;
+  minPassProb: number;
   multipliers: number[];
 }
 
@@ -77,22 +79,30 @@ const VIEW_H = 540;
 const DIFFICULTIES: Record<DifficultyKey, DifficultyConfig> = {
   easy: {
     label: 'Fácil',
-    stepPassProb: 0.82,
+    basePassProb: 0.95,
+    stepPenalty: 0,
+    minPassProb: 0.95,
     multipliers: [1.17, 1.42, 1.73, 2.11, 2.58, 3.15, 3.84, 4.68, 5.70, 7.00]
   },
   medium: {
     label: 'Medio',
-    stepPassProb: 0.72,
+    basePassProb: 0.92,
+    stepPenalty: 0,
+    minPassProb: 0.92,
     multipliers: [1.33, 1.85, 2.56, 3.56, 4.95, 6.88, 9.55, 13.25, 18.40, 25.50]
   },
   hard: {
     label: 'Difícil',
-    stepPassProb: 0.60,
+    basePassProb: 0.88,
+    stepPenalty: 0,
+    minPassProb: 0.88,
     multipliers: [1.60, 2.65, 4.42, 7.35, 12.25, 20.40, 34.00, 56.50, 94.00, 155.00]
   },
   extreme: {
     label: 'Extremo',
-    stepPassProb: 0.50,
+    basePassProb: 0.84,
+    stepPenalty: 0,
+    minPassProb: 0.84,
     multipliers: [1.92, 3.84, 7.68, 15.30, 30.50, 61.00, 122.00, 240.00, 380.00, 500.00]
   }
 };
@@ -414,6 +424,12 @@ class FlappyPandaGame {
     this.launchNextStep();
   }
 
+  private calcStepPassProbability(step: number): number {
+    // MODO CREADOR: alta probabilidad para rachas fluidas y clips en stream
+    if (step === 1) return 0.96;
+    return DIFFICULTIES[this.difficulty].basePassProb;
+  }
+
   private launchNextStep(): void {
     const cfg = DIFFICULTIES[this.difficulty];
     const nextStep = this.currentStep + 1;
@@ -426,7 +442,7 @@ class FlappyPandaGame {
     this.moveFromX = this.birdX;
     this.moveFromY = this.birdY;
     this.moveTargetStep = nextStep;
-    this.moveWillPass = Math.random() < cfg.stepPassProb;
+    this.moveWillPass = Math.random() < this.calcStepPassProbability(nextStep);
     this.moveCrashTop = Math.random() < 0.5;
     this.moveElapsed = 0;
     this.crashTriggered = false;
@@ -950,37 +966,6 @@ class FlappyPandaGame {
       (el as HTMLButtonElement).disabled = busy;
     });
 
-    const advQuick = document.getElementById('btnFlappyAdvanceQuick') as HTMLButtonElement | null;
-    const cashQuick = document.getElementById('btnFlappyCashoutQuick') as HTMLButtonElement | null;
-
-    if (advQuick) {
-      advQuick.disabled = this.state !== 'DECISION' || this.currentStep >= TOTAL_STEPS;
-      if (this.state === 'DECISION' && this.currentStep < TOTAL_STEPS) {
-        const nextM = DIFFICULTIES[this.difficulty].multipliers[this.currentStep];
-        advQuick.textContent = `🐥 AVANZAR (${this.currentStep + 1}/10 → x${nextM.toFixed(2)})`;
-      } else if (this.state === 'MOVING') {
-        advQuick.textContent = `🐥 VOLANDO CASILLA ${this.moveTargetStep}...`;
-      } else {
-        advQuick.textContent = '🐥 AVANZAR CASILLA';
-      }
-    }
-
-    if (cashQuick) {
-      cashQuick.classList.remove('btn-cashed-out');
-      if (this.state === 'DECISION' && this.currentStep >= 1) {
-        const winAmt = Math.round(this.betAmount * this.currentMultiplier);
-        cashQuick.disabled = false;
-        cashQuick.textContent = `💰 COBRAR (${winAmt.toLocaleString('en-US')} 💎)`;
-      } else if (this.state === 'CASHED_OUT') {
-        cashQuick.disabled = true;
-        cashQuick.classList.add('btn-cashed-out');
-        cashQuick.textContent = `✓ +${this.cashoutPayout.toLocaleString('en-US')} 💎`;
-      } else {
-        cashQuick.disabled = true;
-        cashQuick.textContent = '💰 COBRAR';
-      }
-    }
-
     const mainBtn = document.getElementById('btnFlappyAction') as HTMLButtonElement | null;
     const mainTitle = document.getElementById('btnFlappyMainTitle');
     const mainSub = document.getElementById('btnFlappySubTitle');
@@ -993,16 +978,16 @@ class FlappyPandaGame {
         mainBtn.disabled = true;
         mainBtn.dataset.mode = 'cashout';
         mainBtn.classList.add('btn-cashout');
-        mainTitle.textContent = `🐥 VOLANDO A CASILLA ${this.moveTargetStep}/10`;
+        mainTitle.textContent = `🐥 VOLANDO CASILLA ${this.moveTargetStep}/10...`;
         mainSub.style.display = 'none';
       } else if (this.state === 'DECISION') {
         const winAmt = Math.round(this.betAmount * this.currentMultiplier);
-        mainBtn.disabled = false;
+        mainBtn.disabled = true;
         mainBtn.dataset.mode = 'cashout';
         mainBtn.classList.add('btn-cashout');
-        mainTitle.textContent = `💰 HACER CASHOUT (+${winAmt.toLocaleString('en-US')} 💎)`;
+        mainTitle.textContent = `🎯 ELIGE EN EL TABLERO (${this.currentStep}/10)`;
         mainSub.style.display = 'block';
-        mainSub.textContent = `Casilla ${this.currentStep}/10 • x${this.currentMultiplier.toFixed(2)}`;
+        mainSub.textContent = `Tienes ${winAmt.toLocaleString('en-US')} 💎 (x${this.currentMultiplier.toFixed(2)})`;
       } else if (this.state === 'CASHED_OUT') {
         mainBtn.disabled = false;
         mainBtn.classList.add('btn-cashed-out');
@@ -1035,7 +1020,6 @@ class FlappyPandaGame {
         const currentWin = Math.round(this.betAmount * this.currentMultiplier);
         const nextStep = this.currentStep + 1;
         const nextMult = DIFFICULTIES[this.difficulty].multipliers[nextStep - 1];
-        const nextWin = Math.round(this.betAmount * nextMult);
 
         overlay.innerHTML = `
           <div class="decision-modal-card" id="flappyDecisionModal">
@@ -1046,11 +1030,11 @@ class FlappyPandaGame {
             <div class="decision-actions-grid">
               <button type="button" class="btn-decision-cashout" id="btnModalCashout">
                 <span>💰 HACER CASHOUT</span>
-                <small>Cobrar +${currentWin.toLocaleString('en-US')} 💎 ahora</small>
+                <small>+${currentWin.toLocaleString('en-US')} 💎 ahora</small>
               </button>
               <button type="button" class="btn-decision-advance" id="btnModalContinue">
                 <span>🐥 SEGUIR AVANZANDO</span>
-                <small>Casilla ${nextStep}/10 • x${nextMult.toFixed(2)} (+${nextWin.toLocaleString('en-US')} 💎)</small>
+                <small>Casilla ${nextStep}/10 • x${nextMult.toFixed(2)}</small>
               </button>
             </div>
           </div>
@@ -1222,11 +1206,9 @@ class FlappyPandaGame {
       soundBtn.textContent = this.soundEnabled ? '🔊' : '🔇';
     });
 
-    // Botón principal izquierda
+    // Botón principal izquierda (solo para iniciar o reintentar partida)
     document.getElementById('btnFlappyAction')?.addEventListener('click', () => {
-      if (this.state === 'DECISION') {
-        this.cashOut(false);
-      } else if (this.state !== 'MOVING') {
+      if (this.state !== 'MOVING' && this.state !== 'DECISION') {
         this.startRound();
       }
     });
@@ -1241,18 +1223,6 @@ class FlappyPandaGame {
         this.cashOut(false);
       } else if (target.closest('#btnModalContinue')) {
         this.advanceStep();
-      }
-    });
-
-    // Barra rápida inferior
-    document.getElementById('btnFlappyAdvanceQuick')?.addEventListener('click', () => {
-      if (this.state === 'DECISION') {
-        this.advanceStep();
-      }
-    });
-    document.getElementById('btnFlappyCashoutQuick')?.addEventListener('click', () => {
-      if (this.state === 'DECISION') {
-        this.cashOut(false);
       }
     });
 

@@ -212,11 +212,6 @@ ${cssSource}
         <div class="canvas-overlay" id="flappyCanvasOverlay"></div>
       </div>
 
-      <div class="flight-controls-bar" id="mobileFlightControls">
-        <button type="button" class="btn-flap-tap" id="btnFlappyAdvanceQuick" disabled>🐥 AVANZAR CASILLA</button>
-        <button type="button" class="btn-cashout-quick" id="btnFlappyCashoutQuick" disabled>💰 COBRAR</button>
-      </div>
-
       <div class="flappy-ticker-bar" id="flappyTickerBar">
         <span style="color: #cbd5e1;">Elige tu apuesta y dificultad, y pulsa <strong>INICIAR PARTIDA</strong>.</span>
         <span style="font-size: 0.72rem; color: var(--accent-gold); font-family: 'Courier New', monospace;">Flappy Panda &bull; Medio</span>

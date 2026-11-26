@@ -548,7 +548,7 @@ body {
   font-size: 0.7rem;
 }
 
-/* BOTÓN PRINCIPAL CON ALTO CONTRASTE */
+/* BOTÓN PRINCIPAL SOLO INICIO / REINTENTO */
 .actions-wrap {
   display: flex;
   flex-direction: column;
@@ -858,6 +858,7 @@ body {
   font-size: 0.7rem;
   font-weight: 800;
   color: #032203;
+  white-space: nowrap;
 }
 
 .btn-decision-advance {
@@ -887,68 +888,7 @@ body {
   font-size: 0.7rem;
   font-weight: 800;
   color: #e0f7ff;
-}
-
-/* CONTROLES RÁPIDOS DEBAJO DEL CANVAS */
-.flight-controls-bar {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.btn-flap-tap {
-  background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-  color: #fff;
-  border: 1px solid rgba(0, 240, 255, 0.6);
-  border-radius: 8px;
-  padding: 0.52rem 0.75rem;
-  font-size: 0.86rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  cursor: pointer;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 4px 15px rgba(0, 114, 255, 0.35);
-  transition: transform 0.06s;
-}
-
-.btn-flap-tap:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.btn-flap-tap:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.btn-cashout-quick {
-  background: linear-gradient(135deg, #ffb700 0%, #f59e0b 100%);
-  color: #180c00;
-  border: 1px solid rgba(255, 224, 130, 0.78);
-  border-radius: 8px;
-  padding: 0.52rem 0.75rem;
-  font-size: 0.86rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  cursor: pointer;
-  touch-action: manipulation;
-  user-select: none;
-}
-
-.btn-cashout-quick.btn-cashed-out {
-  background: linear-gradient(135deg, #00e701 0%, #009c00 100%);
-  color: #021802;
-  border-color: #80ff9e;
-  opacity: 1;
-}
-
-.btn-cashout-quick:disabled:not(.btn-cashed-out) {
-  background: #10192f;
-  color: #64748b;
-  border-color: rgba(255, 255, 255, 0.08);
-  cursor: not-allowed;
+  white-space: nowrap;
 }
 
 .flappy-ticker-bar {
@@ -1082,7 +1022,6 @@ body {
   }
 
   .ladder-strip,
-  .flight-controls-bar,
   .flappy-ticker-bar,
   .canvas-viewport {
     min-width: 0 !important;
@@ -1127,7 +1066,7 @@ body {
 
   .btn-decision-cashout,
   .btn-decision-advance {
-    padding: 0.42rem 0.35rem;
+    padding: 0.44rem 0.35rem;
     font-size: 0.72rem;
   }
 
@@ -1147,18 +1086,6 @@ body {
   .overlay-sub {
     font-size: 0.72rem;
     margin-bottom: 0.55rem;
-  }
-
-  .flight-controls-bar {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.45rem;
-  }
-
-  .btn-flap-tap,
-  .btn-cashout-quick {
-    padding: 0.72rem 0.45rem;
-    font-size: 0.82rem;
-    min-width: 0;
   }
 
   .history-list {

@@ -96,41 +96,41 @@ interface FloatingText {
 const STORAGE_KEY = 'panda_user_session';
 const DIAMOND_RATE = 10;
 const SEG_SPACING = 7.5;
-const EXTRACT_DURATION_SEC = 2.5;
-const INITIAL_SHIELD_SEC = 2.2;
+const EXTRACT_DURATION_SEC = 1.6;
+const INITIAL_SHIELD_SEC = 3.5;
 const VIEW_W = 780;
 const VIEW_H = 540;
 
 const ARENA_TIERS: Record<ArenaTierKey, ArenaTierConfig> = {
   classic: {
     label: 'Clásica',
-    botCount: 8,
-    radius: 1350,
-    baseSpeed: 192,
+    botCount: 7,
+    radius: 1380,
+    baseSpeed: 190,
     maxMult: 50,
-    orbTarget: 210,
-    goldenOrbs: 14,
-    killBoostFactor: 0.42
+    orbTarget: 240,
+    goldenOrbs: 24,
+    killBoostFactor: 0.85
   },
   pro: {
     label: 'Pro',
-    botCount: 12,
-    radius: 1250,
-    baseSpeed: 218,
+    botCount: 10,
+    radius: 1280,
+    baseSpeed: 215,
     maxMult: 100,
-    orbTarget: 230,
-    goldenOrbs: 20,
-    killBoostFactor: 0.58
+    orbTarget: 260,
+    goldenOrbs: 30,
+    killBoostFactor: 1.15
   },
   vip: {
     label: 'VIP',
-    botCount: 16,
-    radius: 1150,
-    baseSpeed: 245,
+    botCount: 13,
+    radius: 1180,
+    baseSpeed: 240,
     maxMult: 200,
-    orbTarget: 250,
-    goldenOrbs: 28,
-    killBoostFactor: 0.78
+    orbTarget: 280,
+    goldenOrbs: 38,
+    killBoostFactor: 1.50
   }
 };
 
@@ -320,8 +320,8 @@ class PandaSlitherGame {
       glowColor: palette.glow,
       angle,
       targetAngle: angle,
-      baseSpeed: isPlayer ? cfg.baseSpeed : cfg.baseSpeed * (0.94 + Math.random() * 0.12),
-      turnSpeed: isPlayer ? 5.6 : 4.2 + Math.random() * 1.1,
+      baseSpeed: isPlayer ? cfg.baseSpeed : cfg.baseSpeed * (0.82 + Math.random() * 0.10),
+      turnSpeed: isPlayer ? 5.9 : 3.9 + Math.random() * 1.0,
       radius: isPlayer ? 13.5 : 12 + Math.random() * 4.5,
       boosting: false,
       extracting: false,
@@ -354,8 +354,8 @@ class PandaSlitherGame {
       this.orbs.push({
         x: pt.x,
         y: pt.y,
-        radius: shouldGolden ? 8.5 : 4.2 + Math.random() * 2.4,
-        valueMult: shouldGolden ? 0.07 : 0.015 + Math.random() * 0.015,
+        radius: shouldGolden ? 9.5 : 4.8 + Math.random() * 2.5,
+        valueMult: shouldGolden ? 0.14 : 0.025 + Math.random() * 0.015,
         color: shouldGolden ? '#ffb700' : ORB_COLORS[Math.floor(Math.random() * ORB_COLORS.length)],
         isGolden: shouldGolden,
         pulse: Math.random() * Math.PI * 2,
@@ -579,7 +579,7 @@ class PandaSlitherGame {
     this.ensureAudio();
 
     this.setTicker(
-      `¡En la Arena ${cfg.label}! Come orbes y elimina rivales. Mantén Q o COBRAR (2.5s) para extraer.`,
+      `¡En la Arena ${cfg.label}! Come orbes y elimina rivales. Mantén Q o COBRAR (1.6s) para extraer.`,
       false
     );
     this.updateHudStrip();
@@ -607,7 +607,7 @@ class PandaSlitherGame {
         x: seg.x + (Math.random() - 0.5) * 14,
         y: seg.y + (Math.random() - 0.5) * 14,
         radius: 8 + Math.random() * 2.5,
-        valueMult: Math.min(0.45, Math.max(0.05, perOrb)),
+        valueMult: Math.min(1.50, Math.max(0.10, perOrb)),
         color: '#ffb700',
         isGolden: true,
         pulse: Math.random() * Math.PI * 2,
@@ -730,19 +730,19 @@ class PandaSlitherGame {
       }
     }
 
-    if (Math.hypot(dangerVectorX, dangerVectorY) > 0.35 && Math.random() < 0.88) {
+    if (Math.hypot(dangerVectorX, dangerVectorY) > 0.35 && Math.random() < 0.68) {
       bot.targetAngle = Math.atan2(dangerVectorY, dangerVectorX);
-      bot.boosting = bot.targetLength > 18 && Math.random() < 0.45;
+      bot.boosting = bot.targetLength > 18 && Math.random() < 0.25;
       return;
     }
 
-    // 3. Si el jugador está canalizando extracción cerca, los bots cercanos lo cazan ligeramente
+    // MODO CREADOR: cuando el jugador canaliza extracción, bots cercanos se apartan suavemente
     if (this.player && this.player.alive && this.player.extracting) {
       const pHead = this.player.segments[0];
       const dp = Math.hypot(pHead.x - head.x, pHead.y - head.y);
-      if (dp < 420 && dp > 75 && Math.random() < (this.tier === 'vip' ? 0.72 : 0.48)) {
-        bot.targetAngle = Math.atan2(pHead.y - head.y, pHead.x - head.x);
-        bot.boosting = bot.targetLength > 20 && Math.random() < 0.6;
+      if (dp < 380) {
+        bot.targetAngle = Math.atan2(head.y - pHead.y, head.x - pHead.x);
+        bot.boosting = false;
         return;
       }
     }
@@ -897,7 +897,12 @@ class PandaSlitherGame {
 
       for (const sB of this.snakes) {
         if (!sB.alive || sA.id === sB.id || sB.spawnShield > 0) continue;
-        const hitDist = sA.radius * 0.72 + sB.radius * 0.78;
+        // MODO CREADOR: hitbox permisiva para el jugador y más favorable contra bots
+        const hitDist = sA.isPlayer
+          ? sA.radius * 0.60 + sB.radius * 0.60
+          : sB.isPlayer
+            ? sA.radius * 0.84 + sB.radius * 0.84
+            : sA.radius * 0.72 + sB.radius * 0.78;
         const hitDistSq = hitDist * hitDist;
 
         for (let i = 0; i < sB.segments.length; i++) {
@@ -1484,7 +1489,7 @@ class PandaSlitherGame {
     if (mainBtn && mainTitle && mainSub) {
       mainBtn.style.setProperty('--extract-pct', pctStr);
       mainBtn.classList.toggle('extracting', this.player.extracting);
-      mainTitle.textContent = this.player.extracting ? `⏳ EXTRAYENDO ${pct}%` : '💰 MANTENER P/ COBRAR (2.5s)';
+      mainTitle.textContent = this.player.extracting ? `⏳ EXTRAYENDO ${pct}%` : '💰 MANTENER P/ COBRAR (1.6s)';
       mainSub.style.display = 'block';
       mainSub.textContent = `x${this.currentMultiplier.toFixed(2)} = ${pot.toLocaleString('en-US')} 💎`;
     }
@@ -1533,14 +1538,14 @@ class PandaSlitherGame {
       quickCashBtn.classList.remove('extracting', 'btn-cashed-out');
       if (this.state === 'PLAYING') {
         quickCashBtn.disabled = false;
-        quickCashBtn.textContent = '💰 COBRAR (2.5s)';
+        quickCashBtn.textContent = '💰 COBRAR (1.6s)';
       } else if (this.state === 'CASHED_OUT') {
         quickCashBtn.disabled = true;
         quickCashBtn.classList.add('btn-cashed-out');
         quickCashBtn.textContent = `✓ +${this.cashoutPayout.toLocaleString('en-US')} 💎`;
       } else {
         quickCashBtn.disabled = true;
-        quickCashBtn.textContent = '💰 COBRAR (2.5s)';
+        quickCashBtn.textContent = '💰 COBRAR (1.6s)';
       }
     }
 
@@ -1557,7 +1562,7 @@ class PandaSlitherGame {
         mainBtn.disabled = false;
         mainBtn.dataset.mode = 'cashout';
         mainBtn.classList.add('btn-cashout');
-        mainTitle.textContent = '💰 MANTENER P/ COBRAR (2.5s)';
+        mainTitle.textContent = '💰 MANTENER P/ COBRAR (1.6s)';
         mainSub.style.display = 'block';
         mainSub.textContent = `x${this.currentMultiplier.toFixed(2)} = ${Math.round(this.betAmount * this.currentMultiplier).toLocaleString('en-US')} 💎`;
       } else if (this.state === 'CASHED_OUT') {
@@ -1607,7 +1612,7 @@ class PandaSlitherGame {
           overlay.innerHTML = `
             <div class="overlay-card">
               <div class="overlay-title">🐍 Panda Slither Arena</div>
-              <div class="overlay-sub">Come botines dorados, corta a tus rivales con Turbo y mantén <strong>Q</strong> o <strong>COBRAR</strong> (2.5s) para extraer ganancias.</div>
+              <div class="overlay-sub">Come botines dorados, corta a tus rivales con Turbo y mantén <strong>Q</strong> o <strong>COBRAR</strong> (1.6s) para extraer ganancias.</div>
               <button type="button" class="overlay-btn" id="btnOverlayPlayAgain">▶ ENTRAR A LA ARENA</button>
             </div>
           `;
