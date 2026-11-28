@@ -695,9 +695,97 @@
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
+
+    .admin-auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 15, 0.94);
+      backdrop-filter: blur(10px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .admin-auth-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 14px;
+      padding: 1.8rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .audit-action-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.22rem 0.55rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .audit-action-badge.blocked {
+      background: rgba(239, 68, 68, 0.16);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+    }
+
+    .audit-action-badge.win {
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .audit-action-badge.admin {
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      color: #fcd34d;
+    }
+
+    .audit-action-badge.neutral {
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #93c5fd;
+    }
   </style>
 </head>
 <body>
+
+  <!-- MODAL DE AUTENTICACIÓN ADMIN -->
+  <div class="admin-auth-overlay" id="adminAuthOverlay">
+    <div class="admin-auth-card">
+      <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
+        <span style="font-size: 1.6rem;">🔐</span>
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 900; color: #fff;">Acceso Restringido</h2>
+          <p style="font-size: 0.76rem; color: var(--text-muted);">Ingresa la clave secreta (<code>ADMIN_API_KEY</code>) para administrar.</p>
+        </div>
+      </div>
+
+      <form id="adminAuthForm">
+        <div class="form-group" style="margin-bottom: 0.9rem;">
+          <label class="form-label">Clave de Administrador *</label>
+          <input type="password" id="adminKeyInput" class="form-control mono" placeholder="••••••••••••" autocomplete="current-password" required />
+        </div>
+
+        <label class="checkbox-wrap" style="margin-bottom: 1rem;">
+          <input type="checkbox" id="adminKeyRemember" checked />
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Recordar clave en este navegador</span>
+        </label>
+
+        <div id="adminAuthError" style="display: none; background: rgba(239,68,68,0.14); border: 1px solid rgba(239,68,68,0.4); color: #fca5a5; padding: 0.55rem 0.75rem; border-radius: 8px; font-size: 0.78rem; margin-bottom: 0.9rem;"></div>
+
+        <button type="submit" id="btnAdminUnlock" class="btn-action-primary" style="width: 100%; justify-content: center;">
+          🔐 Desbloquear Panel
+        </button>
+      </form>
+    </div>
+  </div>
 
   <!-- BARRA SUPERIOR DE ADMINISTRACIÓN -->
   <header class="admin-header">
@@ -720,6 +808,9 @@
       </select>
       <button type="button" id="btnRefreshAll" class="btn-public-link" style="cursor: pointer;">
         🔄 Actualizar
+      </button>
+      <button type="button" id="btnAdminLock" class="btn-public-link" style="cursor: pointer; border-color: rgba(245,158,11,0.4); color: var(--accent-gold);">
+        🔒 Bloquear
       </button>
       <a href="../frontend/dashboard_directo.html" target="_blank" class="btn-public-link">
         🌐 Abrir Frontend Jugador &rarr;
@@ -767,6 +858,9 @@
       </button>
       <button type="button" class="tab-btn" data-tab="tabRetiros">
         <span>📤</span> Retiros
+      </button>
+      <button type="button" class="tab-btn" data-tab="tab-auditoria">
+        <span>🛡️</span> Auditoría
       </button>
     </nav>
 
@@ -975,6 +1069,38 @@
       </div>
     </div>
 
+    <!-- PESTAÑA 5: AUDITORÍA DE SALDOS -->
+    <div class="tab-pane" id="tab-auditoria">
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title"><span>🛡️</span> Auditoría de Movimientos y Seguridad (<code>balance_audit_logs</code>)</div>
+            <div class="section-desc">Registro en vivo de apuestas, premios, bloqueos de manipulación, ruleta, cofres, encuestas y ediciones admin.</div>
+          </div>
+          <button type="button" class="btn-sm-action" onclick="loadAuditLogs()">🔄 Recargar</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Acción</th>
+                <th>Delta 💎</th>
+                <th>Saldo (Antes &rarr; Después)</th>
+                <th>IP</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody id="tableAuditoriaBody">
+              <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">Cargando registros de auditoría...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- MODAL EDITAR USUARIO -->
@@ -1029,9 +1155,60 @@
 
   <script>
     const FALLBACK_PROD_API_BASE = 'https://panda-creadores-api.onrender.com/api/v1';
+    const ADMIN_KEY_STORAGE = 'PANDA_ADMIN_API_KEY';
 
     function getApiBase() {
       return (window.PANDA_CONFIG && window.PANDA_CONFIG.API_BASE) || window.API_BASE || FALLBACK_PROD_API_BASE;
+    }
+
+    function getAdminKey() {
+      try {
+        return sessionStorage.getItem(ADMIN_KEY_STORAGE) || localStorage.getItem(ADMIN_KEY_STORAGE) || '';
+      } catch (_) {
+        return '';
+      }
+    }
+
+    function saveAdminKey(key, remember) {
+      const clean = String(key || '').trim();
+      try {
+        if (clean) {
+          sessionStorage.setItem(ADMIN_KEY_STORAGE, clean);
+          if (remember) localStorage.setItem(ADMIN_KEY_STORAGE, clean);
+          else localStorage.removeItem(ADMIN_KEY_STORAGE);
+        } else {
+          sessionStorage.removeItem(ADMIN_KEY_STORAGE);
+          localStorage.removeItem(ADMIN_KEY_STORAGE);
+        }
+      } catch (_) {}
+    }
+
+    function showAdminAuthModal(errorMsg = '') {
+      const overlay = document.getElementById('adminAuthOverlay');
+      const errBox = document.getElementById('adminAuthError');
+      const input = document.getElementById('adminKeyInput');
+      if (overlay) overlay.style.display = 'flex';
+      if (errBox) {
+        if (errorMsg) {
+          errBox.textContent = errorMsg;
+          errBox.style.display = 'block';
+        } else {
+          errBox.textContent = '';
+          errBox.style.display = 'none';
+        }
+      }
+      setConnectionStatus('offline', 'Panel bloqueado (requiere clave)');
+      setTimeout(() => input?.focus(), 60);
+    }
+
+    function hideAdminAuthModal() {
+      const overlay = document.getElementById('adminAuthOverlay');
+      const errBox = document.getElementById('adminAuthError');
+      if (overlay) overlay.style.display = 'none';
+      if (errBox) {
+        errBox.textContent = '';
+        errBox.style.display = 'none';
+      }
     }
 
     let globalDirecciones = [];
@@ -1068,19 +1245,29 @@
 
     async function fetchAdminJSON(endpoint, options = {}, retries = 1) {
       const url = `${getApiBase()}${endpoint}`;
+      const adminKey = getAdminKey();
+      const headers = {
+        ...(options.headers || {}),
+        ...(adminKey ? { 'X-Admin-Key': adminKey } : {})
+      };
       try {
-        const res = await fetch(url, { cache: 'no-store', ...options });
+        const res = await fetch(url, { cache: 'no-store', ...options, headers });
         if ((res.status === 502 || res.status === 503 || res.status === 504) && retries > 0) {
           await sleepMs(2500);
           return fetchAdminJSON(endpoint, options, retries - 1);
         }
         const data = await res.json().catch(() => null);
+        if (res.status === 401 || res.status === 403) {
+          saveAdminKey('', false);
+          showAdminAuthModal((data && data.error) || 'Sesión admin expirada o clave inválida');
+          throw new Error((data && data.error) || `HTTP ${res.status}`);
+        }
         if (!res.ok) {
           throw new Error((data && data.error) || `HTTP ${res.status}`);
         }
         return data;
       } catch (err) {
-        if (retries > 0 && (!err.message || !/^HTTP 4\d\d$/.test(err.message))) {
+        if (retries > 0 && (!err.message || !/^HTTP 4\d\d$/.test(err.message)) && !/inválida|ausente/i.test(err.message || '')) {
           await sleepMs(2500);
           return fetchAdminJSON(endpoint, options, retries - 1);
         }
@@ -1510,15 +1697,104 @@
       }
     }
 
+    function escapeAdminHtml(str) {
+      return String(str ?? '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+    }
+
+    // 6. CARGAR LOGS DE AUDITORÍA
+    async function loadAuditLogs() {
+      try {
+        const raw = await fetchAdminJSON('/admin/audit-logs');
+        const list = Array.isArray(raw) ? raw : [];
+        const tbody = document.getElementById('tableAuditoriaBody');
+        tbody.innerHTML = '';
+        if (list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:1.5rem;">Sin registros de auditoría aún.</td></tr>';
+          return;
+        }
+        list.forEach(item => {
+          const act = String(item.action || 'UNKNOWN');
+          const delta = Number(item.delta || 0);
+          const before = Number(item.balance_before || 0);
+          const after = Number(item.balance_after || 0);
+          let badgeCls = 'neutral';
+          if (act.startsWith('BLOCKED_')) badgeCls = 'blocked';
+          else if (act === 'ADMIN_EDIT') badgeCls = 'admin';
+          else if (act.includes('WIN') || act.includes('DEPOSIT') || act.includes('CHEST') || act.includes('SURVEY') || act.includes('VIP') || act.includes('BONUS')) badgeCls = 'win';
+
+          const deltaStr = delta > 0 ? `+${delta.toLocaleString()} 💎` : `${delta.toLocaleString()} 💎`;
+          const deltaColor = delta > 0 ? 'var(--accent-green)' : (delta < 0 ? '#f87171' : 'var(--text-muted)');
+
+          const tr = document.createElement('tr');
+          if (badgeCls === 'blocked') {
+            tr.style.background = 'rgba(239, 68, 68, 0.06)';
+          }
+          tr.innerHTML = `
+            <td style="font-size:0.75rem; color:var(--text-muted); white-space:nowrap;">${formatAdminDate(item.created_at)}</td>
+            <td><strong>${escapeAdminHtml(item.username || '-')}</strong></td>
+            <td><span class="audit-action-badge ${badgeCls}">${escapeAdminHtml(act)}</span></td>
+            <td style="font-family:var(--font-mono); font-weight:800; color:${deltaColor};">${deltaStr}</td>
+            <td style="font-family:var(--font-mono); font-size:0.78rem;">${before.toLocaleString()} &rarr; <strong>${after.toLocaleString()}</strong></td>
+            <td style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted);">${escapeAdminHtml(item.ip_address || '-')}</td>
+            <td style="font-size:0.75rem; color:var(--text-muted); max-width:260px; word-break:break-word;">${escapeAdminHtml(item.details || '-')}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        renderTableError('tableAuditoriaBody', 7, `No se pudieron cargar los logs (${err.message})`, 'loadAuditLogs');
+      }
+    }
+
     async function loadAllAdminData() {
+      if (!getAdminKey()) {
+        showAdminAuthModal();
+        return;
+      }
       setConnectionStatus('loading', 'Conectando con Neon...');
       await Promise.allSettled([
         loadStats(),
         loadDirecciones(),
         loadUsuarios(),
         loadDepositos(),
-        loadRetiros()
+        loadRetiros(),
+        loadAuditLogs()
       ]);
+    }
+
+    async function verifyAndUnlockAdmin(key, remember) {
+      const clean = String(key || '').trim();
+      if (!clean) {
+        showAdminAuthModal('Ingresa la clave de administrador.');
+        return;
+      }
+      const btn = document.getElementById('btnAdminUnlock');
+      const origTxt = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Verificando...';
+      }
+      try {
+        const res = await fetch(`${getApiBase()}/admin/verify`, {
+          cache: 'no-store',
+          headers: { 'X-Admin-Key': clean }
+        });
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          saveAdminKey('', false);
+          showAdminAuthModal((data && data.error) || `Acceso denegado (HTTP ${res.status})`);
+          return;
+        }
+        saveAdminKey(clean, remember);
+        hideAdminAuthModal();
+        await loadAllAdminData();
+      } catch (err) {
+        showAdminAuthModal(`No se pudo conectar con ${getApiBase()} (${err.message})`);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origTxt;
+        }
+      }
     }
 
     // INICIALIZACIÓN
@@ -1530,13 +1806,36 @@
           if (window.PANDA_CONFIG && typeof window.PANDA_CONFIG.setMode === 'function') {
             window.PANDA_CONFIG.setMode(e.target.value);
           }
-          loadAllAdminData();
+          if (getAdminKey()) loadAllAdminData();
+          else showAdminAuthModal();
         });
       }
+
+      document.getElementById('adminAuthForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const key = document.getElementById('adminKeyInput')?.value || '';
+        const rem = Boolean(document.getElementById('adminKeyRemember')?.checked);
+        await verifyAndUnlockAdmin(key, rem);
+      });
+
+      document.getElementById('btnAdminLock')?.addEventListener('click', () => {
+        saveAdminKey('', false);
+        const inp = document.getElementById('adminKeyInput');
+        if (inp) inp.value = '';
+        showAdminAuthModal();
+      });
+
       document.getElementById('btnRefreshAll')?.addEventListener('click', () => {
         loadAllAdminData();
       });
-      loadAllAdminData();
+
+      const savedKey = getAdminKey();
+      if (savedKey) {
+        const isRemembered = Boolean(localStorage.getItem(ADMIN_KEY_STORAGE));
+        verifyAndUnlockAdmin(savedKey, isRemembered);
+      } else {
+        showAdminAuthModal();
+      }
     });
   </script>
 </body>

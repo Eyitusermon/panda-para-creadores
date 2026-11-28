@@ -1246,7 +1246,7 @@
       try {
         await fetch(`${API_BASE}/user/update-security-question`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             username: userState.username,
             question: question,
@@ -1258,7 +1258,7 @@
       showToast('Pregunta de Seguridad Guardada', 'Tu pregunta y respuesta secreta han sido actualizadas con éxito.');
     });
 
-    // Pagar Verificación desde el Perfil
+    // Pagar Verificación desde el Perfil (autoritativo en servidor)
     document.getElementById('btnPayVerifyNow').addEventListener('click', async () => {
       const fee = 100;
       if (userState.balance < fee) {
@@ -1269,23 +1269,35 @@
         return;
       }
 
-      userState.balance -= fee;
-      userState.cuenta_verificada = true;
-      userState.is_verified = true;
-      userState.primer_deposito_realizado = true;
-      userState.tiene_recarga_aprobada = true;
-      userState.fecha_verificacion = new Date().toISOString();
-      saveUserState();
-
       try {
-        await fetch(`${API_BASE}/user/pagar-verificacion`, {
+        const res = await fetch(`${API_BASE}/user/pagar-verificacion`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: userState.username, metodo: 'saldo_diamantes' })
         });
-      } catch (_) {}
-
-      showToast('¡Cuenta Verificada!', 'Tu cuenta ahora está verificada y los retiros a USDT (TRC-20) están habilitados.');
+        const d = await res.json().catch(() => null);
+        if (!res.ok || (d && (d.error || d.success === false))) {
+          showToast('Error de Verificación', (d && d.error) || 'No se pudo completar el pago de verificación.', true);
+          return;
+        }
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          if (d && typeof d.nuevo_balance === 'number') userState.balance = d.nuevo_balance;
+          else userState.balance = Math.max(0, userState.balance - fee);
+          userState.cuenta_verificada = true;
+          userState.is_verified = true;
+          userState.primer_deposito_realizado = true;
+          userState.tiene_recarga_aprobada = true;
+          userState.fecha_verificacion = new Date().toISOString();
+          saveUserState();
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+        }
+        await syncBackendProfile();
+        showToast('¡Cuenta Verificada!', 'Tu cuenta ahora está verificada y los retiros a USDT (TRC-20) están habilitados.');
+      } catch (_) {
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para validar la verificación.', true);
+      }
     });
 
     renderProfileUI();

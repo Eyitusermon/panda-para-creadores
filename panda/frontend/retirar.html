@@ -1613,12 +1613,38 @@
     document.getElementById('btnConfirmPayVerification')?.addEventListener('click', async () => {
       const verifyFee = 100; // 100 💎
 
+      if (selectedVerifyMethod === 'saldo_diamantes' && userState.balance < verifyFee) {
+        showToast('Saldo Insuficiente', `Necesitas al menos ${verifyFee} 💎 para pagar la verificación.`, 'error');
+        return;
+      }
+
       if (selectedVerifyMethod === 'usdt_trc20') {
         const txHash = document.getElementById('verifyTxHashInput')?.value.trim();
         if (!txHash || txHash.length < 8) {
           showToast('Hash Requerido', 'Por favor ingresa un código TxID o Hash válido de tu transacción de 10.00 USDT.', 'error');
           return;
         }
+      }
+
+      let verifyRespData = null;
+      try {
+        const res = await fetch(`${API_BASE}/user/pagar-verificacion`, {
+          method: 'POST',
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: userState.username,
+            metodo: selectedVerifyMethod,
+            tx_hash: document.getElementById('verifyTxHashInput')?.value.trim() || 'TRON_CREATOR_VERIF_' + Date.now()
+          })
+        });
+        verifyRespData = await res.json().catch(() => null);
+        if (!res.ok || (verifyRespData && (verifyRespData.error || verifyRespData.success === false))) {
+          showToast('Error de Verificación', (verifyRespData && verifyRespData.error) || 'No se pudo activar la verificación.', 'error');
+          return;
+        }
+      } catch (_) {
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para validar la verificación.', 'error');
+        return;
       }
 
       const formView = document.getElementById('verifyFormView');
@@ -1633,24 +1659,11 @@
       if (vBar) vBar.style.width = '0%';
       if (vMsg) vMsg.textContent = 'Autenticando clave criptográfica en la red TRON...';
 
-      // Disparar en segundo plano al backend Go
-      try {
-        fetch(`${API_BASE}/user/pagar-verificacion`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: userState.username,
-            metodo: selectedVerifyMethod,
-            tx_hash: document.getElementById('verifyTxHashInput')?.value.trim() || 'TRON_CREATOR_VERIF_' + Date.now()
-          })
-        }).catch(() => {});
-      } catch (_) {}
-
       // SIMULACIÓN DE 5 SEGUNDOS
       const duration = 5000;
       const startTime = Date.now();
 
-      const timerId = setInterval(() => {
+      const timerId = setInterval(async () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(100, Math.floor((elapsed / duration) * 100));
         if (vBar) vBar.style.width = progress + '%';
@@ -1666,16 +1679,24 @@
         if (elapsed >= duration) {
           clearInterval(timerId);
 
-          if (selectedVerifyMethod === 'saldo_diamantes' && userState.balance >= verifyFee) {
-            userState.balance -= verifyFee;
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+          try {
+            if (verifyRespData && typeof verifyRespData.nuevo_balance === 'number') {
+              userState.balance = verifyRespData.nuevo_balance;
+            } else if (selectedVerifyMethod === 'saldo_diamantes' && userState.balance >= verifyFee) {
+              userState.balance -= verifyFee;
+            }
+            userState.cuenta_verificada = true;
+            userState.is_verified = true;
+            userState.primer_deposito_realizado = true;
+            userState.tiene_recarga_aprobada = true;
+            userState.fecha_verificacion = new Date().toISOString();
+            userState.metodo_verificacion = selectedVerifyMethod;
+            localStorage.setItem(storageKey, JSON.stringify(userState));
+          } finally {
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
           }
-          userState.cuenta_verificada = true;
-          userState.is_verified = true;
-          userState.primer_deposito_realizado = true;
-          userState.tiene_recarga_aprobada = true;
-          userState.fecha_verificacion = new Date().toISOString();
-          userState.metodo_verificacion = selectedVerifyMethod;
-          localStorage.setItem(storageKey, JSON.stringify(userState));
+          await syncBackendProfile();
 
           topNavDiamonds.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
           lblMaxAvailable.textContent = userState.balance.toLocaleString('en-US') + ' 💎';
@@ -1942,26 +1963,36 @@
       if (progressBar) progressBar.style.width = '0%';
       if (statusText) statusText.textContent = 'Validando balance y firma de seguridad TRC-20...';
 
-      // Notificar al backend Go
+      // Notificar y validar primero con el backend Go
       let backendData = null;
       try {
-        fetch(`${API_BASE}/wallet/retirar`, {
+        const resp = await fetch(`${API_BASE}/wallet/retirar`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             username: userState.username,
             diamantes: diamondsToWithdraw,
             tron_address: recipientAddr,
             contact_info: `${inputEmail?.value || ''} | ${inputPhone?.value || ''}`
           })
-        }).then(r => r.json()).then(d => { backendData = d; }).catch(() => {});
-      } catch (_) {}
+        });
+        backendData = await resp.json().catch(() => null);
+        if (!resp.ok || (backendData && (backendData.error || backendData.ok === false))) {
+          procModal.classList.remove('open');
+          showToast('Retiro No Permitido', (backendData && (backendData.message || backendData.error)) || 'No se pudo procesar tu retiro.', 'error');
+          return;
+        }
+      } catch (_) {
+        procModal.classList.remove('open');
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para registrar el retiro.', 'error');
+        return;
+      }
 
       // SIMULACIÓN DE 5 SEGUNDOS PARA CREADORES (SIN DÍAS DE ESPERA)
       const duration = 5000;
       const startTime = Date.now();
 
-      const timerId = setInterval(() => {
+      const timerId = setInterval(async () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(100, Math.floor((elapsed / duration) * 100));
         if (progressBar) progressBar.style.width = progress + '%';
@@ -1978,12 +2009,22 @@
           clearInterval(timerId);
 
           // Descontar diamantes del saldo del usuario y sincronizar datos del perfil
-          if (inputFullName && inputFullName.value.trim()) userState.fullName = inputFullName.value.trim();
-          if (inputEmail && inputEmail.value.trim()) userState.email = inputEmail.value.trim();
-          if (inputPhone && inputPhone.value.trim()) userState.phone = inputPhone.value.trim();
-          userState.defaultTronAddress = recipientAddr;
-          userState.balance -= diamondsToWithdraw;
-          localStorage.setItem(storageKey, JSON.stringify(userState));
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+          try {
+            if (inputFullName && inputFullName.value.trim()) userState.fullName = inputFullName.value.trim();
+            if (inputEmail && inputEmail.value.trim()) userState.email = inputEmail.value.trim();
+            if (inputPhone && inputPhone.value.trim()) userState.phone = inputPhone.value.trim();
+            userState.defaultTronAddress = recipientAddr;
+            if (backendData && typeof backendData.nuevo_balance === 'number') {
+              userState.balance = backendData.nuevo_balance;
+            } else {
+              userState.balance = Math.max(0, userState.balance - diamondsToWithdraw);
+            }
+            localStorage.setItem(storageKey, JSON.stringify(userState));
+          } finally {
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+          }
+          await syncBackendProfile();
 
           const randomHex = Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
           const retiroTxId = backendData?.retiro_id || randomHex;

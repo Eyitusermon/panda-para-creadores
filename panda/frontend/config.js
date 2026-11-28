@@ -44,6 +44,7 @@
   // MOTOR CENTRALIZADO DE SINCRONIZACIÓN DE SALDO CON NEON (BIDIRECCIONAL)
   // ===========================================================================
   const SESSION_KEY = 'panda_user_session';
+  const TOKEN_KEY = 'panda_auth_token';
   const DIRTY_KEY = 'panda_balance_dirty';
   const rawSetItem = Storage.prototype.setItem;
   const rawRemoveItem = Storage.prototype.removeItem;
@@ -55,6 +56,64 @@
     } catch (_) {
       return null;
     }
+  }
+
+  window.pandaGetAuthToken = function () {
+    try {
+      const t = localStorage.getItem(TOKEN_KEY);
+      if (t && String(t).trim()) return String(t).trim();
+    } catch (_) {}
+    const s = readSessionSafe();
+    return s && s.token ? String(s.token).trim() : '';
+  };
+
+  window.pandaSetAuthToken = function (tok) {
+    try {
+      const clean = String(tok || '').trim();
+      if (clean) rawSetItem.call(localStorage, TOKEN_KEY, clean);
+      else rawRemoveItem.call(localStorage, TOKEN_KEY);
+    } catch (_) {}
+  };
+
+  window.pandaClearAuthToken = function () {
+    try {
+      rawRemoveItem.call(localStorage, TOKEN_KEY);
+    } catch (_) {}
+  };
+
+  window.pandaGetAuthHeaders = function (extra) {
+    const token = window.pandaGetAuthToken();
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    if (extra && typeof extra === 'object') {
+      Object.assign(headers, extra);
+    }
+    return headers;
+  };
+
+  function applyAuthoritativeBalanceCorrection(data) {
+    if (!data || typeof data.balance_diamantes !== 'number') return;
+    const cur = readSessionSafe() || {};
+    cur.balance = data.balance_diamantes;
+    if (typeof data.vip_xp === 'number') cur.xp = data.vip_xp;
+    if (data.vip_level) cur.vipLevel = data.vip_level;
+    window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+    try {
+      rawSetItem.call(localStorage, SESSION_KEY, JSON.stringify(cur));
+      if (cur.username) {
+        lastTracked = {
+          username: String(cur.username).trim().toLowerCase(),
+          balance: Number(cur.balance || 0),
+          bonusBalance: Number(cur.bonusBalance || 0),
+          xp: Number(cur.xp || 0)
+        };
+      }
+    } finally {
+      window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+    }
+    try {
+      window.dispatchEvent(new CustomEvent('panda:balance-corrected', { detail: data }));
+    } catch (_) {}
   }
 
   let lastTracked = (() => {
@@ -83,7 +142,8 @@
       vip_xp: Math.max(0, Math.round(Number(s.xp) || 0)),
       vip_level: s.vipLevel || 'Panda Bronce',
       email: s.email || '',
-      phone: s.phone || ''
+      phone: s.phone || '',
+      source: window.location.pathname || ''
     };
 
     const sig = `${cleanUser.toLowerCase()}|${payload.balance_diamantes}|${payload.balance_bono_diamantes}|${payload.vip_xp}|${payload.vip_level}`;
@@ -109,10 +169,20 @@
       try {
         const res = await fetch(`${apiBase}/user/sync-balance`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.pandaGetAuthHeaders(),
           body: JSON.stringify(payload),
           keepalive: true
         });
+        const data = await res.json().catch(() => null);
+        if (res.status === 403) {
+          try { rawRemoveItem.call(localStorage, DIRTY_KEY); } catch (_) {}
+          applyAuthoritativeBalanceCorrection(data);
+          return data;
+        }
+        if (res.status === 401) {
+          try { rawRemoveItem.call(localStorage, DIRTY_KEY); } catch (_) {}
+          return data;
+        }
         if (res.ok) {
           try {
             const curDirty = JSON.parse(localStorage.getItem(DIRTY_KEY) || 'null');
@@ -122,7 +192,10 @@
           } catch (_) {
             rawRemoveItem.call(localStorage, DIRTY_KEY);
           }
-          return await res.json().catch(() => ({ ok: true }));
+          if (data && data.vip_upgraded === true) {
+            applyAuthoritativeBalanceCorrection(data);
+          }
+          return data || { ok: true };
         }
       } catch (_) {}
       return null;
@@ -196,6 +269,23 @@
         }
         if (typeof data.tiene_recarga_aprobada !== 'undefined') {
           s.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
+        }
+        if (typeof data.ultimo_cofre_abierto_at !== 'undefined') {
+          s.ultimo_cofre_abierto_at = data.ultimo_cofre_abierto_at || null;
+          s.lastDailyChestAt = data.ultimo_cofre_abierto_at || null;
+        }
+        if (typeof data.ultima_ruleta_girada_at !== 'undefined') {
+          s.ultima_ruleta_girada_at = data.ultima_ruleta_girada_at || null;
+          s.lastRouletteSpinAt = data.ultima_ruleta_girada_at || null;
+        }
+        if (typeof data.ultimo_bono_semanal_at !== 'undefined') {
+          s.ultimo_bono_semanal_at = data.ultimo_bono_semanal_at || null;
+          s.weeklyBonusClaimed = Boolean(data.ultimo_bono_semanal_at && (Date.now() - new Date(data.ultimo_bono_semanal_at).getTime() < 7 * 24 * 3600 * 1000));
+        } else {
+          s.weeklyBonusClaimed = false;
+        }
+        if (typeof data.weekly_wagered_diamantes === 'number') {
+          s.weeklySpent = data.weekly_wagered_diamantes;
         }
         if (data.email && (!s.email || s.email.endsWith('@pandabet.com') || s.email.split('@').length > 2)) {
           s.email = data.email;

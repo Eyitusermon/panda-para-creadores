@@ -3,7 +3,10 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"crypto/hmac"
 	"crypto/sha256"
+	"crypto/subtle"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -20,8 +23,11 @@ import (
 )
 
 // Constante de economía del juego
-const DiamondRate = 10 // 1 USDT = 10 Diamantes 💎
-const VerificationFeeDiamonds = 100 // Costo de verificación (100 💎 = 10 USDT)
+const DiamondRate = 10                 // 1 USDT = 10 Diamantes 💎
+const VerificationFeeDiamonds = 100    // Costo de verificación (100 💎 = 10 USDT)
+const SurveyRewardDiamonds int64 = 50  // Recompensa fija de encuesta diaria en servidor
+const MaxSyncWinMultiplier int64 = 1000 // Multiplicador máximo por apuesta en sync-balance (Panda Creadores)
+const MaxSingleSyncWin int64 = 100000   // Tope máximo de ganancia neta por sincronización (Panda Creadores)
 
 // -----------------------------------------------------------------------------
 // CLIENTE NEON SERVERLESS HTTP SQL API (Puerto 443 / HTTPS Nativo)
@@ -142,7 +148,25 @@ type User struct {
 	BalanceBonoDiamantes   int64      `json:"balance_bono_diamantes"`
 	GirosGratis            int        `json:"giros_gratis"`
 	UltimoCofreAbiertoAt   *time.Time `json:"ultimo_cofre_abierto_at,omitempty"`
+	UltimaRuletaGiradaAt   *time.Time `json:"ultima_ruleta_girada_at,omitempty"`
+	UltimoBonoSemanalAt    *time.Time `json:"ultimo_bono_semanal_at,omitempty"`
+	WeeklyWageredDiamantes int64      `json:"weekly_wagered_diamantes"`
+	ActiveBetPool          int64      `json:"-"`
+	LastBetAt              *time.Time `json:"-"`
 	CreatedAt              time.Time  `json:"created_at"`
+}
+
+type AuditLogRecord struct {
+	ID            string    `json:"id"`
+	UserID        string    `json:"user_id,omitempty"`
+	Username      string    `json:"username"`
+	Action        string    `json:"action"`
+	Delta         int64     `json:"delta"`
+	BalanceBefore int64     `json:"balance_before"`
+	BalanceAfter  int64     `json:"balance_after"`
+	IPAddress     string    `json:"ip_address"`
+	Details       string    `json:"details"`
+	CreatedAt     time.Time `json:"created_at"`
 }
 
 type DepositRecord struct {
@@ -163,12 +187,16 @@ type UserStore struct {
 	users          map[string]*User
 	depositos      map[string]*DepositRecord
 	depositsByHash map[string]*DepositRecord
+	auditLogs      []AuditLogRecord
+	surveyClaims   map[string]bool
 }
 
 var store = &UserStore{
 	users:          make(map[string]*User),
 	depositos:      make(map[string]*DepositRecord),
 	depositsByHash: make(map[string]*DepositRecord),
+	auditLogs:      make([]AuditLogRecord, 0, 128),
+	surveyClaims:   make(map[string]bool),
 }
 
 func loadEnv(filepath string) {
@@ -222,11 +250,30 @@ func initDatabase() {
 	neon = client
 	fmt.Printf("🐘 [NEON HTTP SQL API] ¡Conexión exitosa a la base de datos '%v' en Neon.tech! (Usuarios en Neon: %v)\n", row["db"], row["count"])
 
-	// Auto-migración segura de columnas requeridas
+	// Auto-migración segura de columnas y auditoría requeridas
 	migrations := []string{
 		`ALTER TABLE depositos ADD COLUMN IF NOT EXISTS username VARCHAR(100)`,
 		`ALTER TABLE depositos ADD COLUMN IF NOT EXISTS tipo VARCHAR(30) DEFAULT 'RECARGA'`,
 		`ALTER TABLE users ADD COLUMN IF NOT EXISTS primer_deposito_realizado BOOLEAN DEFAULT FALSE`,
+		`ALTER TABLE wallets ADD COLUMN IF NOT EXISTS active_bet_pool BIGINT NOT NULL DEFAULT 0`,
+		`ALTER TABLE wallets ADD COLUMN IF NOT EXISTS last_bet_at TIMESTAMPTZ NULL`,
+		`ALTER TABLE wallets ADD COLUMN IF NOT EXISTS weekly_wagered_diamantes BIGINT NOT NULL DEFAULT 0`,
+		`ALTER TABLE users ADD COLUMN IF NOT EXISTS ultima_ruleta_girada_at TIMESTAMPTZ NULL`,
+		`ALTER TABLE users ADD COLUMN IF NOT EXISTS ultimo_bono_semanal_at TIMESTAMPTZ NULL`,
+		`CREATE TABLE IF NOT EXISTS balance_audit_logs (
+			id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+			user_id UUID NULL REFERENCES users(id) ON DELETE SET NULL,
+			username VARCHAR(100) NOT NULL,
+			action VARCHAR(50) NOT NULL,
+			delta BIGINT NOT NULL DEFAULT 0,
+			balance_before BIGINT NOT NULL DEFAULT 0,
+			balance_after BIGINT NOT NULL DEFAULT 0,
+			ip_address VARCHAR(80) DEFAULT '',
+			details TEXT DEFAULT '',
+			created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+		)`,
+		`CREATE INDEX IF NOT EXISTS idx_audit_user_created ON balance_audit_logs(user_id, created_at DESC)`,
+		`CREATE INDEX IF NOT EXISTS idx_audit_created ON balance_audit_logs(created_at DESC)`,
 	}
 	for _, m := range migrations {
 		_ = neon.Exec(m)
@@ -277,7 +324,7 @@ func initStore() {
 func enableCORS(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Admin-Key")
 }
 
 func writeJSON(w http.ResponseWriter, status int, data any) {
@@ -285,6 +332,302 @@ func writeJSON(w http.ResponseWriter, status int, data any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(data)
+}
+
+// -----------------------------------------------------------------------------
+// SEGURIDAD: FIRMA HMAC DE SESIÓN, CLAVE ADMIN Y AUDITORÍA DE SALDO
+// -----------------------------------------------------------------------------
+
+type SessionClaims struct {
+	UID      string `json:"uid"`
+	Username string `json:"username"`
+	IAT      int64  `json:"iat"`
+	EXP      int64  `json:"exp"`
+}
+
+func getSessionSigningSecret() []byte {
+	if jwtSecret := strings.TrimSpace(os.Getenv("JWT_SECRET")); jwtSecret != "" {
+		sum := sha256.Sum256([]byte("panda_session_signing_v1:" + jwtSecret))
+		return sum[:]
+	}
+	if dbURL := strings.TrimSpace(os.Getenv("DATABASE_URL")); dbURL != "" {
+		sum := sha256.Sum256([]byte("panda_session_signing_v1:" + dbURL))
+		return sum[:]
+	}
+	sum := sha256.Sum256([]byte("panda_local_dev_fallback_secret"))
+	return sum[:]
+}
+
+func generateSessionToken(userID, username string) string {
+	now := time.Now().Unix()
+	claims := SessionClaims{
+		UID:      strings.TrimSpace(userID),
+		Username: strings.TrimSpace(username),
+		IAT:      now,
+		EXP:      now + 30*24*3600,
+	}
+	rawJSON, _ := json.Marshal(claims)
+	payloadB64 := base64.RawURLEncoding.EncodeToString(rawJSON)
+	mac := hmac.New(sha256.New, getSessionSigningSecret())
+	mac.Write([]byte(payloadB64))
+	sigB64 := base64.RawURLEncoding.EncodeToString(mac.Sum(nil))
+	return payloadB64 + "." + sigB64
+}
+
+func verifySessionToken(token string) (*SessionClaims, error) {
+	parts := strings.Split(strings.TrimSpace(token), ".")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		return nil, fmt.Errorf("formato de token inválido")
+	}
+	mac := hmac.New(sha256.New, getSessionSigningSecret())
+	mac.Write([]byte(parts[0]))
+	expectedSig := base64.RawURLEncoding.EncodeToString(mac.Sum(nil))
+	if len(parts[1]) != len(expectedSig) || subtle.ConstantTimeCompare([]byte(parts[1]), []byte(expectedSig)) != 1 {
+		return nil, fmt.Errorf("firma de token inválida")
+	}
+	rawClaims, err := base64.RawURLEncoding.DecodeString(parts[0])
+	if err != nil {
+		return nil, fmt.Errorf("claims corruptos")
+	}
+	var claims SessionClaims
+	if err := json.Unmarshal(rawClaims, &claims); err != nil {
+		return nil, fmt.Errorf("JSON de token inválido")
+	}
+	if claims.Username == "" || claims.EXP <= time.Now().Unix() {
+		return nil, fmt.Errorf("token expirado")
+	}
+	return &claims, nil
+}
+
+func extractBearerToken(r *http.Request) string {
+	auth := strings.TrimSpace(r.Header.Get("Authorization"))
+	if len(auth) > 7 && strings.EqualFold(auth[:7], "Bearer ") {
+		return strings.TrimSpace(auth[7:])
+	}
+	return ""
+}
+
+func getClientIP(r *http.Request) string {
+	if xff := strings.TrimSpace(r.Header.Get("X-Forwarded-For")); xff != "" {
+		parts := strings.Split(xff, ",")
+		if len(parts) > 0 && strings.TrimSpace(parts[0]) != "" {
+			return strings.TrimSpace(parts[0])
+		}
+	}
+	if xrip := strings.TrimSpace(r.Header.Get("X-Real-IP")); xrip != "" {
+		return xrip
+	}
+	return strings.TrimSpace(r.RemoteAddr)
+}
+
+func appendMemAuditLocked(userID, username, action string, delta, before, after int64, ip, details string) {
+	rec := AuditLogRecord{
+		ID:            fmt.Sprintf("aud_%d", time.Now().UnixNano()),
+		UserID:        strings.TrimSpace(userID),
+		Username:      strings.TrimSpace(username),
+		Action:        action,
+		Delta:         delta,
+		BalanceBefore: before,
+		BalanceAfter:  after,
+		IPAddress:     ip,
+		Details:       details,
+		CreatedAt:     time.Now(),
+	}
+	store.auditLogs = append([]AuditLogRecord{rec}, store.auditLogs...)
+	if len(store.auditLogs) > 500 {
+		store.auditLogs = store.auditLogs[:500]
+	}
+}
+
+func logBalanceAudit(userID, username, action string, delta, before, after int64, ip, details string) {
+	if neon != nil {
+		err := neon.Exec(`
+			INSERT INTO balance_audit_logs (user_id, username, action, delta, balance_before, balance_after, ip_address, details)
+			VALUES (NULLIF($1, '')::uuid, $2, $3, $4, $5, $6, $7, $8)
+		`, strings.TrimSpace(userID), strings.TrimSpace(username), action, delta, before, after, ip, details)
+		if err != nil {
+			log.Printf("[AUDIT WARN] No se pudo insertar log de auditoría: %v", err)
+		}
+		return
+	}
+	store.mu.Lock()
+	appendMemAuditLocked(userID, username, action, delta, before, after, ip, details)
+	store.mu.Unlock()
+}
+
+func requireUserSession(w http.ResponseWriter, r *http.Request, requestedUsername string) (*SessionClaims, bool) {
+	token := extractBearerToken(r)
+	if token == "" {
+		if strings.TrimSpace(requestedUsername) != "" {
+			logBalanceAudit("", requestedUsername, "BLOCKED_AUTH", 0, 0, 0, getClientIP(r), "Token ausente en "+r.URL.Path)
+		}
+		writeJSON(w, http.StatusUnauthorized, map[string]any{
+			"error":         "Sesión expirada o no autenticada. Inicia sesión nuevamente.",
+			"auth_required": true,
+		})
+		return nil, false
+	}
+	claims, err := verifySessionToken(token)
+	if err != nil {
+		if strings.TrimSpace(requestedUsername) != "" {
+			logBalanceAudit("", requestedUsername, "BLOCKED_AUTH", 0, 0, 0, getClientIP(r), "Token inválido ("+err.Error()+") en "+r.URL.Path)
+		}
+		writeJSON(w, http.StatusUnauthorized, map[string]any{
+			"error":         "Sesión expirada o no autenticada. Inicia sesión nuevamente.",
+			"auth_required": true,
+		})
+		return nil, false
+	}
+	if strings.TrimSpace(requestedUsername) != "" && strings.ToLower(strings.TrimSpace(requestedUsername)) != strings.ToLower(strings.TrimSpace(claims.Username)) {
+		logBalanceAudit(claims.UID, claims.Username, "BLOCKED_AUTH", 0, 0, 0, getClientIP(r), "Mismatch usuario solicitado="+requestedUsername+" en "+r.URL.Path)
+		writeJSON(w, http.StatusForbidden, map[string]string{
+			"error": "El token de sesión no coincide con el usuario solicitado",
+		})
+		return nil, false
+	}
+	return claims, true
+}
+
+func getAdminAPIKey() string {
+	return strings.TrimSpace(os.Getenv("ADMIN_API_KEY"))
+}
+
+func requireAdminAuth(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodOptions {
+			enableCORS(w)
+			return
+		}
+		expected := getAdminAPIKey()
+		if expected == "" {
+			writeJSON(w, http.StatusServiceUnavailable, map[string]string{
+				"error": "ADMIN_API_KEY no configurada en el servidor. Configura ADMIN_API_KEY en las variables de entorno de Render.",
+			})
+			return
+		}
+		provided := strings.TrimSpace(r.Header.Get("X-Admin-Key"))
+		if provided == "" {
+			provided = extractBearerToken(r)
+		}
+		if len(provided) != len(expected) || subtle.ConstantTimeCompare([]byte(provided), []byte(expected)) != 1 {
+			logBalanceAudit("", "admin", "BLOCKED_AUTH", 0, 0, 0, getClientIP(r), "Acceso admin denegado en "+r.URL.Path)
+			writeJSON(w, http.StatusUnauthorized, map[string]string{
+				"error": "Clave de administrador inválida o ausente",
+			})
+			return
+		}
+		next(w, r)
+	}
+}
+
+func parseNeonTime(val any) *time.Time {
+	if val == nil {
+		return nil
+	}
+	switch v := val.(type) {
+	case time.Time:
+		if v.IsZero() {
+			return nil
+		}
+		return &v
+	case *time.Time:
+		return v
+	case string:
+		s := strings.TrimSpace(v)
+		if s == "" || s == "<nil>" {
+			return nil
+		}
+		layouts := []string{
+			time.RFC3339Nano,
+			time.RFC3339,
+			"2006-01-02 15:04:05.999999Z07:00",
+			"2006-01-02 15:04:05.999999-07:00",
+			"2006-01-02 15:04:05.999999-07",
+			"2006-01-02 15:04:05Z07:00",
+			"2006-01-02 15:04:05-07:00",
+			"2006-01-02 15:04:05-07",
+			"2006-01-02 15:04:05",
+		}
+		for _, layout := range layouts {
+			if t, err := time.Parse(layout, s); err == nil {
+				return &t
+			}
+		}
+	}
+	return nil
+}
+
+func computeVipUpgrades(currentLevel string, xp int64) (string, int64) {
+	level := strings.TrimSpace(currentLevel)
+	if level == "" {
+		level = "Panda Bronce"
+	}
+	var totalBonus int64
+	for {
+		if level == "Panda Bronce" && xp >= 1000 {
+			level = "Panda Plata"
+			totalBonus += 250
+		} else if level == "Panda Plata" && xp >= 5000 {
+			level = "Panda Oro"
+			totalBonus += 1000
+		} else if level == "Panda Oro" && xp >= 25000 {
+			level = "Panda Platino"
+			totalBonus += 5000
+		} else {
+			break
+		}
+	}
+	return level, totalBonus
+}
+
+func applyVipProgressionNeon(userID, username, ip string) (string, int64) {
+	if neon == nil || strings.TrimSpace(userID) == "" {
+		return "Panda Bronce", 0
+	}
+	row, err := neon.QueryRow(`
+		SELECT u.vip_level, u.vip_xp, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+		FROM users u
+		LEFT JOIN wallets w ON u.id = w.user_id
+		WHERE u.id = $1::uuid
+		LIMIT 1
+	`, userID)
+	if err != nil || row == nil {
+		return "Panda Bronce", 0
+	}
+	curLevel := fmt.Sprintf("%v", row["vip_level"])
+	xp := parseNumber(row["vip_xp"])
+	bal := parseNumber(row["balance_diamantes"])
+	nextLevel, bonus := computeVipUpgrades(curLevel, xp)
+	if bonus <= 0 && nextLevel == curLevel {
+		return curLevel, 0
+	}
+	if err := neon.Exec(`UPDATE users SET vip_level = $1, updated_at = NOW() WHERE id = $2::uuid`, nextLevel, userID); err == nil && bonus > 0 {
+		_ = neon.Exec(`
+			INSERT INTO wallets (user_id, balance_diamantes, updated_at)
+			VALUES ($1::uuid, $2, NOW())
+			ON CONFLICT (user_id) DO UPDATE
+			SET balance_diamantes = wallets.balance_diamantes + $2,
+			    updated_at = NOW()
+		`, userID, bonus)
+		logBalanceAudit(userID, username, "VIP_LEVEL_UP", bonus, bal, bal+bonus, ip, "Ascenso automático a "+nextLevel)
+	}
+	return nextLevel, bonus
+}
+
+func applyVipProgressionMem(user *User, ip string) int64 {
+	if user == nil {
+		return 0
+	}
+	nextLevel, bonus := computeVipUpgrades(user.VIPLevel, int64(user.VIPXP))
+	if nextLevel != user.VIPLevel {
+		user.VIPLevel = nextLevel
+	}
+	if bonus > 0 {
+		before := user.BalanceDiamantes
+		user.BalanceDiamantes += bonus
+		appendMemAuditLocked(user.ID, user.Username, "VIP_LEVEL_UP", bonus, before, before+bonus, ip, "Ascenso automático a "+nextLevel)
+	}
+	return bonus
 }
 
 // -----------------------------------------------------------------------------
@@ -395,7 +738,7 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusCreated, map[string]any{
 			"message": "¡Cuenta creada con éxito en Neon! Bienvenida/o a Panda Cash.",
 			"user":    user,
-			"token":   fmt.Sprintf("jwt_neon_%s", newID),
+			"token":   generateSessionToken(user.ID, user.Username),
 		})
 		return
 	}
@@ -437,7 +780,7 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusCreated, map[string]any{
 		"message": "¡Cuenta creada con éxito! Bienvenida/o a Panda Cash.",
 		"user":    newUser,
-		"token":   fmt.Sprintf("mock_jwt_panda_%s", newUser.ID),
+		"token":   generateSessionToken(newUser.ID, newUser.Username),
 	})
 }
 
@@ -477,7 +820,10 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 			       COALESCE(u.metodo_pago_verificacion, '') as metodo_pago_verificacion,
 			       u.vip_level, u.vip_xp, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes,
 			       COALESCE(w.balance_bono_diamantes, 0)::bigint as balance_bono_diamantes,
-			       COALESCE(w.giros_gratis, 0)::int as giros_gratis, u.ultimo_cofre_abierto_at, u.created_at,
+			       COALESCE(w.giros_gratis, 0)::int as giros_gratis,
+			       u.ultimo_cofre_abierto_at, u.ultima_ruleta_girada_at, u.ultimo_bono_semanal_at,
+			       COALESCE(w.weekly_wagered_diamantes, 0)::bigint as weekly_wagered_diamantes,
+			       u.created_at,
 			       COALESCE(u.primer_deposito_realizado, false) as primer_deposito_realizado,
 			       EXISTS (
 			           SELECT 1 FROM depositos d
@@ -518,7 +864,7 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, map[string]any{
 			"message": "Inicio de sesión exitoso",
 			"user":    user,
-			"token":   fmt.Sprintf("jwt_neon_%s", user.ID),
+			"token":   generateSessionToken(user.ID, user.Username),
 		})
 		return
 	}
@@ -550,7 +896,7 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{
 		"message": "Inicio de sesión exitoso",
 		"user":    user,
-		"token":   fmt.Sprintf("mock_jwt_panda_%s", user.ID),
+		"token":   generateSessionToken(user.ID, user.Username),
 	})
 }
 
@@ -665,6 +1011,10 @@ func parseUserFromRow(row map[string]any) *User {
 		BalanceDiamantes:        balance,
 		BalanceBonoDiamantes:    bonus,
 		GirosGratis:             spins,
+		UltimoCofreAbiertoAt:    parseNeonTime(row["ultimo_cofre_abierto_at"]),
+		UltimaRuletaGiradaAt:    parseNeonTime(row["ultima_ruleta_girada_at"]),
+		UltimoBonoSemanalAt:     parseNeonTime(row["ultimo_bono_semanal_at"]),
+		WeeklyWageredDiamantes:  parseNumber(row["weekly_wagered_diamantes"]),
 		CreatedAt:               time.Now(),
 	}
 }
@@ -693,7 +1043,10 @@ func handleProfile(w http.ResponseWriter, r *http.Request) {
 			       COALESCE(u.metodo_pago_verificacion, '') as metodo_pago_verificacion,
 			       u.vip_level, u.vip_xp, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes,
 			       COALESCE(w.balance_bono_diamantes, 0)::bigint as balance_bono_diamantes,
-			       COALESCE(w.giros_gratis, 0)::int as giros_gratis, u.ultimo_cofre_abierto_at, u.created_at,
+			       COALESCE(w.giros_gratis, 0)::int as giros_gratis,
+			       u.ultimo_cofre_abierto_at, u.ultima_ruleta_girada_at, u.ultimo_bono_semanal_at,
+			       COALESCE(w.weekly_wagered_diamantes, 0)::bigint as weekly_wagered_diamantes,
+			       u.created_at,
 			       COALESCE(u.primer_deposito_realizado, false) as primer_deposito_realizado,
 			       EXISTS (
 			           SELECT 1 FROM depositos d 
@@ -742,6 +1095,7 @@ type SyncBalanceRequest struct {
 	VIPLevel             string  `json:"vip_level"`
 	Email                string  `json:"email,omitempty"`
 	Phone                string  `json:"phone,omitempty"`
+	Source               string  `json:"source,omitempty"`
 }
 
 func handleSyncBalance(w http.ResponseWriter, r *http.Request) {
@@ -760,68 +1114,198 @@ func handleSyncBalance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cleanUser := strings.TrimSpace(req.Username)
-	if cleanUser == "" {
-		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Username requerido"})
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
 		return
 	}
-	if strings.Contains(cleanUser, "@") {
+
+	cleanUser := strings.TrimSpace(claims.Username)
+	if cleanUser == "" || strings.Contains(cleanUser, "@") {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Usuario inválido para sincronizar saldo. Inicia sesión nuevamente."})
 		return
 	}
 	key := strings.ToLower(cleanUser)
+	ip := getClientIP(r)
+	source := strings.TrimSpace(req.Source)
 
 	balDiamantes := int64(math.Round(req.BalanceDiamantes))
 	if balDiamantes < 0 {
 		balDiamantes = 0
 	}
-	balBono := int64(math.Round(req.BalanceBonoDiamantes))
-	if balBono < 0 {
-		balBono = 0
-	}
-	vipXP := req.VIPXP
-	if vipXP < 0 {
-		vipXP = 0
-	}
-	vipLevel := strings.TrimSpace(req.VIPLevel)
 
 	if neon != nil {
-		userID, err := ensureNeonUserAndWallet(cleanUser, req.Email, req.Phone)
-		if err != nil {
-			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error asegurando usuario en Neon: " + err.Error()})
+		row, err := neon.QueryRow(`
+			SELECT u.id::text, u.username, COALESCE(u.vip_xp, 0)::bigint as vip_xp,
+			       COALESCE(u.vip_level, 'Panda Bronce') as vip_level,
+			       COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes,
+			       COALESCE(w.balance_bono_diamantes, 0)::bigint as balance_bono_diamantes,
+			       COALESCE(w.active_bet_pool, 0)::bigint as active_bet_pool,
+			       w.last_bet_at
+			FROM users u
+			LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE ($1::text != '' AND u.id::text = $1) OR LOWER(TRIM(u.username)) = LOWER(TRIM($2))
+			ORDER BY (u.id::text = $1) DESC
+			LIMIT 1
+		`, claims.UID, cleanUser)
+		if err != nil || row == nil || row["id"] == nil {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
 			return
+		}
+
+		userID := fmt.Sprintf("%v", row["id"])
+		canonicalUser := fmt.Sprintf("%v", row["username"])
+		currentBalance := parseNumber(row["balance_diamantes"])
+		currentBonus := parseNumber(row["balance_bono_diamantes"])
+		currentXP := parseNumber(row["vip_xp"])
+		currentLevel := fmt.Sprintf("%v", row["vip_level"])
+		activeBetPool := parseNumber(row["active_bet_pool"])
+		lastBetAt := parseNeonTime(row["last_bet_at"])
+
+		_ = neon.Exec(`
+			INSERT INTO wallets (user_id, balance_diamantes, balance_bono_diamantes, giros_gratis)
+			VALUES ($1::uuid, 0, 0, 0)
+			ON CONFLICT (user_id) DO NOTHING
+		`, userID)
+
+		delta := balDiamantes - currentBalance
+		if delta == 0 {
+			writeJSON(w, http.StatusOK, map[string]any{
+				"ok":                     true,
+				"username":               canonicalUser,
+				"balance_diamantes":      currentBalance,
+				"balance_bono_diamantes": currentBonus,
+				"vip_xp":                 currentXP,
+				"vip_level":              currentLevel,
+				"vip_upgraded":           false,
+				"vip_bonus":              int64(0),
+			})
+			return
+		}
+
+		if delta < 0 {
+			bet := -delta
+			err = neon.Exec(`
+				UPDATE wallets
+				SET balance_diamantes = $2,
+				    active_bet_pool = LEAST(COALESCE(active_bet_pool, 0) + $3, 50000),
+				    last_bet_at = NOW(),
+				    total_jugado_diamantes = COALESCE(total_jugado_diamantes, 0) + $3,
+				    weekly_wagered_diamantes = COALESCE(weekly_wagered_diamantes, 0) + $3,
+				    updated_at = NOW()
+				WHERE user_id = $1::uuid
+			`, userID, balDiamantes, bet)
+			if err != nil {
+				writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error actualizando billetera en Neon: " + err.Error()})
+				return
+			}
+
+			maxXPDelta := bet / 10
+			if maxXPDelta < 1 {
+				maxXPDelta = 1
+			}
+			maxXPDelta += 5
+			newXP := int64(req.VIPXP)
+			if newXP < currentXP {
+				newXP = currentXP
+			}
+			if newXP > currentXP+maxXPDelta {
+				newXP = currentXP + maxXPDelta
+			}
+			if newXP > currentXP {
+				_ = neon.Exec(`UPDATE users SET vip_xp = $1, updated_at = NOW() WHERE id = $2::uuid`, newXP, userID)
+			} else {
+				newXP = currentXP
+			}
+
+			logBalanceAudit(userID, canonicalUser, "GAME_BET", -bet, currentBalance, balDiamantes, ip, "source="+source)
+			nextLevel, vipBonus := applyVipProgressionNeon(userID, canonicalUser, ip)
+			finalBal := balDiamantes + vipBonus
+			if nextLevel == "" {
+				nextLevel = currentLevel
+			}
+
+			writeJSON(w, http.StatusOK, map[string]any{
+				"ok":                     true,
+				"username":               canonicalUser,
+				"balance_diamantes":      finalBal,
+				"balance_bono_diamantes": currentBonus,
+				"vip_xp":                 newXP,
+				"vip_level":              nextLevel,
+				"vip_upgraded":           vipBonus > 0,
+				"vip_bonus":              vipBonus,
+			})
+			return
+		}
+
+		// delta > 0 (premio / cashout de juego)
+		win := delta
+		if activeBetPool < 10 || lastBetAt == nil || time.Since(*lastBetAt) > 20*time.Minute {
+			logBalanceAudit(userID, canonicalUser, "BLOCKED_NO_BET", win, currentBalance, currentBalance, ip,
+				fmt.Sprintf("intento=%d pool=%d source=%s", balDiamantes, activeBetPool, source))
+			writeJSON(w, http.StatusForbidden, map[string]any{
+				"ok":                false,
+				"error":             "SYNC_BLOCKED_NO_ACTIVE_BET",
+				"balance_diamantes": currentBalance,
+				"vip_xp":            currentXP,
+				"vip_level":         currentLevel,
+			})
+			return
+		}
+
+		maxAllowed := activeBetPool * MaxSyncWinMultiplier
+		if maxAllowed > MaxSingleSyncWin {
+			maxAllowed = MaxSingleSyncWin
+		}
+		if win > maxAllowed {
+			logBalanceAudit(userID, canonicalUser, "BLOCKED_ANOMALY", win, currentBalance, currentBalance, ip,
+				fmt.Sprintf("maxAllowed=%d pool=%d source=%s", maxAllowed, activeBetPool, source))
+			writeJSON(w, http.StatusForbidden, map[string]any{
+				"ok":                false,
+				"error":             "SYNC_BLOCKED_ANOMALY",
+				"balance_diamantes": currentBalance,
+				"vip_xp":            currentXP,
+				"vip_level":         currentLevel,
+			})
+			return
+		}
+
+		var nextPool int64 = 0
+		if strings.Contains(strings.ToLower(source), "plinko") {
+			used := (win + 14) / 15
+			if used < 10 {
+				used = 10
+			}
+			if used > activeBetPool {
+				used = activeBetPool
+			}
+			nextPool = activeBetPool - used
 		}
 
 		err = neon.Exec(`
-			INSERT INTO wallets (user_id, balance_diamantes, balance_bono_diamantes, giros_gratis, updated_at)
-			VALUES ($1::uuid, $2, $3, 0, NOW())
-			ON CONFLICT (user_id) DO UPDATE
-			SET balance_diamantes = EXCLUDED.balance_diamantes,
-			    balance_bono_diamantes = CASE WHEN $3 > 0 THEN EXCLUDED.balance_bono_diamantes ELSE wallets.balance_bono_diamantes END,
+			UPDATE wallets
+			SET balance_diamantes = $2,
+			    active_bet_pool = $3,
+			    total_ganado_diamantes = COALESCE(total_ganado_diamantes, 0) + $4,
 			    updated_at = NOW()
-		`, userID, balDiamantes, balBono)
+			WHERE user_id = $1::uuid
+		`, userID, balDiamantes, nextPool, win)
 		if err != nil {
-			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error actualizando billetera en Neon: " + err.Error()})
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error acreditando premio en Neon: " + err.Error()})
 			return
 		}
 
-		if vipXP > 0 || vipLevel != "" {
-			_ = neon.Exec(`
-				UPDATE users
-				SET vip_xp = GREATEST(vip_xp, $1),
-				    vip_level = COALESCE(NULLIF($2, ''), vip_level),
-				    updated_at = NOW()
-				WHERE id = $3::uuid
-			`, vipXP, vipLevel, userID)
-		}
+		logBalanceAudit(userID, canonicalUser, "GAME_WIN", win, currentBalance, balDiamantes, ip,
+			fmt.Sprintf("pool=%d->%d source=%s", activeBetPool, nextPool, source))
 
 		writeJSON(w, http.StatusOK, map[string]any{
 			"ok":                     true,
-			"username":               cleanUser,
+			"username":               canonicalUser,
 			"balance_diamantes":      balDiamantes,
-			"balance_bono_diamantes": balBono,
-			"vip_xp":                 vipXP,
-			"vip_level":              vipLevel,
+			"balance_bono_diamantes": currentBonus,
+			"vip_xp":                 currentXP,
+			"vip_level":              currentLevel,
+			"vip_upgraded":           false,
+			"vip_bonus":              int64(0),
 		})
 		return
 	}
@@ -830,26 +1314,115 @@ func handleSyncBalance(w http.ResponseWriter, r *http.Request) {
 	defer store.mu.Unlock()
 	user, exists := store.users[key]
 	if !exists {
-		user = &User{
-			ID:        fmt.Sprintf("usr_%d", time.Now().UnixNano()%1000000),
-			Username:  cleanUser,
-			Email:     req.Email,
-			Phone:     req.Phone,
-			VIPLevel:  "Panda Bronce",
-			CreatedAt: time.Now(),
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+		return
+	}
+
+	currentBalance := user.BalanceDiamantes
+	delta := balDiamantes - currentBalance
+	if delta == 0 {
+		writeJSON(w, http.StatusOK, map[string]any{
+			"ok":                     true,
+			"username":               user.Username,
+			"balance_diamantes":      user.BalanceDiamantes,
+			"balance_bono_diamantes": user.BalanceBonoDiamantes,
+			"vip_xp":                 user.VIPXP,
+			"vip_level":              user.VIPLevel,
+			"vip_upgraded":           false,
+			"vip_bonus":              int64(0),
+		})
+		return
+	}
+
+	if delta < 0 {
+		bet := -delta
+		now := time.Now()
+		user.BalanceDiamantes = balDiamantes
+		user.ActiveBetPool += bet
+		if user.ActiveBetPool > 50000 {
+			user.ActiveBetPool = 50000
 		}
-		store.users[key] = user
+		user.LastBetAt = &now
+		user.WeeklyWageredDiamantes += bet
+
+		maxXPDelta := int(bet/10)
+		if maxXPDelta < 1 {
+			maxXPDelta = 1
+		}
+		maxXPDelta += 5
+		if req.VIPXP > user.VIPXP {
+			capped := user.VIPXP + maxXPDelta
+			if req.VIPXP < capped {
+				user.VIPXP = req.VIPXP
+			} else {
+				user.VIPXP = capped
+			}
+		}
+
+		appendMemAuditLocked(user.ID, user.Username, "GAME_BET", -bet, currentBalance, balDiamantes, ip, "source="+source)
+		vipBonus := applyVipProgressionMem(user, ip)
+
+		writeJSON(w, http.StatusOK, map[string]any{
+			"ok":                     true,
+			"username":               user.Username,
+			"balance_diamantes":      user.BalanceDiamantes,
+			"balance_bono_diamantes": user.BalanceBonoDiamantes,
+			"vip_xp":                 user.VIPXP,
+			"vip_level":              user.VIPLevel,
+			"vip_upgraded":           vipBonus > 0,
+			"vip_bonus":              vipBonus,
+		})
+		return
+	}
+
+	// delta > 0 en memoria
+	win := delta
+	if user.ActiveBetPool < 10 || user.LastBetAt == nil || time.Since(*user.LastBetAt) > 20*time.Minute {
+		appendMemAuditLocked(user.ID, user.Username, "BLOCKED_NO_BET", win, currentBalance, currentBalance, ip,
+			fmt.Sprintf("intento=%d pool=%d source=%s", balDiamantes, user.ActiveBetPool, source))
+		writeJSON(w, http.StatusForbidden, map[string]any{
+			"ok":                false,
+			"error":             "SYNC_BLOCKED_NO_ACTIVE_BET",
+			"balance_diamantes": currentBalance,
+			"vip_xp":            user.VIPXP,
+			"vip_level":         user.VIPLevel,
+		})
+		return
+	}
+
+	maxAllowed := user.ActiveBetPool * MaxSyncWinMultiplier
+	if maxAllowed > MaxSingleSyncWin {
+		maxAllowed = MaxSingleSyncWin
+	}
+	if win > maxAllowed {
+		appendMemAuditLocked(user.ID, user.Username, "BLOCKED_ANOMALY", win, currentBalance, currentBalance, ip,
+			fmt.Sprintf("maxAllowed=%d pool=%d source=%s", maxAllowed, user.ActiveBetPool, source))
+		writeJSON(w, http.StatusForbidden, map[string]any{
+			"ok":                false,
+			"error":             "SYNC_BLOCKED_ANOMALY",
+			"balance_diamantes": currentBalance,
+			"vip_xp":            user.VIPXP,
+			"vip_level":         user.VIPLevel,
+		})
+		return
+	}
+
+	prevPool := user.ActiveBetPool
+	if strings.Contains(strings.ToLower(source), "plinko") {
+		used := (win + 14) / 15
+		if used < 10 {
+			used = 10
+		}
+		if used > user.ActiveBetPool {
+			used = user.ActiveBetPool
+		}
+		user.ActiveBetPool -= used
+	} else {
+		user.ActiveBetPool = 0
 	}
 	user.BalanceDiamantes = balDiamantes
-	if balBono > 0 {
-		user.BalanceBonoDiamantes = balBono
-	}
-	if vipXP > user.VIPXP {
-		user.VIPXP = vipXP
-	}
-	if vipLevel != "" {
-		user.VIPLevel = vipLevel
-	}
+	appendMemAuditLocked(user.ID, user.Username, "GAME_WIN", win, currentBalance, balDiamantes, ip,
+		fmt.Sprintf("pool=%d->%d source=%s", prevPool, user.ActiveBetPool, source))
 
 	writeJSON(w, http.StatusOK, map[string]any{
 		"ok":                     true,
@@ -858,6 +1431,8 @@ func handleSyncBalance(w http.ResponseWriter, r *http.Request) {
 		"balance_bono_diamantes": user.BalanceBonoDiamantes,
 		"vip_xp":                 user.VIPXP,
 		"vip_level":              user.VIPLevel,
+		"vip_upgraded":           false,
+		"vip_bonus":              int64(0),
 	})
 }
 
@@ -887,15 +1462,28 @@ func handlePayVerification(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	key := strings.ToLower(strings.TrimSpace(req.Username))
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
+		return
+	}
+	targetUser := claims.Username
+	key := strings.ToLower(strings.TrimSpace(targetUser))
+	ip := getClientIP(r)
 
 	if neon != nil {
-		userRow, err := neon.QueryRow(`SELECT id::text FROM users WHERE LOWER(username) = $1`, key)
-		if err != nil {
+		userRow, err := neon.QueryRow(`
+			SELECT u.id::text, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+			FROM users u
+			LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE ($1::text != '' AND u.id::text = $1) OR LOWER(TRIM(u.username)) = $2
+			LIMIT 1
+		`, claims.UID, key)
+		if err != nil || userRow == nil || userRow["id"] == nil {
 			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado en Neon"})
 			return
 		}
 		userID := fmt.Sprintf("%v", userRow["id"])
+		balBefore := parseNumber(userRow["balance_diamantes"])
 
 		if req.Metodo == "usdt_trc20" {
 			req.TxHash = strings.TrimSpace(req.TxHash)
@@ -913,12 +1501,10 @@ func handlePayVerification(w http.ResponseWriter, r *http.Request) {
 				activeWallet = fmt.Sprintf("%v", dirRow["direccion_tron"])
 			}
 
-			// Insertar en tabla 'depositos' con tipo 'VERIFICACION' y estado 'PENDIENTE'
-			// para que el script externo del usuario lo detecte, verifique y apruebe
 			err = neon.Exec(`
 				INSERT INTO depositos (user_id, username, monto_usdt, monto_diamantes, red_blockchain, tron_wallet_destino, tx_hash_tron, estado, tipo)
 				VALUES ($1::uuid, $2, 10.00, 0, 'TRC-20', $3, $4, 'PENDIENTE', 'VERIFICACION')
-			`, userID, req.Username, activeWallet, req.TxHash)
+			`, userID, targetUser, activeWallet, req.TxHash)
 
 			if err != nil {
 				writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error registrando pago de verificación: " + err.Error()})
@@ -942,6 +1528,27 @@ func handlePayVerification(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		if resMap, ok := resRow["res"].(map[string]any); ok {
+			if succ, _ := resMap["success"].(bool); !succ {
+				writeJSON(w, http.StatusBadRequest, resMap)
+				return
+			}
+			balAfter := balBefore
+			if req.Metodo == "saldo_diamantes" {
+				wRow, wErr := neon.QueryRow(`SELECT COALESCE(balance_diamantes, 0)::bigint as bal FROM wallets WHERE user_id = $1::uuid`, userID)
+				if wErr == nil && wRow != nil {
+					balAfter = parseNumber(wRow["bal"])
+				}
+				delta := balAfter - balBefore
+				if delta != 0 {
+					logBalanceAudit(userID, targetUser, "VERIFY_PAYMENT", delta, balBefore, balAfter, ip, "Verificación con saldo_diamantes")
+				}
+			}
+			resMap["nuevo_balance"] = balAfter
+			writeJSON(w, http.StatusOK, resMap)
+			return
+		}
+
 		writeJSON(w, http.StatusOK, resRow["res"])
 		return
 	}
@@ -957,12 +1564,15 @@ func handlePayVerification(w http.ResponseWriter, r *http.Request) {
 
 	if user.CuentaVerificada {
 		writeJSON(w, http.StatusOK, map[string]any{
+			"success":           true,
 			"message":           "La cuenta ya se encuentra verificada",
 			"cuenta_verificada": true,
+			"nuevo_balance":     user.BalanceDiamantes,
 		})
 		return
 	}
 
+	balBefore := user.BalanceDiamantes
 	if req.Metodo == "saldo_diamantes" {
 		if user.BalanceDiamantes < VerificationFeeDiamonds {
 			writeJSON(w, http.StatusPaymentRequired, map[string]string{
@@ -971,6 +1581,7 @@ func handlePayVerification(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		user.BalanceDiamantes -= VerificationFeeDiamonds
+		appendMemAuditLocked(user.ID, user.Username, "VERIFY_PAYMENT", -VerificationFeeDiamonds, balBefore, user.BalanceDiamantes, ip, "Verificación con saldo_diamantes")
 	}
 
 	now := time.Now()
@@ -980,6 +1591,7 @@ func handlePayVerification(w http.ResponseWriter, r *http.Request) {
 	user.TxHashVerificacion = req.TxHash
 
 	writeJSON(w, http.StatusOK, map[string]any{
+		"success":           true,
 		"message":           "¡Cuenta verificada exitosamente! Retiros habilitados.",
 		"cuenta_verificada": true,
 		"nuevo_balance":     user.BalanceDiamantes,
@@ -1193,12 +1805,40 @@ func handleApproveDeposit(w http.ResponseWriter, r *http.Request) {
 	if txHash == "" && req.DepositID != "" {
 		txHash = strings.TrimSpace(req.DepositID)
 	}
+	ip := getClientIP(r)
 
 	// --- 1. MODO NEON SERVERLESS API (Invocación directa de stored proc) ---
 	if neon != nil {
 		row, err := neon.QueryRow(`SELECT aprobar_deposito($1) as res`, txHash)
 		if err != nil {
 			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "Error aprobando depósito en Neon: " + err.Error()})
+			return
+		}
+
+		if resMap, ok := row["res"].(map[string]any); ok {
+			if succ, _ := resMap["success"].(bool); !succ {
+				writeJSON(w, http.StatusBadRequest, resMap)
+				return
+			}
+			depID := fmt.Sprintf("%v", resMap["deposito_id"])
+			montoDiam := parseNumber(resMap["monto_diamantes"])
+			infoRow, infoErr := neon.QueryRow(`
+				SELECT d.user_id::text, COALESCE(u.username, d.username, '') as username,
+				       COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+				FROM depositos d
+				LEFT JOIN users u ON d.user_id = u.id
+				LEFT JOIN wallets w ON d.user_id = w.user_id
+				WHERE d.id::text = $1
+				LIMIT 1
+			`, depID)
+			if infoErr == nil && infoRow != nil {
+				uid := fmt.Sprintf("%v", infoRow["user_id"])
+				uname := fmt.Sprintf("%v", infoRow["username"])
+				balAfter := parseNumber(infoRow["balance_diamantes"])
+				logBalanceAudit(uid, uname, "DEPOSIT_APPROVED", montoDiam, balAfter-montoDiam, balAfter, ip, "tx_hash="+txHash)
+				_, _ = applyVipProgressionNeon(uid, uname, ip)
+			}
+			writeJSON(w, http.StatusOK, resMap)
 			return
 		}
 
@@ -1239,8 +1879,13 @@ func handleApproveDeposit(w http.ResponseWriter, r *http.Request) {
 	user, exists := store.users[userKey]
 	var newBalance int64 = 0
 	if exists {
+		balBefore := user.BalanceDiamantes
 		user.BalanceDiamantes += record.MontoDiamantes
 		user.VIPXP += int(record.MontoUSDT * 2)
+		user.PrimerDepositoRealizado = true
+		user.TieneRecargaAprobada = true
+		appendMemAuditLocked(user.ID, user.Username, "DEPOSIT_APPROVED", record.MontoDiamantes, balBefore, user.BalanceDiamantes, ip, "tx_hash="+txHash)
+		_ = applyVipProgressionMem(user, ip)
 		newBalance = user.BalanceDiamantes
 	}
 
@@ -1393,7 +2038,13 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	key := strings.ToLower(strings.TrimSpace(req.Username))
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
+		return
+	}
+	targetUser := claims.Username
+	key := strings.ToLower(strings.TrimSpace(targetUser))
+	ip := getClientIP(r)
 
 	// --- 1. MODO NEON SERVERLESS API (Con Trigger de Seguridad Estricto en Neon) ---
 	if neon != nil {
@@ -1401,8 +2052,9 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 			SELECT u.id::text, u.cuenta_verificada, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
 			FROM users u
 			LEFT JOIN wallets w ON u.id = w.user_id
-			WHERE LOWER(u.username) = $1
-		`, key)
+			WHERE ($1::text != '' AND u.id::text = $1) OR LOWER(TRIM(u.username)) = $2
+			LIMIT 1
+		`, claims.UID, key)
 
 		if err != nil {
 			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado en Neon"})
@@ -1419,8 +2071,8 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 
 		if !isVerified {
 			writeJSON(w, http.StatusForbidden, map[string]any{
-				"error":              "REGLA_BLOQUEO: Cuenta no verificada",
-				"message":            "Tu cuenta no se encuentra verificada. Debes pagar la tasa de verificación (10 USDT / 100 💎) antes de poder retirar.",
+				"error":             "REGLA_BLOQUEO: Cuenta no verificada",
+				"message":           "Tu cuenta no se encuentra verificada. Debes pagar la tasa de verificación (10 USDT / 100 💎) antes de poder retirar.",
 				"cuenta_verificada": false,
 			})
 			return
@@ -1478,6 +2130,8 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 			WHERE user_id = $1::uuid
 		`, userID, req.Diamantes, montoUsdt)
 
+		logBalanceAudit(userID, targetUser, "WITHDRAW_REQUEST", -req.Diamantes, balance, balance-req.Diamantes, ip, "wallet="+req.TronAddress)
+
 		writeJSON(w, http.StatusOK, map[string]any{
 			"ok":                   true,
 			"estado":               "COMPLETADO",
@@ -1505,8 +2159,8 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 
 	if !user.CuentaVerificada {
 		writeJSON(w, http.StatusForbidden, map[string]any{
-			"error":              "REGLA_BLOQUEO: Cuenta no verificada",
-			"message":            "Tu cuenta no se encuentra verificada. Debes pagar la tasa de verificación (10 USDT / 100 💎) antes de poder retirar.",
+			"error":             "REGLA_BLOQUEO: Cuenta no verificada",
+			"message":           "Tu cuenta no se encuentra verificada. Debes pagar la tasa de verificación (10 USDT / 100 💎) antes de poder retirar.",
 			"cuenta_verificada": false,
 		})
 		return
@@ -1519,7 +2173,9 @@ func handleWithdraw(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	balBefore := user.BalanceDiamantes
 	user.BalanceDiamantes -= req.Diamantes
+	appendMemAuditLocked(user.ID, user.Username, "WITHDRAW_REQUEST", -req.Diamantes, balBefore, user.BalanceDiamantes, ip, "wallet="+req.TronAddress)
 	montoUsdt := float64(req.Diamantes) / float64(DiamondRate)
 
 	writeJSON(w, http.StatusOK, map[string]any{
@@ -1555,24 +2211,64 @@ func handleDailyChest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req DailyChestRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Formato JSON inválido"})
+	_ = json.NewDecoder(r.Body).Decode(&req)
+
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
 		return
 	}
-
-	key := strings.ToLower(strings.TrimSpace(req.Username))
+	targetUser := claims.Username
+	key := strings.ToLower(strings.TrimSpace(targetUser))
+	ip := getClientIP(r)
 
 	if neon != nil {
-		userRow, err := neon.QueryRow(`SELECT id::text FROM users WHERE LOWER(username) = $1`, key)
+		userRow, err := neon.QueryRow(`
+			SELECT u.id::text, COALESCE(u.vip_xp, 0)::bigint as vip_xp,
+			       COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+			FROM users u
+			LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE ($1::text != '' AND u.id::text = $1) OR LOWER(TRIM(u.username)) = $2
+			LIMIT 1
+		`, claims.UID, key)
 		if err != nil {
 			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
 			return
 		}
 		userID := fmt.Sprintf("%v", userRow["id"])
+		balBefore := parseNumber(userRow["balance_diamantes"])
 
 		resRow, err := neon.QueryRow(`SELECT reclamar_cofre_diario($1::uuid) as res`, userID)
 		if err != nil {
 			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+			return
+		}
+
+		if resMap, ok := resRow["res"].(map[string]any); ok {
+			if succ, _ := resMap["success"].(bool); !succ {
+				writeJSON(w, http.StatusTooManyRequests, resMap)
+				return
+			}
+			_, _ = applyVipProgressionNeon(userID, targetUser, ip)
+			afterRow, _ := neon.QueryRow(`
+				SELECT u.vip_xp, u.vip_level, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+				FROM users u LEFT JOIN wallets w ON u.id = w.user_id
+				WHERE u.id = $1::uuid
+			`, userID)
+			balAfter := balBefore
+			var xpAfter int64 = parseNumber(userRow["vip_xp"])
+			lvlAfter := "Panda Bronce"
+			if afterRow != nil {
+				balAfter = parseNumber(afterRow["balance_diamantes"])
+				xpAfter = parseNumber(afterRow["vip_xp"])
+				lvlAfter = fmt.Sprintf("%v", afterRow["vip_level"])
+			}
+			delta := balAfter - balBefore
+			logBalanceAudit(userID, targetUser, "DAILY_CHEST", delta, balBefore, balAfter, ip,
+				fmt.Sprintf("tipo=%v cantidad=%v", resMap["tipo"], resMap["cantidad"]))
+			resMap["nuevo_balance_diamantes"] = balAfter
+			resMap["nuevo_vip_xp"] = xpAfter
+			resMap["vip_level"] = lvlAfter
+			writeJSON(w, http.StatusOK, resMap)
 			return
 		}
 
@@ -1595,6 +2291,7 @@ func handleDailyChest(w http.ResponseWriter, r *http.Request) {
 		if duracionDesdeUltimo < 24*time.Hour {
 			tiempoRestante := 24*time.Hour - duracionDesdeUltimo
 			writeJSON(w, http.StatusTooManyRequests, map[string]any{
+				"success":                     false,
 				"error":                       "COOLDOWN_ACTIVO",
 				"message":                     "Debes esperar 24 horas desde tu última apertura para reclamar el cofre.",
 				"ultimo_cofre_abierto_at":     user.UltimoCofreAbiertoAt,
@@ -1637,22 +2334,367 @@ func handleDailyChest(w http.ResponseWriter, r *http.Request) {
 		rewardLabel = "+200 💎 (20 USDT)"
 	}
 
+	balBefore := user.BalanceDiamantes
 	user.UltimoCofreAbiertoAt = &now
 	if rewardType == "XP" {
 		user.VIPXP += rewardAmount
 	} else {
 		user.BalanceDiamantes += int64(rewardAmount)
 	}
+	appendMemAuditLocked(user.ID, user.Username, "DAILY_CHEST", user.BalanceDiamantes-balBefore, balBefore, user.BalanceDiamantes, ip,
+		fmt.Sprintf("tipo=%s cantidad=%d", rewardType, rewardAmount))
+	_ = applyVipProgressionMem(user, ip)
 
 	writeJSON(w, http.StatusOK, map[string]any{
+		"success":                     true,
 		"message":                     "¡Cofre reclamado con éxito!",
 		"premio":                      rewardLabel,
 		"tipo":                        rewardType,
 		"cantidad":                    rewardAmount,
 		"nuevo_balance_diamantes":     user.BalanceDiamantes,
 		"nuevo_vip_xp":                user.VIPXP,
+		"vip_level":                   user.VIPLevel,
 		"ultimo_cofre_abierto_at":     user.UltimoCofreAbiertoAt,
 		"proximo_cofre_disponible_at": now.Add(24 * time.Hour),
+	})
+}
+
+// -----------------------------------------------------------------------------
+// RULETA DE LA SUERTE (AUTORIATVO EN SERVIDOR + COOLDOWN 24H EN NEON)
+// -----------------------------------------------------------------------------
+
+type rouletteSegmentDef struct {
+	ID     string
+	Type   string
+	Amount int64
+	Label  string
+	Weight float64
+}
+
+var rouletteSegments = []rouletteSegmentDef{
+	{ID: "r_xp100", Type: "xp", Amount: 100, Label: "+100 XP VIP", Weight: 44.0},
+	{ID: "r_usdt5", Type: "diamantes", Amount: 50, Label: "+50 💎 (5 USDT)", Weight: 31.0},
+	{ID: "r_xp200", Type: "xp", Amount: 200, Label: "+200 XP VIP", Weight: 11.5},
+	{ID: "r_usdt10", Type: "diamantes", Amount: 100, Label: "+100 💎 (10 USDT)", Weight: 2.5},
+	{ID: "r_xp350", Type: "xp", Amount: 350, Label: "+350 XP VIP", Weight: 6.5},
+	{ID: "r_usdt20", Type: "diamantes", Amount: 200, Label: "+200 💎 (20 USDT)", Weight: 0.85},
+	{ID: "r_xp500", Type: "xp", Amount: 500, Label: "+500 XP VIP", Weight: 3.5},
+	{ID: "r_special", Type: "diamantes", Amount: 1000, Label: "★ +1,000 💎 (ESPECIAL)", Weight: 0.15},
+}
+
+func rollRouletteSegment() rouletteSegmentDef {
+	r := rand.Float64() * 100.0
+	cum := 0.0
+	for _, seg := range rouletteSegments {
+		cum += seg.Weight
+		if r < cum {
+			return seg
+		}
+	}
+	return rouletteSegments[0]
+}
+
+func handleRouletteSpin(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		enableCORS(w)
+		return
+	}
+	if r.Method != http.MethodPost {
+		http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		Username string `json:"username"`
+	}
+	_ = json.NewDecoder(r.Body).Decode(&req)
+
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
+		return
+	}
+	targetUser := claims.Username
+	key := strings.ToLower(strings.TrimSpace(targetUser))
+	ip := getClientIP(r)
+
+	if neon != nil {
+		userRow, err := neon.QueryRow(`
+			SELECT u.id::text, u.ultima_ruleta_girada_at, COALESCE(u.vip_xp, 0)::bigint as vip_xp,
+			       COALESCE(u.vip_level, 'Panda Bronce') as vip_level,
+			       COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+			FROM users u
+			LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE ($1::text != '' AND u.id::text = $1) OR LOWER(TRIM(u.username)) = $2
+			LIMIT 1
+		`, claims.UID, key)
+		if err != nil || userRow == nil || userRow["id"] == nil {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+			return
+		}
+		userID := fmt.Sprintf("%v", userRow["id"])
+		balBefore := parseNumber(userRow["balance_diamantes"])
+
+		// Bloqueo atómico de cooldown de 24 horas en Postgres
+		updRows, updErr := neon.Query(`
+			UPDATE users
+			SET ultima_ruleta_girada_at = NOW(), updated_at = NOW()
+			WHERE id = $1::uuid
+			  AND (ultima_ruleta_girada_at IS NULL OR NOW() - ultima_ruleta_girada_at >= INTERVAL '24 hours')
+			RETURNING ultima_ruleta_girada_at
+		`, userID)
+		if updErr != nil {
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": updErr.Error()})
+			return
+		}
+		if len(updRows) == 0 {
+			lastSpin := parseNeonTime(userRow["ultima_ruleta_girada_at"])
+			var remSecs int
+			var nextAvail *time.Time
+			if lastSpin != nil {
+				na := lastSpin.Add(24 * time.Hour)
+				nextAvail = &na
+				remSecs = int(time.Until(na).Seconds())
+				if remSecs < 0 {
+					remSecs = 0
+				}
+			}
+			writeJSON(w, http.StatusTooManyRequests, map[string]any{
+				"success":                     false,
+				"error":                       "COOLDOWN_ACTIVO",
+				"message":                     "Debes esperar 24 horas desde tu último giro de la ruleta.",
+				"ultima_ruleta_girada_at":     lastSpin,
+				"proximo_giro_disponible_at":  nextAvail,
+				"segundos_restantes":          remSecs,
+			})
+			return
+		}
+
+		seg := rollRouletteSegment()
+		if seg.Type == "xp" {
+			_ = neon.Exec(`UPDATE users SET vip_xp = vip_xp + $1, updated_at = NOW() WHERE id = $2::uuid`, seg.Amount, userID)
+		} else {
+			_ = neon.Exec(`
+				INSERT INTO wallets (user_id, balance_diamantes, updated_at)
+				VALUES ($1::uuid, $2, NOW())
+				ON CONFLICT (user_id) DO UPDATE
+				SET balance_diamantes = wallets.balance_diamantes + $2,
+				    updated_at = NOW()
+			`, userID, seg.Amount)
+		}
+
+		_, _ = applyVipProgressionNeon(userID, targetUser, ip)
+		afterRow, _ := neon.QueryRow(`
+			SELECT u.vip_xp, u.vip_level, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+			FROM users u LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE u.id = $1::uuid
+		`, userID)
+		balAfter := balBefore
+		xpAfter := parseNumber(userRow["vip_xp"])
+		lvlAfter := fmt.Sprintf("%v", userRow["vip_level"])
+		if afterRow != nil {
+			balAfter = parseNumber(afterRow["balance_diamantes"])
+			xpAfter = parseNumber(afterRow["vip_xp"])
+			lvlAfter = fmt.Sprintf("%v", afterRow["vip_level"])
+		}
+
+		logBalanceAudit(userID, targetUser, "ROULETTE_WIN", balAfter-balBefore, balBefore, balAfter, ip,
+			fmt.Sprintf("segment=%s tipo=%s cantidad=%d", seg.ID, seg.Type, seg.Amount))
+
+		nowTime := time.Now()
+		writeJSON(w, http.StatusOK, map[string]any{
+			"ok":                          true,
+			"success":                     true,
+			"segment_id":                  seg.ID,
+			"tipo":                        seg.Type,
+			"cantidad":                    seg.Amount,
+			"label":                       seg.Label,
+			"nuevo_balance_diamantes":     balAfter,
+			"nuevo_vip_xp":                xpAfter,
+			"vip_level":                   lvlAfter,
+			"ultima_ruleta_girada_at":     nowTime,
+			"proximo_giro_disponible_at":  nowTime.Add(24 * time.Hour),
+		})
+		return
+	}
+
+	store.mu.Lock()
+	defer store.mu.Unlock()
+	user, exists := store.users[key]
+	if !exists {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+		return
+	}
+	now := time.Now()
+	if user.UltimaRuletaGiradaAt != nil && now.Sub(*user.UltimaRuletaGiradaAt) < 24*time.Hour {
+		rem := 24*time.Hour - now.Sub(*user.UltimaRuletaGiradaAt)
+		writeJSON(w, http.StatusTooManyRequests, map[string]any{
+			"success":                    false,
+			"error":                      "COOLDOWN_ACTIVO",
+			"message":                    "Debes esperar 24 horas desde tu último giro de la ruleta.",
+			"ultima_ruleta_girada_at":    user.UltimaRuletaGiradaAt,
+			"proximo_giro_disponible_at": user.UltimaRuletaGiradaAt.Add(24 * time.Hour),
+			"segundos_restantes":         int(rem.Seconds()),
+		})
+		return
+	}
+
+	seg := rollRouletteSegment()
+	balBefore := user.BalanceDiamantes
+	user.UltimaRuletaGiradaAt = &now
+	if seg.Type == "xp" {
+		user.VIPXP += int(seg.Amount)
+	} else {
+		user.BalanceDiamantes += seg.Amount
+	}
+	appendMemAuditLocked(user.ID, user.Username, "ROULETTE_WIN", user.BalanceDiamantes-balBefore, balBefore, user.BalanceDiamantes, ip,
+		fmt.Sprintf("segment=%s tipo=%s cantidad=%d", seg.ID, seg.Type, seg.Amount))
+	_ = applyVipProgressionMem(user, ip)
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"ok":                         true,
+		"success":                    true,
+		"segment_id":                 seg.ID,
+		"tipo":                       seg.Type,
+		"cantidad":                   seg.Amount,
+		"label":                      seg.Label,
+		"nuevo_balance_diamantes":    user.BalanceDiamantes,
+		"nuevo_vip_xp":               user.VIPXP,
+		"vip_level":                  user.VIPLevel,
+		"ultima_ruleta_girada_at":    user.UltimaRuletaGiradaAt,
+		"proximo_giro_disponible_at": now.Add(24 * time.Hour),
+	})
+}
+
+// -----------------------------------------------------------------------------
+// BONO SEMANAL (10% DEL GASTO SEMANAL REGISTRADO EN SERVIDOR)
+// -----------------------------------------------------------------------------
+
+func handleClaimWeeklyBonus(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		enableCORS(w)
+		return
+	}
+	if r.Method != http.MethodPost {
+		http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req struct {
+		Username string `json:"username"`
+	}
+	_ = json.NewDecoder(r.Body).Decode(&req)
+
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
+		return
+	}
+	targetUser := claims.Username
+	key := strings.ToLower(strings.TrimSpace(targetUser))
+	ip := getClientIP(r)
+
+	if neon != nil {
+		row, err := neon.QueryRow(`
+			SELECT u.id::text, u.ultimo_bono_semanal_at,
+			       COALESCE(w.weekly_wagered_diamantes, 0)::bigint as weekly_wagered_diamantes,
+			       COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+			FROM users u
+			LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE ($1::text != '' AND u.id::text = $1) OR LOWER(TRIM(u.username)) = $2
+			LIMIT 1
+		`, claims.UID, key)
+		if err != nil || row == nil || row["id"] == nil {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+			return
+		}
+		userID := fmt.Sprintf("%v", row["id"])
+		lastClaim := parseNeonTime(row["ultimo_bono_semanal_at"])
+		if lastClaim != nil && time.Since(*lastClaim) < 7*24*time.Hour {
+			writeJSON(w, http.StatusTooManyRequests, map[string]any{
+				"error":                  "COOLDOWN_ACTIVO",
+				"message":                "Ya reclamaste tu bono semanal en los últimos 7 días.",
+				"ultimo_bono_semanal_at": lastClaim,
+			})
+			return
+		}
+		weeklySpent := parseNumber(row["weekly_wagered_diamantes"])
+		bonus := weeklySpent / 10
+		if bonus <= 0 {
+			writeJSON(w, http.StatusBadRequest, map[string]string{
+				"error": "Aún no tienes bono acumulado. Juega en los juegos del lobby para acumular gasto y recibir tu 10%.",
+			})
+			return
+		}
+
+		updRows, updErr := neon.Query(`
+			UPDATE users
+			SET ultimo_bono_semanal_at = NOW(), updated_at = NOW()
+			WHERE id = $1::uuid
+			  AND (ultimo_bono_semanal_at IS NULL OR NOW() - ultimo_bono_semanal_at >= INTERVAL '7 days')
+			RETURNING ultimo_bono_semanal_at
+		`, userID)
+		if updErr != nil || len(updRows) == 0 {
+			writeJSON(w, http.StatusTooManyRequests, map[string]string{"error": "Ya reclamaste tu bono semanal recientemente."})
+			return
+		}
+
+		balBefore := parseNumber(row["balance_diamantes"])
+		_ = neon.Exec(`
+			UPDATE wallets
+			SET balance_diamantes = balance_diamantes + $2,
+			    weekly_wagered_diamantes = 0,
+			    updated_at = NOW()
+			WHERE user_id = $1::uuid
+		`, userID, bonus)
+
+		balAfter := balBefore + bonus
+		logBalanceAudit(userID, targetUser, "WEEKLY_BONUS", bonus, balBefore, balAfter, ip,
+			fmt.Sprintf("weekly_wagered=%d", weeklySpent))
+
+		writeJSON(w, http.StatusOK, map[string]any{
+			"ok":                      true,
+			"bonus_diamantes":         bonus,
+			"weekly_wagered":          weeklySpent,
+			"nuevo_balance_diamantes": balAfter,
+			"message":                 fmt.Sprintf("¡Has recibido +%d 💎 de Bono Semanal!", bonus),
+		})
+		return
+	}
+
+	store.mu.Lock()
+	defer store.mu.Unlock()
+	user, exists := store.users[key]
+	if !exists {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+		return
+	}
+	now := time.Now()
+	if user.UltimoBonoSemanalAt != nil && now.Sub(*user.UltimoBonoSemanalAt) < 7*24*time.Hour {
+		writeJSON(w, http.StatusTooManyRequests, map[string]string{
+			"error": "Ya reclamaste tu bono semanal en los últimos 7 días.",
+		})
+		return
+	}
+	bonus := user.WeeklyWageredDiamantes / 10
+	if bonus <= 0 {
+		writeJSON(w, http.StatusBadRequest, map[string]string{
+			"error": "Aún no tienes bono acumulado. Juega en los juegos del lobby para acumular gasto y recibir tu 10%.",
+		})
+		return
+	}
+	balBefore := user.BalanceDiamantes
+	weeklySpent := user.WeeklyWageredDiamantes
+	user.BalanceDiamantes += bonus
+	user.WeeklyWageredDiamantes = 0
+	user.UltimoBonoSemanalAt = &now
+	appendMemAuditLocked(user.ID, user.Username, "WEEKLY_BONUS", bonus, balBefore, user.BalanceDiamantes, ip,
+		fmt.Sprintf("weekly_wagered=%d", weeklySpent))
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"ok":                      true,
+		"bonus_diamantes":         bonus,
+		"weekly_wagered":          weeklySpent,
+		"nuevo_balance_diamantes": user.BalanceDiamantes,
+		"message":                 fmt.Sprintf("¡Has recibido +%d 💎 de Bono Semanal!", bonus),
 	})
 }
 
@@ -1864,7 +2906,12 @@ func handleUpdateSecurityQuestion(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	req.Username = strings.TrimSpace(req.Username)
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
+		return
+	}
+
+	req.Username = claims.Username
 	req.Question = strings.TrimSpace(req.Question)
 	req.Answer = strings.TrimSpace(req.Answer)
 
@@ -1877,8 +2924,8 @@ func handleUpdateSecurityQuestion(w http.ResponseWriter, r *http.Request) {
 		_ = neon.Exec(`
 			UPDATE users
 			SET security_question = $1, security_answer_hash = $2
-			WHERE LOWER(username) = $3
-		`, req.Question, hashSecurityAnswer(req.Answer), strings.ToLower(req.Username))
+			WHERE ($3::text != '' AND id::text = $3) OR LOWER(TRIM(username)) = $4
+		`, req.Question, hashSecurityAnswer(req.Answer), claims.UID, strings.ToLower(req.Username))
 
 		writeJSON(w, http.StatusOK, map[string]any{
 			"ok":       true,
@@ -2003,46 +3050,80 @@ func handleResponderEncuesta(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	reward := req.RecompensaDiamantes
-	if reward <= 0 {
-		reward = 50
+	claims, ok := requireUserSession(w, r, req.Username)
+	if !ok {
+		return
 	}
-	key := strings.ToLower(strings.TrimSpace(req.Username))
+	targetUser := claims.Username
+	key := strings.ToLower(strings.TrimSpace(targetUser))
+	encID := strings.TrimSpace(req.EncuestaID)
+	if encID == "" {
+		encID = "encuesta_diaria"
+	}
+	// Ignorar cualquier monto enviado por el cliente: recompensa fija en servidor
+	reward := SurveyRewardDiamonds
+	ip := getClientIP(r)
 
 	if neon != nil {
 		respJSON, _ := json.Marshal(req.Respuestas)
-		userID, uErr := ensureNeonUserAndWallet(req.Username, "", "")
-		var userIDParam any = nil
-		if uErr == nil && userID != "" {
-			userIDParam = userID
+		uRow, uErr := neon.QueryRow(`
+			SELECT u.id::text, COALESCE(u.vip_xp, 0)::bigint as vip_xp,
+			       COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+			FROM users u LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE ($1::text != '' AND u.id::text = $1) OR LOWER(TRIM(u.username)) = $2
+			LIMIT 1
+		`, claims.UID, key)
+		if uErr != nil || uRow == nil || uRow["id"] == nil {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+			return
 		}
+		userID := fmt.Sprintf("%v", uRow["id"])
+		balBefore := parseNumber(uRow["balance_diamantes"])
 
 		err := neon.Exec(`
 			INSERT INTO respuestas_encuestas (encuesta_id, encuesta_titulo, categoria, user_id, username, respuestas, recompensa_diamantes)
 			VALUES ($1, 'Encuesta de Calidad', 'Comunidad', $2::uuid, $3, $4::jsonb, $5)
-		`, req.EncuestaID, userIDParam, req.Username, string(respJSON), reward)
+		`, encID, userID, targetUser, string(respJSON), reward)
 
 		if err != nil {
-			if strings.Contains(err.Error(), "unique") || strings.Contains(err.Error(), "duplicate") {
+			errLower := strings.ToLower(err.Error())
+			if strings.Contains(errLower, "unique") || strings.Contains(errLower, "duplicate") {
 				writeJSON(w, http.StatusConflict, map[string]string{"error": "Ya has completado esta encuesta en el día de hoy"})
 				return
 			}
+			writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "No se pudo registrar la encuesta en Neon: " + err.Error()})
+			return
 		}
 
-		if userIDParam != nil {
-			_ = neon.Exec(`
-				INSERT INTO wallets (user_id, balance_diamantes, updated_at)
-				VALUES ($1::uuid, $2, NOW())
-				ON CONFLICT (user_id) DO UPDATE
-				SET balance_diamantes = wallets.balance_diamantes + $2,
-				    updated_at = NOW()
-			`, userIDParam, reward)
-			_ = neon.Exec(`UPDATE users SET vip_xp = vip_xp + 10, updated_at = NOW() WHERE id = $1::uuid`, userIDParam)
+		_ = neon.Exec(`
+			INSERT INTO wallets (user_id, balance_diamantes, updated_at)
+			VALUES ($1::uuid, $2, NOW())
+			ON CONFLICT (user_id) DO UPDATE
+			SET balance_diamantes = wallets.balance_diamantes + $2,
+			    updated_at = NOW()
+		`, userID, reward)
+		_ = neon.Exec(`UPDATE users SET vip_xp = vip_xp + 10, updated_at = NOW() WHERE id = $1::uuid`, userID)
+		_, _ = applyVipProgressionNeon(userID, targetUser, ip)
+
+		afterRow, _ := neon.QueryRow(`
+			SELECT u.vip_xp, u.vip_level, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+			FROM users u LEFT JOIN wallets w ON u.id = w.user_id
+			WHERE u.id = $1::uuid
+		`, userID)
+		balAfter := balBefore + reward
+		xpAfter := parseNumber(uRow["vip_xp"]) + 10
+		if afterRow != nil {
+			balAfter = parseNumber(afterRow["balance_diamantes"])
+			xpAfter = parseNumber(afterRow["vip_xp"])
 		}
+		logBalanceAudit(userID, targetUser, "SURVEY_REWARD", balAfter-balBefore, balBefore, balAfter, ip, "encuesta_id="+encID)
 
 		writeJSON(w, http.StatusOK, map[string]any{
-			"message":              fmt.Sprintf("¡Encuesta completada exitosamente! Se han sumado +%d 💎 a tu cuenta.", reward),
-			"recompensa_diamantes": reward,
+			"ok":                      true,
+			"message":                 fmt.Sprintf("¡Encuesta completada exitosamente! Se han sumado +%d 💎 a tu cuenta.", reward),
+			"recompensa_diamantes":    reward,
+			"nuevo_balance_diamantes": balAfter,
+			"nuevo_vip_xp":            xpAfter,
 		})
 		return
 	}
@@ -2051,16 +3132,32 @@ func handleResponderEncuesta(w http.ResponseWriter, r *http.Request) {
 	defer store.mu.Unlock()
 
 	user, exists := store.users[key]
-	var newBal int64 = reward
-	if exists {
-		user.BalanceDiamantes += reward
-		newBal = user.BalanceDiamantes
+	if !exists {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+		return
 	}
+	if store.surveyClaims == nil {
+		store.surveyClaims = make(map[string]bool)
+	}
+	claimKey := key + "|" + encID + "|" + time.Now().Format("2006-01-02")
+	if store.surveyClaims[claimKey] {
+		writeJSON(w, http.StatusConflict, map[string]string{"error": "Ya has completado esta encuesta en el día de hoy"})
+		return
+	}
+	store.surveyClaims[claimKey] = true
+
+	balBefore := user.BalanceDiamantes
+	user.BalanceDiamantes += reward
+	user.VIPXP += 10
+	appendMemAuditLocked(user.ID, user.Username, "SURVEY_REWARD", reward, balBefore, user.BalanceDiamantes, ip, "encuesta_id="+encID)
+	_ = applyVipProgressionMem(user, ip)
 
 	writeJSON(w, http.StatusOK, map[string]any{
+		"ok":                      true,
 		"message":                 fmt.Sprintf("¡Encuesta completada exitosamente! Se han sumado +%d 💎 a tu cuenta.", reward),
 		"recompensa_diamantes":    reward,
-		"nuevo_balance_diamantes": newBal,
+		"nuevo_balance_diamantes": user.BalanceDiamantes,
+		"nuevo_vip_xp":            user.VIPXP,
 	})
 }
 
@@ -2082,8 +3179,15 @@ func handleAdminStats(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if neon == nil {
+		store.mu.RLock()
+		var totalDiam int64
+		for _, u := range store.users {
+			totalDiam += u.BalanceDiamantes
+		}
+		totalUsers := len(store.users)
+		store.mu.RUnlock()
 		writeJSON(w, http.StatusOK, map[string]any{
-			"total_users": 0, "total_diamantes": 0, "pending_depositos": 0, "pending_retiros": 0, "active_address": "",
+			"total_users": totalUsers, "total_diamantes": totalDiam, "pending_depositos": 0, "pending_retiros": 0, "active_address": "TYDnyP8p2nQoD9jA5kU8v9L9w5b3x7K2zM",
 		})
 		return
 	}
@@ -2230,7 +3334,13 @@ func handleAdminGetUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if neon == nil {
-		writeJSON(w, http.StatusOK, []any{})
+		store.mu.RLock()
+		list := make([]*User, 0, len(store.users))
+		for _, u := range store.users {
+			list = append(list, u)
+		}
+		store.mu.RUnlock()
+		writeJSON(w, http.StatusOK, list)
 		return
 	}
 	query := `
@@ -2269,14 +3379,42 @@ func handleAdminUpdateUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
 		return
 	}
-	if neon == nil {
-		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Base de datos Neon offline"})
-		return
-	}
 	var req AdminUpdateUserReq
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.UserID == "" {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Datos de usuario inválidos"})
 		return
+	}
+	ip := getClientIP(r)
+
+	if neon == nil {
+		store.mu.Lock()
+		defer store.mu.Unlock()
+		for _, u := range store.users {
+			if u.ID == req.UserID {
+				balBefore := u.BalanceDiamantes
+				u.BalanceDiamantes = req.BalanceDiamantes
+				u.BalanceBonoDiamantes = req.BalanceBonoDiamantes
+				u.VIPLevel = req.VIPLevel
+				u.CuentaVerificada = req.CuentaVerificada
+				appendMemAuditLocked(u.ID, u.Username, "ADMIN_EDIT", req.BalanceDiamantes-balBefore, balBefore, req.BalanceDiamantes, ip,
+					fmt.Sprintf("vip=%s verif=%v", req.VIPLevel, req.CuentaVerificada))
+				writeJSON(w, http.StatusOK, map[string]any{"ok": true, "message": "Usuario y saldo actualizados exitosamente"})
+				return
+			}
+		}
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "Usuario no encontrado"})
+		return
+	}
+
+	var targetUsername string
+	var balBefore int64
+	if prevRow, prevErr := neon.QueryRow(`
+		SELECT u.username, COALESCE(w.balance_diamantes, 0)::bigint as balance_diamantes
+		FROM users u LEFT JOIN wallets w ON u.id = w.user_id
+		WHERE u.id = $1::uuid LIMIT 1
+	`, req.UserID); prevErr == nil && prevRow != nil {
+		targetUsername = fmt.Sprintf("%v", prevRow["username"])
+		balBefore = parseNumber(prevRow["balance_diamantes"])
 	}
 
 	err := neon.Exec(`
@@ -2299,7 +3437,40 @@ func handleAdminUpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if targetUsername == "" {
+		targetUsername = req.UserID
+	}
+	logBalanceAudit(req.UserID, targetUsername, "ADMIN_EDIT", req.BalanceDiamantes-balBefore, balBefore, req.BalanceDiamantes, ip,
+		fmt.Sprintf("vip=%s verif=%v", req.VIPLevel, req.CuentaVerificada))
+
 	writeJSON(w, http.StatusOK, map[string]any{"ok": true, "message": "Usuario y saldo actualizados exitosamente"})
+}
+
+func handleAdminGetAuditLogs(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		enableCORS(w)
+		return
+	}
+	if neon == nil {
+		store.mu.RLock()
+		logs := make([]AuditLogRecord, len(store.auditLogs))
+		copy(logs, store.auditLogs)
+		store.mu.RUnlock()
+		writeJSON(w, http.StatusOK, logs)
+		return
+	}
+	rows, err := neon.Query(`
+		SELECT id::text, COALESCE(user_id::text, '') as user_id, username, action,
+		       delta, balance_before, balance_after, ip_address, details, created_at
+		FROM balance_audit_logs
+		ORDER BY created_at DESC
+		LIMIT 100
+	`)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, http.StatusOK, rows)
 }
 
 func handleAdminGetDepositos(w http.ResponseWriter, r *http.Request) {
@@ -2443,6 +3614,8 @@ func main() {
 	mux.HandleFunc("/api/v1/wallet/sync-balance", handleSyncBalance)
 	mux.HandleFunc("/api/v1/user/pagar-verificacion", handlePayVerification)
 	mux.HandleFunc("/api/v1/user/cofre-diario", handleDailyChest)
+	mux.HandleFunc("/api/v1/user/ruleta", handleRouletteSpin)
+	mux.HandleFunc("/api/v1/user/bono-semanal", handleClaimWeeklyBonus)
 	mux.HandleFunc("/api/v1/wallet/retirar", handleWithdraw)
 	mux.HandleFunc("/api/v1/wallet/direccion-recarga", handleGetDireccionRecarga)
 	mux.HandleFunc("/api/v1/wallet/recargar", handleDeposit)
@@ -2452,19 +3625,20 @@ func main() {
 	mux.HandleFunc("/api/v1/encuestas/responder", handleResponderEncuesta)
 	mux.HandleFunc("/api/v1/encuestas/respuestas", handleGetRespuestasEncuestas)
 
-	// --- RUTAS DE ADMINISTRACIÓN ---
-	mux.HandleFunc("/api/v1/admin/stats", handleAdminStats)
-	mux.HandleFunc("/api/v1/admin/direcciones", handleAdminGetDirecciones)
-	mux.HandleFunc("/api/v1/admin/direcciones/guardar", handleAdminSaveDireccion)
-	mux.HandleFunc("/api/v1/admin/direcciones/activar", handleAdminSetActiveDireccion)
-	mux.HandleFunc("/api/v1/admin/users", handleAdminGetUsers)
-	mux.HandleFunc("/api/v1/admin/users/editar", handleAdminUpdateUser)
-	mux.HandleFunc("/api/v1/admin/depositos", handleAdminGetDepositos)
-	mux.HandleFunc("/api/v1/admin/retiros", handleAdminGetRetiros)
-	mux.HandleFunc("/api/v1/admin/retiros/procesar", handleAdminProcessRetiro)
-
-	// Servir panel estático de administración
-	mux.Handle("/admin/", http.StripPrefix("/admin/", http.FileServer(http.Dir("../administrador"))))
+	// --- RUTAS DE ADMINISTRACIÓN (Protegidas con X-Admin-Key) ---
+	mux.HandleFunc("/api/v1/admin/verify", requireAdminAuth(func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, http.StatusOK, map[string]any{"ok": true})
+	}))
+	mux.HandleFunc("/api/v1/admin/audit-logs", requireAdminAuth(handleAdminGetAuditLogs))
+	mux.HandleFunc("/api/v1/admin/stats", requireAdminAuth(handleAdminStats))
+	mux.HandleFunc("/api/v1/admin/direcciones", requireAdminAuth(handleAdminGetDirecciones))
+	mux.HandleFunc("/api/v1/admin/direcciones/guardar", requireAdminAuth(handleAdminSaveDireccion))
+	mux.HandleFunc("/api/v1/admin/direcciones/activar", requireAdminAuth(handleAdminSetActiveDireccion))
+	mux.HandleFunc("/api/v1/admin/users", requireAdminAuth(handleAdminGetUsers))
+	mux.HandleFunc("/api/v1/admin/users/editar", requireAdminAuth(handleAdminUpdateUser))
+	mux.HandleFunc("/api/v1/admin/depositos", requireAdminAuth(handleAdminGetDepositos))
+	mux.HandleFunc("/api/v1/admin/retiros", requireAdminAuth(handleAdminGetRetiros))
+	mux.HandleFunc("/api/v1/admin/retiros/procesar", requireAdminAuth(handleAdminProcessRetiro))
 
 	port := os.Getenv("PORT")
 	if port == "" {

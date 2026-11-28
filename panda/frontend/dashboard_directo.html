@@ -3364,6 +3364,8 @@
         if (typeof window.pandaFetchAndSyncProfile === 'function') {
           await window.pandaFetchAndSyncProfile(userState, () => {
             updateUI();
+            if (typeof updateDailyChestStatus === 'function') updateDailyChestStatus();
+            if (typeof updateRouletteStatus === 'function') updateRouletteStatus();
           });
           return;
         }
@@ -3394,6 +3396,17 @@
             if (typeof data.tiene_recarga_aprobada !== 'undefined') {
               userState.tiene_recarga_aprobada = Boolean(data.tiene_recarga_aprobada);
             }
+            if (typeof data.ultimo_cofre_abierto_at !== 'undefined') {
+              userState.ultimo_cofre_abierto_at = data.ultimo_cofre_abierto_at || null;
+              userState.lastDailyChestAt = data.ultimo_cofre_abierto_at || null;
+            }
+            if (typeof data.ultima_ruleta_girada_at !== 'undefined') {
+              userState.ultima_ruleta_girada_at = data.ultima_ruleta_girada_at || null;
+              userState.lastRouletteSpinAt = data.ultima_ruleta_girada_at || null;
+            }
+            if (typeof data.weekly_wagered_diamantes === 'number') {
+              userState.weeklySpent = data.weekly_wagered_diamantes;
+            }
             if (data.email && (!userState.email || userState.email.endsWith('@pandabet.com') || userState.email.split('@').length > 2)) {
               userState.email = data.email;
             }
@@ -3410,6 +3423,18 @@
       } catch (_) {}
     }
     syncBackendProfile();
+    window.addEventListener('panda:balance-corrected', (e) => {
+      const d = e && e.detail;
+      if (d && typeof d.balance_diamantes === 'number') {
+        userState.balance = d.balance_diamantes;
+        if (typeof d.vip_xp === 'number') userState.xp = d.vip_xp;
+        if (d.vip_level) {
+          userState.vipLevel = d.vip_level;
+          userState.xpTarget = getDashboardXpTarget(d.vip_level);
+        }
+        updateUI();
+      }
+    });
     window.addEventListener('focus', () => syncBackendProfile());
     window.addEventListener('pageshow', () => syncBackendProfile());
     document.addEventListener('visibilitychange', () => {
@@ -3419,23 +3444,20 @@
       if (document.visibilityState === 'visible') syncBackendProfile();
     }, 12000);
 
-    // Comprobar y gestionar subida de nivel VIP
+    // Comprobar y gestionar subida de nivel VIP (saldo VIP lo acredita el servidor)
     function checkVipProgression() {
       if (userState.xp >= userState.xpTarget) {
         if (userState.vipLevel === 'Panda Bronce') {
           userState.vipLevel = 'Panda Plata';
           userState.xpTarget = 5000;
-          userState.balance += 250; // Premio cofre de ascenso
-          showToast('¡SUBISTE DE NIVEL VIP!', '¡Felicidades! Has ascendido a Panda Plata. Recibes un cofre de +250 💎 Diamantes.');
+          showToast('¡SUBISTE DE NIVEL VIP!', '¡Felicidades! Has ascendido a Panda Plata. Cofre de +250 💎 Diamantes.');
         } else if (userState.vipLevel === 'Panda Plata') {
           userState.vipLevel = 'Panda Oro';
           userState.xpTarget = 25000;
-          userState.balance += 1000;
-          showToast('¡SUBISTE DE NIVEL VIP!', '¡Felicidades! Has ascendido a Panda Oro. Recibes un cofre de +1,000 💎 Diamantes.');
+          showToast('¡SUBISTE DE NIVEL VIP!', '¡Felicidades! Has ascendido a Panda Oro. Cofre de +1,000 💎 Diamantes.');
         } else if (userState.vipLevel === 'Panda Oro') {
           userState.vipLevel = 'Panda Platino';
           userState.xpTarget = 100000;
-          userState.balance += 5000;
           showToast('¡SUBISTE DE NIVEL VIP!', '¡Ascendiste a Panda Platino! Cofre de +5,000 💎 Diamantes y retiros sin límites.');
         }
       }
@@ -3936,27 +3958,27 @@
       weeklyBonusModal?.classList.remove('open');
     });
 
-    // Lógica del Reclamo del Bono Semanal (10% de lo gastado en la semana)
-    document.getElementById('btnClaimWeeklyBonusAction')?.addEventListener('click', () => {
-      const weeklySpent = typeof userState.weeklySpent === 'number' ? userState.weeklySpent : 0;
-      const weeklyBonus = Math.floor(weeklySpent * 0.10);
-
-      if (userState.weeklyBonusClaimed) {
-        showToast('Bono Semanal', 'Ya has reclamado tu bono de esta semana. Juega en nuestros juegos para acumular para el próximo ciclo.', 'error');
-        return;
+    // Lógica del Reclamo del Bono Semanal (10% acreditado estrictamente en servidor)
+    document.getElementById('btnClaimWeeklyBonusAction')?.addEventListener('click', async () => {
+      try {
+        const res = await fetch(`${API_BASE}/user/bono-semanal`, {
+          method: 'POST',
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: userState.username })
+        });
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !data || !data.ok) {
+          showToast('Bono Semanal', (data && (data.error || data.message)) || 'Aún no tienes bono acumulado disponible para reclamar.', 'error');
+          return;
+        }
+        userState.weeklyBonusClaimed = true;
+        userState.weeklySpent = 0;
+        await syncBackendProfile();
+        weeklyBonusModal?.classList.remove('open');
+        showToast('¡Bono Semanal Reclamado!', data.message || `🎉 Has recibido +${Number(data.bonus_diamantes || 0).toLocaleString('en-US')} 💎.`);
+      } catch (_) {
+        showToast('Error de Conexión', 'No se pudo reclamar el bono semanal en el servidor.', 'error');
       }
-
-      if (weeklyBonus <= 0) {
-        showToast('Bono Semanal', 'Aún no tienes bono acumulado. Juega en los juegos del lobby para acumular gasto y recibir tu 10%.', 'error');
-        return;
-      }
-
-      // Acreditar 10% directo al balance
-      userState.balance += weeklyBonus;
-      userState.weeklyBonusClaimed = true;
-      saveState();
-      weeklyBonusModal?.classList.remove('open');
-      showToast('¡Bono Semanal Reclamado!', `🎉 Has recibido +${weeklyBonus.toLocaleString('en-US')} 💎 (10% de tu gasto semanal de ${weeklySpent.toLocaleString('en-US')} 💎).`);
     });
 
     // Temporizador regresivo hasta el próximo ciclo semanal (Lunes 00:00 UTC)
@@ -4373,7 +4395,9 @@
         return;
       }
 
-      const reward = currentSurveyTaking.recompensa_diamantes || 50;
+      const submitBtn = document.getElementById('btnSubmitSurvey');
+      if (submitBtn) submitBtn.disabled = true;
+
       const newResponseRecord = {
         id: `resp_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
         fecha: new Date().toISOString(),
@@ -4382,7 +4406,6 @@
         encuesta_id: currentSurveyTaking.id,
         encuesta_titulo: currentSurveyTaking.titulo,
         categoria: currentSurveyTaking.categoria,
-        recompensa_diamantes: reward,
         respuestas: currentSurveyTaking.preguntas.map(q => ({
           pregunta_id: q.id,
           pregunta: q.pregunta,
@@ -4390,39 +4413,30 @@
         }))
       };
 
-      surveyResponses.unshift(newResponseRecord);
-      saveSurveyResponses();
-
-      userState.balance += reward;
-      userState.xp = (userState.xp || 0) + 10;
-      checkVipProgression();
-
-      window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
-      try {
-        saveState();
-      } finally {
-        window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
-      }
-
-      document.getElementById('takeSurveyModal')?.classList.remove('open');
-      renderDailySurveysUI();
-
-      showToast('¡Encuesta Completada!', `🎉 Has completado "${currentSurveyTaking.titulo}". Has recibido +${reward} 💎.`);
-
-      let surveySavedOnline = false;
       try {
         const encRes = await fetch(`${API_BASE}/encuestas/responder`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
           body: JSON.stringify(newResponseRecord)
         });
-        if (encRes.ok) {
-          surveySavedOnline = true;
-          await syncBackendProfile();
+        const encData = await encRes.json().catch(() => null);
+        if (!encRes.ok) {
+          showToast('Encuesta No Registrada', (encData && encData.error) || 'No se pudo enviar la encuesta. Verifica tu sesión.', 'error');
+          return;
         }
-      } catch (err) {}
-      if (!surveySavedOnline && typeof window.pandaSyncBalanceToBackend === 'function') {
-        await window.pandaSyncBalanceToBackend(userState);
+        const serverReward = Number((encData && encData.recompensa_diamantes) || 50);
+        newResponseRecord.recompensa_diamantes = serverReward;
+        surveyResponses.unshift(newResponseRecord);
+        saveSurveyResponses();
+
+        document.getElementById('takeSurveyModal')?.classList.remove('open');
+        renderDailySurveysUI();
+        await syncBackendProfile();
+        showToast('¡Encuesta Completada!', `🎉 Has completado "${currentSurveyTaking.titulo}". Has recibido +${serverReward} 💎.`);
+      } catch (err) {
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para acreditar la encuesta.', 'error');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
       }
     });
 
@@ -4437,9 +4451,11 @@
       userWrapper?.classList.remove('open');
       if (confirm('¿Deseas cerrar tu sesión?')) {
         try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        try { window.pandaClearAuthToken?.(); } catch (_) {}
         userState = {
           ...userState,
           isLoggedIn: false,
+          token: '',
           balance: 0,
           bonusBalance: 0,
           freeSpins: 0,
@@ -4553,6 +4569,7 @@
         userState = {
           id: data.user.id || '',
           isLoggedIn: true,
+          token: data.token || '',
           username: canonicalUser,
           fullName: '',
           email: data.user.email || email,
@@ -4579,6 +4596,7 @@
         };
 
         try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        try { if (data.token && typeof window.pandaSetAuthToken === 'function') window.pandaSetAuthToken(data.token); } catch (_) {}
         window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
         try {
           saveState();
@@ -4667,13 +4685,14 @@
           country: '',
           birthDate: '',
           defaultTronAddress: '',
-          weeklySpent: 0,
+          weeklySpent: typeof data.user.weekly_wagered_diamantes === 'number' ? data.user.weekly_wagered_diamantes : 0,
           weeklyBonusClaimed: false,
           lastWeeklyReset: null,
           profileCompleted: false,
           ...prevCosmetic,
           id: data.user.id || '',
           isLoggedIn: true,
+          token: data.token || '',
           username: canonicalUser,
           email: data.user.email || '',
           phone: data.user.phone || '',
@@ -4686,10 +4705,16 @@
           cuenta_verificada: Boolean(data.user.cuenta_verificada),
           is_verified: Boolean(data.user.cuenta_verificada),
           primer_deposito_realizado: Boolean(data.user.primer_deposito_realizado),
-          tiene_recarga_aprobada: Boolean(data.user.tiene_recarga_aprobada)
+          tiene_recarga_aprobada: Boolean(data.user.tiene_recarga_aprobada),
+          ultimo_cofre_abierto_at: data.user.ultimo_cofre_abierto_at || null,
+          lastDailyChestAt: data.user.ultimo_cofre_abierto_at || null,
+          ultima_ruleta_girada_at: data.user.ultima_ruleta_girada_at || null,
+          lastRouletteSpinAt: data.user.ultima_ruleta_girada_at || null,
+          ultimo_bono_semanal_at: data.user.ultimo_bono_semanal_at || null
         };
 
         try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        try { if (data.token && typeof window.pandaSetAuthToken === 'function') window.pandaSetAuthToken(data.token); } catch (_) {}
         window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
         try {
           saveState();
@@ -4712,30 +4737,41 @@
       }
     });
 
-    // Pagar Verificación desde el modal de Perfil
+    // Pagar Verificación desde el modal de Perfil (autoritativo en servidor)
     document.getElementById('btnProfilePayVerify')?.addEventListener('click', async () => {
       const verifyFee = 100; // 100 💎
       if (userState.balance < verifyFee) {
         showToast('Saldo Insuficiente', `Necesitas al menos ${verifyFee} 💎 para pagar la verificación. Recarga diamantes primero.`, 'error');
         return;
       }
-      userState.balance -= verifyFee;
-      userState.cuenta_verificada = true;
-      userState.is_verified = true;
-      userState.fecha_verificacion = new Date().toISOString();
-      saveState();
 
       try {
-        await fetch(`${API_BASE}/user/pagar-verificacion`, {
+        const res = await fetch(`${API_BASE}/user/pagar-verificacion`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: userState.username, metodo: 'saldo_diamantes' })
         });
+        const d = await res.json().catch(() => null);
+        if (!res.ok || (d && (d.error || d.success === false))) {
+          showToast('Verificación Rechazada', (d && d.error) || 'No se pudo completar el pago de verificación.', 'error');
+          return;
+        }
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          if (d && typeof d.nuevo_balance === 'number') userState.balance = d.nuevo_balance;
+          else userState.balance = Math.max(0, userState.balance - verifyFee);
+          userState.cuenta_verificada = true;
+          userState.is_verified = true;
+          userState.fecha_verificacion = new Date().toISOString();
+          saveState();
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
+        }
+        await syncBackendProfile();
+        showToast('¡Cuenta Verificada!', 'Has pagado la verificación de cuenta. Tus retiros a USDT (TRC-20) han sido habilitados con éxito.');
       } catch (e) {
-        console.log('Backend sync offline, verification saved locally');
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para validar la verificación.', 'error');
       }
-
-      showToast('¡Cuenta Verificada!', 'Has pagado la verificación de cuenta. Tus retiros a USDT (TRC-20) han sido habilitados con éxito.');
     });
 
     // Botones de cierre y navegación entre modales
@@ -4925,20 +4961,43 @@
       if (resultState) resultState.style.display = 'none';
       dailyChestModal?.classList.add('open');
 
-      // Elegir premio ponderado (o consultar backend Go si está activo)
-      let wonPrize = rollWeightedChestPrize();
+      let serverData = null;
       try {
         const res = await fetch(`${API_BASE}/user/cofre-diario`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: userState.username })
         });
-        if (res.ok) {
-          const data = await res.json();
-          const match = DAILY_CHEST_POOL.find(p => p.type === data.tipo && p.amount === data.cantidad);
-          if (match) wonPrize = match;
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !data || data.success === false) {
+          dailyChestModal?.classList.remove('open');
+          if (data && data.ultimo_cofre_abierto_at) {
+            userState.ultimo_cofre_abierto_at = data.ultimo_cofre_abierto_at;
+            userState.lastDailyChestAt = data.ultimo_cofre_abierto_at;
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+            try { saveState(); } finally { window.__PANDA_APPLYING_BACKEND_SYNC__ = false; }
+            updateDailyChestStatus();
+          }
+          showToast('Cofre Diario', (data && (data.message || data.error)) || 'No se pudo reclamar el cofre diario.', 'error');
+          return;
         }
-      } catch (_) {}
+        serverData = data;
+      } catch (_) {
+        dailyChestModal?.classList.remove('open');
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para abrir el cofre.', 'error');
+        return;
+      }
+
+      const tipoNorm = String(serverData.tipo || '').toLowerCase();
+      const cantNorm = Number(serverData.cantidad || 0);
+      const wonPrize = DAILY_CHEST_POOL.find(p => p.type === tipoNorm && p.amount === cantNorm) || {
+        id: 'server_chest',
+        type: tipoNorm,
+        amount: cantNorm,
+        label: serverData.etiqueta || serverData.premio || `+${cantNorm}`,
+        sub: 'Acreditado de forma segura por el servidor',
+        icon: tipoNorm === 'xp' ? '⚡' : '💎'
+      };
 
       // Animación de ruleta ciclando los beneficios durante 2.1 segundos
       let spinIdx = 0;
@@ -4948,22 +5007,29 @@
         spinIdx++;
       }, 110);
 
-      setTimeout(() => {
+      setTimeout(async () => {
         clearInterval(spinInterval);
 
-        // Aplicar beneficio al estado del usuario y registrar timestamp de apertura
-        const nowIso = new Date().toISOString();
-        userState.ultimo_cofre_abierto_at = nowIso;
-        userState.lastDailyChestAt = nowIso;
-
-        if (wonPrize.type === 'xp') {
-          userState.xp += wonPrize.amount;
-          checkVipProgression();
-        } else {
-          userState.balance += wonPrize.amount;
+        const openedIso = serverData.ultimo_cofre_abierto_at || new Date().toISOString();
+        window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+        try {
+          userState.ultimo_cofre_abierto_at = openedIso;
+          userState.lastDailyChestAt = openedIso;
+          if (typeof serverData.nuevo_balance_diamantes === 'number') {
+            userState.balance = serverData.nuevo_balance_diamantes;
+          }
+          if (typeof serverData.nuevo_vip_xp === 'number') {
+            userState.xp = serverData.nuevo_vip_xp;
+          }
+          if (serverData.vip_level) {
+            userState.vipLevel = serverData.vip_level;
+            userState.xpTarget = getDashboardXpTarget(serverData.vip_level);
+          }
+          saveState();
+        } finally {
+          window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
         }
-
-        saveState();
+        await syncBackendProfile();
         updateDailyChestStatus();
 
         // Mostrar resultado animado y resaltar fila en la tabla
@@ -5140,13 +5206,46 @@
       try { history.pushState({ modalOpen: 'rouletteModal' }, ''); } catch (_) {}
     });
 
-    btnSpinRouletteNow?.addEventListener('click', () => {
+    btnSpinRouletteNow?.addEventListener('click', async () => {
       if (isSpinningRoulette) return;
       isSpinningRoulette = true;
       btnSpinRouletteNow.disabled = true;
-      btnSpinRouletteNow.textContent = '🎡 GIRANDO...';
+      btnSpinRouletteNow.textContent = '⏳ VALIDANDO...';
 
-      const winIdx = rollWeightedRouletteIndex();
+      let spinData = null;
+      try {
+        const res = await fetch(`${API_BASE}/user/ruleta`, {
+          method: 'POST',
+          headers: window.pandaGetAuthHeaders ? window.pandaGetAuthHeaders() : { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: userState.username })
+        });
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !data || data.success === false) {
+          isSpinningRoulette = false;
+          btnSpinRouletteNow.disabled = false;
+          btnSpinRouletteNow.textContent = '🎡 ¡GIRAR RULETA AHORA!';
+          if (data && data.ultima_ruleta_girada_at) {
+            userState.ultima_ruleta_girada_at = data.ultima_ruleta_girada_at;
+            userState.lastRouletteSpinAt = data.ultima_ruleta_girada_at;
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+            try { saveState(); } finally { window.__PANDA_APPLYING_BACKEND_SYNC__ = false; }
+            updateRouletteStatus();
+          }
+          showToast('Ruleta de la Suerte', (data && (data.message || data.error)) || 'Debes esperar 24h o iniciar sesión.', 'error');
+          return;
+        }
+        spinData = data;
+      } catch (_) {
+        isSpinningRoulette = false;
+        btnSpinRouletteNow.disabled = false;
+        btnSpinRouletteNow.textContent = '🎡 ¡GIRAR RULETA AHORA!';
+        showToast('Error de Conexión', 'No se pudo conectar con el servidor para girar la ruleta.', 'error');
+        return;
+      }
+
+      btnSpinRouletteNow.textContent = '🎡 GIRANDO...';
+      let winIdx = ROULETTE_SEGMENTS.findIndex(s => s.id === spinData.segment_id);
+      if (winIdx < 0) winIdx = 0;
       const wonSeg = ROULETTE_SEGMENTS[winIdx];
       const numSlices = ROULETTE_SEGMENTS.length;
       const sliceArc = (2 * Math.PI) / numSlices;
@@ -5171,20 +5270,28 @@
         if (t < 1) {
           requestAnimationFrame(animateWheel);
         } else {
-          setTimeout(() => {
+          setTimeout(async () => {
             isSpinningRoulette = false;
-            const nowIso = new Date().toISOString();
-            userState.ultima_ruleta_girada_at = nowIso;
-            userState.lastRouletteSpinAt = nowIso;
-
-            if (wonSeg.type === 'xp') {
-              userState.xp += wonSeg.amount;
-              checkVipProgression();
-            } else {
-              userState.balance += wonSeg.amount;
+            const spinIso = spinData.ultima_ruleta_girada_at || new Date().toISOString();
+            window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
+            try {
+              userState.ultima_ruleta_girada_at = spinIso;
+              userState.lastRouletteSpinAt = spinIso;
+              if (typeof spinData.nuevo_balance_diamantes === 'number') {
+                userState.balance = spinData.nuevo_balance_diamantes;
+              }
+              if (typeof spinData.nuevo_vip_xp === 'number') {
+                userState.xp = spinData.nuevo_vip_xp;
+              }
+              if (spinData.vip_level) {
+                userState.vipLevel = spinData.vip_level;
+                userState.xpTarget = getDashboardXpTarget(spinData.vip_level);
+              }
+              saveState();
+            } finally {
+              window.__PANDA_APPLYING_BACKEND_SYNC__ = false;
             }
-
-            saveState();
+            await syncBackendProfile();
             updateRouletteStatus();
 
             document.getElementById('rouletteSpinState').style.display = 'none';
@@ -5221,16 +5328,11 @@
     document.getElementById('btnLogoutAction')?.addEventListener('click', () => {
       if (confirm('¿Deseas cerrar tu sesión?')) {
         try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        try { window.pandaClearAuthToken?.(); } catch (_) {}
         localStorage.removeItem(storageKey);
         window.location.href = './portal_directo.html';
       }
     });
-
-    // ==========================================================================
-    // MOTOR DEL JUEGO ARCADE EN VIVO (NEON BOUNCE)
-    // ==========================================================================
-    let isPlaying = false;
-    let animId = null;
 
     function openGame(gameId) {
       const selectedGame = gamesCatalog.find(g => g.id === gameId);
@@ -5251,128 +5353,8 @@
     });
 
     document.getElementById('btnCloseGame')?.addEventListener('click', () => {
-      gameModal.classList.remove('open');
-      isPlaying = false;
-      if (animId) cancelAnimationFrame(animId);
+      gameModal?.classList.remove('open');
     });
-
-    function runCanvasGame() {
-      const canvas = document.getElementById('gameCanvasLive');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      isPlaying = true;
-      let x = canvas.width / 2;
-      let y = 100;
-      let vx = 4;
-      let vy = 4;
-      const boxSize = 20;
-      let angle = 0;
-
-      const pWidth = 100;
-      const pHeight = 12;
-      let px = canvas.width / 2 - pWidth / 2;
-      let targetPx = px;
-
-      let score = 0;
-      let lives = 3;
-      let isOver = false;
-
-      const mouseMove = (e) => {
-        const rect = canvas.getBoundingClientRect();
-        targetPx = (e.clientX - rect.left) - pWidth / 2;
-      };
-      canvas.onmousemove = mouseMove;
-
-      function loop() {
-        if (!isPlaying) return;
-
-        px += (targetPx - px) * 0.25;
-        if (px < 0) px = 0;
-        if (px + pWidth > canvas.width) px = canvas.width - pWidth;
-
-        if (!isOver) {
-          x += vx;
-          y += vy;
-          angle += 0.04;
-
-          if (x - boxSize/2 <= 0) { x = boxSize/2; vx = Math.abs(vx); }
-          if (x + boxSize/2 >= canvas.width) { x = canvas.width - boxSize/2; vx = -Math.abs(vx); }
-          if (y - boxSize/2 <= 0) { y = boxSize/2; vy = Math.abs(vy); }
-
-          const pTop = canvas.height - 30;
-          if (y + boxSize/2 >= pTop && y - boxSize/2 <= pTop + pHeight &&
-              x >= px - 5 && x <= px + pWidth + 5 && vy > 0) {
-            vy = -Math.abs(vy);
-            score += 10;
-            if (score % 50 === 0) { vx *= 1.08; vy *= 1.08; }
-          }
-
-          if (y > canvas.height) {
-            lives--;
-            if (lives <= 0) {
-              isOver = true;
-              if (score > 0) {
-                // Cada 10 pts otorgan 3 Diamantes y 1 XP adicional
-                const prizeDiamonds = Math.floor(score * 3);
-                const gainedXp = Math.floor(score / 5);
-                userState.balance += prizeDiamonds;
-                userState.xp += gainedXp;
-                checkVipProgression();
-                saveState();
-                showToast('¡Premio Obtenido!', `Puntaje: ${score} pts. Ganaste +${prizeDiamonds} 💎 Diamantes y +${gainedXp} XP.`);
-              }
-            } else {
-              x = canvas.width / 2;
-              y = 100;
-              vy = 4;
-            }
-          }
-        }
-
-        // Render
-        ctx.fillStyle = 'rgba(3, 7, 18, 0.4)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Paddle
-        ctx.fillStyle = '#ffb700';
-        ctx.beginPath();
-        ctx.roundRect(px, canvas.height - 30, pWidth, pHeight, 5);
-        ctx.fill();
-
-        // Cube
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(angle);
-        ctx.fillStyle = '#ff0055';
-        ctx.fillRect(-boxSize/2, -boxSize/2, boxSize, boxSize);
-        ctx.restore();
-
-        // HUD
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 14px sans-serif';
-        ctx.fillText(`PUNTOS: ${score}`, 15, 25);
-        ctx.fillStyle = '#ff3366';
-        ctx.fillText(`VIDAS: ${'♥'.repeat(Math.max(0, lives))}`, canvas.width - 90, 25);
-
-        if (isOver) {
-          ctx.fillStyle = 'rgba(0,0,0,0.85)';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = '#ffb700';
-          ctx.font = 'bold 24px monospace';
-          ctx.textAlign = 'center';
-          ctx.fillText('FIN DE LA PARTIDA', canvas.width/2, canvas.height/2 - 15);
-          ctx.font = '14px sans-serif';
-          ctx.fillStyle = '#fff';
-          ctx.fillText(`Puntos: ${score} pts &bull; Premio: +${Math.floor(score * 3)} 💎`, canvas.width/2, canvas.height/2 + 15);
-        }
-
-        animId = requestAnimationFrame(loop);
-      }
-
-      animId = requestAnimationFrame(loop);
-    }
 
     // =========================================================================
     // VENTANA EMERGENTE PARA COMPLETAR DATOS FALTANTES DEL REGISTRO

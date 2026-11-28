@@ -1390,6 +1390,7 @@
           sessionData.xp = typeof data.user.vip_xp === 'number' ? data.user.vip_xp : 0;
           sessionData.cuenta_verificada = Boolean(data.user.cuenta_verificada);
           sessionData.is_verified = Boolean(data.user.cuenta_verificada);
+          sessionData.token = data.token || '';
         }
       } catch (_) {
         showToast('Error de Conexión', 'No se pudo conectar con el servidor para crear tu cuenta. Intenta de nuevo en unos segundos.', 'error');
@@ -1397,6 +1398,7 @@
       }
 
       try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+      try { if (sessionData.token && typeof window.pandaSetAuthToken === 'function') window.pandaSetAuthToken(sessionData.token); } catch (_) {}
       window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionData));
@@ -1478,6 +1480,7 @@
           ...prevCosmetic,
           id: data.user.id || '',
           isLoggedIn: true,
+          token: data.token || '',
           username: canonicalUser,
           email: data.user.email || '',
           phone: data.user.phone || '',
@@ -1490,10 +1493,15 @@
           cuenta_verificada: Boolean(data.user.cuenta_verificada),
           is_verified: Boolean(data.user.cuenta_verificada),
           primer_deposito_realizado: Boolean(data.user.primer_deposito_realizado),
-          tiene_recarga_aprobada: Boolean(data.user.tiene_recarga_aprobada)
+          tiene_recarga_aprobada: Boolean(data.user.tiene_recarga_aprobada),
+          ultimo_cofre_abierto_at: data.user.ultimo_cofre_abierto_at || null,
+          lastDailyChestAt: data.user.ultimo_cofre_abierto_at || null,
+          ultima_ruleta_girada_at: data.user.ultima_ruleta_girada_at || null,
+          lastRouletteSpinAt: data.user.ultima_ruleta_girada_at || null
         };
 
         try { localStorage.removeItem('panda_balance_dirty'); } catch (_) {}
+        try { if (data.token && typeof window.pandaSetAuthToken === 'function') window.pandaSetAuthToken(data.token); } catch (_) {}
         window.__PANDA_APPLYING_BACKEND_SYNC__ = true;
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionData));

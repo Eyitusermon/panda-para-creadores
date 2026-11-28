@@ -101,6 +101,15 @@ class PandaCrashRocketGame {
         } catch (_) {}
       }
     });
+    window.addEventListener('panda:balance-corrected', (e: any) => {
+      const d = e?.detail;
+      if (d && typeof d.balance_diamantes === 'number') {
+        this.userState.balance = d.balance_diamantes;
+        if (typeof d.vip_xp === 'number') this.userState.xp = d.vip_xp;
+        if (d.vip_level) this.userState.vipLevel = d.vip_level;
+        this.updateWalletUI();
+      }
+    });
 
     this.startCountdown();
     requestAnimationFrame((t) => this.loop(t));
@@ -407,11 +416,9 @@ class PandaCrashRocketGame {
       if (this.userState.vipLevel === 'Panda Bronce') {
         this.userState.vipLevel = 'Panda Plata';
         this.userState.xpTarget = 5000;
-        this.userState.balance += 250;
       } else if (this.userState.vipLevel === 'Panda Plata') {
         this.userState.vipLevel = 'Panda Oro';
         this.userState.xpTarget = 25000;
-        this.userState.balance += 1000;
       }
     }
   }
